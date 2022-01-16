@@ -1,9 +1,10 @@
 @import "./variables.scss";
 
-.login-page {
+.register-page {
   margin: auto;
   background-color: $base-background;
-  .login-container {
+
+  .register-container {
     height: 100vh;
   }
 }
