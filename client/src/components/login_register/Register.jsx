@@ -1,7 +1,79 @@
-import React from "react";
+import { Container, Form, Button } from "react-bootstrap";
+import { useRef } from "react";
+
+// import stylesheet
+import "../../stylesheets/css/register.css";
 
 const Register = () => {
-  return <div>Hello From Register</div>;
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const emailRef = useRef();
+  const pwRef = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div className="register-page">
+      <Container className="register-container m-auto">
+        <h1>Register</h1>
+        <Form onSubmit={handleSubmit} className="w-100">
+          <Form.Group className="mb-3">
+            <h4>
+              <Form.Label>First Name: </Form.Label>
+            </h4>
+            <Form.Control
+              size="lg"
+              type="text"
+              ref={firstNameRef}
+              required
+              placeholder="First Name"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <h4>
+              <Form.Label>Last Name: </Form.Label>
+            </h4>
+            <Form.Control
+              size="lg"
+              type="text"
+              ref={lastNameRef}
+              required
+              placeholder="Last Name"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <h4>
+              <Form.Label>Email: </Form.Label>
+            </h4>
+            <Form.Control
+              size="lg"
+              type="email"
+              ref={emailRef}
+              required
+              placeholder="name@example.com"
+            />
+          </Form.Group>
+          <Form.Group>
+            <h4>
+              <Form.Label>Password: </Form.Label>
+            </h4>
+            <Form.Control size="lg" type="password" ref={pwRef} required />
+          </Form.Group>
+          <Form.Group controlId="formFileLg" className="my-3">
+            <h4>
+              <Form.Label>Upload Profile Photo: </Form.Label>
+            </h4>
+            <Form.Control type="file" size="lg" />
+          </Form.Group>
+          <Button className="w-100 mt-2" type="submit">
+            <h4>Register</h4>
+          </Button>
+        </Form>
+      </Container>
+    </div>
+  );
 };
 
 export default Register;

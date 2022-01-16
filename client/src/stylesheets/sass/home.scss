@@ -1,0 +1,9 @@
+@import "./variables.scss";
+
+.home-page {
+  background: $base-background;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

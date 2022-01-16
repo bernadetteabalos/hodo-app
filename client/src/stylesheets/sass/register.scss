@@ -1,0 +1,10 @@
+@import "./variables.scss";
+
+.register-page {
+  margin: auto;
+  background-color: $base-background;
+
+  .register-container {
+    height: 100vh;
+  }
+}

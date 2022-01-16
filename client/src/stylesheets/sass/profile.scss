@@ -1,0 +1,31 @@
+@import "./variables.scss";
+
+.profile-page {
+  background-color: $base-background;
+  .profile-container {
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    height: 100vh;
+    width: 80vw;
+
+    .profile-photo img {
+      border: 5px solid black;
+      margin-top: 5rem;
+      margin-bottom: 3rem;
+    }
+    .profile-name {
+      border: 5px solid black;
+      text-align: center;
+    }
+    .right-profile {
+      width: 50%;
+      .itineraries-container {
+        margin-top: 5rem;
+        border: 5px solid black;
+        background-color: pink;
+        height: 50vh;
+      }
+    }
+  }
+}
