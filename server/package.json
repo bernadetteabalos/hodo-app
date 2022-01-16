@@ -4,15 +4,19 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "./node_modules/.bin/nodemon --watch server -e js ./bin/wwww.js"
+    "dev": "./node_modules/.bin/nodemon --watch server -e js ./bin/wwww.js",
+    "db:reset": "node ./db/reset.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "pg": "^8.7.1",
+    "pg-native": "^3.0.0"
   },
   "devDependencies": {
+    "dotenv": "^12.0.3",
     "nodemon": "^2.0.15"
   }
 }
