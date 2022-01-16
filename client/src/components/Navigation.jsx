@@ -7,7 +7,7 @@ const Navigation = () => {
     <>
       <Navbar className="navbar">
         <Container>
-          <Navbar.Brand href="/home">
+          <Navbar.Brand href="/">
             <img
               src="https://media.istockphoto.com/photos/paper-plane-on-red-background-picture-id1358970693?b=1&k=20&m=1358970693&s=170667a&w=0&h=AgDbacTXHFKtBYvnkzpbL5k38J-o08iUx-6j7zPDo6Q="
               width="30"
@@ -16,8 +16,11 @@ const Navigation = () => {
               alt="Hodo logo"
             />
           </Navbar.Brand>
-          <Navbar.Brand href="/home">
+          <Navbar.Brand href="/">
             <h3>Hodo</h3>
+          </Navbar.Brand>
+          <Navbar.Brand href="/about">
+            <span>About Us</span>
           </Navbar.Brand>
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Brand href="/login">
