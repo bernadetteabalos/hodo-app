@@ -21,6 +21,33 @@ app.set("port", port);
 
 const server = http.createServer(app);
 
+// ********SOCKET IO CONNECTION AND EMITS
+
+const io = socketio(server);
+
+io.on("connection", (socket) => {
+  console.log("SOMEONE HAS CONNECTED with ID:", socket.id);
+  // sending this out to all users upon connection
+  socket.emit("inital", {
+    string: "HELLO WORLD FROM SERVER TO CLIENT",
+  });
+
+  // 2. Listening for elements change
+  socket.on("stage-change", (elements) => {
+    console.log(
+      "elements received from the client to the server -----> ",
+      elements
+    );
+    // 3. sending out the elements to other users except the sender
+    socket.broadcast.emit("new-stage", elements);
+  });
+
+  // Listening for line changes and then sending it out out to all users expect the sender
+  socket.on("line-change", (lines) => {
+    socket.broadcast.emit("new-line", lines);
+  });
+});
+
 /**
  * Listen on provided port, on all network interfaces.
  */
