@@ -1,8 +1,7 @@
-import { Container, Form, Button } from "react-bootstrap";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import axios from "axios";
-import Profile from "../logged_in/Profile";
 import { useNavigate } from "react-router-dom";
+import { Container, Form, Button } from "react-bootstrap";
 
 // import stylesheet
 import "../../stylesheets/css/register.css";
@@ -15,8 +14,6 @@ const Register = (props) => {
   const emailRef = useRef();
   const pwRef = useRef();
   const photoRef = useRef();
-
-  // const [user, setUser] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,21 +32,9 @@ const Register = (props) => {
         console.log(typeof res.data);
         setCurrentUser(res.data);
         navigate("/profile");
-        // would then change it to 'navigate("/users/${id}")
       })
-      // .then((res) => {
-      //   console.log("ressssss before nav", res);
-      //   console.log("currentUser", currentUser);
-      //   navigate("/profile");
-      // })
-      .error((err) => console.log(err.message));
+      .catch((err) => console.log(err.message));
   };
-
-  // useEffect(() => {
-  //   navigate("/user/1");
-  // }, [currentUser]);
-
-  // console.log("user--->", user);
 
   return (
     <div className="register-page">
