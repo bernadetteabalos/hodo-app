@@ -9,6 +9,7 @@ import Login from "./components/login_register/Login";
 import Register from "./components/login_register/Register";
 import Navigation from "./components/Navigation";
 import About from "./components/about_us/About";
+import MainStage from "./components/board/MainStage";
 
 // import styles
 import "./stylesheets/css/App.css";
@@ -45,6 +46,10 @@ function App() {
           <Route
             path="/profile"
             element={<Profile currentUser={currentUser} />}
+          />
+          <Route
+            path="/board"
+            element={<MainStage currentUser={currentUser} />}
           />
           <Route path="/" element={<Home />} />
         </Routes>
