@@ -35,6 +35,8 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
     //Hashing the password
     const hashedPassword = bcrypt.hashSync(password, 10);
 
+    console.log("hash password", hashedPassword);
+
     //Checks to see if there is a user in the db based on email
     getUserByEmail(email)
       .then((user) => {
@@ -69,9 +71,11 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
 
     getUserByEmail(email)
       .then((user) => {
-        console.log("user--->", user);
+        // console.log("user--->", user);
         if (user.length >= 1) {
-          if (password === user[0].password) {
+          //compares if the hashed password of the inputted password matches the one in our db
+          const comparePass = bcrypt.compareSync(password, user[0].password);
+          if (comparePass) {
             return res.json(user[0]);
           } else {
             return res.json({ msg: "Sorry, invalid password" });

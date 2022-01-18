@@ -15,7 +15,7 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const urlOneUserApi = `/api/users/${emailRef.current.value}`;
+    const urlOneUserApi = `/api/users/login`;
 
     axios
       .post(urlOneUserApi, {
