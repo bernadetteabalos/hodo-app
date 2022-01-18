@@ -48,10 +48,27 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const updateBoard = (id, title) => {
+    const query = {
+      text: `
+      UPDATE boards 
+      SET title = $1 
+      WHERE id = $2
+      RETURNING *`,
+      values: [title, id],
+    };
+
+    return db
+      .query(query)
+      .then((result) => console.log("did it hit this route", result))
+      .catch((err) => console.log("err", err));
+  };
+
   return {
     getUsers,
     getUserByEmail,
     addUser,
     getUsersPosts,
+    updateBoard,
   };
 };
