@@ -119,7 +119,7 @@ const MainStage = () => {
   };
 
   // removes all elements from the board
-  const resetBoard = () => {
+  const clearBoard = () => {
     setElements([]);
     setLines([]);
     setTool("select");
@@ -230,7 +230,7 @@ const MainStage = () => {
         <div>
           {/* ******** RIGHT SIDE BAR ***************/}
           <RightBar
-            resetBoard={resetBoard}
+            clearBoard={clearBoard}
             undo={undo}
             deleteShape={deleteShape}
           />
