@@ -30,11 +30,14 @@ function App() {
       <h1>END</h1> */}
 
       {/* ******DIFFERNT ROUTES */}
-      <Navigation />
+      <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />
       <Router>
         <Routes>
           <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login setCurrentUser={setCurrentUser} />}
+          />
           <Route
             path="/register"
             element={<Register setCurrentUser={setCurrentUser} />}
