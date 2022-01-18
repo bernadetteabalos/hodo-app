@@ -4,7 +4,8 @@ import { useRef } from "react";
 // import stylesheet
 import "../../stylesheets/css/login.css";
 
-const Login = () => {
+const Login = (props) => {
+  const { setCurrentUser } = props;
   const emailRef = useRef();
   const pwRef = useRef();
 
