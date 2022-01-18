@@ -37,7 +37,7 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
             msg: "Sorry, a user account with this email already exists",
           });
         } else {
-          return addUser(first_name, last_name, email, password);
+          return addUser(first_name, last_name, email, password, profile_photo);
         }
       })
       .then((newUser) => res.json(newUser))
