@@ -1,11 +1,20 @@
 import { v4 as uuidV4 } from "uuid";
 
 export const generateOneElement = (shape, fillColor, strokeColor, url) => {
+  let width = 100;
+  let height = 100;
+
+  if (url || shape === "rectangle") {
+    width = 300;
+    height = 150;
+  }
+
   return {
     x: 150,
     y: 150,
-    width: 100,
-    height: 100,
+    width,
+    height,
+    rotation: 0,
     stroke: strokeColor,
     fill: fillColor,
     id: uuidV4(),
