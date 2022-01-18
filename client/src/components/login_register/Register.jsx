@@ -12,6 +12,16 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const urlAddUser = "api/users";
+
+    axios.post(urlAddUser, {
+      first_name: firstNameRef.current.value,
+      last_name: lastNameRef.current.value,
+      email: emailRef.current.value,
+      password: pwRef.current.value,
+      profile_photo: photoRef.current.value,
+    });
   };
 
   return (
