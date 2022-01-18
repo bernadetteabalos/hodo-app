@@ -1,3 +1,5 @@
+import { v4 as uuidV4 } from "uuid";
+
 export const generateOneElement = (shape, fillColor, strokeColor, url) => {
   return {
     x: 150,
@@ -6,7 +8,7 @@ export const generateOneElement = (shape, fillColor, strokeColor, url) => {
     height: 100,
     stroke: strokeColor,
     fill: fillColor,
-    id: randomNum(),
+    id: uuidV4(),
     shape: shape,
     url: url,
   };
