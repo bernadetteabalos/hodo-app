@@ -30,6 +30,9 @@ const Navigation = () => {
             <Navbar.Brand href="/register" className="me-2">
               <h3>Register</h3>
             </Navbar.Brand>
+            <Navbar.Brand href="/" className="me-2">
+              <h3>Logout</h3>
+            </Navbar.Brand>
           </Navbar.Collapse>
         </Container>
       </Navbar>
