@@ -40,24 +40,27 @@ const MainStage = () => {
       console.log(msg.string);
     });
 
+    // listening for when new element is generated on the stage
     conn.on("new-stage", (elements) => {
-      console.log("hit this stage", elements);
-      console.log("elements");
       setElements(elements);
     });
 
+    // listening for when a new line is generated on the stage
     conn.on("new-line", (lines) => {
       setLines(lines);
     });
 
+    // setting connection to be socketIOClient(END_POINT)
     setConnection(conn);
   }, []);
 
+  // deselects the images and updates others' boards
   const checkDeselect = (e) => {
     const clickedOnEmpty = e.target === e.target.getStage();
     if (clickedOnEmpty) {
       selectShape(null);
     }
+    // sends the updated elements and lines arrays through the socket upon deselect to update others' boards'
     connection.emit("stage-change", elements);
     connection.emit("line-change", lines);
   };
