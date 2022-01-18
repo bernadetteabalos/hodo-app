@@ -7,6 +7,7 @@ const {
 module.exports = ({
   getBoards,
   getBoardsByUser,
+  addBoard,
   saveBoard,
   deleteBoard
 }) => {

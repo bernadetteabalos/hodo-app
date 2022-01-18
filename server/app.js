@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -6,6 +7,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const boardsRouter = require("./routes/boards");
 const app = express();
+app.use(cors());
 
 const db = require("./db");
 const dbHelpers = require("./helpers/dbHelpers")(db);

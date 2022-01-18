@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import useApplicationData from "../../hooks/forBoards";
 // import from others libraries
 import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
@@ -24,6 +25,9 @@ const MainStage = () => {
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
   const [selectedId, selectShape] = useState(null);
+  const stageRef = useRef(null);
+
+  const { saveBoard } = useApplicationData();
   
   // IMAGES
   const [url, setURL] = useState("");
@@ -172,6 +176,11 @@ const MainStage = () => {
     connection.emit("line-change", []);
   };
 
+  //saves board
+  const save = () => {
+    saveBoard(1, stageRef.current.children)
+  }
+
   /** removes the previous element from the array */
   const undo = (type) => {
     // removes the previous shape/image from the array
@@ -240,7 +249,7 @@ const MainStage = () => {
             }}
           >
             <Layer>{gridComponents}</Layer>
-            <Layer>
+            <Layer ref={stageRef}>
               {elements.map((rect, i) => {
                 return (
                   <Element
@@ -280,6 +289,7 @@ const MainStage = () => {
           {/* ******** RIGHT SIDE BAR ***************/}
           <RightBar
             clearBoard={clearBoard}
+            saveBoard={save}
             undo={undo}
             deleteShape={deleteShape}
           />
