@@ -6,7 +6,7 @@ import useImage from "use-image";
 
 // import Other Components
 import RectangleLayer from "../layers/shapes_layer/RectangleLayer";
-import StarLayer from "../layers/shapes_layer/ShapeLayer";
+import StarLayer from "../layers/shapes_layer/StarLayer";
 import ImageLayer from "../layers/images_layer/ImageLayer";
 
 const Element = ({
