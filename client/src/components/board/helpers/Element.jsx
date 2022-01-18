@@ -6,6 +6,7 @@ import useImage from "use-image";
 
 // import Other Components
 import RectangleSquareLayer from "../layers/shapes_layer/RectangleSquareLayer";
+import CircleLayer from "../layers/shapes_layer/CircleLayer";
 import StarLayer from "../layers/shapes_layer/StarLayer";
 import ImageLayer from "../layers/images_layer/ImageLayer";
 
@@ -32,6 +33,14 @@ const Element = ({
     <>
       {(shapeName === "rectangle" || shapeName === "square") && (
         <RectangleSquareLayer
+          onSelect={onSelect}
+          shapeRef={shapeRef}
+          onChange={onChange}
+          shapeProps={shapeProps}
+        />
+      )}
+      {shapeName === "circle" && (
+        <CircleLayer
           onSelect={onSelect}
           shapeRef={shapeRef}
           onChange={onChange}

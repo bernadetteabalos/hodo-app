@@ -45,6 +45,12 @@ const LeftBar = (props) => {
         </Button>
         <Button
           variant="outline-secondary"
+          onClick={() => handleClick("circle", fillColor, strokeColor)}
+        >
+          Circle
+        </Button>
+        <Button
+          variant="outline-secondary"
           onClick={() => handleClick("star", fillColor, strokeColor)}
         >
           Star
