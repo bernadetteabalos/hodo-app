@@ -8,6 +8,7 @@ const RectangleLayer = (props) => {
       onTap={onSelect}
       ref={shapeRef}
       {...shapeProps}
+      rotation={shapeProps.rotation}
       draggable
       onDragEnd={(e) => {
         onChange({
@@ -23,12 +24,15 @@ const RectangleLayer = (props) => {
 
         node.scaleX(1);
         node.scaleY(1);
+        node.rotation();
+
         onChange({
           ...shapeProps,
           x: node.x(),
           y: node.y(),
           width: Math.max(5, node.width() * scaleX),
           height: Math.max(node.height() * scaleY),
+          rotation: node.rotation(),
         });
       }}
     />
