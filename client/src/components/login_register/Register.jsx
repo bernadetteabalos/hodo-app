@@ -28,10 +28,12 @@ const Register = (props) => {
         profile_photo: photoRef.current.value,
       })
       .then((res) => {
-        console.log("client res--->", res.data);
-        console.log(typeof res.data);
-        setCurrentUser(res.data);
-        navigate("/profile");
+        if (res.data.msg) {
+          alert(res.data.msg);
+        } else {
+          setCurrentUser(res.data);
+          navigate("/profile");
+        }
       })
       .catch((err) => console.log(err.message));
   };
