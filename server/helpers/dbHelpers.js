@@ -34,24 +34,83 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getUsersPosts = () => {
+  const getBoards = () => {
     const query = {
-      text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
-      FROM users
-      INNER JOIN posts
-      ON users.id = posts.user_id`,
-    };
+        text: `SELECT * FROM boards`,
 
-    return db
-      .query(query)
-      .then((result) => result.rows)
-      .catch((err) => err);
-  };
+    }
 
-  return {
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+
+}
+
+const getBoardsByUser = (owner_id) => {
+    const query = {
+        text: `SELECT * FROM boards WHERE owner_id = $1`,
+        values: [owner_id]
+
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+
+}
+
+const getElementsForBoard = () => {
+    const query = {
+        text: `SELECT metadata FROM boards WHERE boards.id = $1`,
+        values: [boards.id]
+    }
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+}
+
+const addBoard = (title, owner_id, metadata) => {
+    const query = {
+        text: `INSERT INTO boards (title, owner_id, metadata) VALUES ($1, $2, $3) RETURNING *`,
+        values: [title, owner_id, metadata]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+}
+
+const saveBoard = (metadata, id) => {
+    const query = {
+        text: `UPDATE boards SET metadata = $1 WHERE id = $2`,
+        values: [{metadata}, id]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+}
+
+const deleteBoard = (id) => {
+    const query = {
+        text: `DELETE FROM boards WHERE id = $1`,
+        values: [id]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+}
+
+return {
     getUsers,
     getUserByEmail,
     addUser,
-    getUsersPosts,
-  };
+    getBoardsByUser,
+    getElementsForBoard,
+    getBoards,
+    addBoard,
+    saveBoard,
+    deleteBoard
+};
 };
