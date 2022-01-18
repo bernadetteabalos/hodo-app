@@ -1,0 +1,26 @@
+.creativity {
+  display: flex;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(219, 216, 216, 0.993);
+  padding: 1rem;
+}
+
+.stage {
+  background-color: white;
+  border: 3px solid black;
+}
+
+.shapes {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-url {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
