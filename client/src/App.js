@@ -1,4 +1,4 @@
-import "./stylesheets/css/App.css";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import useApplicationData from "./hooks/useApplicationData";
 
@@ -10,7 +10,11 @@ import Register from "./components/login_register/Register";
 import Navigation from "./components/Navigation";
 import About from "./components/about_us/About";
 
+// import styles
+import "./stylesheets/css/App.css";
+
 function App() {
+  const [currentUser, setCurrentUser] = useState({});
   // const { state, dispatch } = useApplicationData();
 
   // const userList = state.users.map((user) => (
@@ -31,8 +35,14 @@ function App() {
         <Routes>
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/user/1" element={<Profile />} />
+          <Route
+            path="/register"
+            element={<Register setCurrentUser={setCurrentUser} />}
+          />
+          <Route
+            path="/profile"
+            element={<Profile currentUser={currentUser} />}
+          />
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>
