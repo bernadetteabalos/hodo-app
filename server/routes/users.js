@@ -54,9 +54,7 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
       .then((user) => {
         console.log("user--->", user);
         if (user.length >= 1) {
-          console.log("hey look, a user in the db--->", user);
           if (password === user[0].password) {
-            console.log("hit this route");
             return res.json(user[0]);
           } else {
             return res.json({ msg: "Sorry, invalid password" });
