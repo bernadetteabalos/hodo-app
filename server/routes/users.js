@@ -28,7 +28,7 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
   });
 
   router.post("/", (req, res) => {
-    const { first_name, last_name, email, password } = req.body;
+    const { first_name, last_name, email, password, profile_photo } = req.body;
 
     getUserByEmail(email)
       .then((user) => {
