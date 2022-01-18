@@ -1,18 +1,24 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 // import from other libraries/styling
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import ModalHeader from "react-bootstrap/esm/ModalHeader";
 //import syling
 import "../../stylesheets/css/header.css";
 
 const Header = () => {
   const [show, setShow] = useState(false);
+  const newTitleRef = useRef();
 
   const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const handleClose = (e) => {
+    e.preventDefault();
+    setShow(false);
+  };
 
   const handleSave = (e) => {
     e.preventDefault();
+    // axios put request here
+    setShow(false);
   };
 
   return (
@@ -21,13 +27,24 @@ const Header = () => {
       <Button variant="primary" onClick={handleShow}>
         Edit
       </Button>
-      <Modal show={show} onHide={handleClose} backdrop="static">
+      <Modal
+        show={show}
+        onHide={() => {
+          setShow(false);
+        }}
+        backdrop="static"
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Edit Title of Board</Modal.Title>
+          <Modal.Title>Edit Title</Modal.Title>
         </Modal.Header>
         <Form>
           <Modal.Body>
-            <p>this is the body text</p>
+            <Form.Control
+              size="lg"
+              ref={newTitleRef}
+              type="text"
+              placeholder="Enter new title"
+            />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
