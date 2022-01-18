@@ -28,7 +28,7 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
   });
 
   router.post("/", (req, res) => {
-    const { first_name, last_name, email, password } = req.body;
+    const { first_name, last_name, email, password, profile_photo } = req.body;
 
     getUserByEmail(email)
       .then((user) => {
@@ -37,7 +37,7 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
             msg: "Sorry, a user account with this email already exists",
           });
         } else {
-          return addUser(first_name, last_name, email, password);
+          return addUser(first_name, last_name, email, password, profile_photo);
         }
       })
       .then((newUser) => res.json(newUser))
@@ -48,15 +48,29 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
       );
   });
 
+  router.post("/:id", (req, res) => {
+    const { email, password } = req.body;
+    getUserByEmail(email)
+      .then((user) => {
+        console.log("user--->", user);
+        if (user.length >= 1) {
+          if (password === user[0].password) {
+            return res.json(user[0]);
+          } else {
+            return res.json({ msg: "Sorry, invalid password" });
+          }
+        } else {
+          return res.json({
+            msg: "Sorry, a user account with this email does not exist.",
+          });
+        }
+      })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
   return router;
 };
-
-// var express = require('express');
-// var router = express.Router();
-
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
-
-// module.exports = router;

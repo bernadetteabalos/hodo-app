@@ -1,17 +1,41 @@
-import { Container, Form, Button } from "react-bootstrap";
 import { useRef } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Container, Form, Button } from "react-bootstrap";
 
 // import stylesheet
 import "../../stylesheets/css/register.css";
 
-const Register = () => {
+const Register = (props) => {
+  const { setCurrentUser } = props;
+  const navigate = useNavigate();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
   const pwRef = useRef();
+  const photoRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const urlPostApi = "/api/users";
+    axios
+      .post(urlPostApi, {
+        first_name: firstNameRef.current.value,
+        last_name: lastNameRef.current.value,
+        email: emailRef.current.value,
+        password: pwRef.current.value,
+        profile_photo: photoRef.current.value,
+      })
+      .then((res) => {
+        if (res.data.msg) {
+          alert(res.data.msg);
+        } else {
+          setCurrentUser(res.data);
+          navigate("/profile");
+        }
+      })
+      .catch((err) => console.log(err.message));
   };
 
   return (
@@ -65,7 +89,7 @@ const Register = () => {
             <h4>
               <Form.Label>Upload Profile Photo: </Form.Label>
             </h4>
-            <Form.Control type="file" size="lg" />
+            <Form.Control ref={photoRef} type="file" size="lg" />
           </Form.Group>
           <Button className="w-100 mt-2" type="submit">
             <h4>Register</h4>

@@ -2,7 +2,9 @@
 import { Container, Navbar } from "react-bootstrap";
 import "../stylesheets/css/navigation.css";
 
-const Navigation = () => {
+const Navigation = (props) => {
+  const { currentUser, setCurrentUser } = props;
+
   return (
     <>
       <Navbar className="navbar">
@@ -23,13 +25,28 @@ const Navigation = () => {
             <span>About Us</span>
           </Navbar.Brand>
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Brand href="/login">
-              <h3>Login</h3>
-            </Navbar.Brand>
+            {!currentUser.id && (
+              <Navbar.Brand href="/login">
+                <h3>Login</h3>
+              </Navbar.Brand>
+            )}
             <Navbar.Brand className="vr"></Navbar.Brand>
-            <Navbar.Brand href="/register" className="me-2">
-              <h3>Register</h3>
-            </Navbar.Brand>
+            {!currentUser.id && (
+              <Navbar.Brand href="/register" className="me-2">
+                <h3>Register</h3>
+              </Navbar.Brand>
+            )}
+            {currentUser.id && (
+              <Navbar.Brand
+                href="/"
+                className="me-2"
+                onClick={() => {
+                  setCurrentUser({});
+                }}
+              >
+                <h3>Logout</h3>
+              </Navbar.Brand>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
