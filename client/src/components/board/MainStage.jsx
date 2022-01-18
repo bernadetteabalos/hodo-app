@@ -4,6 +4,7 @@ import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
 
 // import Other Components
+import Header from "./Header";
 import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
@@ -166,8 +167,12 @@ const MainStage = () => {
 
   // ******** RETURN ********************
   return (
-    // ******** LEFT SIDE BAR ********************
     <>
+      {/* ***** Header */}
+      <div>
+        <Header />
+      </div>
+      {/* ******** LEFT SIDE BAR ******************** */}
       <div className="creativity">
         <LeftBar
           fillColor={fillColor}
