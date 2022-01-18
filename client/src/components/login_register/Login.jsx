@@ -1,16 +1,36 @@
-import { Container, Form, Button } from "react-bootstrap";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Container, Form, Button } from "react-bootstrap";
 
 // import stylesheet
 import "../../stylesheets/css/login.css";
 
 const Login = (props) => {
   const { setCurrentUser } = props;
+  const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const urlOneUserApi = `/api/users/${emailRef.current.value}`;
+
+    axios
+      .post(urlOneUserApi, {
+        email: emailRef.current.value,
+        password: pwRef.current.value,
+      })
+      .then((res) => {
+        if (res.data.msg) {
+          alert(res.data.msg);
+        } else {
+          setCurrentUser(res.data);
+          navigate("/profile");
+        }
+      })
+      .catch((err) => console.log(err.message));
   };
 
   return (
