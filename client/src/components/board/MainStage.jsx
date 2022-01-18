@@ -40,7 +40,7 @@ const MainStage = () => {
       console.log(msg.string);
     });
 
-    // listening for when new element is generated on the stage
+    // 4. listening for when new element is generated on the stage
     conn.on("new-stage", (elements) => {
       setElements(elements);
     });
@@ -60,7 +60,7 @@ const MainStage = () => {
     if (clickedOnEmpty) {
       selectShape(null);
     }
-    // sends the updated elements and lines arrays through the socket upon deselect to update others' boards'
+    // 1. sends the updated elements and lines arrays through the socket upon deselect to update others' boards'
     connection.emit("stage-change", elements);
     connection.emit("line-change", lines);
   };
