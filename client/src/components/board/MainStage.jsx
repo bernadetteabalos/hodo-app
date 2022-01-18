@@ -6,9 +6,10 @@ import { Stage, Layer, Line } from "react-konva";
 // import Other Components
 import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
+import Element from "./helpers/Element";
 
 // import helper functions
-import { generateOneElement } from "./helpers/Element";
+import { generateOneElement } from "./helpers/_helperFunctions";
 
 // import styles
 import "../../stylesheets/css/mainstage.css";
@@ -159,7 +160,7 @@ const MainStage = () => {
       const newElementArray = [...prev];
       // remove the element object from the array
       newElementArray.splice(targetIndex, 1);
-      return newRectangleArray;
+      return newElementArray;
     });
   };
 
