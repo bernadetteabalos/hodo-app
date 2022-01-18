@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 // import from others libraries
 import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
+import { Rect } from "react-konva";
 
 // import Other Components
 import RightBar from "./RightBar";
@@ -16,15 +17,57 @@ import "../../stylesheets/css/mainstage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // socket end point for websocket
-const END_POINT = "http://localhost:8080";
+const END_POINT = "http://localhost:3002";
 
 const MainStage = () => {
   const [elements, setElements] = useState([]);
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
   const [selectedId, selectShape] = useState(null);
+  
   // IMAGES
   const [url, setURL] = useState("");
+
+  //***STAGE GRID ****//
+  const WIDTH = 40;
+  const HEIGHT = 40;
+  
+  const grid = [["white", "white"], ["white", "white"]];
+  
+    const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
+    const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
+    const endX =
+      Math.floor((-stagePos.x + window.innerWidth * 2) / WIDTH) * WIDTH;
+  
+    const startY =
+      Math.floor((-stagePos.y - window.innerHeight) / HEIGHT) * HEIGHT;
+    const endY =
+      Math.floor((-stagePos.y + window.innerHeight * 2) / HEIGHT) * HEIGHT;
+  
+    const gridComponents = [];
+    var i = 0;
+    for (var x = startX; x < endX; x += WIDTH) {
+      for (var y = startY; y < endY; y += HEIGHT) {
+        if (i === 4) {
+          i = 0;
+        }
+  
+        const indexX = Math.abs(x / WIDTH) % grid.length;
+        const indexY = Math.abs(y / HEIGHT) % grid[0].length;
+  
+        gridComponents.push(
+          <Rect
+            x={x}
+            y={y}
+            width={WIDTH}
+            height={HEIGHT}
+            fill={grid[indexX][indexY]}
+            stroke="black"
+            strokeWidth={0.3}
+          />
+        );
+      }
+    }
 
   // PEN TOOLS
   const [tool, setTool] = useState("select");
@@ -191,7 +234,12 @@ const MainStage = () => {
             onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
             onMousemove={tool !== "select" ? handleMouseMove : ""}
             onMouseup={tool !== "select" ? handleMouseUp : ""}
+            draggable={tool === "select"}
+            onDragEnd={e => {
+              setStagePos(e.currentTarget.position());
+            }}
           >
+            <Layer>{gridComponents}</Layer>
             <Layer>
               {elements.map((rect, i) => {
                 return (
