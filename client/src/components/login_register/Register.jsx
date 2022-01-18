@@ -4,7 +4,8 @@ import { useRef } from "react";
 // import stylesheet
 import "../../stylesheets/css/register.css";
 
-const Register = () => {
+const Register = (props) => {
+  const { setCurrentUser } = props;
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
@@ -15,13 +16,19 @@ const Register = () => {
 
     const urlAddUser = "api/users";
 
-    axios.post(urlAddUser, {
-      first_name: firstNameRef.current.value,
-      last_name: lastNameRef.current.value,
-      email: emailRef.current.value,
-      password: pwRef.current.value,
-      profile_photo: photoRef.current.value,
-    });
+    axios
+      .post(urlAddUser, {
+        first_name: firstNameRef.current.value,
+        last_name: lastNameRef.current.value,
+        email: emailRef.current.value,
+        password: pwRef.current.value,
+        profile_photo: photoRef.current.value,
+      })
+      .then((res) => {
+        setCurrentUser(res.data);
+        navigate("/profile");
+      })
+      .catch((err) => console.log(err.message));
   };
 
   return (
