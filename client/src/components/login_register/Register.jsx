@@ -18,7 +18,7 @@ const Register = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const urlPostApi = "/api/users";
+    const urlPostApi = "/api/users/register";
     axios
       .post(urlPostApi, {
         first_name: firstNameRef.current.value,
@@ -31,6 +31,7 @@ const Register = (props) => {
         if (res.data.msg) {
           alert(res.data.msg);
         } else {
+          console.log("res.data-->", res.data);
           setCurrentUser(res.data);
           navigate("/profile");
         }
