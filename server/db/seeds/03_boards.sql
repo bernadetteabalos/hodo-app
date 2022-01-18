@@ -1,5 +1,5 @@
 INSERT INTO
-posts(title, content)
+boards(title, content)
 VALUES
     (
         'Japan 2022',
