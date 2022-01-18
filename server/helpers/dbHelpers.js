@@ -58,10 +58,13 @@ module.exports = (db) => {
       values: [title, id],
     };
 
-    return db
-      .query(query)
-      .then((result) => console.log("did it hit this route", result))
-      .catch((err) => console.log("err", err));
+    return (
+      db
+        .query(query)
+        // result.rows[0] => {id: '1', title: 'Japan'}
+        .then((result) => result.rows[0])
+        .catch((err) => console.log("err", err))
+    );
   };
 
   return {
