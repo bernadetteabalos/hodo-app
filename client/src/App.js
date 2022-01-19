@@ -15,7 +15,14 @@ import MainStage from "./components/board/MainStage";
 import "./stylesheets/css/App.css";
 
 function App() {
+  const initalBoardState = {
+    id: 1,
+    title: "Japan 2022",
+    content: "stuff",
+  };
   const [currentUser, setCurrentUser] = useState({});
+  // hard coded the currentBoard for now
+  const [currentBoard, setCurrentBoard] = useState(initalBoardState);
   // const { state, dispatch } = useApplicationData();
 
   // const userList = state.users.map((user) => (
@@ -49,7 +56,12 @@ function App() {
           />
           <Route
             path="/board"
-            element={<MainStage currentUser={currentUser} />}
+            element={
+              <MainStage
+                currentBoard={currentBoard}
+                setCurrentBoard={setCurrentBoard}
+              />
+            }
           />
           <Route path="/" element={<Home />} />
         </Routes>

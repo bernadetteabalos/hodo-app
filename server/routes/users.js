@@ -3,7 +3,13 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const { getPostsByUsers } = require("../helpers/dataHelpers");
 
-module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
+module.exports = ({
+  getUsers,
+  getUserByEmail,
+  addUser,
+  getUsersPosts,
+  updateBoardTitle,
+}) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
     getUsers()
@@ -27,6 +33,8 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
         })
       );
   });
+
+  // ********** POST REQUESTS **************
 
   // POST Register: route activated when user clicks 'register' button
   router.post("/register", (req, res) => {
@@ -66,6 +74,7 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
       );
   });
 
+  // POST Login: route activated when user clicks 'login' button
   router.post("/login", (req, res) => {
     const { email, password } = req.body;
 
@@ -86,6 +95,44 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
           });
         }
       })
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  //************** PUT REQUESTS */
+
+  // PUT title: route activated when user clicks 'save' button for the title
+  router.put("/title", (req, res) => {
+    // getting the title from the form
+    const { id, title } = req.body;
+    // get the board Id that is present as a prop, send that down into the axios request
+    // updateBoardTitleFunction
+
+    console.log("id, title", id, title);
+    //
+    updateBoardTitle(id, title)
+      .then((board) => res.json(board))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  // PUT board: route activated when user clicks 'save' button for the board
+  router.put("/title", (req, res) => {
+    // getting the title from the form
+    const { id, title } = req.body;
+    // get the board Id that is present as a prop, send that down into the axios request
+    // updateBoardTitleFunction
+
+    console.log("id, title", id, title);
+    //
+    updateBoardTitle(id, title)
+      .then((board) => res.json(board))
       .catch((err) =>
         res.json({
           error: err.message,
