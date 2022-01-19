@@ -160,7 +160,7 @@ const MainStage = () => {
   /**Activated when 'add url' button is clicked */
   const resetUrl = () => {
     // sends img to the main stage
-    handleClick("", "", "", url);
+    handleClick("Image", "", "", url);
     // empties the URL text box
     setURL("");
   };
@@ -177,6 +177,11 @@ const MainStage = () => {
 
   //saves board
   const save = () => {
+    stageRef.current.children.forEach((item) => {
+      if (item.attrs.image) {
+        item.attrs.url = item.attrs.image.src;
+      }
+    });
     saveBoard(1, stageRef.current.children)
   }
 
@@ -253,13 +258,12 @@ const MainStage = () => {
                 console.log('LKSDFJGKDG', rect);
                 return (
                   <Element
-                    shapeName={rect.className}
-                    url={rect.url}
-                    key={i}
-                    shapeProps={rect.attrs}
-                    isSelected={rect.id === selectedId}
-                    onSelect={() => {
-                      selectShape(rect.id);
+                  shapeName={rect.className}
+                  key={i}
+                  shapeProps={rect.attrs}
+                  isSelected={rect.attrs.id === selectedId}
+                  onSelect={() => {
+                    selectShape(rect.attrs.id);
                     }}
                     onChange={(newAttrs) => {
                       setElements((prev) => prev.map((el, j) => {
