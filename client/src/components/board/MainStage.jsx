@@ -4,6 +4,7 @@ import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
 
 // import Other Components
+import Header from "./Header";
 import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
@@ -18,7 +19,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // socket end point for websocket
 const END_POINT = "http://localhost:8080";
 
-const MainStage = () => {
+const MainStage = (props) => {
+  const { currentBoard, setCurrentBoard } = props;
   const [elements, setElements] = useState([]);
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
@@ -166,8 +168,12 @@ const MainStage = () => {
 
   // ******** RETURN ********************
   return (
-    // ******** LEFT SIDE BAR ********************
     <>
+      {/* ***** Header */}
+      <div>
+        <Header currentBoard={currentBoard} setCurrentBoard={setCurrentBoard} />
+      </div>
+      {/* ******** LEFT SIDE BAR ******************** */}
       <div className="creativity">
         <LeftBar
           fillColor={fillColor}
