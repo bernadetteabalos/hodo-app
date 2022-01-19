@@ -1,13 +1,17 @@
 import { useState, useRef } from "react";
 // import from other libraries/styling
+import axios from "axios";
 import { Button, Modal, Form } from "react-bootstrap";
 import ModalHeader from "react-bootstrap/esm/ModalHeader";
 //import syling
 import "../../stylesheets/css/header.css";
 
-const Header = () => {
+const Header = (props) => {
+  const { currentUser, currentBoard, setCurrentBoard } = props;
   const [show, setShow] = useState(false);
   const newTitleRef = useRef();
+
+  console.log("this is currentBoard--->", currentBoard);
 
   const handleShow = () => setShow(true);
   const handleClose = (e) => {
@@ -18,12 +22,27 @@ const Header = () => {
   const handleSave = (e) => {
     e.preventDefault();
     // axios put request here
+    // need to make a seed table first
+    const urlUpdateTitle = "/api/users/title";
+    // passing in values from the form
+    axios
+      .put(urlUpdateTitle, {
+        id: currentBoard.id,
+        title: newTitleRef.current.value,
+      })
+      .then((res) => {
+        console.log("hit this on line 34 in Header");
+        setCurrentBoard((prevState) => {
+          return { ...prevState, title: res.data.title };
+        });
+      })
+      .catch((err) => console.log(err.message));
     setShow(false);
   };
 
   return (
     <div className="header-bar">
-      board.title
+      <h2>{currentBoard.title}</h2>
       <Button variant="primary" onClick={handleShow}>
         Edit
       </Button>
