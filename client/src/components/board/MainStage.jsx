@@ -29,50 +29,53 @@ const MainStage = () => {
   const gridRef = useRef();
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
-  
+
   // IMAGES
   const [url, setURL] = useState("");
 
   //***STAGE GRID ****//
   const WIDTH = 40;
   const HEIGHT = 40;
-  
-  const grid = [["white", "white"], ["white", "white"]];
-  
-    const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
-    const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
-    const endX =
-      Math.floor((-stagePos.x + window.innerWidth * 2) / WIDTH) * WIDTH;
-  
-    const startY =
-      Math.floor((-stagePos.y - window.innerHeight) / HEIGHT) * HEIGHT;
-    const endY =
-      Math.floor((-stagePos.y + window.innerHeight * 2) / HEIGHT) * HEIGHT;
-  
-    const gridComponents = [];
-    var i = 0;
-    for (var x = startX; x < endX; x += WIDTH) {
-      for (var y = startY; y < endY; y += HEIGHT) {
-        if (i === 4) {
-          i = 0;
-        }
-  
-        const indexX = Math.abs(x / WIDTH) % grid.length;
-        const indexY = Math.abs(y / HEIGHT) % grid[0].length;
-  
-        gridComponents.push(
-          <Rect
-            x={x}
-            y={y}
-            width={WIDTH}
-            height={HEIGHT}
-            fill={grid[indexX][indexY]}
-            stroke="black"
-            strokeWidth={0.3}
-          />
-        );
+
+  const grid = [
+    ["white", "white"],
+    ["white", "white"],
+  ];
+
+  const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
+  const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
+  const endX =
+    Math.floor((-stagePos.x + window.innerWidth * 2) / WIDTH) * WIDTH;
+
+  const startY =
+    Math.floor((-stagePos.y - window.innerHeight) / HEIGHT) * HEIGHT;
+  const endY =
+    Math.floor((-stagePos.y + window.innerHeight * 2) / HEIGHT) * HEIGHT;
+
+  const gridComponents = [];
+  var i = 0;
+  for (var x = startX; x < endX; x += WIDTH) {
+    for (var y = startY; y < endY; y += HEIGHT) {
+      if (i === 4) {
+        i = 0;
       }
+
+      const indexX = Math.abs(x / WIDTH) % grid.length;
+      const indexY = Math.abs(y / HEIGHT) % grid[0].length;
+
+      gridComponents.push(
+        <Rect
+          x={x}
+          y={y}
+          width={WIDTH}
+          height={HEIGHT}
+          fill={grid[indexX][indexY]}
+          stroke="black"
+          strokeWidth={0.3}
+        />
+      );
     }
+  }
 
   // PEN TOOLS
   const [tool, setTool] = useState("select");
@@ -105,7 +108,7 @@ const MainStage = () => {
 
   // deselects the images and updates others' boards
   const checkDeselect = (e) => {
-    selectShape(null)
+    selectShape(null);
     // 1. sends the updated elements and lines arrays through the socket upon deselect to update others' boards'
     connection.emit("stage-change", elements);
     connection.emit("line-change", lines);
@@ -181,8 +184,8 @@ const MainStage = () => {
         item.attrs.url = item.attrs.image.src;
       }
     });
-    saveBoard(board_id, stageRef.current.children)
-  }
+    saveBoard(board_id, stageRef.current.children);
+  };
 
   /** removes the previous element from the array */
   const undo = (type) => {
@@ -252,44 +255,44 @@ const MainStage = () => {
             height={800 || window.innerHeight}
             // onMouseDown={checkDeselect}
             draggable={tool === "select"}
-            onDragEnd={e => {
+            onDragEnd={(e) => {
               setStagePos(e.currentTarget.position());
             }}
-            
           >
             <Layer
-            ref={gridRef}
-            onTouchStart={checkDeselect}
-            onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
-            onMousemove={tool !== "select" ? handleMouseMove : ""}
-            onMouseup={tool !== "select" ? handleMouseUp : ""}
-            
-            
-            >{gridComponents}
+              ref={gridRef}
+              onTouchStart={checkDeselect}
+              onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
+              onMousemove={tool !== "select" ? handleMouseMove : ""}
+              onMouseup={tool !== "select" ? handleMouseUp : ""}
+            >
+              {gridComponents}
             </Layer>
             <Layer ref={stageRef}>
               {elements.map((rect, i) => {
-                console.log('LKSDFJGKDG', rect);
+                console.log("LKSDFJGKDG", rect);
                 return (
                   <Element
-                  shapeName={rect.className}
-                  key={i}
-                  shapeProps={rect.attrs}
-                  isSelected={rect.attrs.id === selectedId}
-                  onSelect={() => {
-                    selectShape(rect.attrs.id);
+                    shapeName={rect.className}
+                    key={i}
+                    shapeProps={rect.attrs}
+                    isSelected={rect.attrs.id === selectedId}
+                    onSelect={() => {
+                      selectShape(rect.attrs.id);
                     }}
                     onChange={(newAttrs) => {
-                      setElements((prev) => prev.map((el, j) => {
-                        if (i === j) {
-                          return {
-                            ...el,
-                            attrs: newAttrs,
-                          };
-                        } else {
-                          return el;
-                        }
-                      }));
+                      setElements((prev) =>
+                        prev.map((el, j) => {
+                          if (i === j) {
+                            return {
+                              ...el,
+                              attrs: newAttrs,
+                            };
+                          } else {
+                            return el;
+                          }
+                        })
+                      );
                     }}
                   />
                 );
