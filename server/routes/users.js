@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const { getPostsByUsers } = require("../helpers/dataHelpers");
+const cookieSession = require ('cookie-session');
 
 module.exports = ({
   getUsers,
@@ -66,7 +67,10 @@ module.exports = ({
         }
       })
       // sending info as JSON for front-end
-      .then((newUser) => res.json(newUser))
+      .then((newUser) => {
+        req.session.user_id = "hello"
+        return res.json(newUser)
+      })
       .catch((err) =>
         res.json({
           error: err.message,

@@ -33,25 +33,25 @@ const LeftBar = (props) => {
         <h3>Select a Shape</h3>
         <Button
           variant="outline-secondary"
-          onClick={() => handleClick("rectangle", fillColor, strokeColor)}
+          onClick={() => handleClick("Rect", fillColor, strokeColor)}
         >
           Rectangle
         </Button>
         <Button
           variant="outline-secondary"
-          onClick={() => handleClick("square", fillColor, strokeColor)}
+          onClick={() => handleClick("Square", fillColor, strokeColor)}
         >
           Square
         </Button>
         <Button
           variant="outline-secondary"
-          onClick={() => handleClick("circle", fillColor, strokeColor)}
+          onClick={() => handleClick("Circle", fillColor, strokeColor)}
         >
           Circle
         </Button>
         <Button
           variant="outline-secondary"
-          onClick={() => handleClick("star", fillColor, strokeColor)}
+          onClick={() => handleClick("Star", fillColor, strokeColor)}
         >
           Star
         </Button>

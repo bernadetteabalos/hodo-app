@@ -5,13 +5,15 @@ import { Button, Modal, Form } from "react-bootstrap";
 import ModalHeader from "react-bootstrap/esm/ModalHeader";
 //import syling
 import "../../stylesheets/css/header.css";
+import useApplicationData from "../../hooks/forBoards";
 
-const Header = (props) => {
-  const { currentUser, currentBoard, setCurrentBoard } = props;
+const Header = () => {
+  const { setTitle, title, board_id } = useApplicationData();
   const [show, setShow] = useState(false);
   const newTitleRef = useRef();
-
-  console.log("this is currentBoard--->", currentBoard);
+  console.log("what is title?", title);
+  console.log("typeof title:", typeof title);
+  console.log("this is currentBoard--->", board_id);
 
   const handleShow = () => setShow(true);
   const handleClose = (e) => {
@@ -27,14 +29,13 @@ const Header = (props) => {
     // passing in values from the form
     axios
       .put(urlUpdateTitle, {
-        id: currentBoard.id,
+        id: board_id,
         title: newTitleRef.current.value,
       })
       .then((res) => {
         console.log("hit this on line 34 in Header");
-        setCurrentBoard((prevState) => {
-          return { ...prevState, title: res.data.title };
-        });
+        console.log("this is response", res);
+        setTitle(res.data.title);
       })
       .catch((err) => console.log(err.message));
     setShow(false);
@@ -42,7 +43,7 @@ const Header = (props) => {
 
   return (
     <div className="header-bar">
-      <h2>{currentBoard.title}</h2>
+      <h2>{title}</h2>
       <Button variant="primary" onClick={handleShow}>
         Edit
       </Button>

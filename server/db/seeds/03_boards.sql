@@ -1,7 +1,4 @@
 INSERT INTO
-boards(title, content)
+boards(title, owner_id)
 VALUES
-    (
-        'Japan 2022',
-        'stuff'
-    )
+    ('Test Itinerary', 1);

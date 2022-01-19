@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import useApplicationData from "./hooks/useApplicationData";
+import useApplicationData from "./hooks/forBoards";
 
 // import other Components
 import Home from "./components/home/Home";
@@ -12,6 +12,8 @@ import About from "./components/about_us/About";
 import MainStage from "./components/board/MainStage";
 
 // import styles
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import "./stylesheets/css/App.css";
 
 function App() {
@@ -50,18 +52,13 @@ function App() {
             path="/register"
             element={<Register setCurrentUser={setCurrentUser} />}
           />
-          <Route
+          {currentUser.id && <Route 
             path="/profile"
             element={<Profile currentUser={currentUser} />}
-          />
+          />}
           <Route
-            path="/board"
-            element={
-              <MainStage
-                currentBoard={currentBoard}
-                setCurrentBoard={setCurrentBoard}
-              />
-            }
+            path="/board/:id"
+            element={<MainStage currentUser={currentUser} />}
           />
           <Route path="/" element={<Home />} />
         </Routes>
