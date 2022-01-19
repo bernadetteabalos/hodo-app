@@ -41,9 +41,11 @@ export default function useApplicationData() {
   return {
     elements,
     board_id: params.id,
+    title,
     setElements,
     createBoard,
     deleteBoard,
+    setTitle,
     saveBoard
   }
   

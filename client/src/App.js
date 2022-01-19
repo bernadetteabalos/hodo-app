@@ -17,7 +17,14 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import "./stylesheets/css/App.css";
 
 function App() {
+  const initalBoardState = {
+    id: 1,
+    title: "Japan 2022",
+    content: "stuff",
+  };
   const [currentUser, setCurrentUser] = useState({});
+  // hard coded the currentBoard for now
+  const [currentBoard, setCurrentBoard] = useState(initalBoardState);
   // const { state, dispatch } = useApplicationData();
 
   // const userList = state.users.map((user) => (
@@ -50,8 +57,18 @@ function App() {
             element={<Profile currentUser={currentUser} />}
           />
           <Route
+<<<<<<< HEAD
             path="/board/:id"
             element={<MainStage currentUser={currentUser} />}
+=======
+            path="/board"
+            element={
+              <MainStage
+                currentBoard={currentBoard}
+                setCurrentBoard={setCurrentBoard}
+              />
+            }
+>>>>>>> ba0132e49ba54903613b814ef3161400c9293667
           />
           <Route path="/" element={<Home />} />
         </Routes>

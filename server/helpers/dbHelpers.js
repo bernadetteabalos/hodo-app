@@ -103,6 +103,25 @@ module.exports = (db) => {
       .catch(err => err);
   }
 
+  const updateBoardTitle = (id, title) => {
+    const query = {
+      text: `
+      UPDATE boards 
+      SET title = $1 
+      WHERE id = $2
+      RETURNING *`,
+      values: [title, id],
+    };
+
+    return (
+      db
+        .query(query)
+        // result.rows[0] => {id: '1', title: 'Japan'}
+        .then((result) => result.rows[0])
+        .catch((err) => console.log("err", err))
+    );
+  };
+
   return {
     getUsers,
     getUserByEmail,
@@ -112,6 +131,7 @@ module.exports = (db) => {
     getBoard,
     addBoard,
     saveBoard,
-    deleteBoard
+    deleteBoard,
+    updateBoardTitle,
   };
 };
