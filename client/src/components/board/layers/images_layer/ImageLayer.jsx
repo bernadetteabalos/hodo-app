@@ -3,7 +3,6 @@ import { Image } from "react-konva";
 const ImageLayer = (props) => {
   const { image, onSelect, shapeRef, onChange, shapeProps } = props;
   return (
-    <div>
       <Image
         width={shapeProps.width}
         height={shapeProps.height}
@@ -44,7 +43,6 @@ const ImageLayer = (props) => {
           });
         }}
       />
-    </div>
   );
 };
 
