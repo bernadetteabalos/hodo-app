@@ -19,7 +19,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // socket end point for websocket
 const END_POINT = "http://localhost:8080";
 
-const MainStage = () => {
+const MainStage = (props) => {
+  const { currentBoard, setCurrentBoard } = props;
   const [elements, setElements] = useState([]);
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
@@ -170,7 +171,7 @@ const MainStage = () => {
     <>
       {/* ***** Header */}
       <div>
-        <Header />
+        <Header currentBoard={currentBoard} setCurrentBoard={setCurrentBoard} />
       </div>
       {/* ******** LEFT SIDE BAR ******************** */}
       <div className="creativity">

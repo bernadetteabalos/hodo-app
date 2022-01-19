@@ -22,13 +22,13 @@ const Login = (props) => {
         email: emailRef.current.value,
         password: pwRef.current.value,
       })
-      // axios requesst returns json data with either msg(w/ error msg to client)
+      // axios request returns json data with either msg(w/ error msg to client) ex {msg: 'incorrect credentials'}
       .then((res) => {
         if (res.data.msg) {
           // display msg to user if incorrect credentials
           alert(res.data.msg);
         } else {
-          // sets current user object to user data found in db
+          // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
           setCurrentUser(res.data);
           // navigates to profile page
           navigate("/profile");
