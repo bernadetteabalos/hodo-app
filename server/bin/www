@@ -13,7 +13,7 @@ const socketio = require("socket.io");
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || "8001");
+const port = normalizePort(process.env.PORT || "3002");
 app.set("port", port);
 
 /**
@@ -111,5 +111,5 @@ function onListening() {
   const addr = server.address();
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
-  console.log("Now listening on PORT 8080??...");
+  console.log("Now listening on PORT 3002??...");
 }
