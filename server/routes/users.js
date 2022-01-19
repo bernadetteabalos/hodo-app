@@ -8,7 +8,7 @@ module.exports = ({
   getUserByEmail,
   addUser,
   getUsersPosts,
-  updateBoard,
+  updateBoardTitle,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -113,7 +113,7 @@ module.exports = ({
 
     console.log("id, title", id, title);
     //
-    updateBoard(id, title)
+    updateBoardTitle(id, title)
       .then((board) => res.json(board))
       .catch((err) =>
         res.json({
