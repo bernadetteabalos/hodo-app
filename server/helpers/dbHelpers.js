@@ -34,83 +34,84 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getBoards = () => {
+  const getBoard = (id) => {
     const query = {
-        text: `SELECT * FROM boards`,
+      text: `SELECT * FROM boards where id = $1`,
+      values: [id]
 
     }
 
     return db.query(query)
-        .then(result => result.rows)
-        .catch(err => err);
+      .then(result => result.rows[0])
+      .catch(err => err);
 
-}
+  }
 
-const getBoardsByUser = (owner_id) => {
+  const getBoardsByUser = (owner_id) => {
     const query = {
-        text: `SELECT * FROM boards WHERE owner_id = $1`,
-        values: [owner_id]
+      text: `SELECT * FROM boards WHERE owner_id = $1`,
+      values: [owner_id]
 
     }
 
     return db.query(query)
-        .then(result => result.rows)
-        .catch(err => err);
+      .then(result => result.rows)
+      .catch(err => err);
 
-}
+  }
 
-const getElementsForBoard = () => {
+  const getElementsForBoard = () => {
     const query = {
-        text: `SELECT metadata FROM boards WHERE boards.id = $1`,
-        values: [boards.id]
+      text: `SELECT metadata FROM boards WHERE boards.id = $1`,
+      values: [boards.id]
     }
     return db.query(query)
-        .then(result => result.rows[0])
-        .catch(err => err);
-}
+      .then(result => result.rows[0])
+      .catch(err => err);
+  }
 
-const addBoard = (title, owner_id, metadata) => {
+  const addBoard = (title, owner_id, metadata) => {
     const query = {
-        text: `INSERT INTO boards (title, owner_id, metadata) VALUES ($1, $2, $3) RETURNING *`,
-        values: [title, owner_id, metadata]
-    }
-
-    return db.query(query)
-        .then(result => result.rows[0])
-        .catch(err => err);
-}
-
-const saveBoard = (metadata, id) => {
-    const query = {
-        text: `UPDATE boards SET metadata = $1 WHERE id = $2`,
-        values: [{metadata}, id]
+      text: `INSERT INTO boards (title, owner_id, metadata) VALUES ($1, $2, $3) RETURNING *`,
+      values: [title, owner_id, metadata]
     }
 
     return db.query(query)
-        .then(result => result.rows[0])
-        .catch(err => err);
-}
+      .then(result => result.rows[0])
+      .catch(err => err);
+  }
 
-const deleteBoard = (id) => {
+  const saveBoard = (metadata, id) => {
     const query = {
-        text: `DELETE FROM boards WHERE id = $1`,
-        values: [id]
+      text: `UPDATE boards SET metadata = $1 WHERE id = $2`,
+      values: [{ metadata }, id]
     }
 
     return db.query(query)
-        .then(result => result.rows[0])
-        .catch(err => err);
-}
+      .then(result => result.rows[0])
+      .catch(err => err);
+  }
 
-return {
+  const deleteBoard = (id) => {
+    const query = {
+      text: `DELETE FROM boards WHERE id = $1`,
+      values: [id]
+    }
+
+    return db.query(query)
+      .then(result => result.rows[0])
+      .catch(err => err);
+  }
+
+  return {
     getUsers,
     getUserByEmail,
     addUser,
     getBoardsByUser,
     getElementsForBoard,
-    getBoards,
+    getBoard,
     addBoard,
     saveBoard,
     deleteBoard
-};
+  };
 };

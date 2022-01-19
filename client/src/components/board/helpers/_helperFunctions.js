@@ -10,15 +10,18 @@ export const generateOneElement = (shape, fillColor, strokeColor, url) => {
   }
 
   return {
-    x: 150,
-    y: 150,
-    width,
-    height,
-    rotation: 0,
-    stroke: strokeColor,
-    fill: fillColor,
-    id: uuidV4(),
-    shape: shape,
-    url: url,
+    attrs: {
+      x: 150,
+      y: 150,
+      width,
+      height,
+      rotation: 0,
+      stroke: strokeColor,
+      fill: fillColor,
+      id: uuidV4(),
+      shape: shape,
+      url: url,
+    },
+    className: shape,
   };
 };

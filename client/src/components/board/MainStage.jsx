@@ -21,13 +21,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const END_POINT = "http://localhost:3002";
 
 const MainStage = () => {
-  const [elements, setElements] = useState([]);
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
   const [selectedId, selectShape] = useState(null);
   const stageRef = useRef(null);
 
-  const { saveBoard } = useApplicationData();
+  const { elements, setElements, saveBoard } = useApplicationData(1);
   
   // IMAGES
   const [url, setURL] = useState("");
@@ -251,20 +250,28 @@ const MainStage = () => {
             <Layer>{gridComponents}</Layer>
             <Layer ref={stageRef}>
               {elements.map((rect, i) => {
+                console.log('LKSDFJGKDG', rect);
                 return (
                   <Element
-                    shapeName={rect.shape}
+                    shapeName={rect.className}
                     url={rect.url}
                     key={i}
-                    shapeProps={rect}
+                    shapeProps={rect.attrs}
                     isSelected={rect.id === selectedId}
                     onSelect={() => {
                       selectShape(rect.id);
                     }}
                     onChange={(newAttrs) => {
-                      const rects = elements.slice();
-                      rects[i] = newAttrs;
-                      setElements(rects);
+                      setElements((prev) => prev.map((el, j) => {
+                        if (i === j) {
+                          return {
+                            ...el,
+                            attrs: newAttrs,
+                          };
+                        } else {
+                          return el;
+                        }
+                      }));
                     }}
                   />
                 );

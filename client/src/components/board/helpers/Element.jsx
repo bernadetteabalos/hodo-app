@@ -31,7 +31,7 @@ const Element = ({
 
   return (
     <>
-      {(shapeName === "rectangle" || shapeName === "square") && (
+      {(shapeName === "Rect" || shapeName === "square") && (
         <RectangleSquareLayer
           onSelect={onSelect}
           shapeRef={shapeRef}
@@ -39,7 +39,7 @@ const Element = ({
           shapeProps={shapeProps}
         />
       )}
-      {shapeName === "circle" && (
+      {shapeName === "Circle" && (
         <CircleLayer
           onSelect={onSelect}
           shapeRef={shapeRef}

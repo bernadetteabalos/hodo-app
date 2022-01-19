@@ -5,28 +5,29 @@ const {
 } = require('../helpers/dataHelpers');
 
 module.exports = ({
-  getBoards,
+  getBoard,
   getBoardsByUser,
   addBoard,
   saveBoard,
   deleteBoard
 }) => {
-  /* GET all boards*/
+  /* GET boards BY USER ID*/
   router.get('/', (req, res) => {
-    getBoards()
-      .then((users) => res.json(users))
+    const id = req.query.user_id;
+    getBoardsByUser(id)
+      .then((usersBoards) => {
+        res.json(usersBoards)
+        // res.json(formattedItineraries);
+      })
       .catch((err) => res.json({
         error: err.message
       }));
   });
 
-  /* GET boards BY user*/
+  /* GET board BY ID */
   router.get('/:id', (req, res) => {
-    getBoardsByUser(req.params.id)
-      .then((usersBoards) => {
-        res.json(usersBoards)
-        // res.json(formattedItineraries);
-      })
+    getBoard(req.params.id)
+      .then((users) => res.json(users))
       .catch((err) => res.json({
         error: err.message
       }));

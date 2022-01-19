@@ -2,19 +2,18 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 
 export default function useApplicationData(id) {
-//Set inital state
-  const [state, setState] = useState({
-    metadata: null
-  });
+  // Set inital state
+  const [title, setTitle] = useState('');
+  const [elements, setElements] = useState([]);
 
   useEffect(() => {
     async function init() {
-      const res = await axios.get('http://localhost:8001/api/boards/1')
-      console.log('LOOK  HERE', res.data)
-      setState(prev => ({...prev, id: res.data['id'], metadata: res.data['metadata'], owner_id: res.data['owner_id'], title: res.data['title'] }))
+      const res = await axios.get(`http://localhost:8001/api/boards/${id}`);
+      setTitle(res.data.title);
+      setElements(res.data.metadata.metadata.map((data) => JSON.parse(data)));
     }
     init()
-  }, [])
+  }, [id])
 
   //function for creating Board 
   async function createBoard(title, owner_id) {
@@ -37,7 +36,8 @@ export default function useApplicationData(id) {
   }
 
   return {
-    state,
+    elements,
+    setElements,
     createBoard,
     deleteBoard,
     saveBoard
