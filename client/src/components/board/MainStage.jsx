@@ -166,6 +166,11 @@ const MainStage = (props) => {
     });
   };
 
+  /** HANDLE BOARD SAVE */
+  const handleBoardSave = (e) => {
+    e.preventDefault();
+  };
+
   // ******** RETURN ********************
   return (
     <>
@@ -240,6 +245,7 @@ const MainStage = (props) => {
             clearBoard={clearBoard}
             undo={undo}
             deleteShape={deleteShape}
+            handleBoardSave={handleBoardSave}
           />
         </div>
       </div>

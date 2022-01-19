@@ -1,11 +1,13 @@
 import Button from "react-bootstrap/Button";
 
 const RightBar = (props) => {
-  const { clearBoard, undo, deleteShape } = props;
+  const { clearBoard, undo, deleteShape, handleBoardSave } = props;
   return (
     <>
       <div>
-        <Button variant="primary">Save</Button>
+        <Button variant="primary" onClick={handleBoardSave}>
+          Save
+        </Button>
         <br></br>
         <br></br>
         <Button variant="danger" onClick={clearBoard}>
