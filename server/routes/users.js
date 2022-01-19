@@ -8,7 +8,7 @@ module.exports = ({
   getUserByEmail,
   addUser,
   getUsersPosts,
-  updateBoard,
+  updateBoardTitle,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -113,7 +113,25 @@ module.exports = ({
 
     console.log("id, title", id, title);
     //
-    updateBoard(id, title)
+    updateBoardTitle(id, title)
+      .then((board) => res.json(board))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  // PUT board: route activated when user clicks 'save' button for the board
+  router.put("/title", (req, res) => {
+    // getting the title from the form
+    const { id, title } = req.body;
+    // get the board Id that is present as a prop, send that down into the axios request
+    // updateBoardTitleFunction
+
+    console.log("id, title", id, title);
+    //
+    updateBoardTitle(id, title)
       .then((board) => res.json(board))
       .catch((err) =>
         res.json({

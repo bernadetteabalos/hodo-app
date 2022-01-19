@@ -48,7 +48,7 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const updateBoard = (id, title) => {
+  const updateBoardTitle = (id, title) => {
     const query = {
       text: `
       UPDATE boards 
@@ -72,6 +72,6 @@ module.exports = (db) => {
     getUserByEmail,
     addUser,
     getUsersPosts,
-    updateBoard,
+    updateBoardTitle,
   };
 };
