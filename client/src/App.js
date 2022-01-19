@@ -52,23 +52,13 @@ function App() {
             path="/register"
             element={<Register setCurrentUser={setCurrentUser} />}
           />
-          <Route
+          {currentUser.id && <Route 
             path="/profile"
             element={<Profile currentUser={currentUser} />}
-          />
+          />}
           <Route
-<<<<<<< HEAD
             path="/board/:id"
             element={<MainStage currentUser={currentUser} />}
-=======
-            path="/board"
-            element={
-              <MainStage
-                currentBoard={currentBoard}
-                setCurrentBoard={setCurrentBoard}
-              />
-            }
->>>>>>> ba0132e49ba54903613b814ef3161400c9293667
           />
           <Route path="/" element={<Home />} />
         </Routes>

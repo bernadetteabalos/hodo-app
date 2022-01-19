@@ -26,6 +26,7 @@ const MainStage = () => {
   const [strokeColor, setStrokeColor] = useState("black");
   const [selectedId, selectShape] = useState(null);
   const stageRef = useRef(null);
+  const gridRef = useRef();
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
   
@@ -104,10 +105,7 @@ const MainStage = () => {
 
   // deselects the images and updates others' boards
   const checkDeselect = (e) => {
-    const clickedOnEmpty = e.target === e.target.getStage();
-    if (clickedOnEmpty) {
-      selectShape(null);
-    }
+    selectShape(null)
     // 1. sends the updated elements and lines arrays through the socket upon deselect to update others' boards'
     connection.emit("stage-change", elements);
     connection.emit("line-change", lines);
@@ -247,17 +245,23 @@ const MainStage = () => {
           <Stage
             width={1000 || window.innerWidth}
             height={800 || window.innerHeight}
-            onMouseDown={checkDeselect}
-            onTouchStart={checkDeselect}
-            onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
-            onMousemove={tool !== "select" ? handleMouseMove : ""}
-            onMouseup={tool !== "select" ? handleMouseUp : ""}
+            // onMouseDown={checkDeselect}
             draggable={tool === "select"}
             onDragEnd={e => {
               setStagePos(e.currentTarget.position());
             }}
+            
           >
-            <Layer>{gridComponents}</Layer>
+            <Layer
+            ref={gridRef}
+            onTouchStart={checkDeselect}
+            onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
+            onMousemove={tool !== "select" ? handleMouseMove : ""}
+            onMouseup={tool !== "select" ? handleMouseUp : ""}
+            
+            
+            >{gridComponents}
+            </Layer>
             <Layer ref={stageRef}>
               {elements.map((rect, i) => {
                 console.log('LKSDFJGKDG', rect);

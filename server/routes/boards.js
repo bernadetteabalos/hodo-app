@@ -26,6 +26,7 @@ module.exports = ({
 
   /* GET board BY ID */
   router.get('/:id', (req, res) => {
+    
     getBoard(req.params.id)
       .then((users) => res.json(users))
       .catch((err) => res.json({
@@ -54,11 +55,12 @@ module.exports = ({
 
     const {
       metadata,
-      id
+      id,
+      budget_data
     } = req.body;
     
-    console.log('OKOK', metadata, id)
-    saveBoard(metadata, id)
+    console.log('OKOK', metadata, id, budget_data)
+    saveBoard(metadata, id, budget_data)
       .then(savedBoard => res.json(savedBoard))
       .catch(err => res.json({
         error: err.message

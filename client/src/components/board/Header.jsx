@@ -11,7 +11,8 @@ const Header = () => {
   const { setTitle, title, board_id } = useApplicationData();
   const [show, setShow] = useState(false);
   const newTitleRef = useRef();
-
+  console.log("what is title?", title);
+  console.log("typeof title:", typeof title);
   console.log("this is currentBoard--->", board_id);
 
   const handleShow = () => setShow(true);
@@ -33,9 +34,8 @@ const Header = () => {
       })
       .then((res) => {
         console.log("hit this on line 34 in Header");
-        setTitle((prevState) => {
-          return { ...prevState, title: res.data.title };
-        });
+        console.log("this is response", res);
+        setTitle(res.data.title);
       })
       .catch((err) => console.log(err.message));
     setShow(false);
