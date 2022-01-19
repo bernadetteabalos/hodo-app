@@ -26,7 +26,7 @@ const MainStage = () => {
   const [selectedId, selectShape] = useState(null);
   const stageRef = useRef(null);
 
-  const { elements, setElements, saveBoard } = useApplicationData(1);
+  const { elements, board_id, setElements, saveBoard } = useApplicationData();
   
   // IMAGES
   const [url, setURL] = useState("");
@@ -182,7 +182,7 @@ const MainStage = () => {
         item.attrs.url = item.attrs.image.src;
       }
     });
-    saveBoard(1, stageRef.current.children)
+    saveBoard(board_id, stageRef.current.children)
   }
 
   /** removes the previous element from the array */

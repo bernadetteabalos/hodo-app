@@ -50,7 +50,7 @@ function App() {
             element={<Profile currentUser={currentUser} />}
           />
           <Route
-            path="/board"
+            path="/board/:id"
             element={<MainStage currentUser={currentUser} />}
           />
           <Route path="/" element={<Home />} />

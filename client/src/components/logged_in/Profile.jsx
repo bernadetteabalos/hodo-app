@@ -1,5 +1,6 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import { useState, useRef } from "react"
+import { useNavigate } from "react-router-dom";
 import "../../stylesheets/css/profile.css";
 import useApplicationData from "../../hooks/forBoards";
 
@@ -9,6 +10,7 @@ import useApplicationData from "../../hooks/forBoards";
 // }
 const Profile = (props) => {
   const { currentUser } = props;
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const titleRef = useRef();
   const { createBoard } = useApplicationData();
@@ -17,8 +19,10 @@ const Profile = (props) => {
   const handleShow = () => setShow(true);
   console.log("this is currentUser", currentUser);
 
-  const handleSubmit = () => {
-    createBoard(titleRef.current.value, currentUser.id)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const board = await createBoard(titleRef.current.value, currentUser.id)
+    navigate(`/board/${board.id}`)
   };
   
   return (
