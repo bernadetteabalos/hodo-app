@@ -11,14 +11,13 @@ import StarLayer from "../layers/shapes_layer/StarLayer";
 import ImageLayer from "../layers/images_layer/ImageLayer";
 
 const Element = ({
-  url,
   shapeName,
   shapeProps,
   isSelected,
   onSelect,
   onChange,
 }) => {
-  const [image] = useImage(url, "Anonimus");
+  const [image] = useImage(shapeProps.url, "Anonimus");
   const shapeRef = useRef();
   const trRef = useRef();
 
@@ -31,7 +30,7 @@ const Element = ({
 
   return (
     <>
-      {(shapeName === "rectangle" || shapeName === "square") && (
+      {(shapeName === "Rect" || shapeName === "Square") && (
         <RectangleSquareLayer
           onSelect={onSelect}
           shapeRef={shapeRef}
@@ -39,7 +38,7 @@ const Element = ({
           shapeProps={shapeProps}
         />
       )}
-      {shapeName === "circle" && (
+      {shapeName === "Circle" && (
         <CircleLayer
           onSelect={onSelect}
           shapeRef={shapeRef}
@@ -47,7 +46,7 @@ const Element = ({
           shapeProps={shapeProps}
         />
       )}
-      {shapeName === "star" && (
+      {shapeName === "Star" && (
         <StarLayer
           onSelect={onSelect}
           shapeRef={shapeRef}
@@ -55,7 +54,7 @@ const Element = ({
           shapeProps={shapeProps}
         />
       )}
-      {image && (
+      {shapeName === "Image" && (
         <ImageLayer
           image={image}
           onSelect={onSelect}
