@@ -1,20 +1,22 @@
 import { useState } from "react";
 import "../../stylesheets/css/about.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fas } from "@fortawesome/free-brands-svg-icons";
 
 const About = () => {
   const [count, setCount] = useState(1000);
   return (
-    <div className="about-page">
+    <div className="about-page title">
       <h1>About Us</h1>
       <div className="about-people">
-        <div className="person">
+        <div className="person bold">
           <h1>Bernadette Abalos</h1>
         </div>
-        <div className="person">
+        <div className="person emphasize">
           <h1>Stephanie Li</h1>
         </div>
-        <div className="person">
-          <h1>Bleslinda Mateo</h1>
+        <div className="person outline">
+          <h1>Blesilda Mateo</h1>
         </div>
       </div>
       <div className="about-stack">
@@ -28,7 +30,7 @@ const About = () => {
               setCount(count + 1000);
             }}
           >
-            +
+            <i class="fas fa-glass-cheers"></i> Cheer!
           </button>
           to our instructors and mentors at LHL!
         </h1>

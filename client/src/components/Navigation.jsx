@@ -22,18 +22,18 @@ const Navigation = (props) => {
             <h3>Hodo</h3>
           </Navbar.Brand>
           <Navbar.Brand href="/about">
-            <span>About Us</span>
+            <span className="head">About Us</span>
           </Navbar.Brand>
           <Navbar.Collapse className="justify-content-end">
             {!currentUser.id && (
               <Navbar.Brand href="/login">
-                <h3>Login</h3>
+                <h3 className="head">Login</h3>
               </Navbar.Brand>
             )}
             <Navbar.Brand className="vr"></Navbar.Brand>
             {!currentUser.id && (
               <Navbar.Brand href="/register" className="me-2">
-                <h3>Register</h3>
+                <h3 className="head">Register</h3>
               </Navbar.Brand>
             )}
             {currentUser.id && (

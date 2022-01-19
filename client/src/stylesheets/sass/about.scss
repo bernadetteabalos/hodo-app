@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 .about-page {
-  background: $base-background;
+  background: #2262b1;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      border: 3px solid black;
+      border: 3px solid #000000;
       margin: 3rem;
       width: 25vw;
       height: 50vh;
