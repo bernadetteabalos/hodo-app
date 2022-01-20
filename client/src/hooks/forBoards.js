@@ -41,6 +41,12 @@ export default function useApplicationData() {
     });
   }
 
+  async function addCollaborator(user_id, board_id) {
+    // updates collaborator table to user_id and board_id. Returns the 'happy' msg
+    const res = await axios.post("/api/collaborators", { user_id, board_id });
+    return res.data.msg;
+  }
+
   return {
     elements,
     board_id: params.id,
@@ -50,5 +56,6 @@ export default function useApplicationData() {
     deleteBoard,
     setTitle,
     saveBoard,
+    addCollaborator,
   };
 }
