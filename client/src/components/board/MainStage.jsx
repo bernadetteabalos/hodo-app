@@ -257,7 +257,7 @@ const MainStage = (props) => {
     setChats(newChatArray);
     const speaker = currentUser["first_name"];
 
-    console.log("BITECH WHAT IS YOUR NAME--->", speaker);
+    console.log("BITECH WHAT IS YOUR NAME (a)--->", speaker);
 
     connection.emit("chat-change", newChatArray, board_id, speaker);
     setMessage("");
