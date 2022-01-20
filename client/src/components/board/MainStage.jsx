@@ -19,7 +19,7 @@ import "../../stylesheets/css/mainstage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // socket end point for websocket
-const END_POINT = "http://localhost:3002";
+const END_POINT = "http://localhost:8001";
 
 const MainStage = () => {
   const [fillColor, setFillColor] = useState("");
@@ -29,6 +29,8 @@ const MainStage = () => {
   const gridRef = useRef();
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
+
+  console.log("main stage line 33, board_id", board_id);
 
   // IMAGES
   const [url, setURL] = useState("");
@@ -93,12 +95,13 @@ const MainStage = () => {
     });
 
     // 4. listening for when new element is generated on the stage
-    conn.on("new-stage", (elements) => {
+    conn.on(`new-stage-${board_id}`, (elements) => {
+      console.log("yess, line 99 in MainStage.jsx--->", elements);
       setElements(elements);
     });
 
     // listening for when a new line is generated on the stage
-    conn.on("new-line", (lines) => {
+    conn.on(`new-line-${board_id}`, (lines) => {
       setLines(lines);
     });
 
@@ -110,8 +113,9 @@ const MainStage = () => {
   const checkDeselect = (e) => {
     selectShape(null);
     // 1. sends the updated elements and lines arrays through the socket upon deselect to update others' boards'
-    connection.emit("stage-change", elements);
-    connection.emit("line-change", lines);
+    // I also want to pass down my board_id
+    connection.emit("stage-change", elements, board_id);
+    connection.emit("line-change", lines, board_id);
   };
 
   /**activated upon clicking of shape or add img. generates a new element and adds it to the array */
@@ -121,7 +125,7 @@ const MainStage = () => {
     setElements((prevState) => [...prevState, newElement]);
     const newState = [...elements, newElement];
     // sends the new state through the socket
-    connection.emit("stage-change", newState);
+    connection.emit("stage-change", elements, board_id);
     // reset tool to 'select' to prevent 'pen' mode when transforming the shapes
     setTool("select");
   };
@@ -155,7 +159,7 @@ const MainStage = () => {
   // when the moust is up, set drawing to false and send line through the socket to appear on other users' board
   const handleMouseUp = () => {
     isDrawing.current = false;
-    connection.emit("line-change", lines);
+    connection.emit("line-change", lines, board_id);
   };
 
   //*** IMAGES */
@@ -254,6 +258,8 @@ const MainStage = () => {
             width={1000 || window.innerWidth}
             height={800 || window.innerHeight}
             // onMouseDown={checkDeselect}
+            onMousemove={tool !== "select" ? handleMouseMove : ""}
+            onMouseup={tool !== "select" ? handleMouseUp : ""}
             draggable={tool === "select"}
             onDragEnd={(e) => {
               setStagePos(e.currentTarget.position());
@@ -263,8 +269,6 @@ const MainStage = () => {
               ref={gridRef}
               onTouchStart={checkDeselect}
               onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
-              onMousemove={tool !== "select" ? handleMouseMove : ""}
-              onMouseup={tool !== "select" ? handleMouseUp : ""}
             >
               {gridComponents}
             </Layer>
