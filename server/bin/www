@@ -49,6 +49,12 @@ io.on("connection", (socket) => {
   socket.on("line-change", (lines, board_id) => {
     socket.broadcast.emit(`new-line-${board_id}`, lines);
   });
+
+  // b. Listening for incoming chat message
+  socket.on("chat-change", (newChatArray, board_id, speaker) => {
+    // send chat msg to others but the sender
+    socket.broadcast.emit(`update-chat-${board_id}`, newChatArray, speaker);
+  });
 });
 
 /**
