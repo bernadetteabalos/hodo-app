@@ -4,12 +4,14 @@ import useApplicationData from "../../hooks/forBoards";
 import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
 import { Rect } from "react-konva";
+import { Button } from "react-bootstrap";
 
 // import Other Components
 import Header from "./Header";
 import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
+import OneChatMessage from "./right_bar_components/OneChatMessage";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
@@ -21,7 +23,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // socket end point for websocket
 const END_POINT = "http://localhost:8001";
 
-const MainStage = () => {
+const MainStage = (props) => {
+  const { currentUser } = props;
+  // console.log("line 28 mainstage-->currentUser", current)
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
   const [selectedId, selectShape] = useState(null);
@@ -31,6 +35,10 @@ const MainStage = () => {
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
 
   console.log("main stage line 33, board_id", board_id);
+  //CHAT*********************
+  const [message, setMessage] = useState("");
+  const [chats, setChats] = useState([]);
+  const [chatSpeaker, setChatSpeaker] = useState(currentUser["first_name"]);
 
   // IMAGES
   const [url, setURL] = useState("");
@@ -103,6 +111,14 @@ const MainStage = () => {
     // listening for when a new line is generated on the stage
     conn.on(`new-line-${board_id}`, (lines) => {
       setLines(lines);
+    });
+
+    // d. chat box setting the new array
+    conn.on(`update-chat-${board_id}`, (newChatArray, speaker) => {
+      console.log("OKAY THERE, line 39 newChatArray ---->", newChatArray);
+      setChats(newChatArray);
+      setChatSpeaker(speaker);
+      console.log("what is my speakkkerrr line 121 --->", speaker);
     });
 
     // setting connection to be socketIOClient(END_POINT)
@@ -231,6 +247,20 @@ const MainStage = () => {
     e.preventDefault();
   };
 
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    console.log("it is this message--->", message);
+    // a. emit a connection to send the message object
+    const newChatArray = [...chats, message];
+    setChats(newChatArray);
+    const speaker = currentUser["first_name"];
+
+    console.log("BITECH WHAT IS YOUR NAME--->", speaker);
+
+    connection.emit("chat-change", newChatArray, board_id, speaker);
+    setMessage("");
+  };
+
   // ******** RETURN ********************
   return (
     <>
@@ -325,7 +355,27 @@ const MainStage = () => {
             undo={undo}
             deleteShape={deleteShape}
             handleBoardSave={handleBoardSave}
+            connection={connection}
+            setConnection={setConnection}
+            END_POINT={END_POINT}
+            currentUser={currentUser}
           />
+          <div>
+            <div id="chatbox">
+              {chats.map((chat) => {
+                return <OneChatMessage chat={chat} chatSpeaker={chatSpeaker} />;
+              })}
+            </div>
+            <textarea
+              className="enterText"
+              type="text"
+              value={message}
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+            ></textarea>
+            <Button onClick={handleSendMessage}>Send Message</Button>
+          </div>
         </div>
       </div>
     </>
