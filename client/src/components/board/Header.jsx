@@ -40,11 +40,13 @@ const Header = () => {
 
   return (
     <div className="header-bar">
-      <h2>{title}</h2>
-      <div className="title-edit-button">
-        <Button variant="primary title-edit-button" onClick={handleShow}>
-          Edit
+      <div>
+        <Button variant="warning" onClick={handleShow}>
+          Edit Title
         </Button>
+      </div>
+      <div className="title-name">
+        <h2>{title}</h2>
       </div>
       <Modal
         show={show}
@@ -75,6 +77,9 @@ const Header = () => {
           </Modal.Footer>
         </Form>
       </Modal>
+      <div className="add-collaborators">
+        <Button>Add a Collaborator</Button>
+      </div>
     </div>
   );
 };
