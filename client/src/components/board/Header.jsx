@@ -11,6 +11,7 @@ const Header = () => {
   const { setTitle, title, board_id } = useApplicationData();
   const [show, setShow] = useState(false);
   const newTitleRef = useRef();
+  const newCollaboratorRef = useRef();
 
   const handleShow = () => setShow(true);
   const handleClose = (e) => {
@@ -18,7 +19,7 @@ const Header = () => {
     setShow(false);
   };
 
-  const handleSave = (e) => {
+  const handleEditSave = (e) => {
     e.preventDefault();
     // axios put request here
     // need to make a seed table first
@@ -36,6 +37,23 @@ const Header = () => {
       })
       .catch((err) => console.log(err.message));
     setShow(false);
+  };
+
+  const handleCollaboratorSave = (e) => {
+    e.preventDefault();
+
+    const urlAddCollaborator = "/api/collaborators";
+
+    axios
+      .post(urlAddCollaborator, {
+        user_id: newCollaboratorRef.current.value,
+        board_id: board_id,
+      })
+      .then((res) => {
+        // res.data.msg is the "msg that was sent from collaborators.js in server "Added collaborators to board"
+        alert(res.data.msg);
+        setShow(false);
+      });
   };
 
   return (
@@ -71,15 +89,44 @@ const Header = () => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleSave}>
+            <Button variant="primary" onClick={handleEditSave}>
               Save
             </Button>
           </Modal.Footer>
         </Form>
       </Modal>
       <div className="add-collaborators">
-        <Button>Add a Collaborator</Button>
+        <Button onClick={handleShow}>Add a Collaborator</Button>
       </div>
+      <Modal
+        show={show}
+        onHide={() => {
+          setShow(false);
+        }}
+        backdrop="static"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add Collaborator By Id</Modal.Title>
+        </Modal.Header>
+        <Form>
+          <Modal.Body>
+            <Form.Control
+              size="lg"
+              ref={newCollaboratorRef}
+              type="number"
+              placeholder="Enter Collaborator Id"
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleCollaboratorSave}>
+              Save
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
     </div>
   );
 };
