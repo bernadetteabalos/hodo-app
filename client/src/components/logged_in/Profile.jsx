@@ -12,7 +12,7 @@ const Profile = (props) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const titleRef = useRef();
-  const { createBoard } = useApplicationData();
+  const { createBoard, addCollaborator } = useApplicationData();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,7 +21,12 @@ const Profile = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const board = await createBoard(titleRef.current.value, currentUser.id);
-    // console.log("hit profile line 25");
+
+    // waits for the board info to be grabbed then uses board.id to add user/board to the collaborator table
+    const msg = await addCollaborator(currentUser.id, board.id);
+
+    alert(msg);
+
     navigate(`/board/${board.id}`);
   };
 
@@ -34,6 +39,7 @@ const Profile = (props) => {
           </div>
           <div className="profile-name">
             <h4>{currentUser.first_name}</h4>
+            <h5>Your id is: {currentUser.id}</h5>
           </div>
         </div>
         <div className="right-profile">
