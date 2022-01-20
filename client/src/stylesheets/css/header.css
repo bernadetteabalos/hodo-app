@@ -1,1 +1,1 @@
-.header-bar{background-color:pink;display:flex}
+.header-bar{background-color:pink;display:flex;justify-content:space-between}.header-bar .title-name{margin-left:2rem;margin-right:2rem}.add-collaborators{display:flex}
