@@ -39,7 +39,11 @@ const Profile = (props) => {
           </div>
           <div className="profile-name">
             <h4>{currentUser.first_name}</h4>
-            <h5>Your id is: {currentUser.id}</h5>
+          </div>
+          <div>
+            <em>
+              <h5>Your id is: {currentUser.id}</h5>
+            </em>
           </div>
         </div>
         <div className="right-profile">
@@ -49,7 +53,7 @@ const Profile = (props) => {
               <li>JAPAN 2020</li>
             </ul>
           </div>
-          <Button variant="primary" onClick={handleShow}>
+          <Button className="mt-2 w-100" variant="primary" onClick={handleShow}>
             Create New Board
           </Button>
           <Modal show={show} onHide={handleClose}>
