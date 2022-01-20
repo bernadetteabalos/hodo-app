@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const { getPostsByUsers } = require("../helpers/dataHelpers");
-const cookieSession = require ('cookie-session');
+const cookieSession = require("cookie-session");
 
 module.exports = ({
   getUsers,
@@ -68,8 +68,8 @@ module.exports = ({
       })
       // sending info as JSON for front-end
       .then((newUser) => {
-        req.session.user_id = "hello"
-        return res.json(newUser)
+        req.session.user_id = "hello";
+        return res.json(newUser);
       })
       .catch((err) =>
         res.json({
@@ -99,11 +99,11 @@ module.exports = ({
           });
         }
       })
-      .catch((err) =>
+      .catch((err) => {
         res.json({
           error: err.message,
-        })
-      );
+        });
+      });
   });
 
   //************** PUT REQUESTS */
@@ -119,29 +119,11 @@ module.exports = ({
     //
     updateBoardTitle(id, title)
       .then((board) => res.json(board))
-      .catch((err) =>
+      .catch((err) => {
         res.json({
           error: err.message,
-        })
-      );
-  });
-
-  // PUT board: route activated when user clicks 'save' button for the board
-  router.put("/title", (req, res) => {
-    // getting the title from the form
-    const { id, title } = req.body;
-    // get the board Id that is present as a prop, send that down into the axios request
-    // updateBoardTitleFunction
-
-    console.log("id, title", id, title);
-    //
-    updateBoardTitle(id, title)
-      .then((board) => res.json(board))
-      .catch((err) =>
-        res.json({
-          error: err.message,
-        })
-      );
+        });
+      });
   });
 
   return router;
