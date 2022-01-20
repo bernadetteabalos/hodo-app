@@ -26,8 +26,22 @@ const MainStage = () => {
   const [strokeColor, setStrokeColor] = useState("black");
   const [selectedId, selectShape] = useState(null);
   const stageRef = useRef(null);
+  const posRef = useRef(null);
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
+
+  function getRelativePointerPosition(node) {
+    // the function will return pointer position relative to the passed node
+    var transform = node.getAbsoluteTransform().copy();
+    // to detect relative position we need to invert transform
+    transform.invert();
+  
+    // get pointer (say mouse or touch) position
+    var pos = node.getStage().getPointerPosition();
+  
+    // now we find a relative point
+    return transform.point(pos);
+  }
   
   // IMAGES
   const [url, setURL] = useState("");
@@ -126,7 +140,8 @@ const MainStage = () => {
   // ****************** PEN TOOLS FUNCTIONS ****************
   const handleMouseDown = (e) => {
     isDrawing.current = true;
-    const pos = e.target.getStage().getPointerPosition();
+    const stage = e.target.getStage();
+    const pos = stage.getRelativePointerPosition(posRef);
     setLines([
       ...lines,
       { tool, points: [pos.x, pos.y], strokeColor: strokeColor },
@@ -139,7 +154,7 @@ const MainStage = () => {
       return;
     }
     const stage = e.target.getStage();
-    const point = stage.getPointerPosition();
+    const point = stage.getRelativePointerPosition(posRef);
     let lastLine = lines[lines.length - 1];
     // add point
     lastLine.points = lastLine.points.concat([point.x, point.y]);
@@ -244,7 +259,7 @@ const MainStage = () => {
         />
         {/* ******** STAGE ******************** */}
         <div className="stage">
-          <Stage
+          <Stage ref={posRef}
             width={1000 || window.innerWidth}
             height={800 || window.innerHeight}
             // onMouseDown={checkDeselect}
