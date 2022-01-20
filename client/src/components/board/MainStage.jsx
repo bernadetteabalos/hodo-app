@@ -273,6 +273,19 @@ const MainStage = () => {
               {gridComponents}
             </Layer>
             <Layer ref={stageRef}>
+              {lines.map((line, i) => (
+                <Line
+                  key={i}
+                  points={line.points}
+                  stroke={line.strokeColor}
+                  strokeWidth={5}
+                  tension={0.5}
+                  lineCap="round"
+                  globalCompositeOperation={
+                    line.tool === "eraser" ? "destination-out" : "source-over"
+                  }
+                />
+              ))}
               {elements.map((rect, i) => {
                 console.log("LKSDFJGKDG", rect);
                 return (
@@ -301,19 +314,6 @@ const MainStage = () => {
                   />
                 );
               })}
-              {lines.map((line, i) => (
-                <Line
-                  key={i}
-                  points={line.points}
-                  stroke={line.strokeColor}
-                  strokeWidth={5}
-                  tension={0.5}
-                  lineCap="round"
-                  globalCompositeOperation={
-                    line.tool === "eraser" ? "destination-out" : "source-over"
-                  }
-                />
-              ))}
             </Layer>
           </Stage>
         </div>
