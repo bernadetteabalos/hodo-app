@@ -5,13 +5,14 @@ import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
 import { Rect } from "react-konva";
 import { Button } from "react-bootstrap";
+import { v4 as uuidV4 } from "uuid";
 
 // import Other Components
 import Header from "./Header";
 import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
-import OneChatMessage from "./right_bar_components/OneChatMessage";
+import OneChatMessage from "../../stylesheets/css/chatbox.css";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
@@ -363,7 +364,13 @@ const MainStage = (props) => {
           <div>
             <div id="chatbox">
               {chats.map((chat) => {
-                return <OneChatMessage chat={chat} chatSpeaker={chatSpeaker} />;
+                return (
+                  <OneChatMessage
+                    key={uuidV4()}
+                    chat={chat}
+                    chatSpeaker={chatSpeaker}
+                  />
+                );
               })}
             </div>
             <textarea
