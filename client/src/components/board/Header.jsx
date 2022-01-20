@@ -11,9 +11,6 @@ const Header = () => {
   const { setTitle, title, board_id } = useApplicationData();
   const [show, setShow] = useState(false);
   const newTitleRef = useRef();
-  console.log("what is title?", title);
-  console.log("typeof title:", typeof title);
-  console.log("this is currentBoard--->", board_id);
 
   const handleShow = () => setShow(true);
   const handleClose = (e) => {

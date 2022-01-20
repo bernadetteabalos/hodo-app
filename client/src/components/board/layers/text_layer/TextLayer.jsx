@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import {Stage, Layer, Text } from "react-konva";
 import { Html } from 'react-konva-utils';
+import "/home/odette/host/hodo-app/client/src/stylesheets/css/text.css"
 
 const TextLayer = (props) => {
   const { onSelect, shapeRef, onChange, shapeProps } = props;
@@ -58,7 +59,9 @@ const TextLayer = (props) => {
         onDblClick={onDoubleClick}
       />
       <Html >
-        <input type="text" ref={inputRef} value={text} onChange={onInputChange}/>
+        <div class="textBox">
+        <input draggable={false} id="textEdit" type="text" ref={inputRef} value={text} onChange={onInputChange}/>
+        </div>
       </Html>
       
     </>

@@ -185,9 +185,16 @@ const MainStage = () => {
   }
 
   /** removes the previous element from the array */
-  const undo = (type) => {
+  const undo = () => {
     // removes the previous shape/image from the array
-    if (type === "shape_image") {
+    console.log("dancing on my OWNNN", stageRef.current.children.at(-1));
+    if (stageRef.current.children.at(-1).constructor.name === "Line") {
+      const copyOfLines = [stageRef.current.children];
+      const undoLines = copyOfLines.slice(0, stageRef.current.children.length - 1)
+      setLines(undoLines)
+      connection.emit("line-change", undoLines);
+    } else {
+
       // making a copy of the elements array, and making a copy of that with the last element removed
       const copyOfElements = [...elements];
       const undoElement = copyOfElements.slice(0, elements.length - 1);
@@ -195,13 +202,8 @@ const MainStage = () => {
       setElements(undoElement);
       // send the updated elements array through the socket
       connection.emit("stage-change", undoElement);
-    } else if (type === "pen") {
-      // sets lines array to one without the last element and send it through the socket
-      const copyOfLines = [...lines];
-      const undoLines = copyOfLines.slice(0, lines.length - 1);
-      setLines(undoLines);
-      connection.emit("line-change", undoLines);
     }
+    
   };
 
   /**deletes the selected shape */
@@ -250,31 +252,34 @@ const MainStage = () => {
             onDragEnd={e => {
               setStagePos(e.currentTarget.position());
             }}
+            onMousemove={tool !== "select" ? handleMouseMove : ""}
+            onMouseup={tool !== "select" ? handleMouseUp : ""}
             
           >
             <Layer
             onTouchStart={checkDeselect}
             onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
-            onMousemove={tool !== "select" ? handleMouseMove : ""}
-            onMouseup={tool !== "select" ? handleMouseUp : ""}
             
             
             >{gridComponents}
             </Layer>
             <Layer ref={stageRef}>
               {elements.map((rect, i) => {
-                console.log('LKSDFJGKDG', rect);
+              console.log('this is what i need', elements)
+                
+              console.log('LKSDFJGKDG', rect);
                 return (
-                  <Element
-                  shapeName={rect.className}
-                  key={i}
-                  shapeProps={rect.attrs}
-                  isSelected={rect.attrs.id === selectedId}
-                  onSelect={() => {
-                    selectShape(rect.attrs.id);
-                    }}
+                  <>
+                  {rect.className === "Line" ? (
+                    <Line
+                    key={i}
+                    points={rect.attrs.points}
+                    stroke={rect.attrs.stroke}
+                    strokeWidth={5}
+                    tension={0.5}
+                    lineCap="round"
                     onChange={(newAttrs) => {
-                      setElements((prev) => prev.map((el, j) => {
+                      setLines((prev) => prev.map((el, j) => {
                         if (i === j) {
                           return {
                             ...el,
@@ -285,7 +290,35 @@ const MainStage = () => {
                         }
                       }));
                     }}
+                    // globalCompositeOperation={
+                    //   line.tool === "eraser" ? "destination-out" : "source-over"
+                    // }
                   />
+                  ) : (
+                    <Element
+                    shapeName={rect.className}
+                    key={i}
+                    shapeProps={rect.attrs}
+                    isSelected={rect.attrs.id === selectedId}
+                    onSelect={() => {
+                      selectShape(rect.attrs.id);
+                      }}
+                      onChange={(newAttrs) => {
+                        setElements((prev) => prev.map((el, j) => {
+                          if (i === j) {
+                            return {
+                              ...el,
+                              attrs: newAttrs,
+                            };
+                          } else {
+                            return el;
+                          }
+                        }));
+                      }}
+                    />
+                  )
+                  }
+                  </>
                 );
               })}
               {lines.map((line, i) => (

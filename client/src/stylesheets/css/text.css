@@ -1,0 +1,9 @@
+.textBox {
+  display: block;
+  position: relative;
+}
+
+#textEdit {
+  width: 500px;
+  position: absolute;
+}

@@ -73,14 +73,14 @@ const Element = ({
           shapeProps={shapeProps}
         />
       )}
-      {/* {shapeName === "Line" && (
+      {shapeName === "Line" && (
         <LineLayer
           onSelect={onSelect}
           shapeRef={shapeRef}
           onChange={onChange}
           shapeProps={shapeProps}
         />
-      )} */}
+      )}
       {isSelected && (
         <Transformer
           ref={trRef}
