@@ -12,13 +12,14 @@ import Header from "./Header";
 import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
-import OneChatMessage from "../../stylesheets/css/chatbox.css";
+import OneChatMessage from "../board/right_bar_components/OneChatMessage";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
 
 // import styles
 import "../../stylesheets/css/mainstage.css";
+import "../../stylesheets/css/chatbox.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // socket end point for websocket
