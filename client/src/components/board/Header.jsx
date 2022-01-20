@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 // import from other libraries/styling
 import axios from "axios";
 import { Button, Modal, Form } from "react-bootstrap";
-import ModalHeader from "react-bootstrap/esm/ModalHeader";
+
 //import syling
 import "../../stylesheets/css/header.css";
 import useApplicationData from "../../hooks/forBoards";
@@ -11,9 +11,6 @@ const Header = () => {
   const { setTitle, title, board_id } = useApplicationData();
   const [show, setShow] = useState(false);
   const newTitleRef = useRef();
-  console.log("what is title?", title);
-  console.log("typeof title:", typeof title);
-  console.log("this is currentBoard--->", board_id);
 
   const handleShow = () => setShow(true);
   const handleClose = (e) => {
@@ -44,9 +41,11 @@ const Header = () => {
   return (
     <div className="header-bar">
       <h2>{title}</h2>
-      <Button variant="primary" onClick={handleShow}>
-        Edit
-      </Button>
+      <div className="title-edit-button">
+        <Button variant="primary title-edit-button" onClick={handleShow}>
+          Edit
+        </Button>
+      </div>
       <Modal
         show={show}
         onHide={() => {
