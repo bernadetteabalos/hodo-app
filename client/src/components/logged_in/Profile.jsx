@@ -12,7 +12,7 @@ const Profile = (props) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const titleRef = useRef();
-  const { createBoard } = useApplicationData();
+  const { createBoard, addCollaborator } = useApplicationData();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,7 +21,12 @@ const Profile = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const board = await createBoard(titleRef.current.value, currentUser.id);
-    // console.log("hit profile line 25");
+
+    // waits for the board info to be grabbed then uses board.id to add user/board to the collaborator table
+    const msg = await addCollaborator(currentUser.id, board.id);
+
+    alert(msg);
+
     navigate(`/board/${board.id}`);
   };
 
@@ -35,6 +40,11 @@ const Profile = (props) => {
           <div className="profile-name">
             <h4>{currentUser.first_name}</h4>
           </div>
+          <div>
+            <em>
+              <h5>Your id is: {currentUser.id}</h5>
+            </em>
+          </div>
         </div>
         <div className="right-profile">
           <div className="itineraries-container">
@@ -43,7 +53,7 @@ const Profile = (props) => {
               <li>JAPAN 2020</li>
             </ul>
           </div>
-          <Button variant="primary" onClick={handleShow}>
+          <Button className="mt-2 w-100" variant="primary" onClick={handleShow}>
             Create New Board
           </Button>
           <Modal show={show} onHide={handleClose}>
