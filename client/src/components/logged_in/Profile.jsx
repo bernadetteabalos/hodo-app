@@ -1,9 +1,8 @@
 import { Button, Modal, Form } from "react-bootstrap";
-import { useState, useRef } from "react"
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../stylesheets/css/profile.css";
 import useApplicationData from "../../hooks/forBoards";
-
 
 // const create = () => {
 //   createItinerary(title, currentUser.id,)
@@ -21,10 +20,11 @@ const Profile = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const board = await createBoard(titleRef.current.value, currentUser.id)
-    navigate(`/board/${board.id}`)
+    const board = await createBoard(titleRef.current.value, currentUser.id);
+    // console.log("hit profile line 25");
+    navigate(`/board/${board.id}`);
   };
-  
+
   return (
     <div className="profile-page">
       <div className="profile-container">
@@ -44,32 +44,37 @@ const Profile = (props) => {
             </ul>
           </div>
           <Button variant="primary" onClick={handleShow}>
-        Create New Board
-      </Button>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create New Board</Modal.Title>
-        </Modal.Header>
-          <Form onSubmit={handleSubmit}>
-        <Modal.Body>
-            <Form.Group>
-              <Form.Label>Title</Form.Label>
-              <Form.Control type="text" ref={titleRef} required placeholder="Enter title" />
-              <Form.Text className="text-muted">
-                Give your board a snazzy title.
-              </Form.Text>
-            </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
+            Create New Board
           </Button>
-          <Button variant="primary" type="submit" >
-            Create Board
-          </Button>
-        </Modal.Footer>
-          </Form>
-      </Modal>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Create New Board</Modal.Title>
+            </Modal.Header>
+            <Form onSubmit={handleSubmit}>
+              <Modal.Body>
+                <Form.Group>
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    ref={titleRef}
+                    required
+                    placeholder="Enter title"
+                  />
+                  <Form.Text className="text-muted">
+                    Give your board a snazzy title.
+                  </Form.Text>
+                </Form.Group>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Cancel
+                </Button>
+                <Button variant="primary" type="submit">
+                  Create Board
+                </Button>
+              </Modal.Footer>
+            </Form>
+          </Modal>
         </div>
       </div>
     </div>

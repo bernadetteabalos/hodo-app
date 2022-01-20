@@ -19,7 +19,7 @@ import "../../stylesheets/css/mainstage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // socket end point for websocket
-const END_POINT = "http://localhost:3002";
+const END_POINT = "http://localhost:8001";
 
 const MainStage = () => {
   const [fillColor, setFillColor] = useState("");
@@ -29,50 +29,55 @@ const MainStage = () => {
   const gridRef = useRef();
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
-  
+
+  console.log("main stage line 33, board_id", board_id);
+
   // IMAGES
   const [url, setURL] = useState("");
 
   //***STAGE GRID ****//
   const WIDTH = 40;
   const HEIGHT = 40;
-  
-  const grid = [["white", "white"], ["white", "white"]];
-  
-    const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
-    const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
-    const endX =
-      Math.floor((-stagePos.x + window.innerWidth * 2) / WIDTH) * WIDTH;
-  
-    const startY =
-      Math.floor((-stagePos.y - window.innerHeight) / HEIGHT) * HEIGHT;
-    const endY =
-      Math.floor((-stagePos.y + window.innerHeight * 2) / HEIGHT) * HEIGHT;
-  
-    const gridComponents = [];
-    var i = 0;
-    for (var x = startX; x < endX; x += WIDTH) {
-      for (var y = startY; y < endY; y += HEIGHT) {
-        if (i === 4) {
-          i = 0;
-        }
-  
-        const indexX = Math.abs(x / WIDTH) % grid.length;
-        const indexY = Math.abs(y / HEIGHT) % grid[0].length;
-  
-        gridComponents.push(
-          <Rect
-            x={x}
-            y={y}
-            width={WIDTH}
-            height={HEIGHT}
-            fill={grid[indexX][indexY]}
-            stroke="black"
-            strokeWidth={0.3}
-          />
-        );
+
+  const grid = [
+    ["white", "white"],
+    ["white", "white"],
+  ];
+
+  const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
+  const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
+  const endX =
+    Math.floor((-stagePos.x + window.innerWidth * 2) / WIDTH) * WIDTH;
+
+  const startY =
+    Math.floor((-stagePos.y - window.innerHeight) / HEIGHT) * HEIGHT;
+  const endY =
+    Math.floor((-stagePos.y + window.innerHeight * 2) / HEIGHT) * HEIGHT;
+
+  const gridComponents = [];
+  var i = 0;
+  for (var x = startX; x < endX; x += WIDTH) {
+    for (var y = startY; y < endY; y += HEIGHT) {
+      if (i === 4) {
+        i = 0;
       }
+
+      const indexX = Math.abs(x / WIDTH) % grid.length;
+      const indexY = Math.abs(y / HEIGHT) % grid[0].length;
+
+      gridComponents.push(
+        <Rect
+          x={x}
+          y={y}
+          width={WIDTH}
+          height={HEIGHT}
+          fill={grid[indexX][indexY]}
+          stroke="black"
+          strokeWidth={0.3}
+        />
+      );
     }
+  }
 
   // PEN TOOLS
   const [tool, setTool] = useState("select");
@@ -90,12 +95,13 @@ const MainStage = () => {
     });
 
     // 4. listening for when new element is generated on the stage
-    conn.on("new-stage", (elements) => {
+    conn.on(`new-stage-${board_id}`, (elements) => {
+      console.log("yess, line 99 in MainStage.jsx--->", elements);
       setElements(elements);
     });
 
     // listening for when a new line is generated on the stage
-    conn.on("new-line", (lines) => {
+    conn.on(`new-line-${board_id}`, (lines) => {
       setLines(lines);
     });
 
@@ -105,10 +111,11 @@ const MainStage = () => {
 
   // deselects the images and updates others' boards
   const checkDeselect = (e) => {
-    selectShape(null)
+    selectShape(null);
     // 1. sends the updated elements and lines arrays through the socket upon deselect to update others' boards'
-    connection.emit("stage-change", elements);
-    connection.emit("line-change", lines);
+    // I also want to pass down my board_id
+    connection.emit("stage-change", elements, board_id);
+    connection.emit("line-change", lines, board_id);
   };
 
   /**activated upon clicking of shape or add img. generates a new element and adds it to the array */
@@ -118,7 +125,7 @@ const MainStage = () => {
     setElements((prevState) => [...prevState, newElement]);
     const newState = [...elements, newElement];
     // sends the new state through the socket
-    connection.emit("stage-change", newState);
+    connection.emit("stage-change", elements, board_id);
     // reset tool to 'select' to prevent 'pen' mode when transforming the shapes
     setTool("select");
   };
@@ -152,7 +159,7 @@ const MainStage = () => {
   // when the moust is up, set drawing to false and send line through the socket to appear on other users' board
   const handleMouseUp = () => {
     isDrawing.current = false;
-    connection.emit("line-change", lines);
+    connection.emit("line-change", lines, board_id);
   };
 
   //*** IMAGES */
@@ -181,8 +188,8 @@ const MainStage = () => {
         item.attrs.url = item.attrs.image.src;
       }
     });
-    saveBoard(board_id, stageRef.current.children)
-  }
+    saveBoard(board_id, stageRef.current.children);
+  };
 
   /** removes the previous element from the array */
   const undo = (type) => {
@@ -219,6 +226,11 @@ const MainStage = () => {
     });
   };
 
+  /** HANDLE BOARD SAVE */
+  const handleBoardSave = (e) => {
+    e.preventDefault();
+  };
+
   // ******** RETURN ********************
   return (
     <>
@@ -246,45 +258,45 @@ const MainStage = () => {
             width={1000 || window.innerWidth}
             height={800 || window.innerHeight}
             // onMouseDown={checkDeselect}
-            draggable={tool === "select"}
-            onDragEnd={e => {
-              setStagePos(e.currentTarget.position());
-            }}
-            
-          >
-            <Layer
-            ref={gridRef}
-            onTouchStart={checkDeselect}
-            onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
             onMousemove={tool !== "select" ? handleMouseMove : ""}
             onMouseup={tool !== "select" ? handleMouseUp : ""}
-            
-            
-            >{gridComponents}
+            draggable={tool === "select"}
+            onDragEnd={(e) => {
+              setStagePos(e.currentTarget.position());
+            }}
+          >
+            <Layer
+              ref={gridRef}
+              onTouchStart={checkDeselect}
+              onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
+            >
+              {gridComponents}
             </Layer>
             <Layer ref={stageRef}>
               {elements.map((rect, i) => {
-                console.log('LKSDFJGKDG', rect);
+                console.log("LKSDFJGKDG", rect);
                 return (
                   <Element
-                  shapeName={rect.className}
-                  key={i}
-                  shapeProps={rect.attrs}
-                  isSelected={rect.attrs.id === selectedId}
-                  onSelect={() => {
-                    selectShape(rect.attrs.id);
+                    shapeName={rect.className}
+                    key={i}
+                    shapeProps={rect.attrs}
+                    isSelected={rect.attrs.id === selectedId}
+                    onSelect={() => {
+                      selectShape(rect.attrs.id);
                     }}
                     onChange={(newAttrs) => {
-                      setElements((prev) => prev.map((el, j) => {
-                        if (i === j) {
-                          return {
-                            ...el,
-                            attrs: newAttrs,
-                          };
-                        } else {
-                          return el;
-                        }
-                      }));
+                      setElements((prev) =>
+                        prev.map((el, j) => {
+                          if (i === j) {
+                            return {
+                              ...el,
+                              attrs: newAttrs,
+                            };
+                          } else {
+                            return el;
+                          }
+                        })
+                      );
                     }}
                   />
                 );
@@ -312,6 +324,7 @@ const MainStage = () => {
             saveBoard={save}
             undo={undo}
             deleteShape={deleteShape}
+            handleBoardSave={handleBoardSave}
           />
         </div>
       </div>

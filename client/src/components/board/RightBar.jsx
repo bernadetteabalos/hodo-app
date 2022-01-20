@@ -5,7 +5,9 @@ const RightBar = (props) => {
   return (
     <>
       <div>
-        <Button variant="primary" onClick={saveBoard}>Save</Button>
+        <Button variant="primary" onClick={saveBoard}>
+          Save
+        </Button>
         <br></br>
         <br></br>
         <Button variant="danger" onClick={clearBoard}>
