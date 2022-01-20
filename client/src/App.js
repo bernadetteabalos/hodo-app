@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import useApplicationData from "./hooks/forBoards";
 
 // import other Components
 import Home from "./components/home/Home";

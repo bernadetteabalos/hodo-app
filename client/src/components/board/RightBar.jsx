@@ -29,9 +29,6 @@ const RightBar = (props) => {
           Delete Shape
         </Button>
       </div>
-      <div
-        style={{ border: "2px solid black", padding: "5px", height: "60vh" }}
-      ></div>
     </>
   );
 };
