@@ -4,9 +4,16 @@ import { Html } from 'react-konva-utils';
 import "/home/odette/host/hodo-app/client/src/stylesheets/css/text.css"
 
 const TextLayer = (props) => {
-  const { onSelect, shapeRef, onChange, shapeProps } = props;
+  const {
+    onSelect,
+    shapeRef,
+    onChange,
+    shapeProps,
+  } = props;
+  const { text, fontSize, ...rest } = shapeProps;
   const inputRef = useRef(null);
-  const [text, setText] = useState('Some text here');
+  const [currentText, setCurrentText] = useState(text || 'Some text here');
+  const [fontScale, setScale] = useState(fontSize || 20);
   const [isEditing, setIsEditing] = useState(false);
 
   const onDoubleClick = () => {
@@ -14,54 +21,70 @@ const TextLayer = (props) => {
       return;
     }
 
+    setIsEditing(true);
     inputRef.current.focus();
   };
 
+  const onBlur = () => {
+    setIsEditing(false);
+  };
+
   const onInputChange = (e) => {
-    setText(e.target.value);
+    setCurrentText(e.target.value);
   };
 
   return (
     <>
       <Text
-        text={text}
+        text={currentText}
         x={50}
         y={80}
-        fontSize={20}
+        fontSize={fontScale}
         width={200}
         onClick={onSelect}
         onTap={onSelect}
         ref={shapeRef}
-        {...shapeProps}
         draggable
         onDragEnd={(e) => {
           onChange({
-            ...shapeProps,
+            ...rest,
             x: e.target.x(),
             y: e.target.y(),
           });
         }}
-        onTransformEnd={(e) => {
+        onTransformEnd={() => {
           const node = shapeRef.current;
           const scaleX = node.scaleX();
           const scaleY = node.scaleY();
 
           node.scaleX(1);
           node.scaleY(1);
+          console.log('current font size', node.fontSize())
           onChange({
-            ...shapeProps,
+            ...rest,
+            // fontSize: node.attrs.fontSize * scaleX,
             x: node.x(),
             y: node.y(),
             width: Math.max(5, node.width() * scaleX),
             height: Math.max(node.height() * scaleY),
           });
+          setScale(node.attrs.fontSize * scaleX);
+          console.log('after font size', shapeRef)
         }}
         onDblClick={onDoubleClick}
+        {...rest}
       />
       <Html >
-        <div class="textBox">
-        <input draggable={false} id="textEdit" type="text" ref={inputRef} value={text} onChange={onInputChange}/>
-        </div>
+        <input
+          draggable={false}
+          id="textEdit"
+          type="text"
+          ref={inputRef}
+          value={currentText}
+          onChange={onInputChange}
+          onBlur={onBlur}
+          style={{ display: !isEditing && 'none' }}
+        />
       </Html>
       
     </>

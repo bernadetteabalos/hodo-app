@@ -324,6 +324,7 @@ const MainStage = () => {
                             return {
                               ...el,
                               attrs: newAttrs,
+                              
                             };
                           } else {
                             return el;

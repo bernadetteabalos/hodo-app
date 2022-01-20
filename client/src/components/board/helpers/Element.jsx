@@ -84,6 +84,7 @@ const Element = ({
       {isSelected && (
         <Transformer
           ref={trRef}
+          keepRatio
           boundBoxFunc={(oldBox, newBox) => {
             if (newBox.width < 5 || newBox.height < 5) {
               return oldBox;
