@@ -4,9 +4,14 @@ export const generateOneElement = (shape, fillColor, strokeColor, url) => {
   let width = 100;
   let height = 100;
 
-  if (url || shape === "rectangle") {
+  if (url || shape === "Rect") {
     width = 300;
     height = 150;
+  }
+
+  if (shape === "Text") {
+    width = 150;
+    height = 30;
   }
 
   return {

@@ -20,6 +20,7 @@ const StarLayer = (props) => {
           x: e.target.x(),
           y: e.target.y(),
         });
+        e.target.moveToTop();
       }}
       onTransformEnd={(e) => {
         // transformer is changing scale of the node

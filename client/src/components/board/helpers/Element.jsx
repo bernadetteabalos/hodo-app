@@ -9,6 +9,8 @@ import RectangleSquareLayer from "../layers/shapes_layer/RectangleSquareLayer";
 import CircleLayer from "../layers/shapes_layer/CircleLayer";
 import StarLayer from "../layers/shapes_layer/StarLayer";
 import ImageLayer from "../layers/images_layer/ImageLayer";
+import TextLayer from "../layers/text_layer/TextLayer";
+import LineLayer from "../layers/line_layer/LinesLayer";
 
 const Element = ({
   shapeName,
@@ -63,9 +65,26 @@ const Element = ({
           shapeProps={shapeProps}
         />
       )}
+      {shapeName === "Text" && (
+        <TextLayer
+          onSelect={onSelect}
+          shapeRef={shapeRef}
+          onChange={onChange}
+          shapeProps={shapeProps}
+        />
+      )}
+      {shapeName === "Line" && (
+        <LineLayer
+          onSelect={onSelect}
+          shapeRef={shapeRef}
+          onChange={onChange}
+          shapeProps={shapeProps}
+        />
+      )}
       {isSelected && (
         <Transformer
           ref={trRef}
+          keepRatio
           boundBoxFunc={(oldBox, newBox) => {
             if (newBox.width < 5 || newBox.height < 5) {
               return oldBox;

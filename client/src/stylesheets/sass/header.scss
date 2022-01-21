@@ -1,4 +1,13 @@
 .header-bar {
   background-color: pink;
   display: flex;
+  justify-content: space-between;
+  .title-name {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
+
+.add-collaborators {
+  display: flex;
 }

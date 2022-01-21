@@ -1,9 +1,18 @@
 import { useState } from "react";
+
+// import from other components
+import Navigation from "../Navigation";
+
+// import styling
 import "../../stylesheets/css/about.css";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const About = () => {
+const About = (props) => {
+  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
+    props;
   const [count, setCount] = useState(1000);
+
+  console.log("this is my current user on line 13 from about--->", currentUser);
   return (
     <div className="about-page title">
       <h1>About Us</h1>
@@ -13,7 +22,7 @@ const About = () => {
         </div>
         <div className="person emphasize popsec">
           <h1>Stephanie Li</h1>
-          
+
         </div>
         <div className="person outline popthird">
           <h1>Blesilda Mateo</h1>

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import useApplicationData from "./hooks/forBoards";
 
 // import other Components
 import Home from "./components/home/Home";
@@ -12,55 +11,103 @@ import About from "./components/about_us/About";
 import MainStage from "./components/board/MainStage";
 
 // import styles
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 import "./stylesheets/css/App.css";
 
 function App() {
-  const initalBoardState = {
-    id: 1,
-    title: "Japan 2022",
-    content: "stuff",
-  };
   const [currentUser, setCurrentUser] = useState({});
-  // hard coded the currentBoard for now
-  const [currentBoard, setCurrentBoard] = useState(initalBoardState);
-  // const { state, dispatch } = useApplicationData();
-
-  // const userList = state.users.map((user) => (
-  //   <li key={user.id}>
-  //     {user.first_name} {user.last_name} {user.email}
-  //   </li>
-  // ));
+  const [showLogin, setShowLogin] = useState(true);
+  const [idTitle, setIdTitle] = useState([]);
 
   return (
     <div className="App">
-      {/* <h1>Hello there from App</h1> */}
-      {/* <ul>{userList}</ul>
-      <h1>END</h1> */}
-
       {/* ******DIFFERNT ROUTES */}
-      <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />
       <Router>
         <Routes>
-          <Route path="/about" element={<About />} />
+          <Route
+            path="/about"
+            element={
+              <About
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+                setIdTitle={setIdTitle}
+              />
+            }
+          />
           <Route
             path="/login"
-            element={<Login setCurrentUser={setCurrentUser} />}
+            element={
+              <Login
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+                idTitle={idTitle}
+                setIdTitle={setIdTitle}
+              />
+            }
           />
           <Route
             path="/register"
-            element={<Register setCurrentUser={setCurrentUser} />}
+            element={
+              <Register
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+                setIdTitle={setIdTitle}
+              />
+            }
           />
-          {currentUser.id && <Route 
-            path="/profile"
-            element={<Profile currentUser={currentUser} />}
-          />}
+          {currentUser.id && (
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                  showLogin={showLogin}
+                  setShowLogin={setShowLogin}
+                  idTitle={idTitle}
+                  setIdTitle={setIdTitle}
+                />
+              }
+            />
+          )}
+          {currentUser.id && (
+            <Route
+              path="/board/:id"
+              element={<MainStage currentUser={currentUser} />}
+            />
+          )}
           <Route
-            path="/board/:id"
-            element={<MainStage currentUser={currentUser} />}
+            path="/"
+            element={
+              <Home
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+                setIdTitle={setIdTitle}
+              />
+            }
           />
-          <Route path="/" element={<Home />} />
+          <Route
+            path="*"
+            element={
+              <Home
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+                setIdTitle={setIdTitle}
+              />
+            }
+            replace={"/"}
+          />
         </Routes>
       </Router>
     </div>

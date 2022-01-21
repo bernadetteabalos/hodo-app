@@ -16,6 +16,7 @@ const RectangleLayer = (props) => {
           x: e.target.x(),
           y: e.target.y(),
         });
+        e.target.moveToTop();
       }}
       onTransformEnd={(e) => {
         const node = shapeRef.current;

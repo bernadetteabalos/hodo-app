@@ -2,7 +2,8 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const { getPostsByUsers } = require("../helpers/dataHelpers");
-const cookieSession = require ('cookie-session');
+const cookieSession = require("cookie-session");
+const app = require("../app");
 
 module.exports = ({
   getUsers,
@@ -68,8 +69,18 @@ module.exports = ({
       })
       // sending info as JSON for front-end
       .then((newUser) => {
-        req.session.user_id = "hello"
-        return res.json(newUser)
+        // newUser looks like this: {
+        //   id: 7,
+        //   first_name: 'ok',
+        //   last_name: 'ok',
+        //   email: 'ok@ok',
+        //   password: '$2a$10$NpXEdN0Ej/3Xzij/r5ZqreEsg3mGt9HE0/yg00BYVgydZJnGTZw4m',
+        //   profile_photo: ''
+        // }
+        // create cookie session
+        // req.session.user_id = newUser.id;
+        // newUser.cookie = req.session.user_id;
+        return res.json(newUser);
       })
       .catch((err) =>
         res.json({
@@ -89,6 +100,8 @@ module.exports = ({
           //compares if the hashed password of the inputted password matches the one in our db
           const comparePass = bcrypt.compareSync(password, user[0].password);
           if (comparePass) {
+            // If matches, set cookie session
+            // req.session.user_id = user[0].id;
             return res.json(user[0]);
           } else {
             return res.json({ msg: "Sorry, invalid password" });
@@ -99,11 +112,17 @@ module.exports = ({
           });
         }
       })
-      .catch((err) =>
+      .catch((err) => {
         res.json({
           error: err.message,
-        })
-      );
+        });
+      });
+  });
+
+  // Logout Route activated when user selected "logout" button. Cookie session cleared
+  router.post("/logout", (req, res) => {
+    req.session = null;
+    return res.json({ msg: "You are now logged out" });
   });
 
   //************** PUT REQUESTS */
@@ -119,29 +138,11 @@ module.exports = ({
     //
     updateBoardTitle(id, title)
       .then((board) => res.json(board))
-      .catch((err) =>
+      .catch((err) => {
         res.json({
           error: err.message,
-        })
-      );
-  });
-
-  // PUT board: route activated when user clicks 'save' button for the board
-  router.put("/title", (req, res) => {
-    // getting the title from the form
-    const { id, title } = req.body;
-    // get the board Id that is present as a prop, send that down into the axios request
-    // updateBoardTitleFunction
-
-    console.log("id, title", id, title);
-    //
-    updateBoardTitle(id, title)
-      .then((board) => res.json(board))
-      .catch((err) =>
-        res.json({
-          error: err.message,
-        })
-      );
+        });
+      });
   });
 
   return router;
