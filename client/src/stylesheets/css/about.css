@@ -57,3 +57,39 @@
   text-shadow: -2px -px 0 #4ea404, 1px -1px 0 #4ea404, -2px 2px 0 #4ea404,
     1px 1px 0 #4ea404;
 }
+
+.pop {
+  animation: pop 0.5s ease-in-out;
+}
+.with-delay {
+  animation-delay: 2s;
+}
+@keyframes pop {
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+.popsec {
+  animation: pop 1s ease-in-out;
+}
+.with-delay {
+  animation-delay: 8s;
+}
+@keyframes pop {
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+.popthird {
+  animation: pop 1.5s ease-in-out;
+}
+.with-delay {
+  animation-delay: 14s;
+}
+@keyframes pop {
+  50% {
+    transform: scale(1.25);
+  }
+}
