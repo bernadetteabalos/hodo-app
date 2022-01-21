@@ -9,6 +9,11 @@ export const generateOneElement = (shape, fillColor, strokeColor, url) => {
     height = 150;
   }
 
+  if (shape === "Text") {
+    width = 150;
+    height = 30;
+  }
+
   return {
     attrs: {
       x: 150,

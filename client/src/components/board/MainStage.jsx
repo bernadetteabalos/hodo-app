@@ -27,21 +27,9 @@ const MainStage = () => {
   const [selectedId, selectShape] = useState(null);
   const stageRef = useRef(null);
   const posRef = useRef(null);
+  const gridRef = useRef(null);
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
-
-  function getRelativePointerPosition(node) {
-    // the function will return pointer position relative to the passed node
-    var transform = node.getAbsoluteTransform().copy();
-    // to detect relative position we need to invert transform
-    transform.invert();
-  
-    // get pointer (say mouse or touch) position
-    var pos = node.getStage().getPointerPosition();
-  
-    // now we find a relative point
-    return transform.point(pos);
-  }
   
   // IMAGES
   const [url, setURL] = useState("");
@@ -51,7 +39,8 @@ const MainStage = () => {
   const HEIGHT = 40;
   
   const grid = [["white", "white"], ["white", "white"]];
-  
+  const image = new Image();
+  image.src = 'https://i.ibb.co/dcbmRQt/konigi-dotgrid-cyan-1.png'
     const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
     const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
     const endX =
@@ -75,6 +64,7 @@ const MainStage = () => {
   
         gridComponents.push(
           <Rect
+            ref={gridRef}
             x={x}
             y={y}
             width={WIDTH}
@@ -198,41 +188,56 @@ const MainStage = () => {
     });
     saveBoard(board_id, stageRef.current.children)
   }
-
+console.log("these are the ele", elements);
   /** removes the previous element from the array */
   const undo = () => {
     // removes the previous shape/image from the array
-    console.log("dancing on my OWNNN", stageRef.current.children.at(-1));
-    if (stageRef.current.children.at(-1).constructor.name === "Line") {
-      const copyOfLines = [stageRef.current.children];
-      const undoLines = copyOfLines.slice(0, stageRef.current.children.length - 1)
+    // console.log("dancing on my OWNNN", stageRef.current.children.at(-1));
+
+    // 
+    const copyOfElements = [...elements];
+
+
+
+    if (elements[elements.length -1].className === "Line") {
+      const filteredLines = copyOfElements.filter((element) => {
+        return element.className === "Line"
+      })
+      console.log("filtered lines", filteredLines);
+      // console.log("this is copy of lines", copyOfLines)
+      const undoLines = filteredLines.slice(0, filteredLines.length - 1)
       setLines(undoLines)
+      console.log('HELLOOOOO dis', undoLines);
+      console.log("this is line", lines);
+      console.log("elements afterward:", elements)
       connection.emit("line-change", undoLines);
-    } else {
+      
+    } else if (elements[elements.length -1].className !== "Line") {
 
       // making a copy of the elements array, and making a copy of that with the last element removed
-      const copyOfElements = [...elements];
       const undoElement = copyOfElements.slice(0, elements.length - 1);
       // reset the elements array
       setElements(undoElement);
+      console.log('HELLOOOOO', undoElement);
       // send the updated elements array through the socket
       connection.emit("stage-change", undoElement);
+    
     }
     
   };
 
   /**deletes the selected shape */
+  console.log("currently selected item:", selectedId)
   const deleteShape = () => {
     // locate the index of the selected shape
-    const targetIndex = elements.findIndex((x) => x.id === selectedId);
-
+    const targetIndex = elements.findIndex((x) => x.attrs.id === selectedId);
     // setting the array again with the target index removed
     setElements((prev) => {
       // make copy of previous state
-      const newElementArray = [...prev];
       // remove the element object from the array
-      newElementArray.splice(targetIndex, 1);
-      return newElementArray;
+      const copyOfElements = [...prev];
+      copyOfElements.splice(targetIndex, 1);
+      return copyOfElements;
     });
   };
 
@@ -266,6 +271,7 @@ const MainStage = () => {
             draggable={tool === "select"}
             onDragEnd={e => {
               setStagePos(e.currentTarget.position());
+              
             }}
             onMousemove={tool !== "select" ? handleMouseMove : ""}
             onMouseup={tool !== "select" ? handleMouseUp : ""}
@@ -274,15 +280,13 @@ const MainStage = () => {
             <Layer
             onTouchStart={checkDeselect}
             onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
-            
-            
             >{gridComponents}
             </Layer>
             <Layer ref={stageRef}>
               {elements.map((rect, i) => {
-              console.log('this is what i need', elements)
+              // console.log('this is what i need', elements)
                 
-              console.log('LKSDFJGKDG', rect);
+              // console.log('LKSDFJGKDG', rect);
                 return (
                   <>
                   {rect.className === "Line" ? (

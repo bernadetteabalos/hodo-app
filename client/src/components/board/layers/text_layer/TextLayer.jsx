@@ -51,6 +51,7 @@ const TextLayer = (props) => {
             x: e.target.x(),
             y: e.target.y(),
           });
+          e.target.moveToTop();
         }}
         onTransformEnd={() => {
           const node = shapeRef.current;
