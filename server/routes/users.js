@@ -78,7 +78,7 @@ module.exports = ({
         //   profile_photo: ''
         // }
         // create cookie session
-        req.session.user_id = newUser.id;
+        // req.session.user_id = newUser.id;
         // newUser.cookie = req.session.user_id;
         return res.json(newUser);
       })
@@ -101,7 +101,7 @@ module.exports = ({
           const comparePass = bcrypt.compareSync(password, user[0].password);
           if (comparePass) {
             // If matches, set cookie session
-            req.session.user_id = user[0].id;
+            // req.session.user_id = user[0].id;
             return res.json(user[0]);
           } else {
             return res.json({ msg: "Sorry, invalid password" });
