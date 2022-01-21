@@ -7,11 +7,18 @@ import Navigation from "../Navigation";
 import "../../stylesheets/css/about.css";
 
 const About = (props) => {
-  const { currentUser, setCurrentUser } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
   const [count, setCount] = useState(1000);
+
+  console.log("this is my current user on line 13 from about--->", currentUser);
   return (
     <>
-      <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <Navigation
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+      />
       <div className="about-page">
         <h1>About Us</h1>
         <div className="about-people">

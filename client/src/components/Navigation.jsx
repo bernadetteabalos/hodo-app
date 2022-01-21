@@ -1,13 +1,46 @@
+import { useState } from "react";
+// import from other libraries
+import { Link, useNavigate } from "react-router-dom";
+
+import { Container, Navbar, Button } from "react-bootstrap";
 //styling
-import { Container, Navbar } from "react-bootstrap";
 import "../stylesheets/css/navigation.css";
 
 const Navigation = (props) => {
-  const { currentUser, setCurrentUser } = props;
+  const navigate = useNavigate();
+  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
+
+  console.log("huuuhhhhh currentUser--->", currentUser);
+
+  const logout = () => {
+    navigate("/");
+    setCurrentUser({});
+    setShowLogin(true);
+  };
 
   return (
     <>
-      <Navbar className="navbar">
+      <div className="navbar">
+        <h1>Hello from the Nav Bar</h1>
+      </div>
+      <div>
+        <Link to="/">Home</Link>
+      </div>
+      <div>
+        <Link to="/about">About</Link>
+      </div>
+      {showLogin && (
+        <div>
+          <Link to="/login">Login</Link>
+        </div>
+      )}
+      {!showLogin && (
+        <Button onClick={logout}>Logout</Button>
+        // <div>
+        //   <Link to="/">Logout</Link>
+        // </div>
+      )}
+      {/* <Navbar className="navbar">
         <Container>
           <Navbar.Brand href="/">
             <img
@@ -43,7 +76,7 @@ const Navigation = (props) => {
             </Navbar.Brand>
           </Navbar.Collapse>
         </Container>
-      </Navbar>
+      </Navbar> */}
     </>
   );
 };

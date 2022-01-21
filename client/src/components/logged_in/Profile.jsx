@@ -11,7 +11,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 import "../../stylesheets/css/profile.css";
 
 const Profile = (props) => {
-  const { currentUser, setCurrentUser } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const titleRef = useRef();
@@ -33,9 +33,16 @@ const Profile = (props) => {
     navigate(`/board/${board.id}`);
   };
 
+  console.log("this is my user in profile line 36 --->", currentUser);
+
   return (
     <>
-      <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <Navigation
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+      />
       <div className="profile-page">
         <div className="profile-container">
           <div className="left-profile">

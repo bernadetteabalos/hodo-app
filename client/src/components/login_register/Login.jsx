@@ -12,10 +12,12 @@ import { Container, Form, Button } from "react-bootstrap";
 import "../../stylesheets/css/login.css";
 
 const Login = (props) => {
-  const { currentUser, setCurrentUser } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
+
+  console.log("this is my user in login line 20 --->", currentUser);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,6 +37,7 @@ const Login = (props) => {
         } else {
           // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
           setCurrentUser(res.data);
+          setShowLogin(false);
           // navigates to profile page
           navigate("/profile");
         }
@@ -44,7 +47,12 @@ const Login = (props) => {
 
   return (
     <>
-      <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <Navigation
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+      />
       <div className="login-page">
         <Container className="login-container m-auto">
           <h1>Login</h1>

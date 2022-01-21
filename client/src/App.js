@@ -17,6 +17,7 @@ import "./stylesheets/css/App.css";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [showLogin, setShowLogin] = useState(true);
 
   return (
     <div className="App">
@@ -29,12 +30,21 @@ function App() {
               <About
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
               />
             }
           />
           <Route
             path="/login"
-            element={<Login setCurrentUser={setCurrentUser} />}
+            element={
+              <Login
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+              />
+            }
           />
           <Route
             path="/register"
@@ -42,6 +52,8 @@ function App() {
               <Register
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
               />
             }
           />
@@ -52,6 +64,8 @@ function App() {
                 <Profile
                   currentUser={currentUser}
                   setCurrentUser={setCurrentUser}
+                  showLogin={showLogin}
+                  setShowLogin={setShowLogin}
                 />
               }
             />
@@ -63,7 +77,12 @@ function App() {
           <Route
             path="/"
             element={
-              <Home currentUser={currentUser} setCurrentUser={setCurrentUser} />
+              <Home
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+              />
             }
           />
         </Routes>
