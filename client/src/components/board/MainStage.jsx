@@ -14,6 +14,7 @@ import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
 import OneChatMessage from "../board/right_bar_components/OneChatMessage";
 import Navigation from "../Navigation";
+import MainExample from "./Chart/MainExample";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
@@ -294,6 +295,7 @@ const MainStage = (props) => {
         <Header board_id={board_id} />
       </div>
       {/* ******** LEFT SIDE BAR ******************** */}
+      <MainExample />
       <div className="creativity">
         <LeftBar
           fillColor={fillColor}
