@@ -23,7 +23,7 @@ export default function useApplicationData() {
   async function createBoard(title, owner_id) {
     const res = await axios.post("http://localhost:8001/api/boards", {
       title,
-      owner_id,
+      user_id: owner_id,
     });
     return res.data;
   }
