@@ -8,7 +8,8 @@ import "../stylesheets/css/navigation.css";
 
 const Navigation = (props) => {
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
+    props;
 
   const login = () => {
     navigate("/login");
@@ -22,6 +23,7 @@ const Navigation = (props) => {
     navigate("/");
     setCurrentUser({});
     setShowLogin(true);
+    setIdTitle([]);
   };
 
   return (
@@ -49,6 +51,13 @@ const Navigation = (props) => {
               <h3>About</h3>
             </Link>
           </div>
+          {!showLogin && (
+            <div className="nav-link">
+              <Link to="/profile">
+                <h3>Profile</h3>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="nav-right">
           {showLogin && (

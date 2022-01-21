@@ -18,6 +18,7 @@ import "./stylesheets/css/App.css";
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [showLogin, setShowLogin] = useState(true);
+  const [idTitle, setIdTitle] = useState([]);
 
   return (
     <div className="App">
@@ -32,6 +33,7 @@ function App() {
                 setCurrentUser={setCurrentUser}
                 showLogin={showLogin}
                 setShowLogin={setShowLogin}
+                setIdTitle={setIdTitle}
               />
             }
           />
@@ -43,6 +45,8 @@ function App() {
                 setCurrentUser={setCurrentUser}
                 showLogin={showLogin}
                 setShowLogin={setShowLogin}
+                idTitle={idTitle}
+                setIdTitle={setIdTitle}
               />
             }
           />
@@ -54,6 +58,7 @@ function App() {
                 setCurrentUser={setCurrentUser}
                 showLogin={showLogin}
                 setShowLogin={setShowLogin}
+                setIdTitle={setIdTitle}
               />
             }
           />
@@ -66,6 +71,8 @@ function App() {
                   setCurrentUser={setCurrentUser}
                   showLogin={showLogin}
                   setShowLogin={setShowLogin}
+                  idTitle={idTitle}
+                  setIdTitle={setIdTitle}
                 />
               }
             />
@@ -84,6 +91,7 @@ function App() {
                 setCurrentUser={setCurrentUser}
                 showLogin={showLogin}
                 setShowLogin={setShowLogin}
+                setIdTitle={setIdTitle}
               />
             }
           />
@@ -95,6 +103,7 @@ function App() {
                 setCurrentUser={setCurrentUser}
                 showLogin={showLogin}
                 setShowLogin={setShowLogin}
+                setIdTitle={setIdTitle}
               />
             }
             replace={"/"}

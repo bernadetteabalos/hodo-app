@@ -27,7 +27,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const END_POINT = "http://localhost:8001";
 
 const MainStage = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
+    props;
   // console.log("line 28 mainstage-->currentUser", current)
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
@@ -271,6 +272,7 @@ const MainStage = (props) => {
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
+        setIdTitle={setIdTitle}
       />
       {/* ***** Header */}
       <div>

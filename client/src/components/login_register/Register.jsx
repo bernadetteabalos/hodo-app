@@ -12,7 +12,8 @@ import { Container, Form, Button } from "react-bootstrap";
 import "../../stylesheets/css/register.css";
 
 const Register = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
+    props;
   const navigate = useNavigate();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -51,6 +52,7 @@ const Register = (props) => {
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
+        setIdTitle={setIdTitle}
       />
       <div className="register-page">
         <Container className="register-container m-auto">

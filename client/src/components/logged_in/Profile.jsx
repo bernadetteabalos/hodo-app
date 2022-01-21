@@ -7,11 +7,21 @@ import Navigation from "../Navigation";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Modal, Form } from "react-bootstrap";
 
+// import other components
+import OneTitle from "./OneTitle";
+
 // import styling
 import "../../stylesheets/css/profile.css";
 
 const Profile = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
+  const {
+    currentUser,
+    setCurrentUser,
+    showLogin,
+    setShowLogin,
+    idTitle,
+    setIdTitle,
+  } = props;
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const titleRef = useRef();
@@ -19,7 +29,8 @@ const Profile = (props) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log("this is currentUser", currentUser);
+  // console.log("this is currentUser", currentUser);
+  console.log("this is my idTitle", idTitle);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +53,7 @@ const Profile = (props) => {
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
+        setIdTitle={setIdTitle}
       />
       <div className="profile-page">
         <div className="profile-container">
@@ -61,10 +73,16 @@ const Profile = (props) => {
           <div className="right-profile">
             <div className="itineraries-container">
               <h1>My Itineraries</h1>
-              <ul>
-                <li>JAPAN 2020</li>
-                <Link to="/board/1">DemoBoard</Link>
-              </ul>
+              {idTitle.map((titleObj) => {
+                return <OneTitle key={titleObj.id} titleObj={titleObj} />;
+                // // string interpolation not working
+                // <Link id={titleObj.id} to="/board/:id">
+                //   {titleObj.title}
+                // </Link>
+                // <Link id={titleObj.id} to="/board/:id">
+                //   {titleObj.name}
+                // </Link>
+              })}
             </div>
             <Button
               className="mt-2 w-100"
