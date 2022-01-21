@@ -13,6 +13,7 @@ import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
 import OneChatMessage from "../board/right_bar_components/OneChatMessage";
+import Navigation from "../Navigation";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
@@ -26,7 +27,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const END_POINT = "http://localhost:8001";
 
 const MainStage = (props) => {
-  const { currentUser } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
   // console.log("line 28 mainstage-->currentUser", current)
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
@@ -265,6 +266,12 @@ const MainStage = (props) => {
   // ******** RETURN ********************
   return (
     <>
+      <Navigation
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+      />
       {/* ***** Header */}
       <div>
         <Header board_id={board_id} />
