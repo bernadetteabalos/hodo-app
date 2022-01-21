@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 // import other component
 import Navigation from "../Navigation";
@@ -12,7 +12,14 @@ import { Container, Form, Button } from "react-bootstrap";
 import "../../stylesheets/css/login.css";
 
 const Login = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
+  const {
+    currentUser,
+    setCurrentUser,
+    showLogin,
+    setShowLogin,
+    idTitle,
+    setIdTitle,
+  } = props;
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
@@ -38,8 +45,24 @@ const Login = (props) => {
           // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
           setCurrentUser(res.data);
           setShowLogin(false);
-          // navigates to profile page
-          navigate("/profile");
+
+          // post request to get the user info
+          axios
+            .post("api/collaborators/userboards", { user_id: res.data.id })
+            .then((response) => {
+              // response.data looks like this: [1,3]
+
+              response.data.map((id) => {
+                console.log("board_id===>", id);
+                axios
+                  .post("api/collaborators/boardTitle", { board_id: id })
+                  .then((res) => {
+                    // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
+                    setIdTitle((prevState) => [...prevState, res.data]);
+                    navigate("/profile");
+                  });
+              });
+            });
         }
       })
       .catch((err) => console.log(err.message));
@@ -52,6 +75,7 @@ const Login = (props) => {
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
+        setIdTitle={setIdTitle}
       />
       <div className="login-page">
         <Container className="login-container m-auto">
