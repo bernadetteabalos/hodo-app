@@ -70,10 +70,12 @@ function App() {
               }
             />
           )}
-          <Route
-            path="/board/:id"
-            element={<MainStage currentUser={currentUser} />}
-          />
+          {currentUser.id && (
+            <Route
+              path="/board/:id"
+              element={<MainStage currentUser={currentUser} />}
+            />
+          )}
           <Route
             path="/"
             element={
@@ -84,6 +86,18 @@ function App() {
                 setShowLogin={setShowLogin}
               />
             }
+          />
+          <Route
+            path="*"
+            element={
+              <Home
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+              />
+            }
+            replace={"/"}
           />
         </Routes>
       </Router>
