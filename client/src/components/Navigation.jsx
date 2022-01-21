@@ -25,28 +25,22 @@ const Navigation = (props) => {
             <span>About Us</span>
           </Navbar.Brand>
           <Navbar.Collapse className="justify-content-end">
-            {!currentUser.id && (
-              <Navbar.Brand href="/login">
-                <h3>Login</h3>
-              </Navbar.Brand>
-            )}
+            <Navbar.Brand href="/login">
+              <h3>Login</h3>
+            </Navbar.Brand>
             <Navbar.Brand className="vr"></Navbar.Brand>
-            {!currentUser.id && (
-              <Navbar.Brand href="/register" className="me-2">
-                <h3>Register</h3>
-              </Navbar.Brand>
-            )}
-            {currentUser.id && (
-              <Navbar.Brand
-                href="/"
-                className="me-2"
-                onClick={() => {
-                  setCurrentUser({});
-                }}
-              >
-                <h3>Logout</h3>
-              </Navbar.Brand>
-            )}
+            <Navbar.Brand href="/register" className="me-2">
+              <h3>Register</h3>
+            </Navbar.Brand>
+            <Navbar.Brand
+              href="/"
+              className="me-2"
+              onClick={() => {
+                setCurrentUser({});
+              }}
+            >
+              <h3>Logout</h3>
+            </Navbar.Brand>
           </Navbar.Collapse>
         </Container>
       </Navbar>
