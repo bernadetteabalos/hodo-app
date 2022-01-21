@@ -193,6 +193,7 @@ const MainStage = (props) => {
 
   // removes all elements from the board
   const clearBoard = () => {
+    // set all elements back to none
     setElements([]);
     setLines([]);
     setTool("select");
