@@ -4,7 +4,7 @@ import useApplicationData from "../../hooks/forBoards";
 import Navigation from "../Navigation";
 
 // import from other libraries
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button, Modal, Form } from "react-bootstrap";
 
 // import styling
@@ -63,6 +63,7 @@ const Profile = (props) => {
               <h1>My Itineraries</h1>
               <ul>
                 <li>JAPAN 2020</li>
+                <Link to="/board/1">DemoBoard</Link>
               </ul>
             </div>
             <Button
