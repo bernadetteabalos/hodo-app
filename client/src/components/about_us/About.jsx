@@ -17,17 +17,45 @@ const About = (props) => {
     <div className="about-page title">
       <h1>About Us</h1>
       <div className="about-people">
-        <div className="person bold pop">
-          <h1>Bernadette Abalos</h1>
+        <div className="card-one">
+          <div className="person bold pop">
+            <div className="flip-card-inner">
+              <div className="one-front">
+                <h1>Bernadette Abalos</h1>
+              </div>
+              <div className="one-back">
+                <p>Artist, Front and Back-End Dev</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="person emphasize popsec">
-          <h1>Stephanie Li</h1>
-
+        <div className="card-two">
+          <div className="person emphasize popsec">
+            <div className="flip-inner">
+              <div className="two-front">
+                <h1>Stephanie Li</h1>
+              </div>
+              <div className="two-back">
+                <p>Pharmacist, Front and Back-End Dev</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="person outline popthird">
-          <h1>Blesilda Mateo</h1>
+        <div className="card-three">
+          <div className="person outline popthird">
+            <div className="flip-in">
+              <div className="three-front">
+                <h1>Blesilda Mateo</h1>
+              </div>
+              <div className="three-back">
+                <p>Gamer, Front-End Dev</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <br></br>
+      <br></br>
       <div className="about-stack">
         <h1>Our Tech Stack:</h1>
       </div>
