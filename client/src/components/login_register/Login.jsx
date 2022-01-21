@@ -1,4 +1,9 @@
 import { useRef } from "react";
+
+// import other component
+import Navigation from "../Navigation";
+
+// import from other libraries
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Container, Form, Button } from "react-bootstrap";
@@ -7,10 +12,12 @@ import { Container, Form, Button } from "react-bootstrap";
 import "../../stylesheets/css/login.css";
 
 const Login = (props) => {
-  const { setCurrentUser } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
+
+  console.log("this is my user in login line 20 --->", currentUser);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +37,7 @@ const Login = (props) => {
         } else {
           // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
           setCurrentUser(res.data);
+          setShowLogin(false);
           // navigates to profile page
           navigate("/profile");
         }
@@ -38,34 +46,42 @@ const Login = (props) => {
   };
 
   return (
-    <div className="login-page">
-      <Container className="login-container m-auto">
-        <h1>Login</h1>
-        <Form onSubmit={handleSubmit} className="w-100">
-          <Form.Group className="mb-3">
-            <h4>
-              <Form.Label>Email: </Form.Label>
-            </h4>
-            <Form.Control
-              size="lg"
-              type="email"
-              ref={emailRef}
-              required
-              placeholder="name@example.com"
-            />
-          </Form.Group>
-          <Form.Group>
-            <h4>
-              <Form.Label>Password: </Form.Label>
-            </h4>
-            <Form.Control size="lg" type="password" ref={pwRef} required />
-          </Form.Group>
-          <Button className="w-100 mt-2" type="submit">
-            <h4>Login</h4>
-          </Button>
-        </Form>
-      </Container>
-    </div>
+    <>
+      <Navigation
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+      />
+      <div className="login-page">
+        <Container className="login-container m-auto">
+          <h1>Login</h1>
+          <Form onSubmit={handleSubmit} className="w-100">
+            <Form.Group className="mb-3">
+              <h4>
+                <Form.Label>Email: </Form.Label>
+              </h4>
+              <Form.Control
+                size="lg"
+                type="email"
+                ref={emailRef}
+                required
+                placeholder="name@example.com"
+              />
+            </Form.Group>
+            <Form.Group>
+              <h4>
+                <Form.Label>Password: </Form.Label>
+              </h4>
+              <Form.Control size="lg" type="password" ref={pwRef} required />
+            </Form.Group>
+            <Button className="w-100 mt-2" type="submit">
+              <h4>Login</h4>
+            </Button>
+          </Form>
+        </Container>
+      </div>
+    </>
   );
 };
 

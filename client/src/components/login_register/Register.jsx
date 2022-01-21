@@ -1,4 +1,9 @@
 import { useRef } from "react";
+
+// import other components
+import Navigation from "../Navigation";
+
+// import from other libraries
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
@@ -7,7 +12,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import "../../stylesheets/css/register.css";
 
 const Register = (props) => {
-  const { setCurrentUser } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
   const navigate = useNavigate();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -40,64 +45,72 @@ const Register = (props) => {
   };
 
   return (
-    <div className="register-page">
-      <Container className="register-container m-auto">
-        <h1>Register</h1>
-        <Form onSubmit={handleSubmit} className="w-100">
-          <Form.Group className="mb-3">
-            <h4>
-              <Form.Label>First Name: </Form.Label>
-            </h4>
-            <Form.Control
-              size="lg"
-              type="text"
-              ref={firstNameRef}
-              required
-              placeholder="First Name"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <h4>
-              <Form.Label>Last Name: </Form.Label>
-            </h4>
-            <Form.Control
-              size="lg"
-              type="text"
-              ref={lastNameRef}
-              required
-              placeholder="Last Name"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <h4>
-              <Form.Label>Email: </Form.Label>
-            </h4>
-            <Form.Control
-              size="lg"
-              type="email"
-              ref={emailRef}
-              required
-              placeholder="name@example.com"
-            />
-          </Form.Group>
-          <Form.Group>
-            <h4>
-              <Form.Label>Password: </Form.Label>
-            </h4>
-            <Form.Control size="lg" type="password" ref={pwRef} required />
-          </Form.Group>
-          <Form.Group controlId="formFileLg" className="my-3">
-            <h4>
-              <Form.Label>Upload Profile Photo: </Form.Label>
-            </h4>
-            <Form.Control ref={photoRef} type="file" size="lg" />
-          </Form.Group>
-          <Button className="w-100 mt-2" type="submit">
-            <h4>Register</h4>
-          </Button>
-        </Form>
-      </Container>
-    </div>
+    <>
+      <Navigation
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+      />
+      <div className="register-page">
+        <Container className="register-container m-auto">
+          <h1>Register</h1>
+          <Form onSubmit={handleSubmit} className="w-100">
+            <Form.Group className="mb-3">
+              <h4>
+                <Form.Label>First Name: </Form.Label>
+              </h4>
+              <Form.Control
+                size="lg"
+                type="text"
+                ref={firstNameRef}
+                required
+                placeholder="First Name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <h4>
+                <Form.Label>Last Name: </Form.Label>
+              </h4>
+              <Form.Control
+                size="lg"
+                type="text"
+                ref={lastNameRef}
+                required
+                placeholder="Last Name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <h4>
+                <Form.Label>Email: </Form.Label>
+              </h4>
+              <Form.Control
+                size="lg"
+                type="email"
+                ref={emailRef}
+                required
+                placeholder="name@example.com"
+              />
+            </Form.Group>
+            <Form.Group>
+              <h4>
+                <Form.Label>Password: </Form.Label>
+              </h4>
+              <Form.Control size="lg" type="password" ref={pwRef} required />
+            </Form.Group>
+            <Form.Group controlId="formFileLg" className="my-3">
+              <h4>
+                <Form.Label>Upload Profile Photo: </Form.Label>
+              </h4>
+              <Form.Control ref={photoRef} type="file" size="lg" />
+            </Form.Group>
+            <Button className="w-100 mt-2" type="submit">
+              <h4>Register</h4>
+            </Button>
+          </Form>
+        </Container>
+      </div>
+    </>
   );
 };
 

@@ -13,6 +13,7 @@ import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
 import OneChatMessage from "../board/right_bar_components/OneChatMessage";
+import Navigation from "../Navigation";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
@@ -26,7 +27,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const END_POINT = "http://localhost:8001";
 
 const MainStage = (props) => {
-  const { currentUser } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
   // console.log("line 28 mainstage-->currentUser", current)
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
@@ -39,8 +40,9 @@ const MainStage = (props) => {
   console.log("main stage line 33, board_id", board_id);
   //CHAT*********************
   const [message, setMessage] = useState("");
-  const [chats, setChats] = useState([]);
-  const [chatSpeaker, setChatSpeaker] = useState(currentUser["first_name"]);
+  const [chatSpeakers, setChatSpeakers] = useState([]);
+  // const [chats, setChats] = useState([]);
+  // const [chatSpeaker, setChatSpeaker] = useState(currentUser["first_name"]);
 
   // IMAGES
   const [url, setURL] = useState("");
@@ -116,11 +118,8 @@ const MainStage = (props) => {
     });
 
     // d. chat box setting the new array
-    conn.on(`update-chat-${board_id}`, (newChatArray, speaker) => {
-      console.log("OKAY THERE, line 39 newChatArray ---->", newChatArray);
-      setChats(newChatArray);
-      setChatSpeaker(speaker);
-      console.log("what is my speakkkerrr line 121 --->", speaker);
+    conn.on(`update-chat-${board_id}`, (newChatArray) => {
+      setChatSpeakers(newChatArray);
     });
 
     // setting connection to be socketIOClient(END_POINT)
@@ -253,19 +252,26 @@ const MainStage = (props) => {
     e.preventDefault();
     console.log("it is this message--->", message);
     // a. emit a connection to send the message object
-    const newChatArray = [...chats, message];
-    setChats(newChatArray);
-    const speaker = currentUser["first_name"];
+    const newChatSpeakerObject = {
+      message,
+      speaker: currentUser["first_name"],
+    };
+    const newChatArray = [...chatSpeakers, newChatSpeakerObject];
+    setChatSpeakers(newChatArray);
 
-    console.log("BITECH WHAT IS YOUR NAME--->", speaker);
-
-    connection.emit("chat-change", newChatArray, board_id, speaker);
+    connection.emit("chat-change", newChatArray, board_id);
     setMessage("");
   };
 
   // ******** RETURN ********************
   return (
     <>
+      <Navigation
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+      />
       {/* ***** Header */}
       <div>
         <Header board_id={board_id} />
@@ -364,12 +370,12 @@ const MainStage = (props) => {
           />
           <div>
             <div id="chatbox">
-              {chats.map((chat) => {
+              {chatSpeakers.map((chat) => {
                 return (
                   <OneChatMessage
                     key={uuidV4()}
-                    chat={chat}
-                    chatSpeaker={chatSpeaker}
+                    chat={chat.message}
+                    chatSpeaker={chat.speaker}
                   />
                 );
               })}

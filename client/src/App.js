@@ -17,33 +17,88 @@ import "./stylesheets/css/App.css";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [showLogin, setShowLogin] = useState(true);
 
   return (
     <div className="App">
       {/* ******DIFFERNT ROUTES */}
-      <Navigation currentUser={currentUser} setCurrentUser={setCurrentUser} />
       <Router>
         <Routes>
-          <Route path="/about" element={<About />} />
+          <Route
+            path="/about"
+            element={
+              <About
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+              />
+            }
+          />
           <Route
             path="/login"
-            element={<Login setCurrentUser={setCurrentUser} />}
+            element={
+              <Login
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+              />
+            }
           />
           <Route
             path="/register"
-            element={<Register setCurrentUser={setCurrentUser} />}
+            element={
+              <Register
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+              />
+            }
           />
           {currentUser.id && (
             <Route
               path="/profile"
-              element={<Profile currentUser={currentUser} />}
+              element={
+                <Profile
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                  showLogin={showLogin}
+                  setShowLogin={setShowLogin}
+                />
+              }
+            />
+          )}
+          {currentUser.id && (
+            <Route
+              path="/board/:id"
+              element={<MainStage currentUser={currentUser} />}
             />
           )}
           <Route
-            path="/board/:id"
-            element={<MainStage currentUser={currentUser} />}
+            path="/"
+            element={
+              <Home
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+              />
+            }
           />
-          <Route path="/" element={<Home />} />
+          <Route
+            path="*"
+            element={
+              <Home
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                showLogin={showLogin}
+                setShowLogin={setShowLogin}
+              />
+            }
+            replace={"/"}
+          />
         </Routes>
       </Router>
     </div>
