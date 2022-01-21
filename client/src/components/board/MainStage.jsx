@@ -34,7 +34,8 @@ const MainStage = (props) => {
   const [strokeColor, setStrokeColor] = useState("black");
   const [selectedId, selectShape] = useState(null);
   const stageRef = useRef(null);
-  const gridRef = useRef();
+  const posRef = useRef(null);
+  const gridRef = useRef(null);
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
 
@@ -151,7 +152,8 @@ const MainStage = (props) => {
   // ****************** PEN TOOLS FUNCTIONS ****************
   const handleMouseDown = (e) => {
     isDrawing.current = true;
-    const pos = e.target.getStage().getPointerPosition();
+    const stage = e.target.getStage();
+    const pos = stage.getRelativePointerPosition(posRef);
     setLines([
       ...lines,
       { tool, points: [pos.x, pos.y], strokeColor: strokeColor },
@@ -164,7 +166,7 @@ const MainStage = (props) => {
       return;
     }
     const stage = e.target.getStage();
-    const point = stage.getPointerPosition();
+    const point = stage.getRelativePointerPosition(posRef);
     let lastLine = lines[lines.length - 1];
     // add point
     lastLine.points = lastLine.points.concat([point.x, point.y]);
@@ -206,41 +208,58 @@ const MainStage = (props) => {
         item.attrs.url = item.attrs.image.src;
       }
     });
-    saveBoard(board_id, stageRef.current.children);
-  };
-
+    saveBoard(board_id, stageRef.current.children)
+  }
+console.log("these are the ele", elements);
   /** removes the previous element from the array */
-  const undo = (type) => {
+  const undo = () => {
     // removes the previous shape/image from the array
-    if (type === "shape_image") {
+    // console.log("dancing on my OWNNN", stageRef.current.children.at(-1));
+
+    // 
+    const copyOfElements = [...elements];
+
+
+
+    if (elements[elements.length -1].className === "Line") {
+      const filteredLines = copyOfElements.filter((element) => {
+        return element.className === "Line"
+      })
+      console.log("filtered lines", filteredLines);
+      // console.log("this is copy of lines", copyOfLines)
+      const undoLines = filteredLines.slice(0, filteredLines.length - 1)
+      setLines(undoLines)
+      console.log('HELLOOOOO dis', undoLines);
+      console.log("this is line", lines);
+      console.log("elements afterward:", elements)
+      connection.emit("line-change", undoLines);
+      
+    } else if (elements[elements.length -1].className !== "Line") {
+
       // making a copy of the elements array, and making a copy of that with the last element removed
-      const copyOfElements = [...elements];
       const undoElement = copyOfElements.slice(0, elements.length - 1);
       // reset the elements array
       setElements(undoElement);
+      console.log('HELLOOOOO', undoElement);
       // send the updated elements array through the socket
       connection.emit("stage-change", undoElement);
-    } else if (type === "pen") {
-      // sets lines array to one without the last element and send it through the socket
-      const copyOfLines = [...lines];
-      const undoLines = copyOfLines.slice(0, lines.length - 1);
-      setLines(undoLines);
-      connection.emit("line-change", undoLines);
+    
     }
+    
   };
 
   /**deletes the selected shape */
+  console.log("currently selected item:", selectedId)
   const deleteShape = () => {
     // locate the index of the selected shape
-    const targetIndex = elements.findIndex((x) => x.id === selectedId);
-
+    const targetIndex = elements.findIndex((x) => x.attrs.id === selectedId);
     // setting the array again with the target index removed
     setElements((prev) => {
       // make copy of previous state
-      const newElementArray = [...prev];
       // remove the element object from the array
-      newElementArray.splice(targetIndex, 1);
-      return newElementArray;
+      const copyOfElements = [...prev];
+      copyOfElements.splice(targetIndex, 1);
+      return copyOfElements;
     });
   };
 
@@ -294,7 +313,7 @@ const MainStage = (props) => {
         />
         {/* ******** STAGE ******************** */}
         <div className="stage">
-          <Stage
+          <Stage ref={posRef}
             width={1000 || window.innerWidth}
             height={800 || window.innerHeight}
             // onMouseDown={checkDeselect}
@@ -303,16 +322,76 @@ const MainStage = (props) => {
             draggable={tool === "select"}
             onDragEnd={(e) => {
               setStagePos(e.currentTarget.position());
+              
             }}
+            onMousemove={tool !== "select" ? handleMouseMove : ""}
+            onMouseup={tool !== "select" ? handleMouseUp : ""}
+            
           >
             <Layer
-              ref={gridRef}
-              onTouchStart={checkDeselect}
-              onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
-            >
-              {gridComponents}
+            onTouchStart={checkDeselect}
+            onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
+            >{gridComponents}
             </Layer>
             <Layer ref={stageRef}>
+              {elements.map((rect, i) => {
+              // console.log('this is what i need', elements)
+                
+              // console.log('LKSDFJGKDG', rect);
+                return (
+                  <>
+                  {rect.className === "Line" ? (
+                    <Line
+                    key={i}
+                    points={rect.attrs.points}
+                    stroke={rect.attrs.stroke}
+                    strokeWidth={5}
+                    tension={0.5}
+                    lineCap="round"
+                    onChange={(newAttrs) => {
+                      setLines((prev) => prev.map((el, j) => {
+                        if (i === j) {
+                          return {
+                            ...el,
+                            attrs: newAttrs,
+                          };
+                        } else {
+                          return el;
+                        }
+                      }));
+                    }}
+                    // globalCompositeOperation={
+                    //   line.tool === "eraser" ? "destination-out" : "source-over"
+                    // }
+                  />
+                  ) : (
+                    <Element
+                    shapeName={rect.className}
+                    key={i}
+                    shapeProps={rect.attrs}
+                    isSelected={rect.attrs.id === selectedId}
+                    onSelect={() => {
+                      selectShape(rect.attrs.id);
+                      }}
+                      onChange={(newAttrs) => {
+                        setElements((prev) => prev.map((el, j) => {
+                          if (i === j) {
+                            return {
+                              ...el,
+                              attrs: newAttrs,
+                              
+                            };
+                          } else {
+                            return el;
+                          }
+                        }));
+                      }}
+                    />
+                  )
+                  }
+                  </>
+                );
+              })}
               {lines.map((line, i) => (
                 <Line
                   key={i}
@@ -326,34 +405,6 @@ const MainStage = (props) => {
                   }
                 />
               ))}
-              {elements.map((rect, i) => {
-                console.log("LKSDFJGKDG", rect);
-                return (
-                  <Element
-                    shapeName={rect.className}
-                    key={i}
-                    shapeProps={rect.attrs}
-                    isSelected={rect.attrs.id === selectedId}
-                    onSelect={() => {
-                      selectShape(rect.attrs.id);
-                    }}
-                    onChange={(newAttrs) => {
-                      setElements((prev) =>
-                        prev.map((el, j) => {
-                          if (i === j) {
-                            return {
-                              ...el,
-                              attrs: newAttrs,
-                            };
-                          } else {
-                            return el;
-                          }
-                        })
-                      );
-                    }}
-                  />
-                );
-              })}
             </Layer>
           </Stage>
         </div>

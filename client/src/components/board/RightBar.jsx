@@ -20,7 +20,7 @@ const RightBar = (props) => {
         </Button>
         <br></br>
         <br></br>
-        <Button variant="warning" onClick={() => undo("pen")}>
+        <Button variant="warning" onClick={() => undo("Line")}>
           Undo Line
         </Button>
         <br></br>

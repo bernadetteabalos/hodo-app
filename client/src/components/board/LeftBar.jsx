@@ -56,6 +56,15 @@ const LeftBar = (props) => {
           Star
         </Button>
       </div>
+      <div className="texttools">
+          <h3>Text Editor</h3>
+          <Button
+            variant="outline-secondary"
+            onClick={() => handleClick("Text", fillColor, strokeColor)}
+          >
+            Add text
+          </Button>
+        </div>
       <div className="add-url">
         <form
           autoComplete="off"
