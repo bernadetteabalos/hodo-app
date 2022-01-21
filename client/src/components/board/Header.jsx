@@ -13,7 +13,8 @@ const Header = () => {
   const newTitleRef = useRef();
   const newCollaboratorRef = useRef();
 
-  const handleShow = () => setShow(true);
+  const handleShowTitle = () => setShow("title");
+  const handleShowCollab = () => setShow("collab");
   const handleClose = (e) => {
     e.preventDefault();
     setShow(false);
@@ -59,7 +60,7 @@ const Header = () => {
   return (
     <div className="header-bar">
       <div>
-        <Button variant="warning" onClick={handleShow}>
+        <Button variant="warning" onClick={handleShowTitle}>
           Edit Title
         </Button>
       </div>
@@ -67,7 +68,7 @@ const Header = () => {
         <h2>{title}</h2>
       </div>
       <Modal
-        show={show}
+        show={show === "title"}
         onHide={() => {
           setShow(false);
         }}
@@ -96,10 +97,10 @@ const Header = () => {
         </Form>
       </Modal>
       <div className="add-collaborators">
-        <Button onClick={handleShow}>Add a Collaborator</Button>
+        <Button onClick={handleShowCollab}>Add a Collaborator</Button>
       </div>
       <Modal
-        show={show}
+        show={show === "collab"}
         onHide={() => {
           setShow(false);
         }}
