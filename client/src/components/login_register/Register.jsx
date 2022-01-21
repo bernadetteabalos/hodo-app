@@ -39,6 +39,7 @@ const Register = (props) => {
         } else {
           console.log("res.data-->", res.data);
           setCurrentUser(res.data);
+          setShowLogin(false);
           navigate("/profile");
         }
       })
