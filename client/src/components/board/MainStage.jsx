@@ -4,24 +4,32 @@ import useApplicationData from "../../hooks/forBoards";
 import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
 import { Rect } from "react-konva";
+import { Button } from "react-bootstrap";
+import { v4 as uuidV4 } from "uuid";
 
 // import Other Components
 import Header from "./Header";
 import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
+import OneChatMessage from "../board/right_bar_components/OneChatMessage";
+import Navigation from "../Navigation";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
 
 // import styles
 import "../../stylesheets/css/mainstage.css";
+import "../../stylesheets/css/chatbox.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // socket end point for websocket
-const END_POINT = "http://localhost:3002";
+const END_POINT = "http://localhost:8001";
 
-const MainStage = () => {
+const MainStage = (props) => {
+  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
+    props;
+  // console.log("line 28 mainstage-->currentUser", current)
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
   const [selectedId, selectShape] = useState(null);
@@ -30,52 +38,60 @@ const MainStage = () => {
   const gridRef = useRef(null);
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
-  
+
+  console.log("main stage line 33, board_id", board_id);
+  //CHAT*********************
+  const [message, setMessage] = useState("");
+  const [chatSpeakers, setChatSpeakers] = useState([]);
+  // const [chats, setChats] = useState([]);
+  // const [chatSpeaker, setChatSpeaker] = useState(currentUser["first_name"]);
+
   // IMAGES
   const [url, setURL] = useState("");
 
   //***STAGE GRID ****//
   const WIDTH = 40;
   const HEIGHT = 40;
-  
-  const grid = [["white", "white"], ["white", "white"]];
-  const image = new Image();
-  image.src = 'https://i.ibb.co/dcbmRQt/konigi-dotgrid-cyan-1.png'
-    const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
-    const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
-    const endX =
-      Math.floor((-stagePos.x + window.innerWidth * 2) / WIDTH) * WIDTH;
-  
-    const startY =
-      Math.floor((-stagePos.y - window.innerHeight) / HEIGHT) * HEIGHT;
-    const endY =
-      Math.floor((-stagePos.y + window.innerHeight * 2) / HEIGHT) * HEIGHT;
-  
-    const gridComponents = [];
-    var i = 0;
-    for (var x = startX; x < endX; x += WIDTH) {
-      for (var y = startY; y < endY; y += HEIGHT) {
-        if (i === 4) {
-          i = 0;
-        }
-  
-        const indexX = Math.abs(x / WIDTH) % grid.length;
-        const indexY = Math.abs(y / HEIGHT) % grid[0].length;
-  
-        gridComponents.push(
-          <Rect
-            ref={gridRef}
-            x={x}
-            y={y}
-            width={WIDTH}
-            height={HEIGHT}
-            fill={grid[indexX][indexY]}
-            stroke="black"
-            strokeWidth={0.3}
-          />
-        );
+
+  const grid = [
+    ["white", "white"],
+    ["white", "white"],
+  ];
+
+  const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
+  const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
+  const endX =
+    Math.floor((-stagePos.x + window.innerWidth * 2) / WIDTH) * WIDTH;
+
+  const startY =
+    Math.floor((-stagePos.y - window.innerHeight) / HEIGHT) * HEIGHT;
+  const endY =
+    Math.floor((-stagePos.y + window.innerHeight * 2) / HEIGHT) * HEIGHT;
+
+  const gridComponents = [];
+  var i = 0;
+  for (var x = startX; x < endX; x += WIDTH) {
+    for (var y = startY; y < endY; y += HEIGHT) {
+      if (i === 4) {
+        i = 0;
       }
+
+      const indexX = Math.abs(x / WIDTH) % grid.length;
+      const indexY = Math.abs(y / HEIGHT) % grid[0].length;
+
+      gridComponents.push(
+        <Rect
+          x={x}
+          y={y}
+          width={WIDTH}
+          height={HEIGHT}
+          fill={grid[indexX][indexY]}
+          stroke="black"
+          strokeWidth={0.3}
+        />
+      );
     }
+  }
 
   // PEN TOOLS
   const [tool, setTool] = useState("select");
@@ -93,13 +109,19 @@ const MainStage = () => {
     });
 
     // 4. listening for when new element is generated on the stage
-    conn.on("new-stage", (elements) => {
+    conn.on(`new-stage-${board_id}`, (elements) => {
+      console.log("yess, line 99 in MainStage.jsx--->", elements);
       setElements(elements);
     });
 
     // listening for when a new line is generated on the stage
-    conn.on("new-line", (lines) => {
+    conn.on(`new-line-${board_id}`, (lines) => {
       setLines(lines);
+    });
+
+    // d. chat box setting the new array
+    conn.on(`update-chat-${board_id}`, (newChatArray) => {
+      setChatSpeakers(newChatArray);
     });
 
     // setting connection to be socketIOClient(END_POINT)
@@ -108,11 +130,11 @@ const MainStage = () => {
 
   // deselects the images and updates others' boards
   const checkDeselect = (e) => {
-
-    selectShape(null)
+    selectShape(null);
     // 1. sends the updated elements and lines arrays through the socket upon deselect to update others' boards'
-    connection.emit("stage-change", elements);
-    connection.emit("line-change", lines);
+    // I also want to pass down my board_id
+    connection.emit("stage-change", elements, board_id);
+    connection.emit("line-change", lines, board_id);
   };
 
   /**activated upon clicking of shape or add img. generates a new element and adds it to the array */
@@ -122,7 +144,7 @@ const MainStage = () => {
     setElements((prevState) => [...prevState, newElement]);
     const newState = [...elements, newElement];
     // sends the new state through the socket
-    connection.emit("stage-change", newState);
+    connection.emit("stage-change", elements, board_id);
     // reset tool to 'select' to prevent 'pen' mode when transforming the shapes
     setTool("select");
   };
@@ -157,7 +179,7 @@ const MainStage = () => {
   // when the moust is up, set drawing to false and send line through the socket to appear on other users' board
   const handleMouseUp = () => {
     isDrawing.current = false;
-    connection.emit("line-change", lines);
+    connection.emit("line-change", lines, board_id);
   };
 
   //*** IMAGES */
@@ -241,9 +263,36 @@ console.log("these are the ele", elements);
     });
   };
 
+  /** HANDLE BOARD SAVE */
+  const handleBoardSave = (e) => {
+    e.preventDefault();
+  };
+
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    console.log("it is this message--->", message);
+    // a. emit a connection to send the message object
+    const newChatSpeakerObject = {
+      message,
+      speaker: currentUser["first_name"],
+    };
+    const newChatArray = [...chatSpeakers, newChatSpeakerObject];
+    setChatSpeakers(newChatArray);
+
+    connection.emit("chat-change", newChatArray, board_id);
+    setMessage("");
+  };
+
   // ******** RETURN ********************
   return (
     <>
+      <Navigation
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        showLogin={showLogin}
+        setShowLogin={setShowLogin}
+        setIdTitle={setIdTitle}
+      />
       {/* ***** Header */}
       <div>
         <Header board_id={board_id} />
@@ -268,8 +317,10 @@ console.log("these are the ele", elements);
             width={1000 || window.innerWidth}
             height={800 || window.innerHeight}
             // onMouseDown={checkDeselect}
+            onMousemove={tool !== "select" ? handleMouseMove : ""}
+            onMouseup={tool !== "select" ? handleMouseUp : ""}
             draggable={tool === "select"}
-            onDragEnd={e => {
+            onDragEnd={(e) => {
               setStagePos(e.currentTarget.position());
               
             }}
@@ -364,7 +415,34 @@ console.log("these are the ele", elements);
             saveBoard={save}
             undo={undo}
             deleteShape={deleteShape}
+            handleBoardSave={handleBoardSave}
+            connection={connection}
+            setConnection={setConnection}
+            END_POINT={END_POINT}
+            currentUser={currentUser}
           />
+          <div>
+            <div id="chatbox">
+              {chatSpeakers.map((chat) => {
+                return (
+                  <OneChatMessage
+                    key={uuidV4()}
+                    chat={chat.message}
+                    chatSpeaker={chat.speaker}
+                  />
+                );
+              })}
+            </div>
+            <textarea
+              className="enterText"
+              type="text"
+              value={message}
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+            ></textarea>
+            <Button onClick={handleSendMessage}>Send Message</Button>
+          </div>
         </div>
       </div>
     </>

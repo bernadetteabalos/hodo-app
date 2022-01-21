@@ -37,71 +37,73 @@ module.exports = (db) => {
   const getBoard = (id) => {
     const query = {
       text: `SELECT * FROM boards where id = $1`,
-      values: [id]
+      values: [id],
+    };
 
-    }
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
 
-    return db.query(query)
-      .then(result => result.rows[0])
-      .catch(err => err);
-
-  }
-
-  const getBoardsByUser = (owner_id) => {
+  const getBoardsByUser = (user_id) => {
     const query = {
-      text: `SELECT * FROM boards WHERE owner_id = $1`,
-      values: [owner_id]
+      text: `SELECT * FROM boards WHERE user_id = $1`,
+      values: [user_id],
+    };
 
-    }
-
-    return db.query(query)
-      .then(result => result.rows)
-      .catch(err => err);
-
-  }
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
   const getElementsForBoard = () => {
     const query = {
       text: `SELECT metadata FROM boards WHERE boards.id = $1`,
-      values: [boards.id]
-    }
-    return db.query(query)
-      .then(result => result.rows[0])
-      .catch(err => err);
-  }
+      values: [boards.id],
+    };
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
 
-  const addBoard = (title, owner_id, metadata) => {
+  const addBoard = (title, user_id, metadata) => {
     const query = {
-      text: `INSERT INTO boards (title, owner_id, metadata) VALUES ($1, $2, $3) RETURNING *`,
-      values: [title, owner_id, metadata]
-    }
+      text: `INSERT INTO boards (title, user_id, metadata) VALUES ($1, $2, $3) RETURNING *`,
+      values: [title, user_id, metadata],
+    };
 
-    return db.query(query)
-      .then(result => result.rows[0])
-      .catch(err => err);
-  }
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
 
   const saveBoard = (metadata, id) => {
     const query = {
       text: `UPDATE boards SET metadata = $1 WHERE id = $2`,
-      values: [{ metadata }, id]
-    }
+      values: [{ metadata }, id],
+    };
 
-    return db.query(query)
-      .then(result => result.rows[0])
-      .catch(err => err);
-  }
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
 
   const deleteBoard = (id) => {
     const query = {
       text: `DELETE FROM boards WHERE id = $1`,
-      values: [id]
-    }
+      values: [id],
+    };
 
-    return db.query(query)
-      .then(result => result.rows[0])
-      .catch(err => err);
-  }
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
 
   const updateBoardTitle = (id, title) => {
     const query = {
@@ -122,6 +124,58 @@ module.exports = (db) => {
     );
   };
 
+  const updateCollaborators = (user_id, board_id) => {
+    const query = {
+      text: `INSERT INTO collaborators (user_id, board_id) VALUES ($1, $2) RETURNING *`,
+      values: [user_id, board_id],
+    };
+
+    return (
+      db
+        .query(query)
+        // result.rows[0] => { id: 7, user_id: 3, board_id: 7 }
+        .then((result) => result.rows[0])
+      // cannot add a .catch here but if the user_id does not exist, the error will be caught on the collaborators.js side that make the request and will send a res.json w/msg
+    );
+  };
+
+  const getSpecificBoards = (user_id) => {
+    const query = {
+      text: `
+      SELECT board_id 
+      FROM collaborators
+      WHERE user_id = $1
+      `,
+      values: [user_id],
+    };
+
+    return (
+      db
+        .query(query)
+        // result.row looks like this:
+        //[ { board_id: 1 }, { board_id: 3 } ]
+        .then((result) => {
+          const boardIdArray = result.rows.map(
+            (objBoard) => objBoard["board_id"]
+          );
+          // boardIdArray looks like: [1,3]
+          return boardIdArray;
+        })
+    );
+  };
+
+  const getBoardIdTitle = (id) => {
+    const query = {
+      text: `SELECT id, title FROM boards where id = $1`,
+      values: [id],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
+
   return {
     getUsers,
     getUserByEmail,
@@ -133,5 +187,8 @@ module.exports = (db) => {
     saveBoard,
     deleteBoard,
     updateBoardTitle,
+    updateCollaborators,
+    getSpecificBoards,
+    getBoardIdTitle,
   };
 };
