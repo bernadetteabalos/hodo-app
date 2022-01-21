@@ -46,10 +46,10 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getBoardsByUser = (owner_id) => {
+  const getBoardsByUser = (user_id) => {
     const query = {
-      text: `SELECT * FROM boards WHERE owner_id = $1`,
-      values: [owner_id],
+      text: `SELECT * FROM boards WHERE user_id = $1`,
+      values: [user_id],
     };
 
     return db
@@ -71,7 +71,7 @@ module.exports = (db) => {
 
   const addBoard = (title, user_id, metadata) => {
     const query = {
-      text: `INSERT INTO boards (title, owner_id, metadata) VALUES ($1, $2, $3) RETURNING *`,
+      text: `INSERT INTO boards (title, user_id, metadata) VALUES ($1, $2, $3) RETURNING *`,
       values: [title, user_id, metadata],
     };
 
