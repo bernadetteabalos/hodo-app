@@ -20,10 +20,10 @@ export default function useApplicationData() {
   }, [params.id]);
 
   //function for creating Board
-  async function createBoard(title, owner_id) {
+  async function createBoard(title, user_id) {
     const res = await axios.post("http://localhost:8001/api/boards", {
       title,
-      user_id: owner_id,
+      user_id,
     });
     return res.data;
   }
