@@ -5,7 +5,8 @@ import Navigation from "../Navigation";
 import "../../stylesheets/css/home.css";
 
 const Home = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
+  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
+    props;
   return (
     <>
       <Navigation
@@ -13,6 +14,7 @@ const Home = (props) => {
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
+        setIdTitle={setIdTitle}
       />
       <div className="home-page">
         <h1>Hodo-</h1>
