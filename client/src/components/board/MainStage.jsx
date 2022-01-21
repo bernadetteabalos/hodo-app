@@ -118,10 +118,7 @@ const MainStage = (props) => {
 
     // d. chat box setting the new array
     conn.on(`update-chat-${board_id}`, (newChatArray) => {
-      console.log("OKAY THERE, line 39 newChatArray ---->", newChatArray);
       setChatSpeakers(newChatArray);
-      // setChatSpeaker(speaker);
-      // console.log("what is my speakkkerrr line 121 --->", speaker);
     });
 
     // setting connection to be socketIOClient(END_POINT)
@@ -261,13 +258,6 @@ const MainStage = (props) => {
     const newChatArray = [...chatSpeakers, newChatSpeakerObject];
     setChatSpeakers(newChatArray);
 
-    // const newChatArray = [...chats, message];
-    // setChats(newChatArray);
-    // const speaker = currentUser["first_name"];
-
-    // console.log("BITECH WHAT IS YOUR NAME (a)--->", speaker);
-
-    // connection.emit("chat-change", newChatArray, board_id, speaker);
     connection.emit("chat-change", newChatArray, board_id);
     setMessage("");
   };
