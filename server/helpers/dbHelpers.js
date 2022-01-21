@@ -69,10 +69,10 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const addBoard = (title, owner_id, metadata) => {
+  const addBoard = (title, user_id, metadata) => {
     const query = {
       text: `INSERT INTO boards (title, owner_id, metadata) VALUES ($1, $2, $3) RETURNING *`,
-      values: [title, owner_id, metadata],
+      values: [title, user_id, metadata],
     };
 
     return db
@@ -139,6 +139,43 @@ module.exports = (db) => {
     );
   };
 
+  const getSpecificBoards = (user_id) => {
+    const query = {
+      text: `
+      SELECT board_id 
+      FROM collaborators
+      WHERE user_id = $1
+      `,
+      values: [user_id],
+    };
+
+    return (
+      db
+        .query(query)
+        // result.row looks like this:
+        //[ { board_id: 1 }, { board_id: 3 } ]
+        .then((result) => {
+          const boardIdArray = result.rows.map(
+            (objBoard) => objBoard["board_id"]
+          );
+          // boardIdArray looks like: [1,3]
+          return boardIdArray;
+        })
+    );
+  };
+
+  const getBoardIdTitle = (id) => {
+    const query = {
+      text: `SELECT id, title FROM boards where id = $1`,
+      values: [id],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
+
   return {
     getUsers,
     getUserByEmail,
@@ -151,5 +188,7 @@ module.exports = (db) => {
     deleteBoard,
     updateBoardTitle,
     updateCollaborators,
+    getSpecificBoards,
+    getBoardIdTitle,
   };
 };
