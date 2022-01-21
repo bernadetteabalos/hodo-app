@@ -2,7 +2,7 @@ import { useState } from "react";
 // import from other libraries
 import { Link, useNavigate } from "react-router-dom";
 
-import { Container, Navbar, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 //styling
 import "../stylesheets/css/navigation.css";
 
@@ -11,6 +11,14 @@ const Navigation = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin } = props;
 
   console.log("huuuhhhhh currentUser--->", currentUser);
+
+  const login = () => {
+    navigate("/login");
+  };
+
+  const register = () => {
+    navigate("/register");
+  };
 
   const logout = () => {
     navigate("/");
@@ -21,25 +29,48 @@ const Navigation = (props) => {
   return (
     <>
       <div className="navbar">
-        <h1>Hello from the Nav Bar</h1>
-      </div>
-      <div>
-        <Link to="/">Home</Link>
-      </div>
-      <div>
-        <Link to="/about">About</Link>
-      </div>
-      {showLogin && (
-        <div>
-          <Link to="/login">Login</Link>
+        <div className="logo">
+          <div>
+            <Link to="/">
+              <img
+                src="https://media.istockphoto.com/photos/paper-plane-on-red-background-picture-id1358970693?b=1&k=20&m=1358970693&s=170667a&w=0&h=AgDbacTXHFKtBYvnkzpbL5k38J-o08iUx-6j7zPDo6Q="
+                width="40"
+                height="40"
+                className="d-inline-block align-top"
+                alt="Hodo logo"
+              />
+            </Link>
+          </div>
+          <div className="nav-link">
+            <Link to="/">
+              <h3>Home</h3>
+            </Link>
+          </div>
+          <div className="nav-link">
+            <Link to="/about">
+              <h3>About</h3>
+            </Link>
+          </div>
         </div>
-      )}
-      {!showLogin && (
-        <Button onClick={logout}>Logout</Button>
-        // <div>
-        //   <Link to="/">Logout</Link>
-        // </div>
-      )}
+        <div className="nav-right">
+          {showLogin && (
+            <div className="nav-link">
+              <Button onClick={login}>Login</Button>
+            </div>
+          )}
+          {showLogin && (
+            <div className="nav-link">
+              <Button onClick={register}>Register</Button>
+            </div>
+          )}
+          {!showLogin && (
+            <Button onClick={logout}>Logout</Button>
+            // <div>
+            //   <Link to="/">Logout</Link>
+            // </div>
+          )}
+        </div>
+      </div>
       {/* <Navbar className="navbar">
         <Container>
           <Navbar.Brand href="/">

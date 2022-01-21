@@ -1,5 +1,21 @@
 @import "./variables.scss";
 .navbar {
   display: flex;
+  justify-content: space-around;
   background: $nav-background;
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+  .nav-right {
+    display: flex;
+    Button {
+      font-size: 1.45rem;
+    }
+  }
+}
+
+.nav-link {
+  font: black;
+  // background-color: pink;
 }
