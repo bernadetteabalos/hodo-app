@@ -19,10 +19,15 @@ const Navigation = (props) => {
     navigate("/register");
   };
 
+  const back = () => {
+    setShowLogin("logout");
+    navigate("/profile");
+  };
+
   const logout = () => {
     navigate("/");
     setCurrentUser({});
-    setShowLogin(true);
+    setShowLogin("login");
     setIdTitle([]);
   };
 
@@ -51,7 +56,7 @@ const Navigation = (props) => {
               <h3>About</h3>
             </Link>
           </div>
-          {!showLogin && (
+          {showLogin === "login" && (
             <div className="nav-link">
               <Link to="/profile">
                 <h3>Profile</h3>
@@ -60,17 +65,20 @@ const Navigation = (props) => {
           )}
         </div>
         <div className="nav-right">
-          {showLogin && (
+          {showLogin === "login" && (
             <div className="nav-link">
               <Button onClick={login}>Login</Button>
             </div>
           )}
-          {showLogin && (
+          {showLogin === "login" && (
             <div className="nav-link">
               <Button onClick={register}>Register</Button>
             </div>
           )}
-          {!showLogin && <Button onClick={logout}>Logout</Button>}
+          {showLogin === "logout" && <Button onClick={logout}>Logout</Button>}
+          {showLogin === "back" && (
+            <Button onClick={back}>Back To Profile</Button>
+          )}
         </div>
       </div>
     </>

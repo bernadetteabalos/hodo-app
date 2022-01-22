@@ -1,12 +1,25 @@
 #chatbox {
   border: 3px solid black;
-  width: 25vw;
-  height: 30vh;
+  width: 280px;
+  height: 300px;
+  display: flex;
+  background-color: rgb(190, 231, 190);
+  overflow: auto;
+  flex: 1 1 auto;
+  overflow-wrap: break-word;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  font-size: 1.15rem;
 }
 
 .enterText {
-  width: 25vw;
-  height: 10vh;
+  width: 280px;
+  height: 4rem;
   resize: none;
   border: 3px green solid;
+  font-size: 1.15rem;
+}
+
+.send-btn {
+  width: 280px;
 }

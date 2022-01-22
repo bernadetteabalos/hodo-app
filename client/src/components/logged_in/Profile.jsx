@@ -41,6 +41,11 @@ const Profile = (props) => {
 
     alert(msg);
 
+    setIdTitle((prevState) => [
+      ...prevState,
+      { id: board.id, title: board.title },
+    ]);
+
     navigate(`/board/${board.id}`);
   };
 

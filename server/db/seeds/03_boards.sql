@@ -6,4 +6,5 @@ VALUES
     ('Greek Itinerary', 1),
     ('Polish Itinerary', 2),
     ('Danish Itinerary', 3),
-    ('Scottish Itineray', 3);
+    ('Scottish Itineray', 3),
+    ('Stephanie', 7);

@@ -6,7 +6,7 @@ import useKeyPress from "../../hooks/keyboardShortcuts";
 import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
 import { Rect } from "react-konva";
-import { Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { v4 as uuidV4 } from "uuid";
 
 // import Other Components
@@ -16,7 +16,6 @@ import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
 import OneChatMessage from "../board/right_bar_components/OneChatMessage";
 import Navigation from "../Navigation";
-import { Html } from "react-konva-utils";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
@@ -42,7 +41,13 @@ const MainStage = (props) => {
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
 
-  console.log("main stage line 33, board_id", board_id);
+  // console.log("line 42 mainstage ---> what is showLogin?", showLogin);
+
+  useEffect(() => {
+    setShowLogin("back");
+  }, []);
+
+  // console.log("main stage line 33, board_id", board_id);
   //CHAT*********************
   const [message, setMessage] = useState("");
   const [chatSpeakers, setChatSpeakers] = useState([]);
@@ -200,6 +205,7 @@ const MainStage = (props) => {
 
   // removes all elements from the board
   const clearBoard = () => {
+    // set all elements back to none
     setElements([]);
     setLines([]);
     setTool("select");
@@ -216,6 +222,7 @@ const MainStage = (props) => {
       }
     });
     saveBoard(board_id, stageRef.current.children);
+    alert("Board saved! :)");
   };
   console.log("these are the ele", elements);
   /** removes the previous element from the array */
@@ -278,7 +285,10 @@ const MainStage = (props) => {
     e.preventDefault();
   };
 
+  const bottomChatRef = useRef();
+
   const handleSendMessage = (e) => {
+    console.log("me hit line 268 for chat?");
     e.preventDefault();
     console.log("it is this message--->", message);
     // a. emit a connection to send the message object
@@ -286,7 +296,7 @@ const MainStage = (props) => {
       message,
       speaker: currentUser["first_name"],
     };
-    const newChatArray = [...chatSpeakers, newChatSpeakerObject];
+    const newChatArray = [newChatSpeakerObject, ...chatSpeakers];
     setChatSpeakers(newChatArray);
 
     connection.emit("chat-change", newChatArray, board_id);
@@ -451,7 +461,7 @@ const MainStage = (props) => {
             </Layer>
           </Stage>
         </div>
-        <div>
+        <div className="rightsection">
           {/* ******** RIGHT SIDE BAR ***************/}
           <RightBar
             clearBoard={clearBoard}
@@ -464,27 +474,51 @@ const MainStage = (props) => {
             END_POINT={END_POINT}
             currentUser={currentUser}
           />
-          <div>
-            <div id="chatbox">
-              {chatSpeakers.map((chat) => {
-                return (
-                  <OneChatMessage
-                    key={uuidV4()}
-                    chat={chat.message}
-                    chatSpeaker={chat.speaker}
-                  />
-                );
-              })}
+          <div className="rightsection">
+            <div>
+              <div id="chatbox">
+                {chatSpeakers.map((chat) => {
+                  return (
+                    <OneChatMessage
+                      key={uuidV4()}
+                      chat={chat.message}
+                      chatSpeaker={chat.speaker}
+                    />
+                  );
+                })}
+                <div
+                  style={{ float: "left", clear: "both" }}
+                  ref={bottomChatRef}
+                ></div>
+              </div>
+              <form onSubmit={handleSendMessage}>
+                <input
+                  className="enterText"
+                  type="text"
+                  placeholder="enter message here"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                ></input>
+                {/* <textarea
+                  className="enterText"
+                  type="text"
+                  placeholder="enter message here"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                ></textarea> */}
+                <Button
+                  className="send-btn"
+                  type="submit"
+                  onClick={handleSendMessage}
+                >
+                  Send Message
+                </Button>
+              </form>
             </div>
-            <textarea
-              className="enterText"
-              type="text"
-              value={message}
-              onChange={(e) => {
-                setMessage(e.target.value);
-              }}
-            ></textarea>
-            <Button onClick={handleSendMessage}>Send Message</Button>
           </div>
         </div>
       </div>
