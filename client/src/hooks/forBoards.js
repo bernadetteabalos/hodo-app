@@ -33,11 +33,12 @@ export default function useApplicationData() {
   }
   //function for saving Board
 
-  async function saveBoard(id, metadata) {
-    console.log("LOOK HERE NOW", id, metadata);
+  async function saveBoard(id, metadata, budget_data) {
+    console.log("LOOK HERE NOW", id, metadata, budget_data);
     const res = await axios.put(`http://localhost:8001/api/boards/${id}`, {
       id,
       metadata,
+      budget_data: { expenses: budget_data },
     });
   }
 

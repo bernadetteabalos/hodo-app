@@ -21,7 +21,24 @@ const AppReducer = (state, action) => {
           (expense) => expense.id !== action.payload
         ),
       };
+    case "INITIAL-RENDER":
+      return {
+        ...state,
+        expenses: [...state.expenses, action.payload],
+      };
 
+    case "UPDATE-EXPENSE":
+      console.log("so what is my action.payload??", action.payload);
+      return {
+        ...state,
+        expenses: action.payload,
+      };
+    case "CLEAR":
+      console.log("so what is my action.payload??", action.payload);
+      return {
+        ...state,
+        expenses: action.payload,
+      };
     default:
       return state;
   }

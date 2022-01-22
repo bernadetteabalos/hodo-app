@@ -35,6 +35,8 @@ module.exports = ({
       );
   });
 
+  /*GET board expense */
+
   router.post("/", (req, res) => {
     const { title, user_id, metadata } = req.body;
 
@@ -50,6 +52,11 @@ module.exports = ({
   /*UPDATING BOARD*/
   router.put("/:id", (req, res) => {
     const { metadata, id, budget_data } = req.body;
+
+    console.log(
+      "so this is my budget_data on line 54 in boards.js--->",
+      budget_data
+    );
 
     console.log("OKOK", metadata, id, budget_data);
     saveBoard(metadata, id, budget_data)

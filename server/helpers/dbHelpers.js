@@ -81,16 +81,16 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const saveBoard = (metadata, id) => {
+  const saveBoard = (metadata, id, budget_data) => {
     const query = {
-      text: `UPDATE boards SET metadata = $1 WHERE id = $2`,
-      values: [{ metadata }, id],
+      text: `UPDATE boards SET metadata = $1, budget_data = $3 WHERE id = $2`,
+      values: [{ metadata }, id, budget_data],
     };
 
     return db
       .query(query)
       .then((result) => result.rows[0])
-      .catch((err) => err);
+      .catch((err) => console.log("well I broke", err));
   };
 
   const deleteBoard = (id) => {

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import useApplicationData from "../../hooks/forBoards";
 // import from others libraries
 import socketIOClient from "socket.io-client";
@@ -18,6 +18,7 @@ import MainExample from "./Chart/MainExample";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
+import { AppContext } from "./Chart/AppContext";
 
 // import styles
 import "../../stylesheets/css/mainstage.css";
@@ -39,6 +40,12 @@ const MainStage = (props) => {
   const gridRef = useRef(null);
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
+
+  //*** expenses */
+  const { expenses, dispatch } = useContext(AppContext);
+
+  console.log("what is my expenses??");
+  console.log(expenses);
 
   console.log("main stage line 33, board_id", board_id);
   //CHAT*********************
@@ -125,6 +132,19 @@ const MainStage = (props) => {
       setChatSpeakers(newChatArray);
     });
 
+    // iv. pie chat. setting the new pie chart/expenses
+    conn.on(`update-budget-${board_id}`, (newExpenses) => {
+      // const newExpenses = newExpenses;
+      console.log(
+        "what is my newExpenses for sockets on lilne 138--->",
+        newExpenses // an array of objects
+      );
+      dispatch({
+        type: "UPDATE-EXPENSE",
+        payload: newExpenses,
+      });
+    });
+
     // setting connection to be socketIOClient(END_POINT)
     setConnection(conn);
   }, []);
@@ -136,6 +156,12 @@ const MainStage = (props) => {
     // I also want to pass down my board_id
     connection.emit("stage-change", elements, board_id);
     connection.emit("line-change", lines, board_id);
+    // i. emit msg to backend for the expenses
+    console.log(
+      "this is my expenses on line 156 for socket connection",
+      expenses
+    ); // this is good!
+    connection.emit("budget-change", expenses, board_id);
   };
 
   /**activated upon clicking of shape or add img. generates a new element and adds it to the array */
@@ -203,6 +229,21 @@ const MainStage = (props) => {
     connection.emit("line-change", []);
   };
 
+  // useEffect(() => {
+  //   // this will be where I do the axios request for the inital data from the database
+  //   const expense = {
+  //     id: "2ljdlkfjdslkfjdlk",
+  //     name: "Medicine",
+  //     cost: 300,
+  //     color: "red",
+  //   };
+
+  //   dispatch({
+  //     type: "INITIAL-RENDER",
+  //     payload: expense,
+  //   });
+  // }, []);
+
   //saves board
   const save = () => {
     stageRef.current.children.forEach((item) => {
@@ -210,7 +251,10 @@ const MainStage = (props) => {
         item.attrs.url = item.attrs.image.src;
       }
     });
-    saveBoard(board_id, stageRef.current.children);
+    console.log("line 220 on mainstage for expenses ---->", expenses);
+    // the expenses are an array of items inside
+    // [{id:1, name:'Food', etc},{},{}]
+    saveBoard(board_id, stageRef.current.children, expenses);
     alert("Board saved! :)");
   };
   console.log("these are the ele", elements);
@@ -295,8 +339,10 @@ const MainStage = (props) => {
         <Header board_id={board_id} />
       </div>
       {/* ******** LEFT SIDE BAR ******************** */}
-      <MainExample />
       <div className="creativity">
+        <div className="sidebar">
+          <MainExample />
+        </div>
         <LeftBar
           fillColor={fillColor}
           setFillColor={setFillColor}

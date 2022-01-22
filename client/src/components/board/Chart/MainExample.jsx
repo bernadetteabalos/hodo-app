@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddExpense from "./AddExpense";
 import ExpenseList from "./ExpenseList";
-import { AppProvider } from "./AppContext";
+// import { AppProvider } from "./AppContext";
 // import { useState } from "react";
 import PieChart from "./PieChart";
 // import PieChart from "./Components/PieGraph";
@@ -14,7 +14,7 @@ const MainExample = (props) => {
   // });
 
   return (
-    <AppProvider>
+    <>
       <PieChart />
       {/* <div>
         <PieChart name={expense.name} cost={expense.cost} />
@@ -36,7 +36,7 @@ const MainExample = (props) => {
           </div>
         </div>
       </div>
-    </AppProvider>
+    </>
   );
 };
 

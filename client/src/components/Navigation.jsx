@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 // import from other libraries
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,10 +6,34 @@ import { Button } from "react-bootstrap";
 //styling
 import "../stylesheets/css/navigation.css";
 
+import { AppContext } from "./board/Chart/AppContext";
+
 const Navigation = (props) => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
     props;
+
+  const { expenses, dispatch } = useContext(AppContext);
+
+  const clear = () => {
+    dispatch({
+      type: "CLEAR",
+      payload: [],
+    });
+  };
+
+  const home = () => {
+    clear();
+    navigate("/");
+  };
+  const about = () => {
+    clear();
+    navigate("/about");
+  };
+  const profile = () => {
+    clear();
+    navigate("/profile");
+  };
 
   const login = () => {
     navigate("/login");
@@ -24,6 +48,7 @@ const Navigation = (props) => {
     setCurrentUser({});
     setShowLogin(true);
     setIdTitle([]);
+    clear();
   };
 
   return (
@@ -43,19 +68,17 @@ const Navigation = (props) => {
           </div>
           <div className="nav-link">
             <Link to="/">
-              <h3>Home</h3>
+              <Button onClick={home}>Home</Button>
             </Link>
           </div>
           <div className="nav-link">
             <Link to="/about">
-              <h3>About</h3>
+              <Button onClick={about}>About</Button>
             </Link>
           </div>
           {!showLogin && (
             <div className="nav-link">
-              <Link to="/profile">
-                <h3>Profile</h3>
-              </Link>
+              <Button onClick={profile}>Profile</Button>
             </div>
           )}
         </div>

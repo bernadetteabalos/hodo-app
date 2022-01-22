@@ -56,6 +56,14 @@ io.on("connection", (socket) => {
     console.log("This is the new chat Array", newChatArray);
     socket.broadcast.emit(`update-chat-${board_id}`, newChatArray);
   });
+
+  // ii. Listening for incoming expense change
+  socket.on("budget-change", (newExpenses, board_id) => {
+    // iii. sending out expenses to other users
+    console.log("did I even hit the socket for the pie chart???");
+    console.log("budget-change--->", newExpenses);
+    socket.broadcast.emit(`update-budget-${board_id}`, newExpenses);
+  });
 });
 
 /**
