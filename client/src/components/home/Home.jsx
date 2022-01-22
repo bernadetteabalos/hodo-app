@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 //import other Component
 import Navigation from "../Navigation";
 
@@ -7,6 +9,12 @@ import "../../stylesheets/css/home.css";
 const Home = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
     props;
+
+  useEffect(() => {
+    if (currentUser.id) {
+      setShowLogin("logout");
+    }
+  }, []);
   return (
     <>
       <Navigation
