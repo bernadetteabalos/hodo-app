@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 
 // import styling
 import "../../stylesheets/css/rightbar.css";
+import "../../stylesheets/css/mainstage.css";
 
 const RightBar = (props) => {
   const { clearBoard, undo, deleteShape, saveBoard } = props;
