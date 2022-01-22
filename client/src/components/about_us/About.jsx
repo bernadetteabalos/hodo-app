@@ -5,11 +5,18 @@ import Navigation from "../Navigation";
 
 // import styling
 import "../../stylesheets/css/about.css";
+import { useEffect } from "react/cjs/react.development";
 
 const About = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
     props;
   const [count, setCount] = useState(1000);
+
+  useEffect(() => {
+    if (currentUser.id) {
+      setShowLogin("logout");
+    }
+  }, []);
 
   console.log("this is my current user on line 13 from about--->", currentUser);
   return (

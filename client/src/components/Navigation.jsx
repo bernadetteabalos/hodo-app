@@ -56,7 +56,7 @@ const Navigation = (props) => {
               <h3>About</h3>
             </Link>
           </div>
-          {showLogin === "login" && (
+          {showLogin === "logout" && (
             <div className="nav-link">
               <Link to="/profile">
                 <h3>Profile</h3>
