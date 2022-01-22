@@ -265,6 +265,7 @@ const MainStage = (props) => {
   };
 
   const handleSendMessage = (e) => {
+    console.log("me hit line 268 for chat?");
     e.preventDefault();
     console.log("it is this message--->", message);
     // a. emit a connection to send the message object
@@ -406,7 +407,7 @@ const MainStage = (props) => {
             </Layer>
           </Stage>
         </div>
-        <div>
+        <div className="rightsection">
           {/* ******** RIGHT SIDE BAR ***************/}
           <RightBar
             clearBoard={clearBoard}
@@ -434,6 +435,7 @@ const MainStage = (props) => {
             <textarea
               className="enterText"
               type="text"
+              placeholder="enter message here"
               value={message}
               onChange={(e) => {
                 setMessage(e.target.value);
