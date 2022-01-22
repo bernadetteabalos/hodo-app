@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
+// import styling
+import "../../stylesheets/css/rightbar.css";
+
 const RightBar = (props) => {
   const { clearBoard, undo, deleteShape, saveBoard } = props;
 
@@ -26,7 +29,7 @@ const RightBar = (props) => {
 
   return (
     <>
-      <div>
+      <div className="rightbar">
         <Button variant="primary" onClick={saveBoard}>
           Save
         </Button>

@@ -1,5 +1,11 @@
+// import from other libraries
 import { CirclePicker } from "react-color";
+import { BiRectangle } from "react-icons/bi";
+import { AiOutlineStar } from "react-icons/ai";
 import Button from "react-bootstrap/Button";
+
+// styling
+import "../../stylesheets/css/leftbar.css";
 
 const LeftBar = (props) => {
   // deconstructing the props
@@ -35,13 +41,14 @@ const LeftBar = (props) => {
           variant="outline-secondary"
           onClick={() => handleClick("Rect", fillColor, strokeColor)}
         >
-          Rectangle
+          <BiRectangle />
         </Button>
         <Button
           variant="outline-secondary"
           onClick={() => handleClick("Square", fillColor, strokeColor)}
         >
           Square
+          <BiRectangle />
         </Button>
         <Button
           variant="outline-secondary"
@@ -53,18 +60,18 @@ const LeftBar = (props) => {
           variant="outline-secondary"
           onClick={() => handleClick("Star", fillColor, strokeColor)}
         >
-          Star
+          <AiOutlineStar />
         </Button>
       </div>
       <div className="texttools">
-          <h3>Text Editor</h3>
-          <Button
-            variant="outline-secondary"
-            onClick={() => handleClick("Text", fillColor, strokeColor)}
-          >
-            Add text
-          </Button>
-        </div>
+        <h3>Text Editor</h3>
+        <Button
+          variant="outline-secondary"
+          onClick={() => handleClick("Text", fillColor, strokeColor)}
+        >
+          Add text
+        </Button>
+      </div>
       <div className="add-url">
         <form
           autoComplete="off"
