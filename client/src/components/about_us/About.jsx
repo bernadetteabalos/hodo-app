@@ -30,7 +30,11 @@ const About = (props) => {
                 <h1>Bernadette Abalos</h1>
               </div>
               <div className="one-back">
-                <p>Artist, Front and Back-End Dev</p>
+                <h2>Full-Stack Web Developer</h2>
+                <br></br>
+                <p>
+                  Former life sciences student who enjoys art and programming.
+                </p>
               </div>
             </div>
           </div>
@@ -42,7 +46,9 @@ const About = (props) => {
                 <h1>Stephanie Li</h1>
               </div>
               <div className="two-back">
-                <p>Pharmacist, Front and Back-End Dev</p>
+                <h2>Full-Stack Web Developer</h2>
+                <br></br>
+                <p>Former pharmacist who discovered a love for coding.</p>
               </div>
             </div>
           </div>
@@ -54,7 +60,12 @@ const About = (props) => {
                 <h1>Blesilda Mateo</h1>
               </div>
               <div className="three-back">
-                <p>Gamer, Front-End Dev</p>
+                <h2>Full-Stack Web Developer</h2>
+                <br></br>
+                <p>
+                  Former aviation student who meandered their way into the world
+                  of web development
+                </p>
               </div>
             </div>
           </div>
@@ -67,7 +78,11 @@ const About = (props) => {
       <div className="thank-you">
         <h1>
           & THANK YOU x {count} &nbsp;
-          <button onClick={confetti}>
+          <button
+            type="button"
+            class="btn btn-outline-dark btn-lg"
+            onClick={confetti}
+          >
             <Confetti />
           </button>
           &nbsp; to our instructors and mentors at LHL!

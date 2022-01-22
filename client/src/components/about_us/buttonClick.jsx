@@ -20,36 +20,36 @@ export default class Confetti extends React.Component {
   makeShot = (particleRatio, opts) => {
     this.animationInstance({
       ...opts,
-      origin: { y: 0.7 },
+      origin: { y: 0.9, x: 0.42 },
       particleCount: Math.floor(200 * particleRatio),
     });
   };
 
   fire = () => {
     this.makeShot(0.25, {
-      spread: 33,
+      spread: 1500,
       startVelocity: 55,
     });
 
     this.makeShot(0.2, {
-      spread: 90,
+      spread: 2000,
     });
 
     this.makeShot(0.35, {
-      spread: 150,
+      spread: 2500,
       decay: 0.91,
       scalar: 0.8,
     });
 
     this.makeShot(0.1, {
-      spread: 250,
+      spread: 3000,
       startVelocity: 25,
       decay: 0.92,
       scalar: 1.2,
     });
 
     this.makeShot(0.1, {
-      spread: 300,
+      spread: 3500,
       startVelocity: 45,
     });
   };
@@ -66,6 +66,8 @@ export default class Confetti extends React.Component {
     return (
       <div style={{ display: "flex", alignSelf: "center" }}>
         <span onClick={this.handlerFire}>
+          {" "}
+          Cheers!&nbsp;
           <FontAwesomeIcon icon={faGlassCheers} />
         </span>
         <ReactCanvasConfetti

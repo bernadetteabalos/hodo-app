@@ -78,7 +78,7 @@
   animation: pop 1s ease-in-out;
 }
 .with-delay {
-  animation-delay: 10s;
+  animation-delay: 12s;
 }
 @keyframes pop {
   50% {
@@ -90,7 +90,7 @@
   animation: pop 1.5s ease-in-out;
 }
 .with-delay {
-  animation-delay: 18s;
+  animation-delay: 22s;
 }
 @keyframes pop {
   50% {
@@ -105,7 +105,7 @@
   width: 25vw;
   height: 40vh;
   perspective: 1000px;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .flip-card-inner {
@@ -149,7 +149,7 @@
   width: 25vw;
   height: 40vh;
   perspective: 1000px;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .flip-inner {
@@ -193,7 +193,7 @@
   width: 25vw;
   height: 40vh;
   perspective: 1000px;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .flip-in {
