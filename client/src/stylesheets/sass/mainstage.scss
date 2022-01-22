@@ -25,6 +25,101 @@
   flex-direction: column;
 }
 
+
+.leftsidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.bi {
+  display: flex;
+  font-size: 20px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.shapes {
+  color: black;
+}
+
+.select-a-color {
+  display: grid;
+  justify-content: center;
+  grid-gap: 1em;
+}
+
+input[type="color"] {
+	-webkit-appearance: none;
+  border:none;
+	width: 60px;
+	height: 60px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0);
+  &:hover {
+    filter:brightness(1.2);
+  }
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  background-color: rgba(0, 0, 0, 0);
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+	border-radius: 99999px;
+}
+
+
+.button-icons.btn-outline-secondary {
+	width: 60px;
+	height: 60px;
+  overflow: hidden;
+  &:hover {
+    filter:brightness(1.2);
+  }
+  border-radius: 50%;
+}
+
+input[name="url"] {
+  position: absolute;
+  z-index: 4;
+  margin-left: 5em;
+  margin-top: 2em;
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.1s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+
 .rightsection {
   width: 300px;
   background-color: pink;
