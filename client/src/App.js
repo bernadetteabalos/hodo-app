@@ -13,11 +13,12 @@ import MainStage from "./components/board/MainStage";
 // import styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "./stylesheets/css/App.css";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [showLogin, setShowLogin] = useState(true);
+  const [showLogin, setShowLogin] = useState("login");
   const [idTitle, setIdTitle] = useState([]);
 
   return (
@@ -80,7 +81,13 @@ function App() {
           {currentUser.id && (
             <Route
               path="/board/:id"
-              element={<MainStage currentUser={currentUser} />}
+              element={
+                <MainStage
+                  currentUser={currentUser}
+                  showLogin={showLogin}
+                  setShowLogin={setShowLogin}
+                />
+              }
             />
           )}
           <Route

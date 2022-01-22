@@ -1,18 +1,13 @@
 import React, { useRef, useState } from "react";
-import {Stage, Layer, Text } from "react-konva";
-import { Html } from 'react-konva-utils';
-import "/home/odette/host/hodo-app/client/src/stylesheets/css/text.css"
+import { Stage, Layer, Text } from "react-konva";
+import { Html } from "react-konva-utils";
+import "../../../../stylesheets/css/text.css";
 
 const TextLayer = (props) => {
-  const {
-    onSelect,
-    shapeRef,
-    onChange,
-    shapeProps,
-  } = props;
+  const { onSelect, shapeRef, onChange, shapeProps } = props;
   const { text, fontSize, ...rest } = shapeProps;
   const inputRef = useRef(null);
-  const [currentText, setCurrentText] = useState(text || 'Some text here');
+  const [currentText, setCurrentText] = useState(text || "Some text here");
   const [fontScale, setScale] = useState(fontSize || 20);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -60,7 +55,7 @@ const TextLayer = (props) => {
 
           node.scaleX(1);
           node.scaleY(1);
-          console.log('current font size', node.fontSize())
+          console.log("current font size", node.fontSize());
           onChange({
             ...rest,
             // fontSize: node.attrs.fontSize * scaleX,
@@ -70,12 +65,12 @@ const TextLayer = (props) => {
             height: Math.max(node.height() * scaleY),
           });
           setScale(node.attrs.fontSize * scaleX);
-          console.log('after font size', shapeRef)
+          console.log("after font size", shapeRef);
         }}
         onDblClick={onDoubleClick}
         {...rest}
       />
-      <Html >
+      <Html>
         <input
           draggable={false}
           id="textEdit"
@@ -84,10 +79,9 @@ const TextLayer = (props) => {
           value={currentText}
           onChange={onInputChange}
           onBlur={onBlur}
-          style={{ display: !isEditing && 'none' }}
+          style={{ display: !isEditing && "none" }}
         />
       </Html>
-      
     </>
   );
 };

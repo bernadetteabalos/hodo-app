@@ -1,1 +1,1 @@
-#chatbox{border:3px solid #000;width:25vw;height:30vh}.enterText{width:25vw;height:10vh;resize:none;border:3px green solid}
+#chatbox{border:3px solid #000;width:280px;height:300px;display:flex;background-color:#bee7be;overflow:auto;flex:1 1 auto;overflow-wrap:break-word;flex-direction:column-reverse;justify-content:flex-start;font-size:1.15rem}.enterText{width:280px;height:4rem;resize:none;border:3px green solid;font-size:1.15rem}.send-btn{width:280px}
