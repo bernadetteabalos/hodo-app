@@ -44,7 +44,7 @@ const Login = (props) => {
         } else {
           // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
           setCurrentUser(res.data);
-          setShowLogin(false);
+          setShowLogin("logout");
 
           // post request to get the user info
           axios

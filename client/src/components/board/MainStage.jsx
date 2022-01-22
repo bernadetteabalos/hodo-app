@@ -39,7 +39,13 @@ const MainStage = (props) => {
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
 
-  console.log("main stage line 33, board_id", board_id);
+  // console.log("line 42 mainstage ---> what is showLogin?", showLogin);
+
+  useEffect(() => {
+    setShowLogin("back");
+  }, []);
+
+  // console.log("main stage line 33, board_id", board_id);
   //CHAT*********************
   const [message, setMessage] = useState("");
   const [chatSpeakers, setChatSpeakers] = useState([]);
