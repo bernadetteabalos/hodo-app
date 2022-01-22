@@ -266,17 +266,7 @@ const MainStage = (props) => {
 
   const bottomChatRef = useRef();
 
-  // const scrollToBottom = () => {
-  //   bottomChatRef.scrollIntoView();
-  // };
-
   const handleSendMessage = (e) => {
-    // const chatBoxId = document.getElementById("chatbox");
-
-    // bottomChatRef.scrollIntoView();
-
-    // scrollToBottom();
-
     console.log("me hit line 268 for chat?");
     e.preventDefault();
     console.log("it is this message--->", message);
