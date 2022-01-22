@@ -1,5 +1,7 @@
 import ReactCanvasConfetti from "react-canvas-confetti";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGlassCheers } from "@fortawesome/free-solid-svg-icons";
 
 const canvasStyles = {
   position: "fixed",
@@ -25,29 +27,29 @@ export default class Confetti extends React.Component {
 
   fire = () => {
     this.makeShot(0.25, {
-      spread: 26,
+      spread: 33,
       startVelocity: 55,
     });
 
     this.makeShot(0.2, {
-      spread: 60,
+      spread: 90,
     });
 
     this.makeShot(0.35, {
-      spread: 100,
+      spread: 150,
       decay: 0.91,
       scalar: 0.8,
     });
 
     this.makeShot(0.1, {
-      spread: 120,
+      spread: 250,
       startVelocity: 25,
       decay: 0.92,
       scalar: 1.2,
     });
 
     this.makeShot(0.1, {
-      spread: 120,
+      spread: 300,
       startVelocity: 45,
     });
   };
@@ -63,7 +65,9 @@ export default class Confetti extends React.Component {
   render() {
     return (
       <div style={{ display: "flex", alignSelf: "center" }}>
-        <button onClick={this.handlerFire}>Cheer!</button>
+        <span onClick={this.handlerFire}>
+          <FontAwesomeIcon icon={faGlassCheers} />
+        </span>
         <ReactCanvasConfetti
           refConfetti={this.getInstance}
           style={canvasStyles}

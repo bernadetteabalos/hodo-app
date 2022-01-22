@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ReactCanvasConfetti from "react-canvas-confetti";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // import from other components
 import Navigation from "../Navigation";
@@ -17,7 +17,6 @@ const About = (props) => {
 
   const confetti = () => {
     setCount(count + 1000);
-    <Confetti />;
   };
 
   return (
@@ -67,11 +66,11 @@ const About = (props) => {
       </div>
       <div className="thank-you">
         <h1>
-          & THANK YOU x{count}
+          & THANK YOU x {count} &nbsp;
           <button onClick={confetti}>
             <Confetti />
           </button>
-          to our instructors and mentors at LHL!
+          &nbsp; to our instructors and mentors at LHL!
         </h1>
         <span>It wouldn't be a LHL React project without a counter :) </span>
       </div>
