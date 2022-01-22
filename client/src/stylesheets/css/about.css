@@ -4,12 +4,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 .about-page .about-people {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-right: 60px;
 }
 .about-page .about-people .person {
   display: flex-end;
@@ -19,7 +20,7 @@
   border: 3px solid rgba(160, 240, 252, 0);
   margin: 3rem;
   width: 25vw;
-  height: 50vh;
+  height: 40vh;
 }
 
 .about-page .about-stack {
@@ -77,7 +78,7 @@
   animation: pop 1s ease-in-out;
 }
 .with-delay {
-  animation-delay: 8s;
+  animation-delay: 10s;
 }
 @keyframes pop {
   50% {
@@ -89,7 +90,7 @@
   animation: pop 1.5s ease-in-out;
 }
 .with-delay {
-  animation-delay: 14s;
+  animation-delay: 18s;
 }
 @keyframes pop {
   50% {
@@ -102,8 +103,9 @@
 .card-one {
   background-color: transparent;
   width: 25vw;
-  height: 50vh;
+  height: 40vh;
   perspective: 1000px;
+  margin-right: 20px;
 }
 
 .flip-card-inner {
@@ -145,8 +147,9 @@
 .card-two {
   background-color: transparent;
   width: 25vw;
-  height: 50vh;
+  height: 40vh;
   perspective: 1000px;
+  margin-right: 20px;
 }
 
 .flip-inner {
@@ -188,8 +191,9 @@
 .card-three {
   background-color: transparent;
   width: 25vw;
-  height: 50vh;
+  height: 40vh;
   perspective: 1000px;
+  margin-right: 20px;
 }
 
 .flip-in {
@@ -225,6 +229,3 @@
   color: white;
   transform: rotateY(180deg);
 }
-
-/*Button click confetti*/
-

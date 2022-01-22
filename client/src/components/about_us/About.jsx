@@ -1,11 +1,12 @@
 import { useState } from "react";
+import ReactCanvasConfetti from "react-canvas-confetti";
 
 // import from other components
 import Navigation from "../Navigation";
 
 // import styling
 import "../../stylesheets/css/about.css";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Confetti from "./buttonClick";
 
 const About = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
@@ -13,6 +14,12 @@ const About = (props) => {
   const [count, setCount] = useState(1000);
 
   console.log("this is my current user on line 13 from about--->", currentUser);
+
+  const confetti = () => {
+    setCount(count + 1000);
+    <Confetti />;
+  };
+
   return (
     <div className="about-page title">
       <h1>About Us</h1>
@@ -55,19 +62,14 @@ const About = (props) => {
         </div>
       </div>
       <br></br>
-      <br></br>
       <div className="about-stack">
         <h1>Our Tech Stack:</h1>
       </div>
       <div className="thank-you">
         <h1>
           & THANK YOU x{count}
-          <button
-            onClick={() => {
-              setCount(count + 1000);
-            }}
-          >
-            <i className="fas fa-glass-cheers"></i> Cheer!
+          <button onClick={confetti}>
+            <Confetti />
           </button>
           to our instructors and mentors at LHL!
         </h1>
