@@ -423,33 +423,50 @@ const MainStage = (props) => {
             currentUser={currentUser}
           />
           <div className="rightsection">
-            <div id="chatbox">
-              {chatSpeakers.map((chat) => {
-                return (
-                  <OneChatMessage
-                    key={uuidV4()}
-                    chat={chat.message}
-                    chatSpeaker={chat.speaker}
-                  />
-                );
-              })}
-              <div
-                style={{ float: "left", clear: "both" }}
-                ref={bottomChatRef}
-              ></div>
+            <div>
+              <div id="chatbox">
+                {chatSpeakers.map((chat) => {
+                  return (
+                    <OneChatMessage
+                      key={uuidV4()}
+                      chat={chat.message}
+                      chatSpeaker={chat.speaker}
+                    />
+                  );
+                })}
+                <div
+                  style={{ float: "left", clear: "both" }}
+                  ref={bottomChatRef}
+                ></div>
+              </div>
+              <form onSubmit={handleSendMessage}>
+                <input
+                  className="enterText"
+                  type="text"
+                  placeholder="enter message here"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                ></input>
+                {/* <textarea
+                  className="enterText"
+                  type="text"
+                  placeholder="enter message here"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                ></textarea> */}
+                <Button
+                  className="send-btn"
+                  type="submit"
+                  onClick={handleSendMessage}
+                >
+                  Send Message
+                </Button>
+              </form>
             </div>
-            <textarea
-              className="enterText"
-              type="text"
-              placeholder="enter message here"
-              value={message}
-              onChange={(e) => {
-                setMessage(e.target.value);
-              }}
-            ></textarea>
-            <Button type="submit" onClick={handleSendMessage}>
-              Send Message
-            </Button>
           </div>
         </div>
       </div>
