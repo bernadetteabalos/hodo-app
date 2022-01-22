@@ -4,7 +4,7 @@ import useApplicationData from "../../hooks/forBoards";
 import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
 import { Rect } from "react-konva";
-import { Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { v4 as uuidV4 } from "uuid";
 
 // import Other Components
@@ -264,7 +264,19 @@ const MainStage = (props) => {
     e.preventDefault();
   };
 
+  const bottomChatRef = useRef();
+
+  // const scrollToBottom = () => {
+  //   bottomChatRef.scrollIntoView();
+  // };
+
   const handleSendMessage = (e) => {
+    // const chatBoxId = document.getElementById("chatbox");
+
+    // chatBoxId.scrollIntoView();
+
+    // scrollToBottom();
+
     console.log("me hit line 268 for chat?");
     e.preventDefault();
     console.log("it is this message--->", message);
@@ -420,7 +432,7 @@ const MainStage = (props) => {
             END_POINT={END_POINT}
             currentUser={currentUser}
           />
-          <div>
+          <div className="rightsection">
             <div id="chatbox">
               {chatSpeakers.map((chat) => {
                 return (
@@ -431,6 +443,10 @@ const MainStage = (props) => {
                   />
                 );
               })}
+              <div
+                style={{ float: "left", clear: "both" }}
+                ref={bottomChatRef}
+              ></div>
             </div>
             <textarea
               className="enterText"
@@ -441,7 +457,9 @@ const MainStage = (props) => {
                 setMessage(e.target.value);
               }}
             ></textarea>
-            <Button onClick={handleSendMessage}>Send Message</Button>
+            <Button type="submit" onClick={handleSendMessage}>
+              Send Message
+            </Button>
           </div>
         </div>
       </div>

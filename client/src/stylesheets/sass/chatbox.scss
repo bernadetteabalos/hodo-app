@@ -1,11 +1,15 @@
 #chatbox {
   border: 3px solid black;
-  width: 25vw;
-  height: 30vh;
+  width: 300px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  background-color: green;
+  overflow-y: auto;
 }
 
 .enterText {
-  width: 25vw;
+  width: 300px;
   height: 10vh;
   resize: none;
   border: 3px green solid;
