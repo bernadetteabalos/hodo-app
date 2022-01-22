@@ -273,7 +273,7 @@ const MainStage = (props) => {
   const handleSendMessage = (e) => {
     // const chatBoxId = document.getElementById("chatbox");
 
-    // chatBoxId.scrollIntoView();
+    // bottomChatRef.scrollIntoView();
 
     // scrollToBottom();
 
@@ -285,7 +285,7 @@ const MainStage = (props) => {
       message,
       speaker: currentUser["first_name"],
     };
-    const newChatArray = [...chatSpeakers, newChatSpeakerObject];
+    const newChatArray = [newChatSpeakerObject, ...chatSpeakers];
     setChatSpeakers(newChatArray);
 
     connection.emit("chat-change", newChatArray, board_id);
