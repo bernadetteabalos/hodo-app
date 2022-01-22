@@ -1,13 +1,10 @@
 // import from other libraries
-import { CirclePicker } from "react-color";
-import { BiRectangle } from "react-icons/bi";
-import { AiOutlineStar } from "react-icons/ai";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import "/home/odette/host/hodo-app/client/src/stylesheets/sass/mainstage.scss";
 
 // styling
 import "../../stylesheets/css/leftbar.css";
+import "../../stylesheets/css/mainstage.css";
 
 const LeftBar = (props) => {
   // deconstructing the props
@@ -24,48 +21,56 @@ const LeftBar = (props) => {
     setTool,
   } = props;
 
-  const [state, setState] = useState({ showing: false});
-  const {showing} = state;
+  const [state, setState] = useState({ showing: false });
+  const { showing } = state;
 
-  
   return (
     <div className="leftsidebar">
-        <div className="select-a-color">
-          <div className="icons">
-            <input className="colorPicker" type="color" value={fillColor} onChange={(e) => setFillColor(e.target.value)}/>
-            <i className="bi bi-paint-bucket"></i>
-          </div>
-          <div className="icons">
-          <input type="color" value={strokeColor} onChange={(e) => setStrokeColor(e.target.value)}/>
+      <div className="select-a-color">
+        <div className="icons">
+          <input
+            className="colorPicker"
+            type="color"
+            value={fillColor}
+            onChange={(e) => setFillColor(e.target.value)}
+          />
+          <i className="bi bi-paint-bucket"></i>
+        </div>
+        <div className="icons">
+          <input
+            type="color"
+            value={strokeColor}
+            onChange={(e) => setStrokeColor(e.target.value)}
+          />
           <i class="bi bi-pen-fill"></i>
-          </div>
-      
+        </div>
+
         <Button
           className="button-icons"
           variant="outline-secondary"
           onClick={() => handleClick("Rect", fillColor, strokeColor)}
-          >
-            <div className="icons">
+        >
+          <div className="icons">
             <i class="bi bi-phone-landscape shapes"></i>
           </div>
         </Button>
-        
+
         <Button
           className="button-icons"
           variant="outline-secondary"
           onClick={() => handleClick("Square", fillColor, strokeColor)}
-          >
+        >
           <div className="icons">
-          <i className="bi bi-square shapes"></i>
+            <i className="bi bi-square shapes"></i>
           </div>
         </Button>
         <Button
           className="button-icons"
           variant="outline-secondary"
           onClick={() => handleClick("Circle", fillColor, strokeColor)}
-          >
+        >
           <div className="icons">
-          <i class="bi bi-circle shapes"></i>
+            <i class="bi bi-circle shapes"></i>
           </div>
         </Button>
         <Button
@@ -74,46 +79,55 @@ const LeftBar = (props) => {
           onClick={() => handleClick("Star", fillColor, strokeColor)}
         >
           <div className="icons">
-          <i class="bi bi-star shapes"></i>
+            <i class="bi bi-star shapes"></i>
           </div>
         </Button>
-     
-      <div className="texttools">
-        <Button
-          className="button-icons"
-          variant="outline-secondary"
-          onClick={() => handleClick("Text", fillColor, strokeColor)}
+
+        <div className="texttools">
+          <Button
+            className="button-icons"
+            variant="outline-secondary"
+            onClick={() => handleClick("Text", fillColor, strokeColor)}
           >
-          <div className="icons">
-          <i class="bi bi-fonts shapes"></i>
-          </div>
-        </Button>
-      </div>
+            <div className="icons">
+              <i class="bi bi-fonts shapes"></i>
+            </div>
+          </Button>
+        </div>
         <form
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
           }}
-          >
+        >
           <input
             className="fade-in"
-            style={{ display: (showing ? 'block' : 'none') }}
+            style={{ display: showing ? "block" : "none" }}
             name="url"
             type="text"
             placeholder="Enter URL of Image"
             value={url}
             onChange={(e) => setURL(e.target.value)}
-            />
+          />
         </form>
-        <Button className="button-icons" variant="outline-secondary" onClick={() => {
-            setState({showing: !showing })
-            resetUrl()
+        <Button
+          className="button-icons"
+          variant="outline-secondary"
+          onClick={() => {
+            setState({ showing: !showing });
+            resetUrl();
           }}
-          >
-        <div className="icons">
-          <i style={{ display: (showing ? 'none' : 'flex') }} class="bi bi-image shapes"></i>
-          <i style={{ display: (showing ? 'flex' : 'none') }} class="bi bi-plus-square shapes"></i>
-        </div>
+        >
+          <div className="icons">
+            <i
+              style={{ display: showing ? "none" : "flex" }}
+              class="bi bi-image shapes"
+            ></i>
+            <i
+              style={{ display: showing ? "flex" : "none" }}
+              class="bi bi-plus-square shapes"
+            ></i>
+          </div>
         </Button>
       </div>
       {/* *****PEN TOOLS DROP DOWN***** */}
@@ -122,7 +136,7 @@ const LeftBar = (props) => {
         onChange={(e) => {
           setTool(e.target.value);
         }}
-        >
+      >
         <option value="select">Select</option>
         <option value="pen">Pen</option>
         <option value="eraser">Eraser</option>
