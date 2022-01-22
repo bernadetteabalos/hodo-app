@@ -1,5 +1,8 @@
 .creativity {
   display: flex;
+  flex-direction: row;
+  width: 100%;
+
 }
 
 .sidebar {
@@ -28,9 +31,38 @@
 
 .leftsidebar {
   display: flex;
+  background-color:white;
   flex-direction: column;
   padding: 20px;
+  z-index: 4;
+  width: 100px;
+  position: absolute;
 }
+
+
+.rightbar {
+  display: flex;
+  flex-direction: column;
+  width: 30px;
+}
+
+.rightsection {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 850px;
+  background-color: pink;
+  margin-left: 0px;
+  
+}
+
+.stage {
+  width: 100%;
+  height: 76%;
+  border: 0.1px solid black;
+}
+
+
 
 .icons {
   display: flex;
@@ -119,9 +151,3 @@ input[name="url"] {
 	}
 }
 
-
-.rightsection {
-  width: 300px;
-  background-color: pink;
-  border: 3px red solid;
-}

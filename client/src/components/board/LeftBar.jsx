@@ -1,13 +1,10 @@
 // import from other libraries
-import { CirclePicker } from "react-color";
-import { BiRectangle } from "react-icons/bi";
-import { AiOutlineStar } from "react-icons/ai";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import "/home/odette/host/hodo-app/client/src/stylesheets/sass/mainstage.scss";
 
 // styling
 import "../../stylesheets/css/leftbar.css";
+import "../../stylesheets/css/mainstage.css";
 
 const LeftBar = (props) => {
   // deconstructing the props

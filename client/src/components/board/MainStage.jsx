@@ -363,8 +363,8 @@ const MainStage = (props) => {
 
           <Stage
             ref={posRef}
-            width={1000 || window.innerWidth}
-            height={800 || window.innerHeight}
+            width={window.innerWidth - 300}
+            height={window.innerHeight - 117}
             // onMouseDown={tool === "select" && checkDeselect}
             // onTouchStart={tool === "select" && checkDeselect}
             onMousemove={tool !== "select" ? handleMouseMove : ""}
@@ -379,8 +379,8 @@ const MainStage = (props) => {
               onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
             >
               <Rect 
-                width={1000 || window.innerWidth}
-                height={800 || window.innerHeight}
+                width={window.innerWidth - 300}
+                height={window.innerHeight - 117}
 
               />
             </Layer>
@@ -474,8 +474,7 @@ const MainStage = (props) => {
             END_POINT={END_POINT}
             currentUser={currentUser}
           />
-          <div className="rightsection">
-            <div>
+          
               <div id="chatbox">
                 {chatSpeakers.map((chat) => {
                   return (
@@ -520,8 +519,6 @@ const MainStage = (props) => {
               </form>
             </div>
           </div>
-        </div>
-      </div>
     </>
   );
 };
