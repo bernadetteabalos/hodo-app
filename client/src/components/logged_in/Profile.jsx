@@ -13,6 +13,12 @@ import OneTitle from "./OneTitle";
 // import styling
 import "../../stylesheets/css/profile.css";
 
+//Import font style//
+<style>
+  @import
+  url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+</style>;
+
 const Profile = (props) => {
   const {
     currentUser,
@@ -40,6 +46,11 @@ const Profile = (props) => {
     const msg = await addCollaborator(currentUser.id, board.id);
 
     alert(msg);
+
+    setIdTitle((prevState) => [
+      ...prevState,
+      { id: board.id, title: board.title },
+    ]);
 
     navigate(`/board/${board.id}`);
   };
@@ -84,11 +95,7 @@ const Profile = (props) => {
                 // </Link>
               })}
             </div>
-            <Button
-              className="mt-2 w-100"
-              variant="primary"
-              onClick={handleShow}
-            >
+            <Button className="mt-2 w-100" variant="dark" onClick={handleShow}>
               Create New Board
             </Button>
             <Modal show={show} onHide={handleClose}>
@@ -114,7 +121,11 @@ const Profile = (props) => {
                   <Button variant="secondary" onClick={handleClose}>
                     Cancel
                   </Button>
-                  <Button variant="primary" type="submit">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    class="btn btn-outline-secondary"
+                  >
                     Create Board
                   </Button>
                 </Modal.Footer>
