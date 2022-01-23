@@ -15,7 +15,7 @@ const OneTitle = (props) => {
   };
   return (
     <div>
-      <h3 onClick={handleTitle} className="handleTitle">
+      <h3 onClick={handleTitle} className="handleTitle itineraryBoards">
         &nbsp;
         <FontAwesomeIcon icon={faHandPointRight} />
         &nbsp;{titleObj.title}

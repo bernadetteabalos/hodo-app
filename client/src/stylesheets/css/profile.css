@@ -31,7 +31,19 @@
   font-family: "Poppins", sans-serif;
 }
 
+.itineraryContainer {
+  text-align: center;
+}
+
+.itineraryBold {
+  font-weight: bolder;
+  text-shadow: -1px -1px #000000, 0px -0px 0 #000000, 0px 0px 0 #000000,
+    0px 0px 0 #000000;
+}
+
 .nameEmphasis {
   color: black;
   font-weight: bolder;
+  text-shadow: -1px -1px #000000, 0px -0px 0 #000000, 0px 0px 0 #000000,
+    0px 0px 0 #000000;
 }

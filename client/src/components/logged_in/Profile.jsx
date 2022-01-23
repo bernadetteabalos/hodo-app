@@ -13,7 +13,6 @@ import OneTitle from "./OneTitle";
 // import styling
 import "../../stylesheets/css/profile.css";
 
-
 const Profile = (props) => {
   const {
     currentUser,
@@ -78,7 +77,10 @@ const Profile = (props) => {
           </div>
           <div className="right-profile">
             <div className="itineraries-container">
-              <h1>My Itineraries</h1>
+              <h1 className="itineraryContainer itineraryBold">
+                My Itineraries
+              </h1>
+              <br></br>
               {idTitle.map((titleObj) => {
                 return <OneTitle key={titleObj.id} titleObj={titleObj} />;
                 // // string interpolation not working
@@ -113,11 +115,11 @@ const Profile = (props) => {
                   </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
+                  <Button variant="danger" onClick={handleClose}>
                     Cancel
                   </Button>
                   <Button
-                    variant="primary"
+                    variant="light"
                     type="submit"
                     class="btn btn-outline-secondary"
                   >
