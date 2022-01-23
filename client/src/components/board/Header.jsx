@@ -177,8 +177,6 @@ const Header = (props) => {
             </Modal.Footer>
           </Form>
         </Modal>
-        {/* &&&&&&&&& */}
-
         <Button className="back-to-profile" onClick={() => setShow("profile")}>
           Back To Profile
         </Button>
