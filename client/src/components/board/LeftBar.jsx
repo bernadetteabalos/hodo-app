@@ -101,7 +101,6 @@ const LeftBar = (props) => {
             </div>
           </Button>
         </div>
-        //*****
         <form
           autoComplete="off"
           onSubmit={(e) => {
