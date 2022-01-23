@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 // import other component
 import Navigation from "../Navigation";
@@ -25,6 +25,9 @@ const Login = (props) => {
   const pwRef = useRef();
 
   console.log("this is my user in login line 20 --->", currentUser);
+  useEffect(() => {
+    setShowLogin("register");
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,29 +48,29 @@ const Login = (props) => {
           // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
           setCurrentUser(res.data);
           setShowLogin("logout");
+          navigate("/profile");
+          // // post request to get the user info
+          // axios
+          //   .post("api/collaborators/userboards", { user_id: res.data.id })
+          //   .then((response) => {
+          //     // response.data looks like this: [1,3]
 
-          // post request to get the user info
-          axios
-            .post("api/collaborators/userboards", { user_id: res.data.id })
-            .then((response) => {
-              // response.data looks like this: [1,3]
-
-              // Checks if the user has any exisiting boards. If so, do individual axios request to get board titles. If user does not, navigate to profile
-              if (response.data.length > 0) {
-                response.data.map((id) => {
-                  // id is the board id
-                  axios
-                    .post("api/collaborators/boardTitle", { board_id: id })
-                    .then((res) => {
-                      // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
-                      setIdTitle((prevState) => [...prevState, res.data]);
-                      navigate("/profile");
-                    });
-                });
-              } else {
-                navigate("/profile");
-              }
-            });
+          //     // Checks if the user has any exisiting boards. If so, do individual axios request to get board titles. If user does not, navigate to profile
+          //     if (response.data.length > 0) {
+          //       response.data.map((id) => {
+          //         // id is the board id
+          //         axios
+          //           .post("api/collaborators/boardTitle", { board_id: id })
+          //           .then((res) => {
+          //             // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
+          //             setIdTitle((prevState) => [...prevState, res.data]);
+          //             navigate("/profile");
+          //           });
+          //       });
+          //     } else {
+          //       navigate("/profile");
+          //     }
+          //   });
         }
       })
       .catch((err) => console.log(err.message));
@@ -83,12 +86,12 @@ const Login = (props) => {
         setIdTitle={setIdTitle}
       />
       <div className="login-page">
-        <Container className="login-container m-auto">
+        <Container className="login-container">
           <h1>Login</h1>
           <Form onSubmit={handleSubmit} className="w-100">
-            <Form.Group className="mb-3">
+            <Form.Group>
               <h4>
-                <Form.Label>Email: </Form.Label>
+                <Form.Label className="email-pw">Email </Form.Label>
               </h4>
               <Form.Control
                 size="lg"
@@ -100,11 +103,11 @@ const Login = (props) => {
             </Form.Group>
             <Form.Group>
               <h4>
-                <Form.Label>Password: </Form.Label>
+                <Form.Label className="email-pw">Password </Form.Label>
               </h4>
               <Form.Control size="lg" type="password" ref={pwRef} required />
             </Form.Group>
-            <Button className="w-100 mt-2" type="submit">
+            <Button variant="success" className="w-100 email-pw" type="submit">
               <h4>Login</h4>
             </Button>
           </Form>

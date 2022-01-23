@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 // import from other localhost files
 import useApplicationData from "../../hooks/forBoards";
 import Navigation from "../Navigation";
+import axios from "axios";
 
 // import from other libraries
 import { useNavigate, Link } from "react-router-dom";
@@ -12,6 +13,7 @@ import OneTitle from "./OneTitle";
 
 // import styling
 import "../../stylesheets/css/profile.css";
+import { useEffect } from "react";
 
 const Profile = (props) => {
   const {
@@ -31,6 +33,47 @@ const Profile = (props) => {
   const handleShow = () => setShow(true);
   // console.log("this is currentUser", currentUser);
   console.log("this is my idTitle", idTitle);
+  console.log("this is my showLogin", showLogin);
+
+  useEffect(() => {
+    setShowLogin("logout");
+
+    axios
+      .post("api/collaborators/userboards", { user_id: currentUser.id })
+      .then((response) => {
+        // response.data looks like this: [1,3]
+
+        // compare if the length of the board array is the same as the idTitle array.
+
+        // Checks if the user has any exisiting boards. If so, do individual axios request to get board titles. If user does not, navigate to profile
+
+        console.log(
+          "line 47 on profile, what is my response.data---->",
+          response.data
+        );
+
+        // response.data : [1,3, 4]
+        // idTitle : [{},{}]
+        console.log("what is response.data???-->", response.data);
+        console.log("what is idTitle???--->", idTitle);
+        const dbArray = response.data.slice(idTitle.length);
+        console.log("dbSArrary---->", dbArray);
+
+        if (dbArray.length > 0) {
+          console.log("do I hit line 61 in the map???");
+          dbArray.map((id) => {
+            // id is the board id
+            axios
+              .post("api/collaborators/boardTitle", { board_id: id })
+              .then((res) => {
+                // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
+                setIdTitle((prevState) => [...prevState, res.data]);
+                // navigate("/profile");
+              });
+          });
+        }
+      });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

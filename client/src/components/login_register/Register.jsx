@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 // import other components
 import Navigation from "../Navigation";
@@ -10,6 +10,7 @@ import { Container, Form, Button } from "react-bootstrap";
 
 // import stylesheet
 import "../../stylesheets/css/register.css";
+import "../../stylesheets/css/login.css";
 
 const Register = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
@@ -20,6 +21,10 @@ const Register = (props) => {
   const emailRef = useRef();
   const pwRef = useRef();
   const photoRef = useRef();
+
+  useEffect(() => {
+    setShowLogin("login");
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,31 +66,19 @@ const Register = (props) => {
           <Form onSubmit={handleSubmit} className="w-100">
             <Form.Group className="mb-3">
               <h4>
-                <Form.Label>First Name: </Form.Label>
+                <Form.Label className="form-label">First Name </Form.Label>
               </h4>
-              <Form.Control
-                size="lg"
-                type="text"
-                ref={firstNameRef}
-                required
-                placeholder="First Name"
-              />
+              <Form.Control size="lg" type="text" ref={firstNameRef} required />
             </Form.Group>
             <Form.Group className="mb-3">
               <h4>
-                <Form.Label>Last Name: </Form.Label>
+                <Form.Label className="form-label">Last Name </Form.Label>
               </h4>
-              <Form.Control
-                size="lg"
-                type="text"
-                ref={lastNameRef}
-                required
-                placeholder="Last Name"
-              />
+              <Form.Control size="lg" type="text" ref={lastNameRef} required />
             </Form.Group>
             <Form.Group className="mb-3">
               <h4>
-                <Form.Label>Email: </Form.Label>
+                <Form.Label className="form-label">Email </Form.Label>
               </h4>
               <Form.Control
                 size="lg"
@@ -97,17 +90,19 @@ const Register = (props) => {
             </Form.Group>
             <Form.Group>
               <h4>
-                <Form.Label>Password: </Form.Label>
+                <Form.Label className="form-label">Password </Form.Label>
               </h4>
               <Form.Control size="lg" type="password" ref={pwRef} required />
             </Form.Group>
             <Form.Group controlId="formFileLg" className="my-3">
               <h4>
-                <Form.Label>Upload Profile Photo: </Form.Label>
+                <Form.Label className="form-label">
+                  Upload Profile Photo{" "}
+                </Form.Label>
               </h4>
               <Form.Control ref={photoRef} type="file" size="lg" />
             </Form.Group>
-            <Button className="w-100 mt-2" type="submit">
+            <Button variant="success" className="w-100" type="submit">
               <h4>Register</h4>
             </Button>
           </Form>
