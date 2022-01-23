@@ -1,1 +1,14 @@
-.navbar{display:flex;justify-content:space-around;background:#d7cab7}.navbar .logo{display:flex;justify-content:center}.navbar .nav-right{display:flex}.navbar .nav-right Button{font-size:1.45rem}.nav-link{font:#000}
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background: #d7cab7; }
+  .navbar .logo {
+    display: flex;
+    justify-content: center; }
+  .navbar .nav-right {
+    display: flex; }
+    .navbar .nav-right Button {
+      font-size: 1.45rem; }
+
+.nav-link {
+  font: black; }
