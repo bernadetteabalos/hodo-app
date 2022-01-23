@@ -5,7 +5,6 @@ import { useState } from "react";
 // styling
 import "../../stylesheets/css/leftbar.css";
 import "../../stylesheets/css/mainstage.css";
-import { useEffect } from "react";
 
 const LeftBar = (props) => {
   // deconstructing the props
@@ -22,6 +21,7 @@ const LeftBar = (props) => {
     setTool,
     strokeColor,
     setStrokeColor,
+    checkDeselect,
   } = props;
 
   const [state, setState] = useState({ showing: false });
@@ -31,6 +31,7 @@ const LeftBar = (props) => {
   const handlePen = (e) => {
     setStrokeColor(e.target.value);
     setTool("pen");
+    checkDeselect();
   };
 
   return (
@@ -105,10 +106,6 @@ const LeftBar = (props) => {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
-            setImagePlusButton("image");
-            if (url) {
-              resetUrl();
-            }
           }}
         >
           <input

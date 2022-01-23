@@ -341,6 +341,7 @@ const MainStage = (props) => {
           setTool={setTool}
           strokeColor={strokeColor}
           setStrokeColor={setStrokeColor}
+          checkDeselect={checkDeselect}
         />
         {/* ******** STAGE ******************** */}
         <div className="stage" style={{ position: "relative" }}>
