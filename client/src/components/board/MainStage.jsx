@@ -125,7 +125,6 @@ const MainStage = (props) => {
 
     // 4. listening for when new element is generated on the stage
     conn.on(`new-stage-${board_id}`, (elements) => {
-      console.log("yess, line 99 in MainStage.jsx--->", elements);
       setElements(elements);
     });
 
@@ -153,8 +152,15 @@ const MainStage = (props) => {
 
   /**activated upon clicking of shape or add img. generates a new element and adds it to the array */
   const handleClick = (shape, fillColor, strokeColor) => {
-    // generate and add a new element to the array
-    let newElement = generateOneElement(shape, fillColor, strokeColor, url);
+    // generate and add a new property to the array
+    let newElement = generateOneElement(
+      -posRef.current.x() + (posRef.current.width() / 2),
+      -posRef.current.y() + (posRef.current.height() / 2),
+      shape,
+      fillColor,
+      strokeColor,
+      url
+    );
     setElements((prevState) => [...prevState, newElement]);
     const newElementsArray = [...elements, newElement];
     // 1. sends the new state through the socket
@@ -231,7 +237,7 @@ const MainStage = (props) => {
     // let the user know that the board is saved
     alert("Board saved! :)");
   };
-
+  
   /** removes the previous element from the array */
   const undo = (type) => {
     // removes the previous shape/image from the array
@@ -250,9 +256,7 @@ const MainStage = (props) => {
       // console.log("this is copy of lines", copyOfLines)
       const undoLines = filteredLines.slice(0, filteredLines.length - 1);
       setLines(undoLines);
-      console.log("HELLOOOOO dis", undoLines);
-      console.log("this is line", lines);
-      console.log("elements afterward:", elements);
+     
       connection.emit("line-change", undoLines);
     } else {
       // } else if (elements[elements.length -1].className !== "Line") {
@@ -268,7 +272,7 @@ const MainStage = (props) => {
   };
 
   /**deletes the selected shape */
-  console.log("currently selected item:", selectedId);
+  // console.log("currently selected item:", selectedId);
   const deleteShape = () => {
     // locate the index of the selected shape
     const targetIndex = elements.findIndex((x) => x.attrs.id === selectedId);
@@ -365,7 +369,7 @@ const MainStage = (props) => {
                   height="100%"
                   fill="none"
                   strokeWidth="2"
-                  stroke={"#000000"}
+                  stroke={"#ccd5e3"}
                 />
               </pattern>
             </defs>
@@ -385,16 +389,24 @@ const MainStage = (props) => {
             onDragMove={(e) => {
               setStagePos(e.currentTarget.position());
             }}
-          >
-            <Layer
-              onTouchStart={checkDeselect}
-              onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
             >
-              <Rect
-                width={window.innerWidth - 300}
-                height={window.innerHeight - 117}
-              />
-            </Layer>
+              {posRef.current && (
+                <Layer
+                  onTouchStart={checkDeselect}
+                  onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
+                >
+                  {posRef.current && (
+                    <Rect
+                      x={posRef.current.x || 0}
+                      y={posRef.current.y || 0}
+                      width={window.innerWidth - 300}
+                      height={window.innerHeight - 117}
+                    
+                    />
+                  )}
+                </Layer>
+              )}
+            
             <Layer ref={stageRef}>
               {elements.map((rect, i) => {
                 // console.log('this is what i need', elements)
@@ -472,8 +484,8 @@ const MainStage = (props) => {
             </Layer>
           </Stage>
         </div>
-        <div className="rightsection">
-          {/* ******** RIGHT SIDE BAR BUTTONS***************/}
+          {/* ******** RIGHT SIDE BAR ***************/}
+         
           <RightBar
             clearBoard={clearBoard}
             saveBoard={save}
@@ -482,40 +494,51 @@ const MainStage = (props) => {
             handleBoardSave={handleBoardSave}
             currentUser={currentUser}
           />
-          {/* ******** CHAT BOX***************/}
-          <div id="chatbox">
-            {chatSpeakers.map((chat) => {
-              return (
-                <OneChatMessage
-                  key={uuidV4()}
-                  chat={chat.message}
-                  chatSpeaker={chat.speaker}
-                />
-              );
-            })}
-            <div
-              style={{ float: "left", clear: "both" }}
-              ref={bottomChatRef}
-            ></div>
-          </div>
-          <form onSubmit={handleSendMessage}>
-            <input
-              className="enterText"
-              type="text"
-              placeholder="enter message here"
-              value={message}
-              onChange={(e) => {
-                setMessage(e.target.value);
-              }}
-            ></input>
-            <Button
-              className="send-btn"
-              type="submit"
-              onClick={handleSendMessage}
-            >
-              Send Message
-            </Button>
-          </form>
+          
+          
+        <div className="rightsection">
+              <div id="chatbox">
+                {chatSpeakers.map((chat) => {
+                  return (
+                    <OneChatMessage
+                      key={uuidV4()}
+                      chat={chat.message}
+                      chatSpeaker={chat.speaker}
+                    />
+                  );
+                })}
+                <div
+                  style={{ float: "left", clear: "both" }}
+                  ref={bottomChatRef}
+                ></div>
+              </div>
+              <form onSubmit={handleSendMessage}>
+                <input
+                  className="enterText"
+                  type="text"
+                  placeholder="enter message here"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                ></input>
+                {/* <textarea
+                  className="enterText"
+                  type="text"
+                  placeholder="enter message here"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                ></textarea> */}
+                <Button
+                  className="send-btn"
+                  type="submit"
+                  onClick={handleSendMessage}
+                >
+                  Send Message
+                </Button>
+              </form>
         </div>
       </div>
     </>

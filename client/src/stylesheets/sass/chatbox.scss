@@ -1,25 +1,31 @@
 #chatbox {
-  border: 3px solid black;
+  border: none;
   width: 280px;
-  height: 300px;
+  height: 50%;
   display: flex;
-  background-color: rgb(190, 231, 190);
+  background-color: white;
   overflow: auto;
   flex: 1 1 auto;
   overflow-wrap: break-word;
   flex-direction: column-reverse;
   justify-content: flex-start;
   font-size: 1.15rem;
+  padding: 0.5em;
 }
 
 .enterText {
   width: 280px;
   height: 4rem;
   resize: none;
-  border: 3px green solid;
-  font-size: 1.15rem;
+  border: 3px solid rgb(185, 188, 223);
+  font-size: 1rem;
+  display: flex;
+  align-items: flex-end;
 }
 
-.send-btn {
+button.send-btn {
   width: 280px;
+  background-color: rgb(185, 188, 223);
+  border: none;
+  
 }
