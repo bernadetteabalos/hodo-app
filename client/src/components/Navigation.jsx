@@ -38,27 +38,27 @@ const Navigation = (props) => {
           <div>
             <Link to="/">
               <img
-                src="https://media.istockphoto.com/photos/paper-plane-on-red-background-picture-id1358970693?b=1&k=20&m=1358970693&s=170667a&w=0&h=AgDbacTXHFKtBYvnkzpbL5k38J-o08iUx-6j7zPDo6Q="
-                width="40"
-                height="40"
+                src="https://i.imgur.com/293NPiy.png"
+                width="185"
+                height="100"
                 className="d-inline-block align-top"
                 alt="Hodo logo"
               />
             </Link>
           </div>
-          <div className="nav-link">
-            <Link to="/">
+          <div>
+            <Link className="nav-link" to="/">
               <h3>Home</h3>
             </Link>
           </div>
-          <div className="nav-link">
-            <Link to="/about">
+          <div>
+            <Link className="nav-link" to="/about">
               <h3>About</h3>
             </Link>
           </div>
           {showLogin === "profile-logout" && (
-            <div className="nav-link">
-              <Link to="/profile">
+            <div>
+              <Link className="nav-link" to="/profile">
                 <h3>Profile</h3>
               </Link>
             </div>
@@ -66,12 +66,14 @@ const Navigation = (props) => {
         </div>
         <div className="nav-right">
           {showLogin === "login" && (
-            <div className="nav-link">
-              <Button onClick={login}>Login</Button>
+            <div className="link-btn">
+              <Button className="login-btn" onClick={login}>
+                Login
+              </Button>
             </div>
           )}
           {showLogin === "login" && (
-            <div className="nav-link">
+            <div className="link-btn">
               <Button onClick={register}>Register</Button>
             </div>
           )}
@@ -80,7 +82,9 @@ const Navigation = (props) => {
             <Button onClick={logout}>Logout</Button>
           )}
           {showLogin === "back" && (
-            <Button onClick={back}>Back To Profile</Button>
+            <Button className="base-btn" onClick={back}>
+              Back To Profile
+            </Button>
           )}
         </div>
       </div>
