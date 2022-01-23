@@ -9,8 +9,14 @@ const RightBar = (props) => {
   const { clearBoard, undo, deleteShape, saveBoard } = props;
 
   const [warning, setWarning] = useState("");
-  const [state, setState] = useState({showing : false});
+  const [state, setState] = useState({ showing: false });
   const { showing } = state;
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    setWarning("save");
+    saveBoard();
+  };
 
   // activated when clear board or delete button are pressed; displays the modal
   const handleClose = (e) => {
@@ -35,33 +41,44 @@ const RightBar = (props) => {
   return (
     <>
       <div className="rightbar">
-        <Button 
-        className="funcButton" 
-        variant="primary" 
-        onClick={() => {setState({ showing : !showing })}}>
-        <i class="bi bi-gear"></i>
-        </Button>
-        <br></br>
-        <div 
-        className="hideThis fade-in"
-        style={{ display: showing ? "block" : "none"}}
-        >
-        <Button className="funcButton" variant="primary" onClick={saveBoard}>
-          Save
-        </Button>
-        <br></br>
-        <br></br>
         <Button
-          className="clear"
-          variant="danger"
+          className="funcButton"
+          variant="primary"
           onClick={() => {
-            setWarning("clear");
+            setState({ showing: !showing });
           }}
-          >
-          Clear
+        >
+          <i class="bi bi-gear"></i>
         </Button>
-          </div>
-        <Modal show={warning == "clear"}>
+        <br></br>
+        <div
+          className="hideThis fade-in"
+          style={{ display: showing ? "block" : "none" }}
+        >
+          <Button className="funcButton" variant="primary" onClick={handleSave}>
+            Save
+          </Button>
+          <Modal show={warning === "save"}>
+            <Modal.Header>Board Saved :)</Modal.Header>
+            <Modal.Footer>
+              <Button variant="primary" onClick={handleClose}>
+                Ok!
+              </Button>
+            </Modal.Footer>
+          </Modal>
+          <br></br>
+          <br></br>
+          <Button
+            className="clear"
+            variant="danger"
+            onClick={() => {
+              setWarning("clear");
+            }}
+          >
+            Clear
+          </Button>
+        </div>
+        <Modal show={warning === "clear"}>
           <Modal.Body>Are you sure you want to clear the board?</Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={exitClearBoard}>
@@ -73,11 +90,19 @@ const RightBar = (props) => {
           </Modal.Footer>
         </Modal>
         <br></br>
-        <Button className="undoButton" variant="warning" onClick={() => undo("shape_image")}>
+        <Button
+          className="undoButton"
+          variant="warning"
+          onClick={() => undo("shape_image")}
+        >
           Undo Shape
         </Button>
         <br></br>
-        <Button className="undoButton" variant="warning" onClick={() => undo("Line")}>
+        <Button
+          className="undoButton"
+          variant="warning"
+          onClick={() => undo("Line")}
+        >
           Undo Line
         </Button>
         <br></br>
@@ -90,7 +115,7 @@ const RightBar = (props) => {
         >
           <i class="bi bi-trash"></i>
         </Button>
-        <Modal show={warning == "delete-shape"}>
+        <Modal show={warning === "delete-shape"}>
           <Modal.Body>Are you sure you want to delete the shape?</Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={exitDeleteShape}>
