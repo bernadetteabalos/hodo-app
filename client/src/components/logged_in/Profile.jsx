@@ -37,6 +37,9 @@ const Profile = (props) => {
     // to display the 'logout' button on the nav bar (pass showLogin down to Navigation Component)
     setShowLogin("logout");
 
+    // clear the board first (this is to update new title on board if user A makes change and user B goes back to profile page, the new title will be reflected)
+    setIdTitle([]);
+
     // axios request to get the board id and titles associated with the specific user
     // 1. axios request to collaborators table to get the board ids associated with the user
     axios
@@ -44,15 +47,9 @@ const Profile = (props) => {
       .then((response) => {
         // response.data looks like this: [1,3] <-- this is the list of the board id associated with the user
 
-        // Only do individual axios request for the boards that are not already in the idTitle array (for inital login as well as when a user is added as a collaborator to another board)
-        // For example:
-        // response.data = [1,3, 4]
-        // idTitle = [{id: 1, title: 'hello'},{id: 3, title: 'world'}]
-        // dbArray = [4]
-        const dbArray = response.data.slice(idTitle.length);
-
-        if (dbArray.length > 0) {
-          dbArray.map((id) => {
+        // will only send axios request for title if user has boards
+        if (response.data.length > 0) {
+          response.data.map((id) => {
             // id is the board id
             axios
               .post("api/collaborators/boardTitle", { board_id: id })
@@ -63,6 +60,33 @@ const Profile = (props) => {
           });
         }
       });
+
+    // // axios request to get the board id and titles associated with the specific user
+    // // 1. axios request to collaborators table to get the board ids associated with the user
+    // axios
+    //   .post("api/collaborators/userboards", { user_id: currentUser.id })
+    //   .then((response) => {
+    //     // response.data looks like this: [1,3] <-- this is the list of the board id associated with the user
+
+    //     // Only do individual axios request for the boards that are not already in the idTitle array (for inital login as well as when a user is added as a collaborator to another board)
+    //     // For example:
+    //     // response.data = [1,3, 4]
+    //     // idTitle = [{id: 1, title: 'hello'},{id: 3, title: 'world'}]
+    //     // dbArray = [4]
+    //     const dbArray = response.data.slice(idTitle.length);
+
+    //     if (dbArray.length > 0) {
+    //       dbArray.map((id) => {
+    //         // id is the board id
+    //         axios
+    //           .post("api/collaborators/boardTitle", { board_id: id })
+    //           .then((res) => {
+    //             // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
+    //             setIdTitle((prevState) => [...prevState, res.data]);
+    //           });
+    //       });
+    //     }
+    //   });
   }, []);
 
   // activated when "create new board" is clicked
