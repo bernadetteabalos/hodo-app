@@ -105,6 +105,9 @@ const LeftBar = (props) => {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
+            if (url) {
+              resetUrl();
+            }
           }}
         >
           <input
