@@ -70,7 +70,7 @@ const TextLayer = (props) => {
         onDblClick={onDoubleClick}
         {...rest}
       />
-      <Html>
+      <Html transform={true} transformFunc={(attrs) => ({ ...attrs, x: shapeRef.current.getAbsolutePosition().x, y: shapeRef.current.getAbsolutePosition().y }) }>
         <input
           draggable={false}
           id="textEdit"
@@ -79,7 +79,10 @@ const TextLayer = (props) => {
           value={currentText}
           onChange={onInputChange}
           onBlur={onBlur}
-          style={{ display: !isEditing && "none" }}
+          style={{
+            display: !isEditing && "none",
+            transform: 'translateY(-100%)',
+          }}
         />
       </Html>
     </>

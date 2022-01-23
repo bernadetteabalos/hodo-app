@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 
 // styling
-import "../../stylesheets/css/leftbar.css";
+// import "../../stylesheets/css/leftbar.css";
 import "../../stylesheets/css/mainstage.css";
 
 const LeftBar = (props) => {
@@ -23,6 +23,8 @@ const LeftBar = (props) => {
 
   const [state, setState] = useState({ showing: false });
   const { showing } = state;
+  const isPenActivated = tool === 'pen';
+  const isEraserActivated = tool === 'eraser';
 
   return (
     <div className="leftsidebar">
@@ -34,7 +36,7 @@ const LeftBar = (props) => {
             value={fillColor}
             onChange={(e) => setFillColor(e.target.value)}
           />
-          <i className="bi bi-paint-bucket"></i>
+          <i className="bi bi-paint-bucket shapes shapesTwo"></i>
         </div>
         <div className="icons">
           <input
@@ -42,7 +44,7 @@ const LeftBar = (props) => {
             value={strokeColor}
             onChange={(e) => setStrokeColor(e.target.value)}
           />
-          <i class="bi bi-pen-fill"></i>
+          <i class="bi bi-pen-fill shapes shapesTwo"></i>
         </div>
 
         <Button
@@ -114,8 +116,12 @@ const LeftBar = (props) => {
           className="button-icons"
           variant="outline-secondary"
           onClick={() => {
-            setState({ showing: !showing });
-            resetUrl();
+            setState({ showing : !showing })
+            if (showing) {
+              resetUrl()
+            } else {
+              return
+            }
           }}
         >
           <div className="icons">
@@ -129,18 +135,54 @@ const LeftBar = (props) => {
             ></i>
           </div>
         </Button>
-      </div>
       {/* *****PEN TOOLS DROP DOWN***** */}
-      <select
-        value={tool}
-        onChange={(e) => {
-          setTool(e.target.value);
-        }}
-      >
-        <option value="select">Select</option>
-        <option value="pen">Pen</option>
-        <option value="eraser">Eraser</option>
-      </select>
+      <Button
+            className="button-icons"
+            variant="outline-secondary"
+            value={tool}
+            onClick={() => {
+              setTool(isPenActivated ? 'select' : 'pen');
+            }}
+          >
+            <div className="icons">
+            <i
+            //when visible, we're in drawing mode
+              style={{ display: isPenActivated ? "none" : "flex" }}
+              className="bi bi-brush shapes"
+            ></i>
+            </div>
+            <div className="icons">
+            <i
+            //when !visible, we're in select mode
+              style={{ display: isPenActivated ? "flex" : "none" }}
+              className="bi bi-brush-fill shapes"
+            ></i>
+            </div>
+      </Button>
+      <Button
+            className="button-icons"
+            variant="outline-secondary"
+            value={tool}
+            onClick={() => {
+              setTool(isEraserActivated ? 'select' : 'eraser');
+            }}
+          >
+            <div className="icons">
+            <i
+              //when erase, we're in eraser mode
+              style={{ display: isEraserActivated ? "none" : "flex" }}
+              className="bi bi-eraser shapes"
+            ></i>
+            </div>
+            <div className="icons">
+            <i
+            // when !erase, we're in select mode
+              style={{ display: isEraserActivated ? "flex" : "none" }}
+              className="bi bi-eraser-fill shapes"
+            ></i>
+            </div>
+      </Button>
+        </div>
     </div>
   );
 };
