@@ -172,10 +172,12 @@ const LeftBar = (props) => {
         </Button> */}
       </div>
       {/* *****PEN TOOLS DROP DOWN***** */}
+      {/* PEN */}
       <div className="icons">
         <input type="color" value={strokeColor} onChange={handlePen} />
         <i className="bi bi-pen-fill"></i>
       </div>
+      {/* *****PEN TOOLS DROP DOWN***** */}
       <select
         value={tool}
         onChange={(e) => {
