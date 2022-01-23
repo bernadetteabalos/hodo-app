@@ -113,6 +113,17 @@ const Navigation = (props) => {
             </Button>
           )}
           <Modal show={showBackToProfile}>
+            <Modal.Header id="exit-header">
+              <i
+                class="bi bi-x exit-btn"
+                onClick={() => {
+                  setShowBackToProfile(false);
+                }}
+              ></i>
+              {/* <Modal.Title>
+                Did you want to save before going back to profile?
+              </Modal.Title> */}
+            </Modal.Header>
             <Modal.Body>
               Did you want to save before going back to profile?
             </Modal.Body>
