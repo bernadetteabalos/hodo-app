@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 // import helpers from local files
 import useApplicationData from "../../hooks/forBoards";
+import logo from "../../images/hodoapp (2).png";
 
 //import syling
 import "../../stylesheets/css/header.css";
@@ -106,7 +107,15 @@ const Header = (props) => {
 
   return (
     <div className="header-bar">
-      <div className="space"></div>
+      <div className="space">
+        <img
+          src={logo}
+          width="120"
+          height="100"
+          className="d-inline-block align-top img-logo"
+          alt="Hodo logo"
+        />
+      </div>
       <div className="title-name">
         <h2 id="boardTitle">{title}</h2>
         <Button className="headerButton" onClick={handleShowTitle}>
