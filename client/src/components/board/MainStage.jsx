@@ -378,10 +378,9 @@ const MainStage = (props) => {
               onTouchStart={checkDeselect}
               onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
             >
-              <Rect 
+              <Rect
                 width={window.innerWidth - 300}
                 height={window.innerHeight - 117}
-
               />
             </Layer>
             <Layer ref={stageRef}>
@@ -469,38 +468,35 @@ const MainStage = (props) => {
             undo={undo}
             deleteShape={deleteShape}
             handleBoardSave={handleBoardSave}
-            connection={connection}
-            setConnection={setConnection}
-            END_POINT={END_POINT}
             currentUser={currentUser}
           />
-          
-              <div id="chatbox">
-                {chatSpeakers.map((chat) => {
-                  return (
-                    <OneChatMessage
-                      key={uuidV4()}
-                      chat={chat.message}
-                      chatSpeaker={chat.speaker}
-                    />
-                  );
-                })}
-                <div
-                  style={{ float: "left", clear: "both" }}
-                  ref={bottomChatRef}
-                ></div>
-              </div>
-              <form onSubmit={handleSendMessage}>
-                <input
-                  className="enterText"
-                  type="text"
-                  placeholder="enter message here"
-                  value={message}
-                  onChange={(e) => {
-                    setMessage(e.target.value);
-                  }}
-                ></input>
-                {/* <textarea
+
+          <div id="chatbox">
+            {chatSpeakers.map((chat) => {
+              return (
+                <OneChatMessage
+                  key={uuidV4()}
+                  chat={chat.message}
+                  chatSpeaker={chat.speaker}
+                />
+              );
+            })}
+            <div
+              style={{ float: "left", clear: "both" }}
+              ref={bottomChatRef}
+            ></div>
+          </div>
+          <form onSubmit={handleSendMessage}>
+            <input
+              className="enterText"
+              type="text"
+              placeholder="enter message here"
+              value={message}
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+            ></input>
+            {/* <textarea
                   className="enterText"
                   type="text"
                   placeholder="enter message here"
@@ -509,16 +505,16 @@ const MainStage = (props) => {
                     setMessage(e.target.value);
                   }}
                 ></textarea> */}
-                <Button
-                  className="send-btn"
-                  type="submit"
-                  onClick={handleSendMessage}
-                >
-                  Send Message
-                </Button>
-              </form>
-            </div>
-          </div>
+            <Button
+              className="send-btn"
+              type="submit"
+              onClick={handleSendMessage}
+            >
+              Send Message
+            </Button>
+          </form>
+        </div>
+      </div>
     </>
   );
 };
