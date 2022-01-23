@@ -31,36 +31,32 @@ const END_POINT = "http://localhost:8001";
 const MainStage = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
     props;
-  // console.log("line 28 mainstage-->currentUser", current)
+  // for the socket connection
+  const [connection, setConnection] = useState(undefined);
+  // colours
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
+  // for if SHAPE is selected
   const [selectedId, selectShape] = useState(null);
-  const stageRef = useRef(null);
-  const posRef = useRef(null);
-  const gridRef = useRef(null);
-
-  const { elements, board_id, setElements, saveBoard } = useApplicationData();
-
-  // console.log("line 42 mainstage ---> what is showLogin?", showLogin);
-
-  useEffect(() => {
-    setShowLogin("back");
-  }, []);
-
-  // console.log("main stage line 33, board_id", board_id);
-  //CHAT*********************
+  // for IMAGES
+  const [url, setURL] = useState("");
+  // for CHAT
   const [message, setMessage] = useState("");
   const [chatSpeakers, setChatSpeakers] = useState([]);
-  // const [chats, setChats] = useState([]);
-  // const [chatSpeaker, setChatSpeaker] = useState(currentUser["first_name"]);
+  // for PENS
+  const [tool, setTool] = useState("select");
+  const [lines, setLines] = useState([]);
+  // references
+  const isDrawing = useRef(false);
+  const stageRef = useRef(null);
+  const posRef = useRef(null);
+
+  const { elements, board_id, setElements, saveBoard } = useApplicationData();
 
   const onKeyPress = (event) => {
     undo();
   };
   useKeyPress(["z"], onKeyPress);
-
-  // IMAGES
-  const [url, setURL] = useState("");
 
   //***STAGE GRID ****//
   const WIDTH = 40;
@@ -106,13 +102,12 @@ const MainStage = (props) => {
   //   }
   // }
 
-  // PEN TOOLS
-  const [tool, setTool] = useState("select");
-  const [lines, setLines] = useState([]);
-  const isDrawing = useRef(false);
+  // upon render, setShowLogin to back to display "back to profile" button on nav bar (showLogin is passed down as prop)
+  useEffect(() => {
+    setShowLogin("back");
+  }, []);
 
   // ************** SOCKET ************************
-  const [connection, setConnection] = useState(undefined);
   useEffect(() => {
     const conn = socketIOClient(END_POINT);
     // what is being received from SERVER
@@ -120,6 +115,12 @@ const MainStage = (props) => {
       console.log("something came back");
       console.log(msg.string);
     });
+
+    /*
+    board-shapes-images: 1, 2, 3, 4
+    board-lines: i, ii, iii, iv
+    chat-messages: a, b, c, d
+    */
 
     // 4. listening for when new element is generated on the stage
     conn.on(`new-stage-${board_id}`, (elements) => {
@@ -143,9 +144,9 @@ const MainStage = (props) => {
   // deselects the images and updates others' boards
   const checkDeselect = (e) => {
     selectShape(null);
-    // 1. sends the updated elements and lines arrays through the socket upon deselect to update others' boards'
-    // I also want to pass down my board_id
+    // 1. sends the updated elements arrays through the socket upon deselect to update others' boards'
     connection.emit("stage-change", elements, board_id);
+    // i. sends the updated lines array to the server via socket
     connection.emit("line-change", lines, board_id);
   };
 
@@ -156,7 +157,7 @@ const MainStage = (props) => {
     setElements((prevState) => [...prevState, newElement]);
     const newState = [...elements, newElement];
     // sends the new state through the socket
-    connection.emit("stage-change", elements, board_id);
+    connection.emit("stage-change", newState, board_id);
     // reset tool to 'select' to prevent 'pen' mode when transforming the shapes
     setTool("select");
   };
