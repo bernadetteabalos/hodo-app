@@ -42,7 +42,7 @@ const LeftBar = (props) => {
             value={strokeColor}
             onChange={(e) => setStrokeColor(e.target.value)}
           />
-          <i class="bi bi-pen-fill"></i>
+          <i className="bi bi-pen-fill"></i>
         </div>
 
         <Button
@@ -51,7 +51,7 @@ const LeftBar = (props) => {
           onClick={() => handleClick("Rect", fillColor, strokeColor)}
         >
           <div className="icons">
-            <i class="bi bi-phone-landscape shapes"></i>
+            <i className="bi bi-phone-landscape shapes"></i>
           </div>
         </Button>
 
@@ -70,7 +70,7 @@ const LeftBar = (props) => {
           onClick={() => handleClick("Circle", fillColor, strokeColor)}
         >
           <div className="icons">
-            <i class="bi bi-circle shapes"></i>
+            <i className="bi bi-circle shapes"></i>
           </div>
         </Button>
         <Button
@@ -79,7 +79,7 @@ const LeftBar = (props) => {
           onClick={() => handleClick("Star", fillColor, strokeColor)}
         >
           <div className="icons">
-            <i class="bi bi-star shapes"></i>
+            <i className="bi bi-star shapes"></i>
           </div>
         </Button>
 
@@ -90,7 +90,7 @@ const LeftBar = (props) => {
             onClick={() => handleClick("Text", fillColor, strokeColor)}
           >
             <div className="icons">
-              <i class="bi bi-fonts shapes"></i>
+              <i className="bi bi-fonts shapes"></i>
             </div>
           </Button>
         </div>
@@ -121,11 +121,11 @@ const LeftBar = (props) => {
           <div className="icons">
             <i
               style={{ display: showing ? "none" : "flex" }}
-              class="bi bi-image shapes"
+              className="bi bi-image shapes"
             ></i>
             <i
               style={{ display: showing ? "flex" : "none" }}
-              class="bi bi-plus-square shapes"
+              className="bi bi-plus-square shapes"
             ></i>
           </div>
         </Button>
