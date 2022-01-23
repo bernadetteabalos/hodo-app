@@ -13,12 +13,6 @@ import OneTitle from "./OneTitle";
 // import styling
 import "../../stylesheets/css/profile.css";
 
-//Import font style//
-<style>
-  @import
-  url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
-</style>;
-
 const Profile = (props) => {
   const {
     currentUser,
@@ -73,7 +67,7 @@ const Profile = (props) => {
               <img src={currentUser.profile_photo} alt="profile-photo" />
             </div>
             <div className="profile-name">
-              <h4>{currentUser.first_name}</h4>
+              <h4 className="nameEmphasis">{currentUser.first_name}</h4>
             </div>
             <div>
               <em>

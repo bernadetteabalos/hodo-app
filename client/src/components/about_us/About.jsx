@@ -46,7 +46,7 @@ const About = (props) => {
                   <h1>Bernadette Abalos</h1>
                 </div>
                 <div className="one-back">
-                  <h2>Full-Stack Web Developer</h2>
+                  <h2 className="occupation">Full-Stack Web Developer</h2>
                   <br></br>
                   <p>
                     Former life sciences student who enjoys art and programming.
@@ -67,7 +67,7 @@ const About = (props) => {
                   <h1>Stephanie Li</h1>
                 </div>
                 <div className="two-back">
-                  <h2>Full-Stack Web Developer</h2>
+                  <h2 className="occupation">Full-Stack Web Developer</h2>
                   <br></br>
                   <p>
                     &nbsp;Former pharmacist who discovered a love for
@@ -89,7 +89,7 @@ const About = (props) => {
                   <h1>Blesilda Mateo</h1>
                 </div>
                 <div className="three-back">
-                  <h2>Full-Stack Web Developer</h2>
+                  <h2 className="occupation">Full-Stack Web Developer</h2>
                   <br></br>
                   <p>
                     Former aviation student who meandered their way into the

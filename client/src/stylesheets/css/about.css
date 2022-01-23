@@ -45,6 +45,10 @@
     1px 1px 0 #000000;
 }
 
+.occupation {
+  color: black;
+  font-weight: bold;
+}
 .head {
   color: rgb(255, 255, 255);
   text-shadow: -0.5px -0.5px #000000, 1px -1px 0 #000000, -1px 1px 0 #000000,

@@ -25,7 +25,12 @@
 .profile-page .profile-container .right-profile .itineraries-container {
   margin-top: 5rem;
   border: 5px solid #000;
-  background-color: rgb(250, 241, 243);
+  background-color: rgb(183, 195, 244);
   height: 50vh;
   font-family: "Poppins", sans-serif;
+}
+
+.nameEmphasis {
+  color: black;
+  font-weight: bolder;
 }
