@@ -1,13 +1,32 @@
+@import "./variables.scss";
+
 .header-bar {
-  background-color: pink;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  .space {
+    width: 100%;
+    // background-color: blue;
+  }
   .title-name {
-    margin-left: 2rem;
-    margin-right: 2rem;
+    width: 100%;
+    // background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
-.add-collaborators {
+.collab-profile {
   display: flex;
+  justify-content: flex-end;
+  padding-right: 5em;
+  width: 100%;
+  // background-color: red;
+  .add-collaborators {
+    margin-right: 3em;
+  }
+  .back-to-profile {
+    background-color: $btn;
+    border: none;
+  }
 }

@@ -106,120 +106,118 @@ const Header = (props) => {
 
   return (
     <div className="header-bar">
-      <div></div>
+      <div className="space"></div>
       <div className="title-name">
         <h2 id="boardTitle">{title}</h2>
         <Button className="headerButton" onClick={handleShowTitle}>
           <i class="bi bi-pencil-square"></i>
         </Button>
+        <Modal
+          show={show === "title"}
+          onHide={() => {
+            setShow(false);
+          }}
+          backdrop="static"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Title</Modal.Title>
+          </Modal.Header>
+          <Form onSubmit={handleEditSave}>
+            <Modal.Body>
+              <Form.Control
+                size="lg"
+                ref={newTitleRef}
+                type="text"
+                placeholder="Enter new title"
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={handleEditSave}>
+                Save
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal>
       </div>
-      <Modal
-        show={show === "title"}
-        onHide={() => {
-          setShow(false);
-        }}
-        backdrop="static"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Title</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleEditSave}>
-          <Modal.Body>
-            <Form.Control
-              size="lg"
-              ref={newTitleRef}
-              type="text"
-              placeholder="Enter new title"
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleEditSave}>
-              Save
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-      <div className="add-collaborators">
-        <Button className="headerButtonTwo" onClick={handleShowCollab}>
-          Add a Collaborator
+      <div className="collab-profile">
+        <div className="add-collaborators">
+          <Button className="headerButtonTwo" onClick={handleShowCollab}>
+            Add a Collaborator
+          </Button>
+        </div>
+        <Modal
+          show={show === "collab"}
+          onHide={() => {
+            setShow(false);
+          }}
+          backdrop="static"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Add Collaborator By Id</Modal.Title>
+          </Modal.Header>
+          <Form onSubmit={handleCollaboratorSave}>
+            <Modal.Body>
+              <Form.Control
+                size="lg"
+                ref={newCollaboratorRef}
+                type="number"
+                placeholder="Enter Collaborator Id"
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={handleCollaboratorSave}>
+                Save
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal>
+        {/* &&&&&&&&& */}
+
+        <Button className="back-to-profile" onClick={() => setShow("profile")}>
+          Back To Profile
         </Button>
-      </div>
-      <Modal
-        show={show === "collab"}
-        onHide={() => {
-          setShow(false);
-        }}
-        backdrop="static"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Add Collaborator By Id</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleCollaboratorSave}>
+
+        <Modal show={show === "profile"}>
+          <Modal.Header id="exit-header">
+            <i
+              class="bi bi-x exit-btn"
+              onClick={() => {
+                setShow("");
+              }}
+            ></i>
+          </Modal.Header>
           <Modal.Body>
-            <Form.Control
-              size="lg"
-              ref={newCollaboratorRef}
-              type="number"
-              placeholder="Enter Collaborator Id"
-            />
+            <h4>Save before going back to profile?</h4>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
+            <Button
+              size="lg"
+              variant="primary"
+              onClick={() => {
+                saveBoard();
+                navigate("/profile");
+              }}
+            >
+              Yes, save board
             </Button>
-            <Button variant="primary" onClick={handleCollaboratorSave}>
-              Save
+            <Button
+              size="lg"
+              variant="secondary"
+              onClick={() => {
+                navigate("/profile");
+              }}
+            >
+              No
             </Button>
           </Modal.Footer>
-        </Form>
-      </Modal>
-      {/* &&&&&&&&& */}
-
-      <Button
-        variant="success"
-        className="base-btn"
-        onClick={() => setShow("profile")}
-      >
-        Back To Profile
-      </Button>
-
-      <Modal show={show === "profile"}>
-        <Modal.Header id="exit-header">
-          <i
-            class="bi bi-x exit-btn"
-            onClick={() => {
-              setShow("");
-            }}
-          ></i>
-        </Modal.Header>
-        <Modal.Body>
-          <h4>Save before going back to profile?</h4>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            size="lg"
-            variant="primary"
-            onClick={() => {
-              saveBoard();
-              navigate("/profile");
-            }}
-          >
-            Yes, save board
-          </Button>
-          <Button
-            size="lg"
-            variant="secondary"
-            onClick={() => {
-              navigate("/profile");
-            }}
-          >
-            No
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        </Modal>
+      </div>
     </div>
   );
 };
