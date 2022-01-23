@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
+import logo from "../images/hodoapp (2).png"
 //styling
 import "../stylesheets/css/navigation.css";
 
@@ -41,20 +42,16 @@ const Navigation = (props) => {
           <div>
             <Link to="/">
               <img
-                src="https://i.imgur.com/293NPiy.png"
-                width="185"
+                src={logo}
+                width="120"
                 height="100"
-                className="d-inline-block align-top"
+                className="d-inline-block align-top img-logo"
                 alt="Hodo logo"
               />
             </Link>
           </div>
           <div className="home-profile-about">
-            <div>
-              <Link className="nav-link" to="/">
-                <h3>Home</h3>
-              </Link>
-            </div>
+            
             <div>
               <Link className="nav-link" to="/about">
                 <h3>About</h3>

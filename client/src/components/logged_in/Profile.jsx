@@ -130,7 +130,7 @@ const Profile = (props) => {
           </div>
           <div className="right-profile">
             <div className="itineraries-container">
-              <h1>My Itineraries</h1>
+              <h1>My Boards</h1>
               {/* Displays every board and when the name is clicked, redirect to respective board (calls the OneTitle Component) */}
               {idTitle.map((titleObj) => {
                 return <OneTitle key={titleObj.id} titleObj={titleObj} />;
