@@ -12,7 +12,7 @@ const Navigation = (props) => {
   const { setCurrentUser, showLogin, setShowLogin, setIdTitle, saveBoard } =
     props;
 
-  const [showBackToProfile, setShowBackToProfile] = useState(false);
+  // const [showBackToProfile, setShowBackToProfile] = useState(false);
 
   const login = (e) => {
     e.preventDefault();
@@ -103,7 +103,7 @@ const Navigation = (props) => {
               Logout
             </Button>
           )}
-          {showLogin === "back" && (
+          {/* {showLogin === "back" && (
             <Button
               variant="success"
               className="base-btn"
@@ -111,8 +111,8 @@ const Navigation = (props) => {
             >
               Back To Profile
             </Button>
-          )}
-          <Modal show={showBackToProfile}>
+          )} */}
+          {/* <Modal show={showBackToProfile}>
             <Modal.Header id="exit-header">
               <i
                 class="bi bi-x exit-btn"
@@ -120,15 +120,13 @@ const Navigation = (props) => {
                   setShowBackToProfile(false);
                 }}
               ></i>
-              {/* <Modal.Title>
-                Did you want to save before going back to profile?
-              </Modal.Title> */}
             </Modal.Header>
             <Modal.Body>
-              Did you want to save before going back to profile?
+              <h4>Save before going back to profile?</h4>
             </Modal.Body>
             <Modal.Footer>
               <Button
+                size="lg"
                 variant="primary"
                 onClick={() => {
                   saveBoard();
@@ -138,6 +136,7 @@ const Navigation = (props) => {
                 Yes, save board
               </Button>
               <Button
+                size="lg"
                 variant="secondary"
                 onClick={() => {
                   navigate("/profile");
@@ -146,7 +145,7 @@ const Navigation = (props) => {
                 No
               </Button>
             </Modal.Footer>
-          </Modal>
+          </Modal> */}
         </div>
       </div>
     </>

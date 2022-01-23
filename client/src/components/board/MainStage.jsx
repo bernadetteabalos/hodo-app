@@ -320,16 +320,9 @@ const MainStage = (props) => {
   // ******** RETURN ********************
   return (
     <>
-      <Navigation
-        setCurrentUser={setCurrentUser}
-        showLogin={showLogin}
-        setShowLogin={setShowLogin}
-        setIdTitle={setIdTitle}
-        saveBoard={save}
-      />
       {/* ***** Header with the title ******/}
       <div>
-        <Header currentUser={currentUser} />
+        <Header currentUser={currentUser} saveBoard={save} />
       </div>
       {/* ******** LEFT SIDE BAR ******************** */}
       <div className="creativity">

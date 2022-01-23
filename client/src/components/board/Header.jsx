@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 // import from other libraries
 import axios from "axios";
 import { Button, Modal, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 // import helpers from local files
 import useApplicationData from "../../hooks/forBoards";
@@ -10,9 +11,10 @@ import useApplicationData from "../../hooks/forBoards";
 import "../../stylesheets/css/header.css";
 
 const Header = (props) => {
-  const { currentUser } = props;
+  const navigate = useNavigate();
+  const { currentUser, saveBoard } = props;
   const { setTitle, title, board_id } = useApplicationData();
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState("");
   const newTitleRef = useRef();
   const newCollaboratorRef = useRef();
 
@@ -20,7 +22,12 @@ const Header = (props) => {
   const handleShowCollab = () => setShow("collab");
   const handleClose = (e) => {
     e.preventDefault();
-    setShow(false);
+    setShow("");
+  };
+
+  const back = (e) => {
+    e.preventDefault();
+    navigate("/profile");
   };
 
   // Activated when user clicks the edit title button
@@ -168,6 +175,50 @@ const Header = (props) => {
             </Button>
           </Modal.Footer>
         </Form>
+      </Modal>
+      {/* &&&&&&&&& */}
+
+      <Button
+        variant="success"
+        className="base-btn"
+        onClick={() => setShow("profile")}
+      >
+        Back To Profile
+      </Button>
+
+      <Modal show={show === "profile"}>
+        <Modal.Header id="exit-header">
+          <i
+            class="bi bi-x exit-btn"
+            onClick={() => {
+              setShow("");
+            }}
+          ></i>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>Save before going back to profile?</h4>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            size="lg"
+            variant="primary"
+            onClick={() => {
+              saveBoard();
+              navigate("/profile");
+            }}
+          >
+            Yes, save board
+          </Button>
+          <Button
+            size="lg"
+            variant="secondary"
+            onClick={() => {
+              navigate("/profile");
+            }}
+          >
+            No
+          </Button>
+        </Modal.Footer>
       </Modal>
     </div>
   );

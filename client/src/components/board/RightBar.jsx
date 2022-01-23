@@ -59,9 +59,11 @@ const RightBar = (props) => {
             Save
           </Button>
           <Modal show={warning === "save"}>
-            <Modal.Header>Board Saved :)</Modal.Header>
+            <Modal.Body>
+              <h4>Board Saved :)</h4>
+            </Modal.Body>
             <Modal.Footer>
-              <Button variant="primary" onClick={handleClose}>
+              <Button size="lg" variant="primary" onClick={handleClose}>
                 Ok!
               </Button>
             </Modal.Footer>
@@ -70,6 +72,7 @@ const RightBar = (props) => {
           <br></br>
           <Button
             className="clear"
+            size="lg"
             variant="danger"
             onClick={() => {
               setWarning("clear");
@@ -79,7 +82,9 @@ const RightBar = (props) => {
           </Button>
         </div>
         <Modal show={warning === "clear"}>
-          <Modal.Body>Are you sure you want to clear the board?</Modal.Body>
+          <Modal.Body>
+            <h4>Are you sure you want to clear the board?</h4>
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={exitClearBoard}>
               Yes
@@ -116,12 +121,14 @@ const RightBar = (props) => {
           <i class="bi bi-trash"></i>
         </Button>
         <Modal show={warning === "delete-shape"}>
-          <Modal.Body>Are you sure you want to delete the shape?</Modal.Body>
+          <Modal.Body>
+            <h4>Are you sure you want to delete the shape?</h4>
+          </Modal.Body>
           <Modal.Footer>
-            <Button variant="danger" onClick={exitDeleteShape}>
+            <Button size="lg" variant="danger" onClick={exitDeleteShape}>
               Yes
             </Button>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button size="lg" variant="secondary" onClick={handleClose}>
               No, don't delete
             </Button>
           </Modal.Footer>
