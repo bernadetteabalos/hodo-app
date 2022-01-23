@@ -97,17 +97,17 @@
 .select-a-color {
   display: grid;
   justify-content: center;
-  grid-gap: 1em;
+  grid-gap: 0.5em;
 
 }
 
 input[type="color"] {
   -webkit-appearance: none;
   border: none;
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(255, 255, 255, 0);
   &:hover {
     filter: brightness(1.2);
   }
@@ -123,8 +123,8 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .button-icons.btn-outline-secondary {
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   overflow: hidden;
   &:hover {
     filter: brightness(1.2);
@@ -193,7 +193,7 @@ button.funcButton.active {
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: white;
+  color: black;
 }
 
 button.headerButton {

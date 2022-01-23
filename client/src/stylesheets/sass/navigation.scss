@@ -3,19 +3,33 @@
   display: flex;
   justify-content: space-around;
   background: $nav-background;
+  h3:hover {
+    color: green;
+  }
   .logo {
     display: flex;
     justify-content: center;
+    margin-left: 3em;
+  }
+
+  .home-profile-about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .nav-link {
+      color: black;
+      text-decoration: none;
+    }
   }
   .nav-right {
     display: flex;
     Button {
+      width: 80%;
       font-size: 1.45rem;
+      color: white;
+      background-color: $btn;
+      border: none;
+      margin-right: 2em;
     }
   }
-}
-
-.nav-link {
-  font: black;
-  // background-color: pink;
 }

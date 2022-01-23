@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Modal } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
+// import from other libraries
+import { Modal, Button } from "react-bootstrap";
 
 // import styling
 import "../../stylesheets/css/mainstage.css";
@@ -12,17 +12,20 @@ const RightBar = (props) => {
   const [state, setState] = useState({showing : false});
   const { showing } = state;
 
+  // activated when clear board or delete button are pressed; displays the modal
   const handleClose = (e) => {
     e.preventDefault();
     setWarning(false);
   };
 
+  // activated when user confirms "yes" to clearing the board. Closes the modal and calls clearBoard function
   const exitClearBoard = (e) => {
     e.preventDefault();
     setWarning(false);
     clearBoard();
   };
 
+  // activated when user confirms "yes" to deleting a shape/img. Closes the modal and calls deleteShape function
   const exitDeleteShape = (e) => {
     e.preventDefault();
     setWarning(false);

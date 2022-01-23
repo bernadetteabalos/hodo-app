@@ -1,9 +1,24 @@
 @import "./variables.scss";
 
 .login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: auto;
   background-color: $base-background;
   .login-container {
     height: 100vh;
+    margin-top: 3%;
+  }
+  .email-pw {
+    margin-top: 3%;
+    margin-bottom: 0%;
+  }
+  Button {
+    background-color: $btn;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
