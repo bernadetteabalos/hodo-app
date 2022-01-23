@@ -12,14 +12,7 @@ import Navigation from "../Navigation";
 import "../../stylesheets/css/login.css";
 
 const Login = (props) => {
-  const {
-    currentUser,
-    setCurrentUser,
-    showLogin,
-    setShowLogin,
-    idTitle,
-    setIdTitle,
-  } = props;
+  const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();

@@ -6,11 +6,10 @@ import Home from "./components/home/Home";
 import Profile from "./components/logged_in/Profile";
 import Login from "./components/login_register/Login";
 import Register from "./components/login_register/Register";
-import Navigation from "./components/Navigation";
 import About from "./components/about_us/About";
 import MainStage from "./components/board/MainStage";
 
-// import styles
+// import styling
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -42,11 +41,9 @@ function App() {
             path="/login"
             element={
               <Login
-                currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
                 showLogin={showLogin}
                 setShowLogin={setShowLogin}
-                idTitle={idTitle}
                 setIdTitle={setIdTitle}
               />
             }
@@ -55,7 +52,6 @@ function App() {
             path="/register"
             element={
               <Register
-                currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
                 showLogin={showLogin}
                 setShowLogin={setShowLogin}

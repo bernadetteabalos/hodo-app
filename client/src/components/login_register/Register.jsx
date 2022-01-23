@@ -13,8 +13,7 @@ import "../../stylesheets/css/register.css";
 import "../../stylesheets/css/login.css";
 
 const Register = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
-    props;
+  const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
   const navigate = useNavigate();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
