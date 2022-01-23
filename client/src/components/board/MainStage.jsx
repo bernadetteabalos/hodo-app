@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import useApplicationData from "../../hooks/forBoards";
+import useKeyPress from "../../hooks/keyboardShortcuts";
+
 // import from others libraries
 import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
 import { Rect } from "react-konva";
-import { Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { v4 as uuidV4 } from "uuid";
 
 // import Other Components
@@ -39,12 +41,23 @@ const MainStage = (props) => {
 
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
 
-  console.log("main stage line 33, board_id", board_id);
+  // console.log("line 42 mainstage ---> what is showLogin?", showLogin);
+
+  useEffect(() => {
+    setShowLogin("back");
+  }, []);
+
+  // console.log("main stage line 33, board_id", board_id);
   //CHAT*********************
   const [message, setMessage] = useState("");
   const [chatSpeakers, setChatSpeakers] = useState([]);
   // const [chats, setChats] = useState([]);
   // const [chatSpeaker, setChatSpeaker] = useState(currentUser["first_name"]);
+
+  const onKeyPress = (event) => {
+    undo();
+  };
+  useKeyPress(["z"], onKeyPress);
 
   // IMAGES
   const [url, setURL] = useState("");
@@ -59,39 +72,39 @@ const MainStage = (props) => {
   ];
 
   const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
-  const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
-  const endX =
-    Math.floor((-stagePos.x + window.innerWidth * 2) / WIDTH) * WIDTH;
+  // const startX = Math.floor((-stagePos.x - window.innerWidth) / WIDTH) * WIDTH;
+  // const endX =
+  //   Math.floor((-stagePos.x + window.innerWidth * 2) / WIDTH) * WIDTH;
 
-  const startY =
-    Math.floor((-stagePos.y - window.innerHeight) / HEIGHT) * HEIGHT;
-  const endY =
-    Math.floor((-stagePos.y + window.innerHeight * 2) / HEIGHT) * HEIGHT;
+  // const startY =
+  //   Math.floor((-stagePos.y - window.innerHeight) / HEIGHT) * HEIGHT;
+  // const endY =
+  //   Math.floor((-stagePos.y + window.innerHeight * 2) / HEIGHT) * HEIGHT;
 
-  const gridComponents = [];
-  var i = 0;
-  for (var x = startX; x < endX; x += WIDTH) {
-    for (var y = startY; y < endY; y += HEIGHT) {
-      if (i === 4) {
-        i = 0;
-      }
+  // const gridComponents = [];
+  // var i = 0;
+  // for (var x = startX; x < endX; x += WIDTH) {
+  //   for (var y = startY; y < endY; y += HEIGHT) {
+  //     if (i === 4) {
+  //       i = 0;
+  //     }
 
-      const indexX = Math.abs(x / WIDTH) % grid.length;
-      const indexY = Math.abs(y / HEIGHT) % grid[0].length;
+  //     const indexX = Math.abs(x / WIDTH) % grid.length;
+  //     const indexY = Math.abs(y / HEIGHT) % grid[0].length;
 
-      gridComponents.push(
-        <Rect
-          x={x}
-          y={y}
-          width={WIDTH}
-          height={HEIGHT}
-          fill={grid[indexX][indexY]}
-          stroke="black"
-          strokeWidth={0.3}
-        />
-      );
-    }
-  }
+  //     gridComponents.push(
+  //       <Rect
+  //         x={x}
+  //         y={y}
+  //         width={WIDTH}
+  //         height={HEIGHT}
+  //         fill={grid[indexX][indexY]}
+  //         stroke="black"
+  //         strokeWidth={0.3}
+  //       />
+  //     );
+  //   }
+  // }
 
   // PEN TOOLS
   const [tool, setTool] = useState("select");
@@ -118,7 +131,6 @@ const MainStage = (props) => {
     conn.on(`new-line-${board_id}`, (lines) => {
       setLines(lines);
     });
-
     // d. chat box setting the new array
     conn.on(`update-chat-${board_id}`, (newChatArray) => {
       setChatSpeakers(newChatArray);
@@ -186,13 +198,14 @@ const MainStage = (props) => {
   /**Activated when 'add url' button is clicked */
   const resetUrl = () => {
     // sends img to the main stage
-    handleClick("Image", "", "", url);
+    handleClick("Image", "", "", url + "?not-from-cache-please");
     // empties the URL text box
     setURL("");
   };
 
   // removes all elements from the board
   const clearBoard = () => {
+    // set all elements back to none
     setElements([]);
     setLines([]);
     setTool("select");
@@ -208,48 +221,47 @@ const MainStage = (props) => {
         item.attrs.url = item.attrs.image.src;
       }
     });
-    saveBoard(board_id, stageRef.current.children)
-  }
-console.log("these are the ele", elements);
+    saveBoard(board_id, stageRef.current.children);
+    alert("Board saved! :)");
+  };
+  console.log("these are the ele", elements);
   /** removes the previous element from the array */
-  const undo = () => {
+  const undo = (type) => {
     // removes the previous shape/image from the array
     // console.log("dancing on my OWNNN", stageRef.current.children.at(-1));
 
-    // 
+    //
     const copyOfElements = [...elements];
 
-
-
-    if (elements[elements.length -1].className === "Line") {
-      const filteredLines = copyOfElements.filter((element) => {
-        return element.className === "Line"
-      })
+    if (type === "Line") {
+      // if (elements[elements.length -1].className === "Line") {
+      // const filteredLines = copyOfElements.filter((element) => {
+      //   return element.className === "Line"
+      // })
+      const filteredLines = [...lines];
       console.log("filtered lines", filteredLines);
       // console.log("this is copy of lines", copyOfLines)
-      const undoLines = filteredLines.slice(0, filteredLines.length - 1)
-      setLines(undoLines)
-      console.log('HELLOOOOO dis', undoLines);
+      const undoLines = filteredLines.slice(0, filteredLines.length - 1);
+      setLines(undoLines);
+      console.log("HELLOOOOO dis", undoLines);
       console.log("this is line", lines);
-      console.log("elements afterward:", elements)
+      console.log("elements afterward:", elements);
       connection.emit("line-change", undoLines);
-      
-    } else if (elements[elements.length -1].className !== "Line") {
+    } else {
+      // } else if (elements[elements.length -1].className !== "Line") {
 
       // making a copy of the elements array, and making a copy of that with the last element removed
       const undoElement = copyOfElements.slice(0, elements.length - 1);
       // reset the elements array
       setElements(undoElement);
-      console.log('HELLOOOOO', undoElement);
+      console.log("HELLOOOOO", undoElement);
       // send the updated elements array through the socket
       connection.emit("stage-change", undoElement);
-    
     }
-    
   };
 
   /**deletes the selected shape */
-  console.log("currently selected item:", selectedId)
+  console.log("currently selected item:", selectedId);
   const deleteShape = () => {
     // locate the index of the selected shape
     const targetIndex = elements.findIndex((x) => x.attrs.id === selectedId);
@@ -259,16 +271,24 @@ console.log("these are the ele", elements);
       // remove the element object from the array
       const copyOfElements = [...prev];
       copyOfElements.splice(targetIndex, 1);
+      selectShape(null);
       return copyOfElements;
     });
   };
+
+  useKeyPress(["x"], () => {
+    deleteShape();
+  });
 
   /** HANDLE BOARD SAVE */
   const handleBoardSave = (e) => {
     e.preventDefault();
   };
 
+  const bottomChatRef = useRef();
+
   const handleSendMessage = (e) => {
+    console.log("me hit line 268 for chat?");
     e.preventDefault();
     console.log("it is this message--->", message);
     // a. emit a connection to send the message object
@@ -276,7 +296,7 @@ console.log("these are the ele", elements);
       message,
       speaker: currentUser["first_name"],
     };
-    const newChatArray = [...chatSpeakers, newChatSpeakerObject];
+    const newChatArray = [newChatSpeakerObject, ...chatSpeakers];
     setChatSpeakers(newChatArray);
 
     connection.emit("chat-change", newChatArray, board_id);
@@ -312,83 +332,116 @@ console.log("these are the ele", elements);
           setTool={setTool}
         />
         {/* ******** STAGE ******************** */}
-        <div className="stage">
-          <Stage ref={posRef}
-            width={1000 || window.innerWidth}
-            height={800 || window.innerHeight}
-            // onMouseDown={checkDeselect}
+        <div className="stage" style={{ position: "relative" }}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            style={{ position: "absolute", top: "0", left: "0" }}
+          >
+            <defs>
+              <pattern
+                id="grid-pattern"
+                width={WIDTH}
+                height={HEIGHT}
+                patternUnits="userSpaceOnUse"
+                x={stagePos.x}
+                y={stagePos.y}
+              >
+                <rect
+                  width="100%"
+                  height="100%"
+                  fill="none"
+                  strokeWidth="2"
+                  stroke={"#000000"}
+                />
+              </pattern>
+            </defs>
+
+            <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+          </svg>
+
+          <Stage
+            ref={posRef}
+            width={window.innerWidth - 300}
+            height={window.innerHeight - 117}
+            // onMouseDown={tool === "select" && checkDeselect}
+            // onTouchStart={tool === "select" && checkDeselect}
             onMousemove={tool !== "select" ? handleMouseMove : ""}
             onMouseup={tool !== "select" ? handleMouseUp : ""}
             draggable={tool === "select"}
-            onDragEnd={(e) => {
+            onDragMove={(e) => {
               setStagePos(e.currentTarget.position());
-              
             }}
-            onMousemove={tool !== "select" ? handleMouseMove : ""}
-            onMouseup={tool !== "select" ? handleMouseUp : ""}
-            
           >
             <Layer
-            onTouchStart={checkDeselect}
-            onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
-            >{gridComponents}
+              onTouchStart={checkDeselect}
+              onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
+            >
+              <Rect 
+                width={window.innerWidth - 300}
+                height={window.innerHeight - 117}
+
+              />
             </Layer>
             <Layer ref={stageRef}>
               {elements.map((rect, i) => {
-              // console.log('this is what i need', elements)
-                
-              // console.log('LKSDFJGKDG', rect);
+                // console.log('this is what i need', elements)
+
+                // console.log('LKSDFJGKDG', rect);
                 return (
                   <>
-                  {rect.className === "Line" ? (
-                    <Line
-                    key={i}
-                    points={rect.attrs.points}
-                    stroke={rect.attrs.stroke}
-                    strokeWidth={5}
-                    tension={0.5}
-                    lineCap="round"
-                    onChange={(newAttrs) => {
-                      setLines((prev) => prev.map((el, j) => {
-                        if (i === j) {
-                          return {
-                            ...el,
-                            attrs: newAttrs,
-                          };
-                        } else {
-                          return el;
-                        }
-                      }));
-                    }}
-                    // globalCompositeOperation={
-                    //   line.tool === "eraser" ? "destination-out" : "source-over"
-                    // }
-                  />
-                  ) : (
-                    <Element
-                    shapeName={rect.className}
-                    key={i}
-                    shapeProps={rect.attrs}
-                    isSelected={rect.attrs.id === selectedId}
-                    onSelect={() => {
-                      selectShape(rect.attrs.id);
-                      }}
-                      onChange={(newAttrs) => {
-                        setElements((prev) => prev.map((el, j) => {
-                          if (i === j) {
-                            return {
-                              ...el,
-                              attrs: newAttrs,
-                              
-                            };
-                          } else {
-                            return el;
-                          }
-                        }));
-                      }}
-                    />
-                  )
-                  }
+                    {rect.className === "Line" ? (
+                      <Line
+                        key={i}
+                        points={rect.attrs.points}
+                        stroke={rect.attrs.stroke}
+                        strokeWidth={5}
+                        tension={0.5}
+                        lineCap="round"
+                        onChange={(newAttrs) => {
+                          setLines((prev) =>
+                            prev.map((el, j) => {
+                              if (i === j) {
+                                return {
+                                  ...el,
+                                  attrs: newAttrs,
+                                };
+                              } else {
+                                return el;
+                              }
+                            })
+                          );
+                        }}
+                        // globalCompositeOperation={
+                        //   line.tool === "eraser" ? "destination-out" : "source-over"
+                        // }
+                      />
+                    ) : (
+                      <Element
+                        shapeName={rect.className}
+                        key={i}
+                        shapeProps={rect.attrs}
+                        isSelected={rect.attrs.id === selectedId}
+                        onSelect={() => {
+                          selectShape(rect.attrs.id);
+                        }}
+                        onChange={(newAttrs) => {
+                          setElements((prev) =>
+                            prev.map((el, j) => {
+                              if (i === j) {
+                                return {
+                                  ...el,
+                                  attrs: newAttrs,
+                                };
+                              } else {
+                                return el;
+                              }
+                            })
+                          );
+                        }}
+                      />
+                    )}
                   </>
                 );
               })}
@@ -408,7 +461,7 @@ console.log("these are the ele", elements);
             </Layer>
           </Stage>
         </div>
-        <div>
+        <div className="rightsection">
           {/* ******** RIGHT SIDE BAR ***************/}
           <RightBar
             clearBoard={clearBoard}
@@ -421,30 +474,51 @@ console.log("these are the ele", elements);
             END_POINT={END_POINT}
             currentUser={currentUser}
           />
-          <div>
-            <div id="chatbox">
-              {chatSpeakers.map((chat) => {
-                return (
-                  <OneChatMessage
-                    key={uuidV4()}
-                    chat={chat.message}
-                    chatSpeaker={chat.speaker}
-                  />
-                );
-              })}
+          
+              <div id="chatbox">
+                {chatSpeakers.map((chat) => {
+                  return (
+                    <OneChatMessage
+                      key={uuidV4()}
+                      chat={chat.message}
+                      chatSpeaker={chat.speaker}
+                    />
+                  );
+                })}
+                <div
+                  style={{ float: "left", clear: "both" }}
+                  ref={bottomChatRef}
+                ></div>
+              </div>
+              <form onSubmit={handleSendMessage}>
+                <input
+                  className="enterText"
+                  type="text"
+                  placeholder="enter message here"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                ></input>
+                {/* <textarea
+                  className="enterText"
+                  type="text"
+                  placeholder="enter message here"
+                  value={message}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                ></textarea> */}
+                <Button
+                  className="send-btn"
+                  type="submit"
+                  onClick={handleSendMessage}
+                >
+                  Send Message
+                </Button>
+              </form>
             </div>
-            <textarea
-              className="enterText"
-              type="text"
-              value={message}
-              onChange={(e) => {
-                setMessage(e.target.value);
-              }}
-            ></textarea>
-            <Button onClick={handleSendMessage}>Send Message</Button>
           </div>
-        </div>
-      </div>
     </>
   );
 };

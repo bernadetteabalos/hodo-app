@@ -38,10 +38,15 @@
   text-shadow: -0.5px -0.5px #000000, 1px -1px 0 #000000, -1px 1px 0 #000000,
     1px 1px 0 #000000;
 }
+
 .title {
-  color: rgb(255, 255, 255);
-  text-shadow: -1px -1px #002954, 1px -1px 0 #002954, -1px 1px 0 #002954,
-    2px 2px 0 #002954;
+  color: rgb(0, 0, 0);
+  font-family: "Poppins", sans-serif;
+}
+
+.thick {
+  text-shadow: -0.5px -0.5px #000000, 0.5px -0.5px 0 #000000,
+    -0.5px 0.5px 0 #000000, 0.5px 0.5px 0 #000000;
 }
 
 .bold {
@@ -58,8 +63,8 @@
 
 .outline {
   color: rgb(255, 255, 255);
-  text-shadow: -2px -px 0 #4ea404, 1px -1px 0 #4ea404, -2px 2px 0 #4ea404,
-    1px 1px 0 #4ea404;
+  text-shadow: -1.5px -1.5px 0 #459102, 1px -1px 0 #459102, -2px 2px 0 #459102,
+    1.5px 1.5px 0 #459102;
 }
 
 .pop {
@@ -138,7 +143,8 @@
 
 .one-back {
   background-color: rgb(173, 243, 254);
-  color: white;
+  color: rgb(0, 0, 0);
+  text-shadow: none;
   transform: rotateY(180deg);
 }
 
@@ -182,7 +188,8 @@
 
 .two-back {
   background-color: rgb(237, 182, 255);
-  color: white;
+  color: rgb(0, 0, 0);
+  text-shadow: none;
   transform: rotateY(180deg);
 }
 
@@ -225,7 +232,8 @@
 }
 
 .three-back {
-  background-color: rgb(165, 250, 221);
-  color: white;
+  background-color: #a5fadd;
+  color: rgb(0, 0, 0);
+  text-shadow: none;
   transform: rotateY(180deg);
 }

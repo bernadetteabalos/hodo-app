@@ -14,7 +14,7 @@ const OneTitle = (props) => {
   return (
     <div>
       <h3 onClick={handleTitle} className="handleTitle">
-        ✈︎{titleObj.title}
+        ✈︎&nbsp;{titleObj.title}
       </h3>
       <br></br>
     </div>
