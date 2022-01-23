@@ -28,6 +28,7 @@ const Home = (props) => {
       />
       <div className="home-page">
         <img src="https://i.imgur.com/A8H3iYm.png" alt="hodo-logoo" />
+        {/* <img src="https://i.imgur.com/293NPiy.png" alt="hodo-logoo" /> */}
       </div>
       <div className="bottom-page"></div>
     </>
