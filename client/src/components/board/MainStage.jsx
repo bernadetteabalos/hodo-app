@@ -6,7 +6,7 @@ import useKeyPress from "../../hooks/keyboardShortcuts";
 import socketIOClient from "socket.io-client";
 import { Stage, Layer, Line } from "react-konva";
 import { Rect } from "react-konva";
-import { Form, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { v4 as uuidV4 } from "uuid";
 
 // import Other Components
@@ -31,36 +31,32 @@ const END_POINT = "http://localhost:8001";
 const MainStage = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
     props;
-  // console.log("line 28 mainstage-->currentUser", current)
+  // for the socket connection
+  const [connection, setConnection] = useState(undefined);
+  // colours
   const [fillColor, setFillColor] = useState("");
   const [strokeColor, setStrokeColor] = useState("black");
+  // for if SHAPE is selected
   const [selectedId, selectShape] = useState(null);
-  const stageRef = useRef(null);
-  const posRef = useRef(null);
-  const gridRef = useRef(null);
-
-  const { elements, board_id, setElements, saveBoard } = useApplicationData();
-
-  // console.log("line 42 mainstage ---> what is showLogin?", showLogin);
-
-  useEffect(() => {
-    setShowLogin("back");
-  }, []);
-
-  // console.log("main stage line 33, board_id", board_id);
-  //CHAT*********************
+  // for IMAGES
+  const [url, setURL] = useState("");
+  // for CHAT
   const [message, setMessage] = useState("");
   const [chatSpeakers, setChatSpeakers] = useState([]);
-  // const [chats, setChats] = useState([]);
-  // const [chatSpeaker, setChatSpeaker] = useState(currentUser["first_name"]);
+  // for PENS
+  const [tool, setTool] = useState("select");
+  const [lines, setLines] = useState([]);
+  // references
+  const isDrawing = useRef(false);
+  const stageRef = useRef(null);
+  const posRef = useRef(null);
+
+  const { elements, board_id, setElements, saveBoard } = useApplicationData();
 
   const onKeyPress = (event) => {
     undo();
   };
   useKeyPress(["z"], onKeyPress);
-
-  // IMAGES
-  const [url, setURL] = useState("");
 
   //***STAGE GRID ****//
   const WIDTH = 40;
@@ -106,13 +102,12 @@ const MainStage = (props) => {
   //   }
   // }
 
-  // PEN TOOLS
-  const [tool, setTool] = useState("select");
-  const [lines, setLines] = useState([]);
-  const isDrawing = useRef(false);
+  // upon render, setShowLogin to back to display "back to profile" button on nav bar (showLogin is passed down as prop)
+  useEffect(() => {
+    setShowLogin("back");
+  }, []);
 
   // ************** SOCKET ************************
-  const [connection, setConnection] = useState(undefined);
   useEffect(() => {
     const conn = socketIOClient(END_POINT);
     // what is being received from SERVER
@@ -120,6 +115,12 @@ const MainStage = (props) => {
       console.log("something came back");
       console.log(msg.string);
     });
+
+    /*
+    board-shapes-images: 1, 2, 3, 4
+    board-lines: i, ii, iii, iv
+    chat-messages: a, b, c, d
+    */
 
     // 4. listening for when new element is generated on the stage
     conn.on(`new-stage-${board_id}`, (elements) => {
@@ -143,25 +144,26 @@ const MainStage = (props) => {
   // deselects the images and updates others' boards
   const checkDeselect = (e) => {
     selectShape(null);
-    // 1. sends the updated elements and lines arrays through the socket upon deselect to update others' boards'
-    // I also want to pass down my board_id
+    // 1. sends the updated elements arrays through the socket upon deselect to update others' boards'
     connection.emit("stage-change", elements, board_id);
+    // i. sends the updated lines array to the server via socket
     connection.emit("line-change", lines, board_id);
   };
 
   /**activated upon clicking of shape or add img. generates a new element and adds it to the array */
   const handleClick = (shape, fillColor, strokeColor) => {
-    // generate and add a new property to the array
+    // generate and add a new element to the array
     let newElement = generateOneElement(shape, fillColor, strokeColor, url);
     setElements((prevState) => [...prevState, newElement]);
-    const newState = [...elements, newElement];
-    // sends the new state through the socket
-    connection.emit("stage-change", elements, board_id);
+    const newElementsArray = [...elements, newElement];
+    // 1. sends the new state through the socket
+    connection.emit("stage-change", newElementsArray, board_id);
     // reset tool to 'select' to prevent 'pen' mode when transforming the shapes
     setTool("select");
   };
 
   // ****************** PEN TOOLS FUNCTIONS ****************
+  /**activated when the mouse is being pressed down when use is using the pen */
   const handleMouseDown = (e) => {
     isDrawing.current = true;
     const stage = e.target.getStage();
@@ -172,7 +174,7 @@ const MainStage = (props) => {
     ]);
   };
 
-  // activated when the user is drawing the line
+  // grabs the stage, sets lines to the new point and strokecolor (to make it look like a continous line)
   const handleMouseMove = (e) => {
     if (!isDrawing.current) {
       return;
@@ -188,13 +190,15 @@ const MainStage = (props) => {
     setLines(lines.concat());
   };
 
-  // when the moust is up, set drawing to false and send line through the socket to appear on other users' board
+  // activated when the mouse is up
   const handleMouseUp = () => {
+    // set isDrawing to false
     isDrawing.current = false;
+    // i. send line through the socket to appear on other users' board
     connection.emit("line-change", lines, board_id);
   };
 
-  //*** IMAGES */
+  //***************************** IMAGES ***********************/
   /**Activated when 'add url' button is clicked */
   const resetUrl = () => {
     // sends img to the main stage
@@ -209,12 +213,13 @@ const MainStage = (props) => {
     setElements([]);
     setLines([]);
     setTool("select");
-    // sends empty arrays through socket to reset all boards in the room
+    // 1. sends empty array through socket to reset board
     connection.emit("stage-change", []);
+    // i. sends empty array through socket to reset board
     connection.emit("line-change", []);
   };
 
-  //saves board
+  /** Activated when the user confirms "yes" to save the board */
   const save = () => {
     stageRef.current.children.forEach((item) => {
       if (item.attrs.image) {
@@ -222,9 +227,10 @@ const MainStage = (props) => {
       }
     });
     saveBoard(board_id, stageRef.current.children);
+    // let the user know that the board is saved
     alert("Board saved! :)");
   };
-  console.log("these are the ele", elements);
+
   /** removes the previous element from the array */
   const undo = (type) => {
     // removes the previous shape/image from the array
@@ -287,19 +293,22 @@ const MainStage = (props) => {
 
   const bottomChatRef = useRef();
 
+  /** Activated when user submits a message by clicking "enter" or clicking "send message" btn */
   const handleSendMessage = (e) => {
-    console.log("me hit line 268 for chat?");
     e.preventDefault();
-    console.log("it is this message--->", message);
-    // a. emit a connection to send the message object
+
+    // creates new object with message and the current user
     const newChatSpeakerObject = {
       message,
       speaker: currentUser["first_name"],
     };
+    // sets the chatSpeaker array as the one with the newChatSpeakerObject
     const newChatArray = [newChatSpeakerObject, ...chatSpeakers];
     setChatSpeakers(newChatArray);
 
+    // a. emit a connection to send the message object
     connection.emit("chat-change", newChatArray, board_id);
+    // clears the message input box
     setMessage("");
   };
 
@@ -307,13 +316,12 @@ const MainStage = (props) => {
   return (
     <>
       <Navigation
-        currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
         setIdTitle={setIdTitle}
       />
-      {/* ***** Header */}
+      {/* ***** Header with the title ******/}
       <div>
         <Header board_id={board_id} />
       </div>
@@ -461,7 +469,7 @@ const MainStage = (props) => {
           </Stage>
         </div>
         <div className="rightsection">
-          {/* ******** RIGHT SIDE BAR ***************/}
+          {/* ******** RIGHT SIDE BAR BUTTONS***************/}
           <RightBar
             clearBoard={clearBoard}
             saveBoard={save}
@@ -470,7 +478,7 @@ const MainStage = (props) => {
             handleBoardSave={handleBoardSave}
             currentUser={currentUser}
           />
-
+          {/* ******** CHAT BOX***************/}
           <div id="chatbox">
             {chatSpeakers.map((chat) => {
               return (
@@ -496,15 +504,6 @@ const MainStage = (props) => {
                 setMessage(e.target.value);
               }}
             ></input>
-            {/* <textarea
-                  className="enterText"
-                  type="text"
-                  placeholder="enter message here"
-                  value={message}
-                  onChange={(e) => {
-                    setMessage(e.target.value);
-                  }}
-                ></textarea> */}
             <Button
               className="send-btn"
               type="submit"

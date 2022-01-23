@@ -8,8 +8,7 @@ import "../stylesheets/css/navigation.css";
 
 const Navigation = (props) => {
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
-    props;
+  const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
 
   const login = (e) => {
     e.preventDefault();

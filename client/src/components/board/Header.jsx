@@ -1,11 +1,13 @@
 import { useState, useRef } from "react";
-// import from other libraries/styling
+// import from other libraries
 import axios from "axios";
 import { Button, Modal, Form } from "react-bootstrap";
 
+// import helpers from local files
+import useApplicationData from "../../hooks/forBoards";
+
 //import syling
 import "../../stylesheets/css/header.css";
-import useApplicationData from "../../hooks/forBoards";
 
 const Header = () => {
   const { setTitle, title, board_id } = useApplicationData();
@@ -20,41 +22,47 @@ const Header = () => {
     setShow(false);
   };
 
+  // Activated when user clicks the edit title button
   const handleEditSave = (e) => {
+    // prevent the refresh of the page
     e.preventDefault();
-    // axios put request here
-    // need to make a seed table first
+    //axios request to server to update the title of the specific board (id) on the boards table
     const urlUpdateTitle = "/api/users/title";
-    // passing in values from the form
     axios
       .put(urlUpdateTitle, {
         id: board_id,
         title: newTitleRef.current.value,
       })
       .then((res) => {
-        console.log("hit this on line 34 in Header");
-        console.log("this is response", res);
+        // res.data.title is the updated title
+        // setting the new title to be the updated one
         setTitle(res.data.title);
+        // closes the Modal with the edit title prompt
+        setShow(false);
       })
+      // prints error in console if axios request failed
       .catch((err) => console.log(err.message));
-    setShow(false);
   };
 
+  /** Activated when user confirms save board */
   const handleCollaboratorSave = (e) => {
     e.preventDefault();
 
+    // axios request to url to add user_id and board_id to collaborators table
     const urlAddCollaborator = "/api/collaborators";
-
     axios
       .post(urlAddCollaborator, {
         user_id: newCollaboratorRef.current.value,
         board_id: board_id,
       })
       .then((res) => {
-        // res.data.msg is the "msg that was sent from collaborators.js in server "Added collaborators to board"
+        // res.data.msg is the "msg that was sent from collaborators.js in server "Added collaborators to board". Msg is alerted to user
         alert(res.data.msg);
+        // close the Modal with the save prompt
         setShow(false);
-      });
+      })
+      // prints error in console if axios request failed
+      .catch((err) => console.log(err.message));
   };
 
   return (

@@ -1,20 +1,19 @@
 import { useRef, useEffect } from "react";
 
-// import other components
-import Navigation from "../Navigation";
-
 // import from other libraries
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
+
+// import other components
+import Navigation from "../Navigation";
 
 // import stylesheet
 import "../../stylesheets/css/register.css";
 import "../../stylesheets/css/login.css";
 
 const Register = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
-    props;
+  const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
   const navigate = useNavigate();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -22,6 +21,7 @@ const Register = (props) => {
   const pwRef = useRef();
   const photoRef = useRef();
 
+  // setShowLogin to display 'login' button in the nav bar (showLogin passed down to Navigation component)
   useEffect(() => {
     setShowLogin("login");
   }, []);
@@ -29,6 +29,7 @@ const Register = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // axios request add user to database
     const urlPostApi = "/api/users/register";
     axios
       .post(urlPostApi, {
@@ -40,11 +41,14 @@ const Register = (props) => {
       })
       .then((res) => {
         if (res.data.msg) {
+          // alert user if there is an error (eg 'user with email already exists')
           alert(res.data.msg);
         } else {
-          console.log("res.data-->", res.data);
+          // set current user to the one that was just added to the db
           setCurrentUser(res.data);
-          setShowLogin("login");
+          // setShowLogin to logout to display logout in the nav bar
+          setShowLogin("logout");
+          // redirects user to the profile page
           navigate("/profile");
         }
       })
@@ -53,13 +57,14 @@ const Register = (props) => {
 
   return (
     <>
+      {/* ************ NAVIGATION BAR ************/}
       <Navigation
-        currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
         setIdTitle={setIdTitle}
       />
+      {/* ************ REGISTRATION FORM ************/}
       <div className="register-page">
         <Container className="register-container m-auto">
           <h1>Register</h1>

@@ -1,30 +1,23 @@
-import { useRef, useState, useEffect } from "react";
-
-// import other component
-import Navigation from "../Navigation";
+import { useRef, useEffect } from "react";
 
 // import from other libraries
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Container, Form, Button } from "react-bootstrap";
 
+// import other component
+import Navigation from "../Navigation";
+
 // import stylesheet
 import "../../stylesheets/css/login.css";
 
 const Login = (props) => {
-  const {
-    currentUser,
-    setCurrentUser,
-    showLogin,
-    setShowLogin,
-    idTitle,
-    setIdTitle,
-  } = props;
+  const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
 
-  console.log("this is my user in login line 20 --->", currentUser);
+  // setShowLogin to display 'register' button in the nav bar (showLogin passed down to Navigation component)
   useEffect(() => {
     setShowLogin("register");
   }, []);
@@ -32,8 +25,8 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // axios request to check if user's credentials matches those in database
     const urlOneUserApi = `/api/users/login`;
-
     axios
       .post(urlOneUserApi, {
         email: emailRef.current.value,
@@ -47,44 +40,26 @@ const Login = (props) => {
         } else {
           // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
           setCurrentUser(res.data);
+          // setShowLogin to logout to display logout in the nav bar
           setShowLogin("logout");
+          // redirects user to the profile page
           navigate("/profile");
-          // // post request to get the user info
-          // axios
-          //   .post("api/collaborators/userboards", { user_id: res.data.id })
-          //   .then((response) => {
-          //     // response.data looks like this: [1,3]
-
-          //     // Checks if the user has any exisiting boards. If so, do individual axios request to get board titles. If user does not, navigate to profile
-          //     if (response.data.length > 0) {
-          //       response.data.map((id) => {
-          //         // id is the board id
-          //         axios
-          //           .post("api/collaborators/boardTitle", { board_id: id })
-          //           .then((res) => {
-          //             // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
-          //             setIdTitle((prevState) => [...prevState, res.data]);
-          //             navigate("/profile");
-          //           });
-          //       });
-          //     } else {
-          //       navigate("/profile");
-          //     }
-          //   });
         }
       })
+      // prints any error
       .catch((err) => console.log(err.message));
   };
 
   return (
     <>
+      {/* ************ NAVIGATION BAR ************/}
       <Navigation
-        currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
         setIdTitle={setIdTitle}
       />
+      {/* ************ LOGIN FORM ************/}
       <div className="login-page">
         <Container className="login-container">
           <h1>Login</h1>
