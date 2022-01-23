@@ -49,6 +49,15 @@
   color: black;
   font-weight: bold;
 }
+
+.textAlign {
+  text-align: center;
+  margin-left: 1em;
+  margin-right: 1em;
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
 .head {
   color: rgb(255, 255, 255);
   text-shadow: -0.5px -0.5px #000000, 1px -1px 0 #000000, -1px 1px 0 #000000,

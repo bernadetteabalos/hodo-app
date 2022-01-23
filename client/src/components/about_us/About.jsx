@@ -48,14 +48,16 @@ const About = (props) => {
                 <div className="one-back">
                   <h2 className="occupation">Full-Stack Web Developer</h2>
                   <br></br>
-                  <p>
+                  <p className="textAlign">
                     Former life sciences student who enjoys art and programming.
                   </p>
-                  <p>Follow me on</p>
-                  <a href={"https://github.com/bernadetteabalos"}>
-                    <FontAwesomeIcon icon={faGithub} />
-                    Github
-                  </a>
+                  <p>
+                    Follow me on &nbsp;
+                    <a href={"https://github.com/bernadetteabalos"}>
+                      <FontAwesomeIcon icon={faGithub} />
+                      Github
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -69,15 +71,16 @@ const About = (props) => {
                 <div className="two-back">
                   <h2 className="occupation">Full-Stack Web Developer</h2>
                   <br></br>
-                  <p>
-                    &nbsp;Former pharmacist who discovered a love for
-                    coding.&nbsp;
+                  <p className="textAlign">
+                    Former pharmacist who discovered a love for coding.
                   </p>
-                  <p>Follow me on</p>
-                  <a href={"https://github.com/StephhyL"}>
-                    <FontAwesomeIcon icon={faGithub} />
-                    Github
-                  </a>
+                  <p>
+                    Follow me on &nbsp;
+                    <a href={"https://github.com/StephhyL"}>
+                      <FontAwesomeIcon icon={faGithub} />
+                      Github
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -91,15 +94,17 @@ const About = (props) => {
                 <div className="three-back">
                   <h2 className="occupation">Full-Stack Web Developer</h2>
                   <br></br>
-                  <p>
+                  <p className="textAlign">
                     Former aviation student who meandered their way into the
                     world of web development
                   </p>
-                  <p>Follow me on</p>
-                  <a href={"https://github.com/BlesMateo"}>
-                    <FontAwesomeIcon icon={faGithub} />
-                    Github
-                  </a>
+                  <p>
+                    Follow me on &nbsp;
+                    <a href={"https://github.com/BlesMateo"}>
+                      <FontAwesomeIcon icon={faGithub} />
+                      Github
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>

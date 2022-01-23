@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 import "../../stylesheets/css/onetitle.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHandPointRight } from "@fortawesome/free-solid-svg-icons";
 
 const OneTitle = (props) => {
   const { titleObj } = props;
@@ -14,7 +16,9 @@ const OneTitle = (props) => {
   return (
     <div>
       <h3 onClick={handleTitle} className="handleTitle">
-        ✈︎&nbsp;{titleObj.title}
+        &nbsp;
+        <FontAwesomeIcon icon={faHandPointRight} />
+        &nbsp;{titleObj.title}
       </h3>
       <br></br>
     </div>

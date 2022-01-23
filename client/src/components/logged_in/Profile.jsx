@@ -13,6 +13,7 @@ import OneTitle from "./OneTitle";
 // import styling
 import "../../stylesheets/css/profile.css";
 
+
 const Profile = (props) => {
   const {
     currentUser,
