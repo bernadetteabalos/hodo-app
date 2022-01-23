@@ -99,13 +99,11 @@ const Header = (props) => {
 
   return (
     <div className="header-bar">
-      <div>
-
-      </div>
+      <div></div>
       <div className="title-name">
-        <h2 id="boardTitle" >{title}</h2>
+        <h2 id="boardTitle">{title}</h2>
         <Button className="headerButton" onClick={handleShowTitle}>
-        <i class="bi bi-pencil-square"></i>
+          <i class="bi bi-pencil-square"></i>
         </Button>
       </div>
       <Modal
@@ -138,7 +136,9 @@ const Header = (props) => {
         </Form>
       </Modal>
       <div className="add-collaborators">
-        <Button className="headerButtonTwo" onClick={handleShowCollab}>Add a Collaborator</Button>
+        <Button className="headerButtonTwo" onClick={handleShowCollab}>
+          Add a Collaborator
+        </Button>
       </div>
       <Modal
         show={show === "collab"}

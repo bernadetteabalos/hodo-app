@@ -2,14 +2,17 @@ import { useState } from "react";
 // import from other libraries
 import { Link, useNavigate } from "react-router-dom";
 
-import { Button } from "react-bootstrap";
-import logo from "../images/hodoapp (2).png"
+import { Button, Modal } from "react-bootstrap";
+import logo from "../images/hodoapp (2).png";
 //styling
 import "../stylesheets/css/navigation.css";
 
 const Navigation = (props) => {
   const navigate = useNavigate();
-  const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
+  const { setCurrentUser, showLogin, setShowLogin, setIdTitle, saveBoard } =
+    props;
+
+  const [showBackToProfile, setShowBackToProfile] = useState(false);
 
   const login = (e) => {
     e.preventDefault();
@@ -51,7 +54,6 @@ const Navigation = (props) => {
             </Link>
           </div>
           <div className="home-profile-about">
-            
             <div>
               <Link className="nav-link" to="/about">
                 <h3>About</h3>
@@ -102,10 +104,38 @@ const Navigation = (props) => {
             </Button>
           )}
           {showLogin === "back" && (
-            <Button variant="success" className="base-btn" onClick={back}>
+            <Button
+              variant="success"
+              className="base-btn"
+              onClick={() => setShowBackToProfile(true)}
+            >
               Back To Profile
             </Button>
           )}
+          <Modal show={showBackToProfile}>
+            <Modal.Body>
+              Did you want to save before going back to profile?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  saveBoard();
+                  navigate("/profile");
+                }}
+              >
+                Yes, save board
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              >
+                No
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </>
