@@ -4,7 +4,7 @@
   background: #f3c9d0;
 }
 .navbar h3:hover {
-  color: green;
+  color: rgb(255, 255, 255);
 }
 .navbar .logo {
   display: flex;
