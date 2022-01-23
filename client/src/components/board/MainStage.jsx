@@ -155,9 +155,9 @@ const MainStage = (props) => {
     // generate and add a new property to the array
     let newElement = generateOneElement(shape, fillColor, strokeColor, url);
     setElements((prevState) => [...prevState, newElement]);
-    const newState = [...elements, newElement];
+    const newElementsArray = [...elements, newElement];
     // sends the new state through the socket
-    connection.emit("stage-change", newState, board_id);
+    connection.emit("stage-change", newElementsArray, board_id);
     // reset tool to 'select' to prevent 'pen' mode when transforming the shapes
     setTool("select");
   };
