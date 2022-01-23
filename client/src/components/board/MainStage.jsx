@@ -316,7 +316,6 @@ const MainStage = (props) => {
   return (
     <>
       <Navigation
-        currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}

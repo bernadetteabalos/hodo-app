@@ -60,7 +60,6 @@ const Register = (props) => {
     <>
       {/* ************ NAVIGATION BAR ************/}
       <Navigation
-        currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
