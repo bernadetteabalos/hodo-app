@@ -324,7 +324,7 @@ const MainStage = (props) => {
       />
       {/* ***** Header with the title ******/}
       <div>
-        <Header board_id={board_id} />
+        <Header currentUser={currentUser} />
       </div>
       {/* ******** LEFT SIDE BAR ******************** */}
       <div className="creativity">

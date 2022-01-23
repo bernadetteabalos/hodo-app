@@ -9,7 +9,8 @@ import useApplicationData from "../../hooks/forBoards";
 //import syling
 import "../../stylesheets/css/header.css";
 
-const Header = () => {
+const Header = (props) => {
+  const { currentUser } = props;
   const { setTitle, title, board_id } = useApplicationData();
   const [show, setShow] = useState(false);
   const newTitleRef = useRef();
@@ -48,21 +49,52 @@ const Header = () => {
   const handleCollaboratorSave = (e) => {
     e.preventDefault();
 
-    // axios request to url to add user_id and board_id to collaborators table
-    const urlAddCollaborator = "/api/collaborators";
-    axios
-      .post(urlAddCollaborator, {
-        user_id: newCollaboratorRef.current.value,
-        board_id: board_id,
-      })
-      .then((res) => {
-        // res.data.msg is the "msg that was sent from collaborators.js in server "Added collaborators to board". Msg is alerted to user
-        alert(res.data.msg);
-        // close the Modal with the save prompt
-        setShow(false);
-      })
-      // prints error in console if axios request failed
-      .catch((err) => console.log(err.message));
+    // axios request to pull all the boards of the COLLABORATOR user
+
+    // currentUser.id is a number, newCollaboratorRef.current.value is a string
+    // convert to the same type and then compare
+    if (currentUser.id === Number(newCollaboratorRef.current.value)) {
+      alert("That's your id. Please enter the other person's id! :)");
+    } else {
+      axios
+        .post("/api/collaborators/userboards", {
+          user_id: newCollaboratorRef.current.value,
+        })
+        .then((response) => {
+          // response.data looks like this: [1,3] <-- this is the list of the board id associated with the user
+          console.log("do I even hit this point?");
+          console.log("this is my response", response.data);
+
+          console.log("what is my board_id??", board_id);
+          console.log("typeof board_id", typeof board_id);
+          console.log("what is my response.data??", response.data);
+          console.log("is this true??", response.data.includes(board_id));
+
+          if (response.data.includes(Number(board_id))) {
+            alert("Collaborator already previously added!");
+            setShow(false);
+          } else {
+            // axios request t)o url to add user_id and board_id to collaborators table
+            // const urlAddCollaborator = "/api/collaborators";
+            axios
+              .post("/api/collaborators", {
+                user_id: newCollaboratorRef.current.value,
+                board_id: board_id,
+              })
+              .then((res) => {
+                // res.data.msg is the "msg that was sent from collaborators.js in server "Added collaborators to board". Msg is alerted to user
+                alert(res.data.msg);
+                // close the Modal with the save prompt
+                setShow(false);
+              })
+              // prints error in console if axios request failed
+              .catch((err) => console.log(err.message));
+          }
+        })
+        .catch((err) => {
+          console.log("errrrr", err);
+        });
+    }
   };
 
   return (
@@ -85,7 +117,7 @@ const Header = () => {
         <Modal.Header closeButton>
           <Modal.Title>Edit Title</Modal.Title>
         </Modal.Header>
-        <Form>
+        <Form onSubmit={handleEditSave}>
           <Modal.Body>
             <Form.Control
               size="lg"
@@ -117,7 +149,7 @@ const Header = () => {
         <Modal.Header closeButton>
           <Modal.Title>Add Collaborator By Id</Modal.Title>
         </Modal.Header>
-        <Form>
+        <Form onSubmit={handleCollaboratorSave}>
           <Modal.Body>
             <Form.Control
               size="lg"

@@ -43,7 +43,7 @@ const Profile = (props) => {
     // axios request to get the board id and titles associated with the specific user
     // 1. axios request to collaborators table to get the board ids associated with the user
     axios
-      .post("api/collaborators/userboards", { user_id: currentUser.id })
+      .post("/api/collaborators/userboards", { user_id: currentUser.id })
       .then((response) => {
         // response.data looks like this: [1,3] <-- this is the list of the board id associated with the user
 
@@ -52,7 +52,7 @@ const Profile = (props) => {
           response.data.map((id) => {
             // id is the board id
             axios
-              .post("api/collaborators/boardTitle", { board_id: id })
+              .post("/api/collaborators/boardTitle", { board_id: id })
               .then((res) => {
                 // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
                 setIdTitle((prevState) => [...prevState, res.data]);
