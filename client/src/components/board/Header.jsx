@@ -2,17 +2,20 @@ import { useState, useRef } from "react";
 // import from other libraries
 import axios from "axios";
 import { Button, Modal, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 // import helpers from local files
 import useApplicationData from "../../hooks/forBoards";
+import logo from "../../images/hodoapp (2).png";
 
 //import syling
 import "../../stylesheets/css/header.css";
 
 const Header = (props) => {
-  const { currentUser } = props;
+  const navigate = useNavigate();
+  const { currentUser, saveBoard } = props;
   const { setTitle, title, board_id } = useApplicationData();
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState("");
   const newTitleRef = useRef();
   const newCollaboratorRef = useRef();
 
@@ -20,7 +23,12 @@ const Header = (props) => {
   const handleShowCollab = () => setShow("collab");
   const handleClose = (e) => {
     e.preventDefault();
-    setShow(false);
+    setShow("");
+  };
+
+  const back = (e) => {
+    e.preventDefault();
+    navigate("/profile");
   };
 
   // Activated when user clicks the edit title button
@@ -99,76 +107,124 @@ const Header = (props) => {
 
   return (
     <div className="header-bar">
-      <div>
-
+      <div className="space">
+        <img
+          src={logo}
+          width="120"
+          height="100"
+          className="d-inline-block align-top img-logo"
+          alt="Hodo logo"
+        />
       </div>
       <div className="title-name">
-        <h2 id="boardTitle" >{title}</h2>
+        <h2 id="boardTitle">{title}</h2>
         <Button className="headerButton" onClick={handleShowTitle}>
-        <i class="bi bi-pencil-square"></i>
+          <i class="bi bi-pencil-square"></i>
         </Button>
+        <Modal
+          show={show === "title"}
+          onHide={() => {
+            setShow(false);
+          }}
+          backdrop="static"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Title</Modal.Title>
+          </Modal.Header>
+          <Form onSubmit={handleEditSave}>
+            <Modal.Body>
+              <Form.Control
+                size="lg"
+                ref={newTitleRef}
+                type="text"
+                placeholder="Enter new title"
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={handleEditSave}>
+                Save
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal>
       </div>
-      <Modal
-        show={show === "title"}
-        onHide={() => {
-          setShow(false);
-        }}
-        backdrop="static"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Title</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleEditSave}>
+      <div className="collab-profile">
+        <div className="add-collaborators">
+          <Button className="headerButtonTwo" onClick={handleShowCollab}>
+            Add a Collaborator
+          </Button>
+        </div>
+        <Modal
+          show={show === "collab"}
+          onHide={() => {
+            setShow(false);
+          }}
+          backdrop="static"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Add Collaborator By Id</Modal.Title>
+          </Modal.Header>
+          <Form onSubmit={handleCollaboratorSave}>
+            <Modal.Body>
+              <Form.Control
+                size="lg"
+                ref={newCollaboratorRef}
+                type="number"
+                placeholder="Enter Collaborator Id"
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={handleCollaboratorSave}>
+                Save
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal>
+        <Button className="back-to-profile" onClick={() => setShow("profile")}>
+          Back To Profile
+        </Button>
+
+        <Modal show={show === "profile"}>
+          <Modal.Header id="exit-header">
+            <i
+              class="bi bi-x exit-btn"
+              onClick={() => {
+                setShow("");
+              }}
+            ></i>
+          </Modal.Header>
           <Modal.Body>
-            <Form.Control
-              size="lg"
-              ref={newTitleRef}
-              type="text"
-              placeholder="Enter new title"
-            />
+            <h4>Save before going back to profile?</h4>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleEditSave}>
-              Save
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-      <div className="add-collaborators">
-        <Button className="headerButtonTwo" onClick={handleShowCollab}>Add a Collaborator</Button>
-      </div>
-      <Modal
-        show={show === "collab"}
-        onHide={() => {
-          setShow(false);
-        }}
-        backdrop="static"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Add Collaborator By Id</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleCollaboratorSave}>
-          <Modal.Body>
-            <Form.Control
+            <Button
               size="lg"
-              ref={newCollaboratorRef}
-              type="number"
-              placeholder="Enter Collaborator Id"
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
+              variant="primary"
+              onClick={() => {
+                saveBoard();
+                navigate("/profile");
+              }}
+            >
+              Yes, save board
             </Button>
-            <Button variant="primary" onClick={handleCollaboratorSave}>
-              Save
+            <Button
+              size="lg"
+              variant="secondary"
+              onClick={() => {
+                navigate("/profile");
+              }}
+            >
+              No
             </Button>
           </Modal.Footer>
-        </Form>
-      </Modal>
+        </Modal>
+      </div>
     </div>
   );
 };

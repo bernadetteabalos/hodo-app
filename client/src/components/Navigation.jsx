@@ -2,14 +2,17 @@ import { useState } from "react";
 // import from other libraries
 import { Link, useNavigate } from "react-router-dom";
 
-import { Button } from "react-bootstrap";
-import logo from "../images/hodoapp (2).png"
+import { Button, Modal } from "react-bootstrap";
+import logo from "../images/hodoapp (2).png";
 //styling
 import "../stylesheets/css/navigation.css";
 
 const Navigation = (props) => {
   const navigate = useNavigate();
-  const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
+  const { setCurrentUser, showLogin, setShowLogin, setIdTitle, saveBoard } =
+    props;
+
+  // const [showBackToProfile, setShowBackToProfile] = useState(false);
 
   const login = (e) => {
     e.preventDefault();
@@ -51,7 +54,6 @@ const Navigation = (props) => {
             </Link>
           </div>
           <div className="home-profile-about">
-            
             <div>
               <Link className="nav-link" to="/about">
                 <h3>About</h3>
@@ -101,11 +103,49 @@ const Navigation = (props) => {
               Logout
             </Button>
           )}
-          {showLogin === "back" && (
-            <Button variant="success" className="base-btn" onClick={back}>
+          {/* {showLogin === "back" && (
+            <Button
+              variant="success"
+              className="base-btn"
+              onClick={() => setShowBackToProfile(true)}
+            >
               Back To Profile
             </Button>
-          )}
+          )} */}
+          {/* <Modal show={showBackToProfile}>
+            <Modal.Header id="exit-header">
+              <i
+                class="bi bi-x exit-btn"
+                onClick={() => {
+                  setShowBackToProfile(false);
+                }}
+              ></i>
+            </Modal.Header>
+            <Modal.Body>
+              <h4>Save before going back to profile?</h4>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                size="lg"
+                variant="primary"
+                onClick={() => {
+                  saveBoard();
+                  navigate("/profile");
+                }}
+              >
+                Yes, save board
+              </Button>
+              <Button
+                size="lg"
+                variant="secondary"
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              >
+                No
+              </Button>
+            </Modal.Footer>
+          </Modal> */}
         </div>
       </div>
     </>
