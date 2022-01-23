@@ -14,7 +14,7 @@ const About = (props) => {
 
   useEffect(() => {
     if (currentUser.id) {
-      setShowLogin("logout");
+      setShowLogin("profile-logout");
     }
   }, []);
 

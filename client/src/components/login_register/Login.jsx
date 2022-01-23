@@ -45,29 +45,29 @@ const Login = (props) => {
           // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
           setCurrentUser(res.data);
           setShowLogin("logout");
+          navigate("/profile");
+          // // post request to get the user info
+          // axios
+          //   .post("api/collaborators/userboards", { user_id: res.data.id })
+          //   .then((response) => {
+          //     // response.data looks like this: [1,3]
 
-          // post request to get the user info
-          axios
-            .post("api/collaborators/userboards", { user_id: res.data.id })
-            .then((response) => {
-              // response.data looks like this: [1,3]
-
-              // Checks if the user has any exisiting boards. If so, do individual axios request to get board titles. If user does not, navigate to profile
-              if (response.data.length > 0) {
-                response.data.map((id) => {
-                  // id is the board id
-                  axios
-                    .post("api/collaborators/boardTitle", { board_id: id })
-                    .then((res) => {
-                      // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
-                      setIdTitle((prevState) => [...prevState, res.data]);
-                      navigate("/profile");
-                    });
-                });
-              } else {
-                navigate("/profile");
-              }
-            });
+          //     // Checks if the user has any exisiting boards. If so, do individual axios request to get board titles. If user does not, navigate to profile
+          //     if (response.data.length > 0) {
+          //       response.data.map((id) => {
+          //         // id is the board id
+          //         axios
+          //           .post("api/collaborators/boardTitle", { board_id: id })
+          //           .then((res) => {
+          //             // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
+          //             setIdTitle((prevState) => [...prevState, res.data]);
+          //             navigate("/profile");
+          //           });
+          //       });
+          //     } else {
+          //       navigate("/profile");
+          //     }
+          //   });
         }
       })
       .catch((err) => console.log(err.message));

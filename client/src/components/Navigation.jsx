@@ -56,7 +56,7 @@ const Navigation = (props) => {
               <h3>About</h3>
             </Link>
           </div>
-          {showLogin === "logout" && (
+          {showLogin === "profile-logout" && (
             <div className="nav-link">
               <Link to="/profile">
                 <h3>Profile</h3>
@@ -76,6 +76,9 @@ const Navigation = (props) => {
             </div>
           )}
           {showLogin === "logout" && <Button onClick={logout}>Logout</Button>}
+          {showLogin === "profile-logout" && (
+            <Button onClick={logout}>Logout</Button>
+          )}
           {showLogin === "back" && (
             <Button onClick={back}>Back To Profile</Button>
           )}

@@ -12,7 +12,7 @@ const Home = (props) => {
 
   useEffect(() => {
     if (currentUser.id) {
-      setShowLogin("logout");
+      setShowLogin("profile-logout");
     }
   }, []);
   return (
@@ -39,7 +39,7 @@ const Home = (props) => {
         <h3>
           <em>
             A collaborative whiteboard application that allows for the planning
-            of itineraries!
+            of itineraries! :)
           </em>
         </h3>
       </div>
