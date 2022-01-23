@@ -38,46 +38,17 @@ module.exports = ({
     const { user_id } = req.body;
 
     getSpecificBoards(user_id).then((boardIdArray) => {
+      console.log("what is my boardIdArray--->", boardIdArray);
       // boardIdArray looks like this [1,3]
-      res.json(boardIdArray);
-      // boardIdArray.forEach((board_id) => {
-      // console.log("board_id--->", board_id);
-      // const boardArray = [];
-      // getBoardIdTitle(board_id)
-      //   .then((result) => {
-      //     console.log(result);
-      //     boardArray.push(result);
-      //   })
-      //   .then((response) => {
-      //     console.log("hhhmmmm response on line 50--->", response);
-      //   });
-      // });
+      return res.json(boardIdArray);
     });
-    // .then((response) => {
-    //   console.log("did it reach line 47, response", response);
-    // });
-    // updateCollaborators(user_id, board_id)
-    //   .then((results) => {
-    //     // console.log(
-    //     //   "hit line 15 in collaborators after the function call. This is the res",
-    //     //   res
-    //     // );
-    //     return res.json({
-    //       msg: "Added collaborator to board! Happy planning!",
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     return res.json({
-    //       msg: "cannot add collaborator because collaborator id does not exist",
-    //     });
-    //   });
   });
 
   router.post("/boardTitle", (req, res) => {
     const { board_id } = req.body;
-    console.log("line 78 from collaborators.js", board_id);
+    // console.log("line 78 from collaborators.js", board_id);
     getBoardIdTitle(board_id).then((result) => {
-      console.log("result from line 81--->", result);
+      // console.log("result from line 81--->", result);
       res.json(result);
     });
   });

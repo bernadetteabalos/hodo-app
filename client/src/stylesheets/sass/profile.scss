@@ -25,6 +25,12 @@
         border: 5px solid black;
         background-color: pink;
         height: 50vh;
+        display: flex;
+        overflow: auto;
+        overflow-wrap: break-word;
+        flex-direction: column;
+        justify-content: flex-start;
+        font-size: 1.15rem;
       }
     }
   }

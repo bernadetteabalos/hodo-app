@@ -49,10 +49,10 @@ module.exports = ({
 
   /*UPDATING BOARD*/
   router.put("/:id", (req, res) => {
-    const { metadata, id, budget_data } = req.body;
+    const { metadata, id } = req.body;
 
-    console.log("OKOK", metadata, id, budget_data);
-    saveBoard(metadata, id, budget_data)
+    console.log("OKOK", metadata, id);
+    saveBoard(metadata, id)
       .then((savedBoard) => res.json(savedBoard))
       .catch((err) =>
         res.json({

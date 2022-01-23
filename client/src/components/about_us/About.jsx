@@ -14,7 +14,7 @@ const About = (props) => {
 
   useEffect(() => {
     if (currentUser.id) {
-      setShowLogin("logout");
+      setShowLogin("profile-logout");
     }
   }, []);
 
@@ -22,23 +22,22 @@ const About = (props) => {
   return (
     <>
       <Navigation
-        currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
         setIdTitle={setIdTitle}
       />
-      <div className="about-page">
+      <div className="about-page title">
         <h1>About Us</h1>
         <div className="about-people">
-          <div className="person">
+          <div className="person bold pop">
             <h1>Bernadette Abalos</h1>
           </div>
-          <div className="person">
+          <div className="person emphasize popsec">
             <h1>Stephanie Li</h1>
           </div>
-          <div className="person">
-            <h1>Bleslinda Mateo</h1>
+          <div className="person outline popthird">
+            <h1>Blesilda Mateo</h1>
           </div>
         </div>
         <div className="about-stack">
@@ -52,7 +51,7 @@ const About = (props) => {
                 setCount(count + 1000);
               }}
             >
-              +
+              <i className="fas fa-glass-cheers"></i> Cheer!
             </button>
             to our instructors and mentors at LHL!
           </h1>
