@@ -11,20 +11,24 @@ const Navigation = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
     props;
 
-  const login = () => {
+  const login = (e) => {
+    e.preventDefault();
     navigate("/login");
   };
 
-  const register = () => {
+  const register = (e) => {
+    e.preventDefault();
     navigate("/register");
   };
 
-  const back = () => {
+  const back = (e) => {
+    e.preventDefault();
     setShowLogin("logout");
     navigate("/profile");
   };
 
-  const logout = () => {
+  const logout = (e) => {
+    e.preventDefault();
     navigate("/");
     setCurrentUser({});
     setShowLogin("login");
@@ -46,23 +50,25 @@ const Navigation = (props) => {
               />
             </Link>
           </div>
-          <div>
-            <Link className="nav-link" to="/">
-              <h3>Home</h3>
-            </Link>
-          </div>
-          <div>
-            <Link className="nav-link" to="/about">
-              <h3>About</h3>
-            </Link>
-          </div>
-          {showLogin === "profile-logout" && (
+          <div className="home-profile-about">
             <div>
-              <Link className="nav-link" to="/profile">
-                <h3>Profile</h3>
+              <Link className="nav-link" to="/">
+                <h3>Home</h3>
               </Link>
             </div>
-          )}
+            <div>
+              <Link className="nav-link" to="/about">
+                <h3>About</h3>
+              </Link>
+            </div>
+            {showLogin === "profile-logout" && (
+              <div>
+                <Link className="nav-link" to="/profile">
+                  <h3>Profile</h3>
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
         <div className="nav-right">
           {showLogin === "login" && (

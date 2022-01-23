@@ -3,14 +3,22 @@
   display: flex;
   justify-content: space-around;
   background: $nav-background;
+  h3:hover {
+    color: green;
+  }
   .logo {
     display: flex;
     justify-content: center;
     margin-left: 4vw;
   }
-  .nav-link {
-    color: black;
-    text-decoration: none;
+  .home-profile-about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .nav-link {
+      color: black;
+      text-decoration: none;
+    }
   }
   .nav-right {
     display: flex;
