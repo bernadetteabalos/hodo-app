@@ -1,6 +1,6 @@
 .about-page {
-  background: #e6faff;
-  height: 100vh;
+  background: #ffffff;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,6 +31,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.aboutTitle {
+  color: #fabcbc;
+  text-shadow: -1px -1px #000000, 1.5px -1.5px 0 #000000, -1px 1px 0 #000000,
+    1px 1px 0 #000000;
+}
+
+.techStack {
+  color: #fabcbc;
+  text-shadow: -1px -1px #000000, 1.5px -1.5px 0 #000000, -1px 1px 0 #000000,
+    1px 1px 0 #000000;
 }
 
 .head {

@@ -20,7 +20,7 @@ export default class Confetti extends React.Component {
   makeShot = (particleRatio, opts) => {
     this.animationInstance({
       ...opts,
-      origin: { y: 0.9, x: 0.42 },
+      origin: { y: 0.9, x: 0.39 },
       particleCount: Math.floor(200 * particleRatio),
     });
   };
