@@ -100,12 +100,13 @@ const Header = (props) => {
   return (
     <div className="header-bar">
       <div>
-        <Button variant="warning" onClick={handleShowTitle}>
-          Edit Title
-        </Button>
+
       </div>
       <div className="title-name">
-        <h2>{title}</h2>
+        <h2 id="boardTitle" >{title}</h2>
+        <Button className="headerButton" onClick={handleShowTitle}>
+        <i class="bi bi-pencil-square"></i>
+        </Button>
       </div>
       <Modal
         show={show === "title"}
@@ -137,7 +138,7 @@ const Header = (props) => {
         </Form>
       </Modal>
       <div className="add-collaborators">
-        <Button onClick={handleShowCollab}>Add a Collaborator</Button>
+        <Button className="headerButtonTwo" onClick={handleShowCollab}>Add a Collaborator</Button>
       </div>
       <Modal
         show={show === "collab"}

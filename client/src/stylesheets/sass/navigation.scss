@@ -9,8 +9,9 @@
   .logo {
     display: flex;
     justify-content: center;
-    margin-left: 4vw;
+    margin-left: 3em;
   }
+
   .home-profile-about {
     display: flex;
     justify-content: center;
@@ -28,7 +29,7 @@
       color: white;
       background-color: $btn;
       border: none;
-      margin-right: 5rem;
+      margin-right: 2em;
     }
   }
 }

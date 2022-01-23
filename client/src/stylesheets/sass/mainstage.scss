@@ -1,6 +1,7 @@
 .creativity {
   display: flex;
   flex-direction: row;
+  align-items: center;
   width: 100%;
 
 }
@@ -8,13 +9,8 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: rgba(219, 216, 216, 0.993);
+  background-color:transparent;
   padding: 1rem;
-}
-
-.stage {
-  background-color: white;
-  border: 3px solid black;
 }
 
 .shapes {
@@ -27,41 +23,47 @@
   display: flex;
   flex-direction: column;
 }
+.stage {
+  background-color: white;
+  width: 100%;
+  height: 76%;
+  border: 0.1px solid rgb(201, 198, 198);
+}
 
 .leftsidebar {
   display: flex;
-  background-color:white;
+  background-color: white;
   flex-direction: column;
+  width: 80px;
   padding: 20px;
   z-index: 4;
-  width: 100px;
+  margin-left: 3em;
   position: absolute;
+  border-radius: 25px;
+  filter: drop-shadow(4px 5px 6px #cfcfcf);
 }
-
 
 .rightbar {
   display: flex;
+  background-color:transparent;
   flex-direction: column;
-  width: 30px;
+  width: 60px;
+  height: 60%;
+  z-index: 4;
+  position: absolute;
+  right: 20em;
+  
+  
 }
 
 .rightsection {
   display: flex;
   flex-direction: column;
   width: 300px;
-  height: 850px;
-  background-color: pink;
-  margin-left: 0px;
-  
+  height: 838px;
+  background-color: transparent;
+  margin-left: 0px;  
 }
-
-.stage {
-  width: 100%;
-  height: 76%;
-  border: 0.1px solid black;
-}
-
-
 
 .icons {
   display: flex;
@@ -70,7 +72,7 @@
   position: relative;
 }
 
-.bi {
+.shapes {
   display: flex;
   font-size: 20px;
   width: 100%;
@@ -88,19 +90,24 @@
   color: black;
 }
 
+.shapesTwo {
+  color: white;
+}
+
 .select-a-color {
   display: grid;
   justify-content: center;
-  grid-gap: 1em;
+  grid-gap: 0.5em;
+
 }
 
 input[type="color"] {
   -webkit-appearance: none;
   border: none;
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(255, 255, 255, 0);
   &:hover {
     filter: brightness(1.2);
   }
@@ -116,8 +123,8 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .button-icons.btn-outline-secondary {
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   overflow: hidden;
   &:hover {
     filter: brightness(1.2);
@@ -149,3 +156,107 @@ input[name="url"] {
   }
 }
 
+.header-bar {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  z-index: 4;
+  background-color: rgb(214, 216, 238);
+}
+
+button.funcButton {
+  background-color:rgb(214, 216, 238); 
+  border: none;
+  width: 60px;
+  height: 60px;
+  padding: 0px;
+}
+.bi-gear {
+font-size: 20px;
+}
+button.funcButton:hover {
+  background-color:rgb(185, 188, 223);
+}
+
+button.funcButton:focus{
+  background-color:rgb(185, 188, 223);
+  box-shadow: none;
+}
+
+button.funcButton.active {
+  border: none;
+}
+
+.title-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: black;
+}
+
+button.headerButton {
+  width: 50px;
+  color: black;
+  background-color:white;
+  border: none;
+}
+
+button.headerButtonTwo {
+  width: 100%;
+  color: black;
+  background-color:white;
+  border: none;
+  margin-right: 1em;
+}
+
+button.headerButton:hover {
+  width: 50px;
+  background-color:rgb(185, 188, 223);
+}
+
+button.headerButton:focus{
+  width: 50px;
+  background-color:rgb(185, 188, 223);
+  box-shadow: none;
+}
+
+button.headerButton.active {
+  border: none;
+}
+
+#boardTitle {
+  font-size: 20px;
+  margin-bottom: 0px;
+  margin-right: 1em;
+  
+}
+
+button.undoButton {
+  background-color: transparent;
+  color: rgb(185, 188, 223);
+  border: 1px solid rgb(185, 188, 223);
+  height: 60px;
+  padding: 0px;
+
+}
+
+button.undoButton:hover {
+  background-color:rgb(185, 188, 223);
+  border: none;
+}
+
+button.undoButton:focus{
+  background-color:rgb(185, 188, 223);
+  box-shadow: none;
+}
+
+.hideThis {
+  width: 60px;
+}
+button.clear {
+  width: 100%;
+  height: 60px;
+  padding: 0px;
+}

@@ -1,1 +1,25 @@
-.about-page{background:#2262b1;height:100vh;display:flex;flex-direction:column;align-items:center}.about-page .about-people{display:flex;align-items:center;justify-content:space-between}.about-page .about-people .person{display:flex;flex-direction:column;align-items:center;border:3px solid #000;margin:3rem;width:25vw;height:50vh}.about-page .about-stack{display:flex}.about-page .thank-you{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.about-page {
+  background: #2262b1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .about-page .about-people {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
+    .about-page .about-people .person {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 3px solid #000000;
+      margin: 3rem;
+      width: 25vw;
+      height: 50vh; }
+  .about-page .about-stack {
+    display: flex; }
+  .about-page .thank-you {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }

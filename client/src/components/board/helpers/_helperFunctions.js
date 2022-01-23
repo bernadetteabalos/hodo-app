@@ -1,6 +1,6 @@
 import { v4 as uuidV4 } from "uuid";
 
-export const generateOneElement = (shape, fillColor, borderColor, url) => {
+export const generateOneElement = (x, y, shape, fillColor, borderColor, url) => {
   let width = 100;
   let height = 100;
 
@@ -16,8 +16,8 @@ export const generateOneElement = (shape, fillColor, borderColor, url) => {
 
   return {
     attrs: {
-      x: 150,
-      y: 150,
+      x,
+      y,
       width,
       height,
       rotation: 0,
