@@ -35,7 +35,7 @@ const MainStage = (props) => {
   const [connection, setConnection] = useState(undefined);
   // colours
   const [fillColor, setFillColor] = useState("");
-  const [strokeColor, setStrokeColor] = useState("black");
+  const [borderColor, setBorderColor] = useState("black");
   // for if SHAPE is selected
   const [selectedId, selectShape] = useState(null);
   // for IMAGES
@@ -44,6 +44,7 @@ const MainStage = (props) => {
   const [message, setMessage] = useState("");
   const [chatSpeakers, setChatSpeakers] = useState([]);
   // for PENS
+  const [strokeColor, setStrokeColor] = useState("black");
   const [tool, setTool] = useState("select");
   const [lines, setLines] = useState([]);
   // references
@@ -330,14 +331,16 @@ const MainStage = (props) => {
         <LeftBar
           fillColor={fillColor}
           setFillColor={setFillColor}
-          strokeColor={strokeColor}
-          setStrokeColor={setStrokeColor}
+          borderColor={borderColor}
+          setBorderColor={setBorderColor}
           handleClick={handleClick}
           url={url}
           setURL={setURL}
           resetUrl={resetUrl}
           tool={tool}
           setTool={setTool}
+          strokeColor={strokeColor}
+          setStrokeColor={setStrokeColor}
         />
         {/* ******** STAGE ******************** */}
         <div className="stage" style={{ position: "relative" }}>
