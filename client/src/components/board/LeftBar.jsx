@@ -155,31 +155,6 @@ const LeftBar = (props) => {
             </div>
           </Button>
         )}
-<<<<<<< HEAD
-        {/* <Button
-          className="button-icons"
-          variant="outline-secondary"
-          onClick={() => {
-            setState({ showing: !showing });
-            resetUrl();
-          }}
-        >
-          <div className="icons">
-            <i
-              style={{ display: showing ? "none" : "flex" }}
-              className="bi bi-image shapes"
-            ></i>
-            <i
-              style={{ display: showing ? "flex" : "none" }}
-              className="bi bi-plus-square shapes"
-            ></i>
-          </div>
-        </Button> */}
-      </div>
-      {/* *****PEN TOOLS DROP DOWN***** */}
-      {/* PEN */}
-      <div className="icons">
-=======
       {/* SELECT */}
       <Button
         className="button-icons"
@@ -193,7 +168,6 @@ const LeftBar = (props) => {
       </Button>
       {/* PEN */}
       <div className="icons" onClick={() =>  setTool(isPenActivated ? 'select' : 'pen')}>
->>>>>>> cfb0f355f0c7a909c4ca55b4200252e7237ee5f8
         <input type="color" value={strokeColor} onChange={handlePen} />
         <i style={{display: isPenActivated ? 'flex': 'none'}} className="bi bi-pen-fill shapes"></i>
         <i style={{display: isPenActivated ? 'none': 'flex'}} className="bi bi-pen shapes shapesTwo"></i>
