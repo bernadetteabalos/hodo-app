@@ -83,12 +83,12 @@ const Login = (props) => {
         setIdTitle={setIdTitle}
       />
       <div className="login-page">
-        <Container className="login-container m-auto">
+        <Container className="login-container">
           <h1>Login</h1>
           <Form onSubmit={handleSubmit} className="w-100">
-            <Form.Group className="mb-3">
+            <Form.Group>
               <h4>
-                <Form.Label>Email: </Form.Label>
+                <Form.Label className="email-pw">Email </Form.Label>
               </h4>
               <Form.Control
                 size="lg"
@@ -100,11 +100,11 @@ const Login = (props) => {
             </Form.Group>
             <Form.Group>
               <h4>
-                <Form.Label>Password: </Form.Label>
+                <Form.Label className="email-pw">Password </Form.Label>
               </h4>
               <Form.Control size="lg" type="password" ref={pwRef} required />
             </Form.Group>
-            <Button className="w-100 mt-2" type="submit">
+            <Button variant="success" className="w-100 email-pw" type="submit">
               <h4>Login</h4>
             </Button>
           </Form>

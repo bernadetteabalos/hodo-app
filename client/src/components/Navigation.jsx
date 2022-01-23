@@ -67,22 +67,26 @@ const Navigation = (props) => {
         <div className="nav-right">
           {showLogin === "login" && (
             <div className="link-btn">
-              <Button className="login-btn" onClick={login}>
+              <Button variant="success" className="login-btn" onClick={login}>
                 Login
               </Button>
             </div>
           )}
           {showLogin === "login" && (
             <div className="link-btn">
-              <Button onClick={register}>Register</Button>
+              <Button variant="success" onClick={register}>
+                Register
+              </Button>
             </div>
           )}
           {showLogin === "logout" && <Button onClick={logout}>Logout</Button>}
           {showLogin === "profile-logout" && (
-            <Button onClick={logout}>Logout</Button>
+            <Button variant="success" onClick={logout}>
+              Logout
+            </Button>
           )}
           {showLogin === "back" && (
-            <Button className="base-btn" onClick={back}>
+            <Button variant="success" className="base-btn" onClick={back}>
               Back To Profile
             </Button>
           )}
