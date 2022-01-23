@@ -72,7 +72,21 @@ const Navigation = (props) => {
               </Button>
             </div>
           )}
-          {showLogin === "login" && (
+          {showLogin === "register" && (
+            <div className="link-btn">
+              <Button variant="success" onClick={register}>
+                Register
+              </Button>
+            </div>
+          )}
+          {showLogin === "login-register" && (
+            <div className="link-btn">
+              <Button variant="success" className="login-btn" onClick={login}>
+                Login
+              </Button>
+            </div>
+          )}
+          {showLogin === "login-register" && (
             <div className="link-btn">
               <Button variant="success" onClick={register}>
                 Register

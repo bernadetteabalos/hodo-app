@@ -13,6 +13,8 @@ const Home = (props) => {
   useEffect(() => {
     if (currentUser.id) {
       setShowLogin("profile-logout");
+    } else {
+      setShowLogin("login-register");
     }
   }, []);
   return (

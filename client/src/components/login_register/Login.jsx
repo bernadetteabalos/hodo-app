@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 // import other component
 import Navigation from "../Navigation";
@@ -25,6 +25,9 @@ const Login = (props) => {
   const pwRef = useRef();
 
   console.log("this is my user in login line 20 --->", currentUser);
+  useEffect(() => {
+    setShowLogin("register");
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
