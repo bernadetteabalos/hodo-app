@@ -2,6 +2,7 @@
 .navbar {
   display: flex;
   justify-content: space-around;
+  width: 100%;
   background: $nav-background;
   h3:hover {
     color: $btn;
@@ -13,6 +14,7 @@
   }
 
   .home-profile-about {
+    margin-left: 1.5em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,6 +32,11 @@
       background-color: $btn;
       border: none;
       margin-right: 2em;
+
+      &:hover {
+        background-color: $btn-hover;
+      }
+
     }
   }
 }

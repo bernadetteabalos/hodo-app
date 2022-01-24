@@ -135,7 +135,7 @@ const Profile = (props) => {
               </strong>
             </div>
             <div>
-              <h5>Your id is: {currentUser.id}</h5>
+              <h5>Your collaborator id is: {currentUser.id}</h5>
             </div>
           </div>
           <div className="right-profile">

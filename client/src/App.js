@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // import other Components
 import Home from "./components/home/Home";
@@ -19,6 +21,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [showLogin, setShowLogin] = useState("login");
   const [idTitle, setIdTitle] = useState([]);
+
+  AOS.init();
 
   return (
     <div className="App">

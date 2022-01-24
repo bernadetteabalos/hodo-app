@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 // import from other libraries
 import axios from "axios";
 import { Button, Modal, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // import helpers from local files
 import useApplicationData from "../../hooks/forBoards";
@@ -108,6 +108,7 @@ const Header = (props) => {
   return (
     <div className="header-bar">
       <div className="space">
+      <Link to="/">
         <img
           src={logo}
           width="120"
@@ -115,6 +116,7 @@ const Header = (props) => {
           className="d-inline-block align-top img-logo"
           alt="Hodo logo"
         />
+        </Link>
       </div>
       <div className="title-name">
         <h2 id="boardTitle">{title}</h2>
