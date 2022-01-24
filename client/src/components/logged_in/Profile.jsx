@@ -100,6 +100,11 @@ const Profile = (props) => {
     // let's user know that a board has been created
     alert(msg);
 
+    setIdTitle((prevState) => [
+      ...prevState,
+      { id: board.id, title: board.title },
+    ]);
+
     navigate(`/board/${board.id}`);
   };
 
@@ -120,7 +125,7 @@ const Profile = (props) => {
               <img src={currentUser.profile_photo} alt="profile-photo" />
             </div>
             <div className="profile-name">
-              <h4>{currentUser.first_name}</h4>
+              <h4 className="nameEmphasis">{currentUser.first_name}</h4>
             </div>
             <div>
               <em>
@@ -130,17 +135,15 @@ const Profile = (props) => {
           </div>
           <div className="right-profile">
             <div className="itineraries-container">
-              <h1>My Boards</h1>
-              {/* Displays every board and when the name is clicked, redirect to respective board (calls the OneTitle Component) */}
+              <h1 className="itineraryContainer itineraryBold">
+                My Itineraries
+              </h1>
+              <br></br>
               {idTitle.map((titleObj) => {
                 return <OneTitle key={titleObj.id} titleObj={titleObj} />;
               })}
             </div>
-            <Button
-              className="mt-2 w-100"
-              variant="primary"
-              onClick={handleShow}
-            >
+            <Button className="mt-2 w-100" variant="dark" onClick={handleShow}>
               Create New Board
             </Button>
             {/* ****** Modal that appears when user creates a new board, user enters title for new board */}
@@ -164,10 +167,14 @@ const Profile = (props) => {
                   </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
+                  <Button variant="danger" onClick={handleClose}>
                     Cancel
                   </Button>
-                  <Button variant="primary" type="submit">
+                  <Button
+                    variant="light"
+                    type="submit"
+                    class="btn btn-outline-secondary"
+                  >
                     Create Board
                   </Button>
                 </Modal.Footer>

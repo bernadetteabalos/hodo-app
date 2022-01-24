@@ -1,1 +1,8 @@
-.handleTitle{cursor:pointer;color:blue}
+.handleTitle {
+  cursor: pointer;
+  color: rgb(110, 74, 164);
+}
+
+.itineraryBoards {
+  text-align: center;
+}

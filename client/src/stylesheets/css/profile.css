@@ -1,1 +1,49 @@
-.profile-page{background-color:"white"}.profile-page .profile-container{margin:auto;display:flex;justify-content:space-evenly;height:100vh;width:80vw}.profile-page .profile-container .profile-photo img{border:5px solid #000;margin-top:5rem;margin-bottom:3rem}.profile-page .profile-container .profile-name{border:5px solid #000;text-align:center}.profile-page .profile-container .right-profile{width:50%}.profile-page .profile-container .right-profile .itineraries-container{margin-top:5rem;border:5px solid #000;background-color:pink;height:50vh;display:flex;overflow:auto;overflow-wrap:break-word;flex-direction:column;justify-content:flex-start;font-size:1.15rem}
+.profile-page {
+  background-color: #cedffc;
+}
+.profile-page .profile-container {
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  height: 100vh;
+  width: 80vw;
+}
+.profile-page .profile-container .profile-photo img {
+  border: 5px solid #000;
+  margin-top: 5rem;
+  margin-bottom: 1.5rem;
+}
+.profile-page .profile-container .profile-name {
+  border: 5px solid #000;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+.profile-page .profile-container .right-profile {
+  width: 50%;
+  font-family: "Poppins", sans-serif;
+  padding-left: 3em;
+}
+.profile-page .profile-container .right-profile .itineraries-container {
+  margin-top: 5rem;
+  border: 5px solid #000;
+  background-color: rgb(183, 195, 244);
+  height: 50vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.itineraryContainer {
+  text-align: center;
+}
+
+.itineraryBold {
+  font-weight: bolder;
+  text-shadow: -1px -1px #000000, 0px -0px 0 #000000, 0px 0px 0 #000000,
+    0px 0px 0 #000000;
+}
+
+.nameEmphasis {
+  color: black;
+  font-weight: bolder;
+  text-shadow: -1px -1px #000000, 0px -0px 0 #000000, 0px 0px 0 #000000,
+    0px 0px 0 #000000;
+}
