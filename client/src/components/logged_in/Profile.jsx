@@ -137,11 +137,13 @@ const Profile = (props) => {
             <div className="itineraries-container">
               <h1>My Boards</h1>
               {/* Displays every board and when the name is clicked, redirect to respective board (calls the OneTitle Component) */}
-              {idTitle.map((titleObj) => {
-                return <OneTitle key={titleObj.id} titleObj={titleObj} />;
-              })}
+              <div>
+                {idTitle.map((titleObj) => {
+                  return <OneTitle key={titleObj.id} titleObj={titleObj} />;
+                })}
+              </div>
             </div>
-            <Button className="mt-2 w-100" variant="dark" onClick={handleShow}>
+            <Button className="mt-2 w-100" onClick={handleShow}>
               Create New Board
             </Button>
             {/* ****** Modal that appears when user creates a new board, user enters title for new board */}

@@ -3,29 +3,55 @@
 .profile-page {
   background-color: $base-background;
   .profile-container {
+    // background-color: green;
     margin: auto;
     display: flex;
     justify-content: space-evenly;
     height: 100vh;
     width: 80vw;
 
-    .profile-photo img {
-      border: 5px solid black;
-      margin-top: 5rem;
-      margin-bottom: 3rem;
-      height: 80vh;
+    .left-profile {
+      // background-color: blue;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .profile-photo {
+        // background-color: red;
+        display: flex;
+        justify-content: center;
+        height: 50%;
+        width: 50%;
+        border-radius: 100px;
+        // profile img
+        img {
+          border: 5px solid black;
+          border-radius: 50%;
+          margin-top: 5rem;
+          margin-bottom: 3rem;
+          min-width: 90%;
+          min-height: 90%;
+          flex-shrink: 0;
+        }
+      }
     }
+
     .profile-name {
       border: 5px solid black;
-      text-align: center;
+
       background-color: white;
+      display: flex;
+      justify-content: center;
+      margin-top: 4em;
+      width: 50%;
     }
     .right-profile {
       width: 50%;
       .itineraries-container {
         margin-top: 5rem;
         border: 5px solid black;
-        background-color: pink;
+        border-radius: 40px;
+        background-color: $nav-background;
         height: 50vh;
         display: flex;
         overflow: auto;
@@ -33,6 +59,14 @@
         flex-direction: column;
         justify-content: flex-start;
         font-size: 1.15rem;
+        h1 {
+          padding-top: 0.5em;
+          padding-left: 1em;
+        }
+      }
+      Button {
+        background-color: $btn;
+        border: none;
       }
     }
   }
