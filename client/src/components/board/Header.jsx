@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 // import helpers from local files
 import useApplicationData from "../../hooks/forBoards";
-import logo from "../../images/hodoapp (2).png";
+import logo from "../../images/hodo_v3.png";
 
 //import syling
 import "../../stylesheets/css/header.css";

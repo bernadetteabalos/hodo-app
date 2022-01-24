@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 
-//import other Component
+// import other Component
 import Navigation from "../Navigation";
+
+// import from other local files
+import logo from "../../images/hodo_v3.png";
 
 // import styling
 import "../../stylesheets/css/home.css";
@@ -29,10 +32,8 @@ const Home = (props) => {
       />
       {/* ************ HOME PAGE WITH LOGO ************/}
       <div className="home-page">
-        <img src="https://i.imgur.com/A8H3iYm.png" alt="hodo-logoo" />
-        {/* <img src="https://i.imgur.com/293NPiy.png" alt="hodo-logoo" /> */}
+        <img src={logo} alt="hodo-logoo" />
       </div>
-      <div className="bottom-page"></div>
     </>
   );
 };
