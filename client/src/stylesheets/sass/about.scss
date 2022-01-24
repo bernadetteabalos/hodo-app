@@ -264,3 +264,12 @@
   text-shadow: none;
   transform: rotateY(180deg);
 }
+
+.profile-photo-about {
+  img {
+    height: 300px;
+    width: 300px;
+    border-radius: 300px;
+    border: 4px solid black;
+  }
+}
