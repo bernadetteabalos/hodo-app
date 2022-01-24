@@ -27,8 +27,7 @@ import SASS from "./images/SASS.png";
 import Socketio from "./images/Socketio.png";
 
 const About = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
-    props;
+  const { currentUser, showLogin, setShowLogin, setIdTitle } = props;
   const [count, setCount] = useState(1000);
 
   useEffect(() => {

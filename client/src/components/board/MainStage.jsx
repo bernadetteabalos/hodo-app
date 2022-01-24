@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import useApplicationData from "../../hooks/forBoards";
 import useKeyPress from "../../hooks/keyboardShortcuts";
 
@@ -15,7 +15,7 @@ import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
 import OneChatMessage from "../board/right_bar_components/OneChatMessage";
-import Navigation from "../Navigation";
+import { currentUserContext } from "../../providers/UserProvider";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
@@ -30,6 +30,7 @@ const END_POINT = "http://localhost:8001";
 
 const MainStage = (props) => {
   const { showLogin, setShowLogin, setIdTitle } = props;
+  const { currentUser } = useContext(currentUserContext);
   // for the socket connection
   const [connection, setConnection] = useState(undefined);
   // colours

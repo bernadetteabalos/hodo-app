@@ -13,8 +13,8 @@ import "../../stylesheets/css/login.css";
 import { currentUserContext } from "../../providers/UserProvider";
 
 const Login = (props) => {
-  const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
-  const { currentUser, login, logout } = useContext(currentUserContext);
+  const { showLogin, setShowLogin, setIdTitle } = props;
+  const { currentUser, login } = useContext(currentUserContext);
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
