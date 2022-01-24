@@ -26,6 +26,10 @@ import React from "./images/React.png";
 import SASS from "./images/SASS.png";
 import Socketio from "./images/Socketio.png";
 
+//import Creator photos
+import Bernadette from "./images/Creators/Bernadette.png";
+import Blesilda from "./images/Creators/Blesilda.png";
+
 const About = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
     props;
@@ -58,9 +62,16 @@ const About = (props) => {
             <div className="person bold pop">
               <div className="flip-card-inner">
                 <div className="one-front">
-                  <h1>Bernadette Abalos</h1>
+                  <h1 className="tinyName">Bernadette Abalos</h1>
+                  <br></br>
                   <div className="profile-photo-about">
-                    <img src={bubbles} />
+                    <img
+                      src={Bernadette}
+                      className="Bernadette"
+                      width="240"
+                      height="240"
+                      alt="avatar"
+                    />
                   </div>
                 </div>
                 <div className="one-back">
@@ -91,9 +102,16 @@ const About = (props) => {
             <div className="person emphasize popsec">
               <div className="flip-inner">
                 <div className="two-front">
-                  <h1>Stephanie Li</h1>
+                  <h1 className="smallName">Stephanie Li</h1>
+                  <br></br>
                   <div className="profile-photo-about">
-                    <img src={blossom} />
+                    <img
+                      src={SASS}
+                      className="Stephanie"
+                      width="240"
+                      height="240"
+                      alt="avatar"
+                    />
                   </div>
                 </div>
                 <div className="two-back">
@@ -124,9 +142,16 @@ const About = (props) => {
             <div className="person outline popthird">
               <div className="flip-in">
                 <div className="three-front">
-                  <h1>Blesilda Mateo</h1>
+                  <h1 className="miniName">Blesilda Mateo</h1>
+                  <br></br>
                   <div className="profile-photo-about">
-                    <img src={buttercup} />
+                    <img
+                      src={Blesilda}
+                      className="Blesilda"
+                      width="240"
+                      height="240"
+                      alt="avatar"
+                    />
                   </div>
                 </div>
                 <div className="three-back">

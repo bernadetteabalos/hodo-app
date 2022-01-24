@@ -250,3 +250,27 @@
   text-shadow: none;
   transform: rotateY(180deg);
 }
+
+.Bernadette {
+  border-radius: 50%;
+}
+
+.Stephanie {
+  border-radius: 50%;
+}
+
+.Blesilda {
+  border-radius: 50%;
+}
+
+.tinyName {
+  font-size: 38px;
+}
+
+.smallName {
+  font-size: 38px;
+}
+
+.miniName {
+  font-size: 38px;
+}
