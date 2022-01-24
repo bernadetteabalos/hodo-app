@@ -29,10 +29,10 @@ const Home = (props) => {
       />
       {/* ************ HOME PAGE WITH LOGO ************/}
       <div className="home-page">
-        <img src="https://i.imgur.com/A8H3iYm.png" alt="hodo-logoo" />
+        <img src="https://i.imgur.com/d5zMkIN.png" alt="hodo-logoo" />
         {/* <img src="https://i.imgur.com/293NPiy.png" alt="hodo-logoo" /> */}
       </div>
-      <div className="bottom-page"></div>
+      {/* <div className="bottom-page"></div> */}
     </>
   );
 };
