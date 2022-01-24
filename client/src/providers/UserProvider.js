@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState, createContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const currentUserContext = createContext();
 
 const CurrentUserProvider = (props) => {
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
 
   const login = (email, password) => {
@@ -25,6 +27,7 @@ const CurrentUserProvider = (props) => {
           // setShowLogin to logout to display logout in the nav bar
           //  setShowLogin("logout");
           // redirects user to the profile page
+          navigate("/profile");
         }
       })
       // prints any error

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 
 // import from other libraries
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import axios from "axios";
 // import other components
 import OneTitle from "./OneTitle";
 import Navigation from "../Navigation";
+import { currentUserContext } from "../../providers/UserProvider";
 
 // import helpers from local files
 import useApplicationData from "../../hooks/forBoards";
@@ -17,14 +18,8 @@ import "../../stylesheets/css/profile.css";
 import { useEffect } from "react";
 
 const Profile = (props) => {
-  const {
-    currentUser,
-    setCurrentUser,
-    showLogin,
-    setShowLogin,
-    idTitle,
-    setIdTitle,
-  } = props;
+  const { showLogin, setShowLogin, idTitle, setIdTitle } = props;
+  const { currentUser } = useContext(currentUserContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const titleRef = useRef();
@@ -34,6 +29,7 @@ const Profile = (props) => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
+    console.log("who is my user on line 32 of profile--->", currentUser);
     // to display the 'logout' button on the nav bar (pass showLogin down to Navigation Component)
     setShowLogin("logout");
 
@@ -112,7 +108,6 @@ const Profile = (props) => {
     <>
       {/* ************ NAVIGATION BAR ************/}
       <Navigation
-        setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
         setIdTitle={setIdTitle}

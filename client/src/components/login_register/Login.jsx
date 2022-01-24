@@ -14,7 +14,7 @@ import { currentUserContext } from "../../providers/UserProvider";
 
 const Login = (props) => {
   const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
-  const { auth, currentUser, login, logout } = useContext(currentUserContext);
+  const { currentUser, login, logout } = useContext(currentUserContext);
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
@@ -28,8 +28,6 @@ const Login = (props) => {
     e.preventDefault();
 
     login(emailRef.current.value, pwRef.current.value);
-
-    navigate("/profile");
 
     // // axios request to check if user's credentials matches those in database
     // const urlOneUserApi = `/api/users/login`;

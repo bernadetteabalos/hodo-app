@@ -9,8 +9,7 @@ import "../stylesheets/css/navigation.css";
 
 const Navigation = (props) => {
   const navigate = useNavigate();
-  const { setCurrentUser, showLogin, setShowLogin, setIdTitle, saveBoard } =
-    props;
+  const { showLogin, setShowLogin, setIdTitle, saveBoard } = props;
 
   // const [showBackToProfile, setShowBackToProfile] = useState(false);
 
@@ -26,14 +25,14 @@ const Navigation = (props) => {
 
   const back = (e) => {
     e.preventDefault();
-    setShowLogin("logout");
+    // setShowLogin("logout");
     navigate("/profile");
   };
 
   const logout = (e) => {
     e.preventDefault();
     navigate("/");
-    setCurrentUser({});
+    // setCurrentUser({});
     setShowLogin("login");
     setIdTitle([]);
   };
