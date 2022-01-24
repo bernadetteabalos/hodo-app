@@ -1,5 +1,3 @@
-@import "./variables.scss";
-
 .about-page {
   background: #ffffff;
   height: 90vh;
@@ -272,4 +270,139 @@
     border-radius: 300px;
     border: 4px solid black;
   }
+}
+
+/*Bernadette's Card*/
+
+.card-one {
+  background-color: transparent;
+  width: 25vw;
+  height: 40vh;
+  perspective: 1000px;
+  margin-right: 40px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(38, 45, 46, 0.536);
+}
+
+.card-one:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.one-front,
+.one-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.one-front {
+  background-color: rgb(194, 247, 255);
+  color: rgb(255, 255, 255);
+}
+
+.one-back {
+  background-color: rgb(173, 243, 254);
+  color: rgb(0, 0, 0);
+  text-shadow: none;
+  transform: rotateY(180deg);
+}
+
+/*Stephanie's Card*/
+
+.card-two {
+  background-color: transparent;
+  width: 25vw;
+  height: 40vh;
+  perspective: 1000px;
+  margin-right: 40px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(38, 45, 46, 0.536);
+}
+
+.card-two:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.two-front,
+.two-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.two-front {
+  background-color: rgb(240, 209, 250);
+  color: rgb(255, 255, 255);
+}
+
+.two-back {
+  background-color: rgb(237, 182, 255);
+  color: rgb(0, 0, 0);
+  text-shadow: none;
+  transform: rotateY(180deg);
+}
+
+/*Bles's Cards*/
+
+.card-three {
+  background-color: transparent;
+  width: 25vw;
+  height: 40vh;
+  perspective: 1000px;
+  margin-right: 40px;
+}
+
+.flip-in {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(38, 45, 46, 0.536);
+}
+
+.card-three:hover .flip-in {
+  transform: rotateY(180deg);
+}
+
+.three-front,
+.three-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.three-front {
+  background-color: rgb(191, 245, 227);
+  color: rgb(255, 255, 255);
+}
+
+.three-back {
+  background-color: #a5fadd;
+  color: rgb(0, 0, 0);
+  text-shadow: none;
+  transform: rotateY(180deg);
 }
