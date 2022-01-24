@@ -14,7 +14,7 @@ import { currentUserContext } from "../../providers/UserProvider";
 
 const Login = (props) => {
   const { showLogin, setShowLogin, setIdTitle } = props;
-  const { currentUser, login } = useContext(currentUserContext);
+  const { currentUser, loginMainProfile } = useContext(currentUserContext);
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
@@ -27,7 +27,7 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    login(emailRef.current.value, pwRef.current.value);
+    loginMainProfile(emailRef.current.value, pwRef.current.value);
 
     // // axios request to check if user's credentials matches those in database
     // const urlOneUserApi = `/api/users/login`;

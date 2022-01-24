@@ -8,7 +8,7 @@ const CurrentUserProvider = (props) => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
 
-  const login = (email, password) => {
+  const loginMainProfile = (email, password) => {
     // axios request to check if user's credentials matches those in database
     const urlOneUserApi = `/api/users/login`;
     axios
@@ -34,7 +34,7 @@ const CurrentUserProvider = (props) => {
       .catch((err) => console.log(err.message));
   };
 
-  const providerData = { currentUser, login };
+  const providerData = { currentUser, loginMainProfile };
   const Provider = currentUserContext.Provider;
   return <Provider value={providerData}>{props.children}</Provider>;
 };

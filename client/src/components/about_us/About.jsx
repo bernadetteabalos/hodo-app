@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // import from other components
@@ -25,9 +25,11 @@ import PostgreSQL from "./images/PostgreSQL.png";
 import React from "./images/React.png";
 import SASS from "./images/SASS.png";
 import Socketio from "./images/Socketio.png";
+import { currentUserContext } from "../../providers/UserProvider";
 
 const About = (props) => {
-  const { currentUser, showLogin, setShowLogin, setIdTitle } = props;
+  const { currentUser } = useContext(currentUserContext);
+  const { showLogin, setShowLogin, setIdTitle } = props;
   const [count, setCount] = useState(1000);
 
   useEffect(() => {
@@ -36,7 +38,10 @@ const About = (props) => {
     }
   }, []);
 
-  console.log("this is my current user on line 13 from about--->", currentUser);
+  console.log(
+    "this is my current user.id on line 13 from about--->",
+    currentUser.id
+  );
 
   const confetti = () => {
     setCount(count + 1000);
