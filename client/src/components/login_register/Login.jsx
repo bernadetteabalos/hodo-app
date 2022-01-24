@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
 
 // import from other libraries
 import { useNavigate } from "react-router-dom";
@@ -10,9 +10,11 @@ import Navigation from "../Navigation";
 
 // import stylesheet
 import "../../stylesheets/css/login.css";
+import { currentUserContext } from "../../providers/UserProvider";
 
 const Login = (props) => {
   const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
+  const { auth, currentUser, login, logout } = useContext(currentUserContext);
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
@@ -25,30 +27,36 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // axios request to check if user's credentials matches those in database
-    const urlOneUserApi = `/api/users/login`;
-    axios
-      .post(urlOneUserApi, {
-        email: emailRef.current.value,
-        password: pwRef.current.value,
-      })
-      // axios request returns json data with either msg(w/ error msg to client) ex {msg: 'incorrect credentials'}
-      .then((res) => {
-        if (res.data.msg) {
-          // display msg to user if incorrect credentials
-          alert(res.data.msg);
-        } else {
-          // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
-          setCurrentUser(res.data);
-          // setShowLogin to logout to display logout in the nav bar
-          setShowLogin("logout");
-          // redirects user to the profile page
-          navigate("/profile");
-        }
-      })
-      // prints any error
-      .catch((err) => console.log(err.message));
+    login(emailRef.current.value, pwRef.current.value);
+
+    navigate("/profile");
+
+    // // axios request to check if user's credentials matches those in database
+    // const urlOneUserApi = `/api/users/login`;
+    // axios
+    //   .post(urlOneUserApi, {
+    //     email: emailRef.current.value,
+    //     password: pwRef.current.value,
+    //   })
+    //   // axios request returns json data with either msg(w/ error msg to client) ex {msg: 'incorrect credentials'}
+    //   .then((res) => {
+    //     if (res.data.msg) {
+    //       // display msg to user if incorrect credentials
+    //       alert(res.data.msg);
+    //     } else {
+    //       // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
+    //       setCurrentUser(res.data);
+    //       // setShowLogin to logout to display logout in the nav bar
+    //       setShowLogin("logout");
+    //       // redirects user to the profile page
+    //       navigate("/profile");
+    //     }
+    //   })
+    //   // prints any error
+    //   .catch((err) => console.log(err.message));
   };
+
+  console.log("what is my currentUser then?", currentUser);
 
   return (
     <>
