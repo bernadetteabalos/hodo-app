@@ -2,27 +2,39 @@ import { useState } from "react";
 // import from other libraries
 import { Link, useNavigate } from "react-router-dom";
 
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
+import logo from "../images/hodo_v3.png";
 //styling
 import "../stylesheets/css/navigation.css";
 
 const Navigation = (props) => {
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
+  const { setCurrentUser, showLogin, setShowLogin, setIdTitle, saveBoard } =
     props;
 
-  const login = () => {
+  // const [showBackToProfile, setShowBackToProfile] = useState(false);
+
+  const login = (e) => {
+    e.preventDefault();
     navigate("/login");
   };
 
-  const register = () => {
+  const register = (e) => {
+    e.preventDefault();
     navigate("/register");
   };
 
-  const logout = () => {
+  const back = (e) => {
+    e.preventDefault();
+    setShowLogin("logout");
+    navigate("/profile");
+  };
+
+  const logout = (e) => {
+    e.preventDefault();
     navigate("/");
     setCurrentUser({});
-    setShowLogin(true);
+    setShowLogin("login");
     setIdTitle([]);
   };
 
@@ -33,44 +45,107 @@ const Navigation = (props) => {
           <div>
             <Link to="/">
               <img
-                src="https://media.istockphoto.com/photos/paper-plane-on-red-background-picture-id1358970693?b=1&k=20&m=1358970693&s=170667a&w=0&h=AgDbacTXHFKtBYvnkzpbL5k38J-o08iUx-6j7zPDo6Q="
-                width="40"
-                height="40"
-                className="d-inline-block align-top"
+                src={logo}
+                width="120"
+                height="100"
+                className="d-inline-block align-top img-logo"
                 alt="Hodo logo"
               />
             </Link>
           </div>
-          <div className="nav-link">
-            <Link to="/">
-              <h3>Home</h3>
-            </Link>
-          </div>
-          <div className="nav-link">
-            <Link to="/about">
-              <h3>About</h3>
-            </Link>
-          </div>
-          {!showLogin && (
-            <div className="nav-link">
-              <Link to="/profile">
-                <h3>Profile</h3>
+          <div className="home-profile-about">
+            <div>
+              <Link className="nav-link" to="/about">
+                <h3>About</h3>
               </Link>
             </div>
-          )}
+            {showLogin === "profile-logout" && (
+              <div>
+                <Link className="nav-link" to="/profile">
+                  <h3>Profile</h3>
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
         <div className="nav-right">
-          {showLogin && (
-            <div className="nav-link">
-              <Button onClick={login}>Login</Button>
+          {showLogin === "login" && (
+            <div className="link-btn">
+              <Button variant="success" className="login-btn" onClick={login}>
+                Login
+              </Button>
             </div>
           )}
-          {showLogin && (
-            <div className="nav-link">
-              <Button onClick={register}>Register</Button>
+          {showLogin === "register" && (
+            <div className="link-btn">
+              <Button variant="success" onClick={register}>
+                Register
+              </Button>
             </div>
           )}
-          {!showLogin && <Button onClick={logout}>Logout</Button>}
+          {showLogin === "login-register" && (
+            <div className="link-btn">
+              <Button variant="success" className="login-btn" onClick={login}>
+                Login
+              </Button>
+            </div>
+          )}
+          {showLogin === "login-register" && (
+            <div className="link-btn">
+              <Button variant="success" onClick={register}>
+                Register
+              </Button>
+            </div>
+          )}
+          {showLogin === "logout" && <Button onClick={logout}>Logout</Button>}
+          {showLogin === "profile-logout" && (
+            <Button variant="success" onClick={logout}>
+              Logout
+            </Button>
+          )}
+          {/* {showLogin === "back" && (
+            <Button
+              variant="success"
+              className="base-btn"
+              onClick={() => setShowBackToProfile(true)}
+            >
+              Back To Profile
+            </Button>
+          )} */}
+          {/* <Modal show={showBackToProfile}>
+            <Modal.Header id="exit-header">
+              <i
+                class="bi bi-x exit-btn"
+                onClick={() => {
+                  setShowBackToProfile(false);
+                }}
+              ></i>
+            </Modal.Header>
+            <Modal.Body>
+              <h4>Save before going back to profile?</h4>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                size="lg"
+                variant="primary"
+                onClick={() => {
+                  saveBoard();
+                  navigate("/profile");
+                }}
+              >
+                Yes, save board
+              </Button>
+              <Button
+                size="lg"
+                variant="secondary"
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              >
+                No
+              </Button>
+            </Modal.Footer>
+          </Modal> */}
         </div>
       </div>
     </>

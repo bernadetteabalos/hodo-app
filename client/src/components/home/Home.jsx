@@ -1,5 +1,10 @@
-//import other Component
+import { useEffect } from "react";
+
+// import other Component
 import Navigation from "../Navigation";
+
+// import from other local files
+import logo from "../../images/hodo_v3.png";
 
 // import styling
 import "../../stylesheets/css/home.css";
@@ -7,33 +12,27 @@ import "../../stylesheets/css/home.css";
 const Home = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
     props;
+
+  // upon render, checks if user is logged in. Loggin in, display 'profile' and 'logout' btns. Else, 'login', and 'register' btns
+  useEffect(() => {
+    if (currentUser.id) {
+      setShowLogin("profile-logout");
+    } else {
+      setShowLogin("login-register");
+    }
+  }, []);
   return (
     <>
+      {/* ************ NAVIGATION BAR ************/}
       <Navigation
-        currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
         setIdTitle={setIdTitle}
       />
+      {/* ************ HOME PAGE WITH LOGO ************/}
       <div className="home-page">
-        <h1>Hodo-</h1>
-        <h2>
-          <em>Prefix for 'road', 'path', 'travel'</em>
-        </h2>
-        <div>
-          <img
-            src="https://media.istockphoto.com/photos/the-word-2022-behind-the-tree-of-empty-asphalt-road-at-golden-sunset-picture-id1300086148?b=1&k=20&m=1300086148&s=170667a&w=0&h=vh75YUEVACLRBF96r0pwFof0HX-ZTjX0PwUr2e94h0s="
-            alt="home-page-photo"
-          />
-        </div>
-        <br></br>
-        <h3>
-          <em>
-            A collaborative whiteboard application that allows for the planning
-            of itineraries!
-          </em>
-        </h3>
+        <img src={logo} alt="hodo-logoo" />
       </div>
     </>
   );

@@ -28,7 +28,7 @@ const About = (props) => {
 
   useEffect(() => {
     if (currentUser.id) {
-      setShowLogin("logout");
+      setShowLogin("profile-logout");
     }
   }, []);
 
@@ -41,7 +41,6 @@ const About = (props) => {
   return (
     <>
       <Navigation
-        currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}

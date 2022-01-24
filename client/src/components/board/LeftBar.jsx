@@ -1,78 +1,122 @@
-import { CirclePicker } from "react-color";
+// import from other libraries
 import Button from "react-bootstrap/Button";
+import { useState } from "react";
+
+// styling
+// import "../../stylesheets/css/leftbar.css";
+import "../../stylesheets/css/mainstage.css";
 
 const LeftBar = (props) => {
   // deconstructing the props
   const {
     fillColor,
     setFillColor,
-    strokeColor,
-    setStrokeColor,
+    borderColor,
+    setBorderColor,
     handleClick,
     url,
     setURL,
     resetUrl,
     tool,
     setTool,
+    strokeColor,
+    setStrokeColor,
+    checkDeselect,
   } = props;
+
+  const [state, setState] = useState({ showing: false });
+  const [imagePlusButton, setImagePlusButton] = useState("image");
+  const { showing } = state;
+  const isPenActivated = tool === "pen";
+  const isEraserActivated = tool === "eraser";
+  const isSelectActivated = tool === "select";
+
+  const handlePen = (e) => {
+    setStrokeColor(e.target.value);
+    setTool("pen");
+    checkDeselect();
+  };
+
   return (
     <div className="leftsidebar">
       <div className="select-a-color">
-        <h5>Select Shape Fill Color</h5>
-        <CirclePicker
-          color={fillColor}
-          onChange={(fillColor) => setFillColor(fillColor.hex)}
-        />
-        <h5>Select Shape Border & Pen Color </h5>
-        <CirclePicker
-          color={strokeColor}
-          onChange={(strokeColor) => setStrokeColor(strokeColor.hex)}
-        />
-      </div>
-      <div className="shapes">
-        <h3>Select a Shape</h3>
+        <div className="icons">
+          <input
+            className="colorPicker"
+            type="color"
+            value={fillColor}
+            onChange={(e) => setFillColor(e.target.value)}
+          />
+          <i className="bi bi-paint-bucket shapes shapesTwo"></i>
+        </div>
+        <div className="icons">
+          <input
+            type="color"
+            value={borderColor}
+            onChange={(e) => setBorderColor(e.target.value)}
+          />
+          <i class="bi bi-slash-lg shapes shapesTwo"></i>
+        </div>
         <Button
+          className="button-icons"
           variant="outline-secondary"
-          onClick={() => handleClick("Rect", fillColor, strokeColor)}
+          onClick={() => handleClick("Rect", fillColor, borderColor)}
         >
-          Rectangle
+          <div className="icons">
+            <i className="bi bi-phone-landscape shapes"></i>
+          </div>
         </Button>
         <Button
+          className="button-icons"
           variant="outline-secondary"
-          onClick={() => handleClick("Square", fillColor, strokeColor)}
+          onClick={() => handleClick("Square", fillColor, borderColor)}
         >
-          Square
+          <div className="icons">
+            <i className="bi bi-square shapes"></i>
+          </div>
         </Button>
         <Button
+          className="button-icons"
           variant="outline-secondary"
-          onClick={() => handleClick("Circle", fillColor, strokeColor)}
+          onClick={() => handleClick("Circle", fillColor, borderColor)}
         >
-          Circle
+          <div className="icons">
+            <i className="bi bi-circle shapes"></i>
+          </div>
         </Button>
         <Button
+          className="button-icons"
           variant="outline-secondary"
-          onClick={() => handleClick("Star", fillColor, strokeColor)}
+          onClick={() => handleClick("Star", fillColor, borderColor)}
         >
-          Star
+          <div className="icons">
+            <i className="bi bi-star shapes"></i>
+          </div>
         </Button>
-      </div>
-      <div className="texttools">
-          <h3>Text Editor</h3>
+        <div className="texttools">
           <Button
+            className="button-icons"
             variant="outline-secondary"
-            onClick={() => handleClick("Text", fillColor, strokeColor)}
+            onClick={() => handleClick("Text", fillColor, borderColor)}
           >
-            Add text
+            <div className="icons">
+              <i className="bi bi-fonts shapes"></i>
+            </div>
           </Button>
         </div>
-      <div className="add-url">
         <form
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
+            setImagePlusButton("image");
+            if (url) {
+              resetUrl();
+            }
           }}
         >
           <input
+            className="fade-in"
+            style={{ display: imagePlusButton === "plus" ? "block" : "none" }}
             name="url"
             type="text"
             placeholder="Enter URL of Image"
@@ -80,22 +124,87 @@ const LeftBar = (props) => {
             onChange={(e) => setURL(e.target.value)}
           />
         </form>
-        <Button variant="outline-secondary" onClick={() => resetUrl()}>
-          Add!!
+        {imagePlusButton === "image" && (
+          <Button
+            display={"none"}
+            className="button-icons"
+            variant="outline-secondary"
+            onClick={() => {
+              setImagePlusButton("plus");
+              // resetUrl(); don't need this line
+            }}
+          >
+            <div className="icons">
+              <i className="bi bi-image shapes"></i>
+            </div>
+          </Button>
+        )}
+        {imagePlusButton === "plus" && (
+          <Button
+            className="button-icons"
+            variant="outline-secondary"
+            onClick={() => {
+              setImagePlusButton("image");
+              if (url) {
+                resetUrl();
+              }
+            }}
+          >
+            <div className="icons">
+              <i className="bi bi-plus-square shapes"></i>
+            </div>
+          </Button>
+        )}
+        {/* SELECT */}
+        <Button
+          className="button-icons"
+          variant="outline-secondary"
+          onClick={() => setTool("select")}
+        >
+          <div className="icons">
+            <i
+              style={{ display: isSelectActivated ? "flex" : "none" }}
+              className="bi bi-hand-index-thumb-fill shapes"
+            ></i>
+            <i
+              style={{ display: isSelectActivated ? "none" : "flex" }}
+              className="bi bi-hand-index-thumb shapes"
+            ></i>
+          </div>
+        </Button>
+        {/* PEN */}
+        <div
+          className="icons"
+          onClick={() => setTool(isPenActivated ? "select" : "pen")}
+        >
+          <input type="color" value={strokeColor} onChange={handlePen} />
+          <i
+            style={{ display: isPenActivated ? "flex" : "none" }}
+            className="bi bi-pen-fill shapes"
+          ></i>
+          <i
+            style={{ display: isPenActivated ? "none" : "flex" }}
+            className="bi bi-pen shapes shapesTwo"
+          ></i>
+        </div>
+        {/* Eraser */}
+        <Button
+          className="button-icons"
+          variant="outline-secondary"
+          onClick={() => setTool(isEraserActivated ? "select" : "eraser")}
+        >
+          <div className="icons">
+            <i
+              style={{ display: isEraserActivated ? "flex" : "none" }}
+              className="bi bi-eraser-fill shapes"
+            ></i>
+            <i
+              style={{ display: isEraserActivated ? "none" : "flex" }}
+              className="bi bi-eraser shapes"
+            ></i>
+          </div>
         </Button>
       </div>
-      {/* *****PEN TOOLS DROP DOWN***** */}
-      <h5>Select Tool to Draw or Erase</h5>
-      <select
-        value={tool}
-        onChange={(e) => {
-          setTool(e.target.value);
-        }}
-      >
-        <option value="select">Select</option>
-        <option value="pen">Pen</option>
-        <option value="eraser">Eraser</option>
-      </select>
     </div>
   );
 };
