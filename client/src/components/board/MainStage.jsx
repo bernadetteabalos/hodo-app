@@ -234,7 +234,7 @@ const MainStage = (props) => {
       }
     });
     saveBoard(board_id, stageRef.current.children);
-    console.log('stageref', stageRef.current.children)
+    console.log("stageref", stageRef.current.children);
     // let the user know that the board is saved
     // alert("Board saved! :)");
   };
@@ -375,7 +375,7 @@ const MainStage = (props) => {
           <Stage
             ref={posRef}
             width={window.innerWidth - 300}
-            height={window.innerHeight - 117}
+            height={window.innerHeight - 50}
             // onMouseDown={tool === "select" && checkDeselect}
             // onTouchStart={tool === "select" && checkDeselect}
             onMousemove={tool !== "select" ? handleMouseMove : ""}
@@ -397,7 +397,7 @@ const MainStage = (props) => {
                     x={posRef.current.x || 0}
                     y={posRef.current.y || 0}
                     width={window.innerWidth - 300}
-                    height={window.innerHeight - 117}
+                    height={window.innerHeight - 50}
                   />
                 )}
               </Layer>
