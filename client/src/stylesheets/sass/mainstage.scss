@@ -3,13 +3,12 @@
   flex-direction: row;
   align-items: center;
   width: 100%;
-
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color:transparent;
+  background-color: transparent;
   padding: 1rem;
 }
 
@@ -45,24 +44,22 @@
 
 .rightbar {
   display: flex;
-  background-color:transparent;
+  background-color: transparent;
   flex-direction: column;
   width: 60px;
   height: 60%;
   z-index: 4;
   position: absolute;
   right: 20em;
-  
-  
 }
 
 .rightsection {
   display: flex;
   flex-direction: column;
   width: 300px;
-  height: 838px;
+  height: 95vh;
   background-color: transparent;
-  margin-left: 0px;  
+  margin-left: 0px;
 }
 
 .icons {
@@ -98,7 +95,6 @@
   display: grid;
   justify-content: center;
   grid-gap: 0.5em;
-
 }
 
 input[type="color"] {
@@ -167,21 +163,21 @@ input[name="url"] {
 }
 
 button.funcButton {
-  background-color:rgb(214, 216, 238); 
+  background-color: rgb(214, 216, 238);
   border: none;
   width: 60px;
   height: 60px;
   padding: 0px;
 }
 .bi-gear {
-font-size: 20px;
+  font-size: 20px;
 }
 button.funcButton:hover {
-  background-color:rgb(185, 188, 223);
+  background-color: rgb(185, 188, 223);
 }
 
-button.funcButton:focus{
-  background-color:rgb(185, 188, 223);
+button.funcButton:focus {
+  background-color: rgb(185, 188, 223);
   box-shadow: none;
 }
 
@@ -199,26 +195,26 @@ button.funcButton.active {
 button.headerButton {
   width: 50px;
   color: black;
-  background-color:white;
+  background-color: white;
   border: none;
 }
 
 button.headerButtonTwo {
   width: 100%;
   color: black;
-  background-color:white;
+  background-color: white;
   border: none;
   margin-right: 1em;
 }
 
 button.headerButton:hover {
   width: 50px;
-  background-color:rgb(185, 188, 223);
+  background-color: rgb(185, 188, 223);
 }
 
-button.headerButton:focus{
+button.headerButton:focus {
   width: 50px;
-  background-color:rgb(185, 188, 223);
+  background-color: rgb(185, 188, 223);
   box-shadow: none;
 }
 
@@ -230,7 +226,6 @@ button.headerButton.active {
   font-size: 20px;
   margin-bottom: 0px;
   margin-right: 1em;
-  
 }
 
 button.undoButton {
@@ -239,16 +234,15 @@ button.undoButton {
   border: 1px solid rgb(185, 188, 223);
   height: 60px;
   padding: 0px;
-
 }
 
 button.undoButton:hover {
-  background-color:rgb(185, 188, 223);
+  background-color: rgb(185, 188, 223);
   border: none;
 }
 
-button.undoButton:focus{
-  background-color:rgb(185, 188, 223);
+button.undoButton:focus {
+  background-color: rgb(185, 188, 223);
   box-shadow: none;
 }
 
