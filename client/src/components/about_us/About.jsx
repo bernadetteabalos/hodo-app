@@ -17,7 +17,6 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 //import Stack Logos
 import Bootstrap from "./images/Bootstrap.jpeg";
-import CSS from "./images/CSS.png";
 import Express from "./images/Express.jpeg";
 import Konva from "./images/Konva.png";
 import KonvaReact from "./images/KonvaReact.png";
@@ -52,7 +51,7 @@ const About = (props) => {
         setIdTitle={setIdTitle}
       />
       <div className="about-page title thick">
-        <h1 className="aboutTitle">ABOUT US</h1>
+        <h1> ABOUT US </h1>
         <div className="about-people">
           <div className="card-one">
             <div className="person bold pop">
@@ -136,13 +135,11 @@ const About = (props) => {
         </div>
         <br></br>
         <div className="about-stack">
-          <h1 className="techStack">Our Tech Stack</h1>
+          <h1>Our Tech Stack</h1>
         </div>
         <div className="stack-list">
           <h3>
             <img src={Bootstrap} width="80" alt="bootstrap"></img>
-            &nbsp; &nbsp;
-            <img src={CSS} width="60" alt="css"></img>
             &nbsp; &nbsp;
             <img src={Express} width="100" alt="express"></img>
             &nbsp; &nbsp;
@@ -160,7 +157,7 @@ const About = (props) => {
           </h3>
         </div>
         <div className="thank-you">
-          <h1 className="techStack">
+          <h1>
             THANK YOU x {count} & &nbsp;
             <button
               type="button"
