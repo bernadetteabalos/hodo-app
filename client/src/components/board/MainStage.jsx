@@ -154,8 +154,8 @@ const MainStage = (props) => {
   const handleClick = (shape, fillColor, strokeColor) => {
     // generate and add a new property to the array
     let newElement = generateOneElement(
-      -posRef.current.x() + (posRef.current.width() / 2),
-      -posRef.current.y() + (posRef.current.height() / 2),
+      -posRef.current.x() + posRef.current.width() / 2,
+      -posRef.current.y() + posRef.current.height() / 2,
       shape,
       fillColor,
       strokeColor,
@@ -236,9 +236,9 @@ const MainStage = (props) => {
     saveBoard(board_id, stageRef.current.children);
     console.log('stageref', stageRef.current.children)
     // let the user know that the board is saved
-    alert("Board saved! :)");
+    // alert("Board saved! :)");
   };
-  
+
   /** removes the previous element from the array */
   const undo = (type) => {
     // removes the previous shape/image from the array
@@ -257,7 +257,7 @@ const MainStage = (props) => {
       // console.log("this is copy of lines", copyOfLines)
       const undoLines = filteredLines.slice(0, filteredLines.length - 1);
       setLines(undoLines);
-     
+
       connection.emit("line-change", undoLines);
     } else {
       // } else if (elements[elements.length -1].className !== "Line") {
@@ -321,15 +321,9 @@ const MainStage = (props) => {
   // ******** RETURN ********************
   return (
     <>
-      <Navigation
-        setCurrentUser={setCurrentUser}
-        showLogin={showLogin}
-        setShowLogin={setShowLogin}
-        setIdTitle={setIdTitle}
-      />
       {/* ***** Header with the title ******/}
       <div>
-        <Header currentUser={currentUser} />
+        <Header currentUser={currentUser} saveBoard={save} />
       </div>
       {/* ******** LEFT SIDE BAR ******************** */}
       <div className="creativity">
@@ -390,24 +384,25 @@ const MainStage = (props) => {
             onDragMove={(e) => {
               setStagePos(e.currentTarget.position());
             }}
-            >
-              {posRef.current && (
-                <Layer
-                  onTouchStart={checkDeselect}
-                  onMouseDown={tool !== "select" ? handleMouseDown : checkDeselect}
-                >
-                  {posRef.current && (
-                    <Rect
-                      x={posRef.current.x || 0}
-                      y={posRef.current.y || 0}
-                      width={window.innerWidth - 300}
-                      height={window.innerHeight - 117}
-                    
-                    />
-                  )}
-                </Layer>
-              )}
-            
+          >
+            {posRef.current && (
+              <Layer
+                onTouchStart={checkDeselect}
+                onMouseDown={
+                  tool !== "select" ? handleMouseDown : checkDeselect
+                }
+              >
+                {posRef.current && (
+                  <Rect
+                    x={posRef.current.x || 0}
+                    y={posRef.current.y || 0}
+                    width={window.innerWidth - 300}
+                    height={window.innerHeight - 117}
+                  />
+                )}
+              </Layer>
+            )}
+
             <Layer ref={stageRef}>
               {elements.map((rect, i) => {
                 // console.log('this is what i need', elements)
@@ -485,45 +480,44 @@ const MainStage = (props) => {
             </Layer>
           </Stage>
         </div>
-          {/* ******** RIGHT SIDE BAR ***************/}
-         
-          <RightBar
-            clearBoard={clearBoard}
-            saveBoard={save}
-            undo={undo}
-            deleteShape={deleteShape}
-            handleBoardSave={handleBoardSave}
-            currentUser={currentUser}
-          />
-          
-          
+        {/* ******** RIGHT SIDE BAR ***************/}
+
+        <RightBar
+          clearBoard={clearBoard}
+          saveBoard={save}
+          undo={undo}
+          deleteShape={deleteShape}
+          handleBoardSave={handleBoardSave}
+          currentUser={currentUser}
+        />
+
         <div className="rightsection">
-              <div id="chatbox">
-                {chatSpeakers.map((chat) => {
-                  return (
-                    <OneChatMessage
-                      key={uuidV4()}
-                      chat={chat.message}
-                      chatSpeaker={chat.speaker}
-                    />
-                  );
-                })}
-                <div
-                  style={{ float: "left", clear: "both" }}
-                  ref={bottomChatRef}
-                ></div>
-              </div>
-              <form onSubmit={handleSendMessage}>
-                <input
-                  className="enterText"
-                  type="text"
-                  placeholder="enter message here"
-                  value={message}
-                  onChange={(e) => {
-                    setMessage(e.target.value);
-                  }}
-                ></input>
-                {/* <textarea
+          <div id="chatbox">
+            {chatSpeakers.map((chat) => {
+              return (
+                <OneChatMessage
+                  key={uuidV4()}
+                  chat={chat.message}
+                  chatSpeaker={chat.speaker}
+                />
+              );
+            })}
+            <div
+              style={{ float: "left", clear: "both" }}
+              ref={bottomChatRef}
+            ></div>
+          </div>
+          <form onSubmit={handleSendMessage}>
+            <input
+              className="enterText"
+              type="text"
+              placeholder="enter message here"
+              value={message}
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+            ></input>
+            {/* <textarea
                   className="enterText"
                   type="text"
                   placeholder="enter message here"
@@ -532,14 +526,14 @@ const MainStage = (props) => {
                     setMessage(e.target.value);
                   }}
                 ></textarea> */}
-                <Button
-                  className="send-btn"
-                  type="submit"
-                  onClick={handleSendMessage}
-                >
-                  Send Message
-                </Button>
-              </form>
+            <Button
+              className="send-btn"
+              type="submit"
+              onClick={handleSendMessage}
+            >
+              Send Message
+            </Button>
+          </form>
         </div>
       </div>
     </>

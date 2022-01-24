@@ -9,10 +9,12 @@
     .profile-page .profile-container .profile-photo img {
       border: 5px solid black;
       margin-top: 5rem;
-      margin-bottom: 3rem; }
+      margin-bottom: 3rem;
+      height: 80vh; }
     .profile-page .profile-container .profile-name {
       border: 5px solid black;
-      text-align: center; }
+      text-align: center;
+      background-color: white; }
     .profile-page .profile-container .right-profile {
       width: 50%; }
       .profile-page .profile-container .right-profile .itineraries-container {

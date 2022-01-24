@@ -27,10 +27,9 @@ const LeftBar = (props) => {
   const [state, setState] = useState({ showing: false });
   const [imagePlusButton, setImagePlusButton] = useState("image");
   const { showing } = state;
-  const isPenActivated = tool === 'pen';
-  const isEraserActivated = tool === 'eraser';
-  const isSelectActivated = tool === 'select';
-
+  const isPenActivated = tool === "pen";
+  const isEraserActivated = tool === "eraser";
+  const isSelectActivated = tool === "select";
 
   const handlePen = (e) => {
     setStrokeColor(e.target.value);
@@ -109,6 +108,7 @@ const LeftBar = (props) => {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
+            setImagePlusButton("image");
             if (url) {
               resetUrl();
             }
@@ -155,35 +155,56 @@ const LeftBar = (props) => {
             </div>
           </Button>
         )}
-      {/* SELECT */}
-      <Button
-        className="button-icons"
-        variant="outline-secondary"
-        onClick={() => setTool('select')}
-      >
-        <div className="icons">
-          <i style={{display: isSelectActivated ? 'flex' : 'none'}} className="bi bi-hand-index-thumb-fill shapes"></i>
-          <i style={{display: isSelectActivated ? 'none' : 'flex'}} className="bi bi-hand-index-thumb shapes"></i>
+        {/* SELECT */}
+        <Button
+          className="button-icons"
+          variant="outline-secondary"
+          onClick={() => setTool("select")}
+        >
+          <div className="icons">
+            <i
+              style={{ display: isSelectActivated ? "flex" : "none" }}
+              className="bi bi-hand-index-thumb-fill shapes"
+            ></i>
+            <i
+              style={{ display: isSelectActivated ? "none" : "flex" }}
+              className="bi bi-hand-index-thumb shapes"
+            ></i>
+          </div>
+        </Button>
+        {/* PEN */}
+        <div
+          className="icons"
+          onClick={() => setTool(isPenActivated ? "select" : "pen")}
+        >
+          <input type="color" value={strokeColor} onChange={handlePen} />
+          <i
+            style={{ display: isPenActivated ? "flex" : "none" }}
+            className="bi bi-pen-fill shapes"
+          ></i>
+          <i
+            style={{ display: isPenActivated ? "none" : "flex" }}
+            className="bi bi-pen shapes shapesTwo"
+          ></i>
         </div>
-      </Button>
-      {/* PEN */}
-      <div className="icons" onClick={() =>  setTool(isPenActivated ? 'select' : 'pen')}>
-        <input type="color" value={strokeColor} onChange={handlePen} />
-        <i style={{display: isPenActivated ? 'flex': 'none'}} className="bi bi-pen-fill shapes"></i>
-        <i style={{display: isPenActivated ? 'none': 'flex'}} className="bi bi-pen shapes shapesTwo"></i>
+        {/* Eraser */}
+        <Button
+          className="button-icons"
+          variant="outline-secondary"
+          onClick={() => setTool(isEraserActivated ? "select" : "eraser")}
+        >
+          <div className="icons">
+            <i
+              style={{ display: isEraserActivated ? "flex" : "none" }}
+              className="bi bi-eraser-fill shapes"
+            ></i>
+            <i
+              style={{ display: isEraserActivated ? "none" : "flex" }}
+              className="bi bi-eraser shapes"
+            ></i>
+          </div>
+        </Button>
       </div>
-      {/* Eraser */}
-      <Button
-        className="button-icons"
-        variant="outline-secondary"
-        onClick={() => setTool(isEraserActivated ? 'select' : 'eraser')}
-      >
-        <div className="icons">
-          <i style={{display: isEraserActivated ? 'flex' : 'none'}} className="bi bi-eraser-fill shapes"></i>
-          <i style={{display: isEraserActivated ? 'none' : 'flex'}} className="bi bi-eraser shapes"></i>
-        </div>
-      </Button>
-        </div>
     </div>
   );
 };

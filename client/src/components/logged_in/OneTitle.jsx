@@ -2,6 +2,8 @@
 import { useNavigate } from "react-router-dom";
 // import styling
 import "../../stylesheets/css/onetitle.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHandPointRight } from "@fortawesome/free-solid-svg-icons";
 
 // this component is imported into the Profile Component
 const OneTitle = (props) => {
