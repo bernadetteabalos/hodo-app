@@ -108,6 +108,7 @@ const LeftBar = (props) => {
           autoComplete="off"
           onSubmit={(e) => {
             e.preventDefault();
+            setImagePlusButton("image");
             if (url) {
               resetUrl();
             }

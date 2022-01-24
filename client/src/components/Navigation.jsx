@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Button, Modal } from "react-bootstrap";
-import logo from "../images/hodoapp (2).png";
+import logo from "../images/hodo_v3.png";
 //styling
 import "../stylesheets/css/navigation.css";
 
