@@ -1,4 +1,10 @@
 .handleTitle {
+  padding-left: 2em;
+  padding-right: 1em;
   cursor: pointer;
   color: rgb(0, 0, 0);
+}
+
+.handleTitle:hover {
+  color: blue;
 }

@@ -1,1 +1,27 @@
-#chatbox{border:none;width:280px;height:50%;display:flex;background-color:#fff;overflow:auto;flex:1 1 auto;overflow-wrap:break-word;flex-direction:column-reverse;justify-content:flex-start;font-size:1.15rem;padding:.5em}.enterText{width:280px;height:4rem;resize:none;border:3px solid #b9bcdf;font-size:1rem;display:flex;align-items:flex-end}button.send-btn{width:280px;background-color:#b9bcdf;border:none}
+#chatbox {
+  border: none;
+  width: 280px;
+  height: 50%;
+  display: flex;
+  background-color: white;
+  overflow: auto;
+  flex: 1 1 auto;
+  overflow-wrap: break-word;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  font-size: 1.15rem;
+  padding: 0.5em; }
+
+.enterText {
+  width: 280px;
+  height: 4rem;
+  resize: none;
+  border: 3px solid #b9bcdf;
+  font-size: 1rem;
+  display: flex;
+  align-items: flex-end; }
+
+button.send-btn {
+  width: 280px;
+  background-color: #b9bcdf;
+  border: none; }
