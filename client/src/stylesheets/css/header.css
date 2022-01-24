@@ -3,6 +3,8 @@
   justify-content: space-evenly; }
   .header-bar .space {
     width: 100%; }
+    .header-bar .space img {
+      margin-left: 2em; }
   .header-bar .title-name {
     width: 100%;
     display: flex;
