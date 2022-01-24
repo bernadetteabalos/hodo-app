@@ -123,11 +123,11 @@ const Profile = (props) => {
           <div className="left-profile">
             <div
               className="profile-photo"
-              style={{
-                backgroundImage: `url(${currentUser.profile_photo})`,
-              }}
+              // style={{
+              //   backgroundImage: `url(${currentUser.profile_photo})`,
+              // }}
             >
-              {/* <img src={currentUser.profile_photo} alt="profile-photo" /> */}
+              <img src={currentUser.profile_photo} alt="profile-photo" />
             </div>
             <div className="profile-name">
               <strong>
@@ -148,7 +148,7 @@ const Profile = (props) => {
                 })}
               </div>
             </div>
-            <Button className="mt-2 w-100" onClick={handleShow}>
+            <Button className="create-btn" onClick={handleShow}>
               <h3>Create New Board</h3>
             </Button>
             {/* ****** Modal that appears when user creates a new board, user enters title for new board */}
