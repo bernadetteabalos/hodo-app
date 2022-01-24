@@ -70,11 +70,7 @@ const TextLayer = (props) => {
         onDblClick={onDoubleClick}
         {...rest}
       />
-<<<<<<< HEAD
-      <Html transform={true} transformFunc={(attrs) => ({ ...attrs, x: shapeRef.current.getAbsolutePosition().x, y: shapeRef.current.getAbsolutePosition().y }) }>
-=======
       <Html>
->>>>>>> profile-styling
         <input
           draggable={false}
           id="textEdit"
@@ -83,14 +79,7 @@ const TextLayer = (props) => {
           value={currentText}
           onChange={onInputChange}
           onBlur={onBlur}
-<<<<<<< HEAD
-          style={{
-            display: !isEditing && "none",
-            transform: 'translateY(-100%)',
-          }}
-=======
           style={{ display: !isEditing && "none" }}
->>>>>>> profile-styling
         />
       </Html>
     </>
