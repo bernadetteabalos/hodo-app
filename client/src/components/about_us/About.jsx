@@ -10,6 +10,17 @@ import Confetti from "./buttonClick";
 import { useEffect } from "react/cjs/react.development";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
+//import Stack Logos
+import Bootstrap from "./images/Bootstrap.jpeg";
+import CSS from "./images/CSS.png";
+import Express from "./images/Express.jpeg";
+import Konva from "./images/Konva.png";
+import KonvaReact from "./images/KonvaReact.png";
+import PostgreSQL from "./images/PostgreSQL.png";
+import React from "./images/React.png";
+import SASS from "./images/SASS.png";
+import Socketio from "./images/Socketio.png";
+
 const About = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
     props;
@@ -116,8 +127,23 @@ const About = (props) => {
         </div>
         <div className="stack-list">
           <h3>
-            React Express PostgreSQL WebSocket Bootstrap Konva Socket.io SASS
-            and CSS
+            <img src={Bootstrap} width="80" alt="bootstrap"></img>
+            &nbsp; &nbsp;
+            <img src={CSS} width="60" alt="css"></img>
+            &nbsp; &nbsp;
+            <img src={Express} width="100" alt="express"></img>
+            &nbsp; &nbsp;
+            <img src={KonvaReact} width="120" alt="konvareact"></img>
+            &nbsp; &nbsp;
+            <img src={Konva} width="120" alt="konva"></img>
+            &nbsp; &nbsp;
+            <img src={PostgreSQL} width="80" alt="postgresql"></img>
+            &nbsp; &nbsp;
+            <img src={React} width="100" alt="react"></img>
+            &nbsp; &nbsp;
+            <img src={SASS} width="80" alt="sass"></img>
+            &nbsp; &nbsp;
+            <img src={Socketio} width="80" alt="socketio"></img>
           </h3>
         </div>
         <div className="thank-you">
