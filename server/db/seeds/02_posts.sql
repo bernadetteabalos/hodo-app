@@ -44,10 +44,10 @@ VALUES
     (
         'Banana slamma!!',
         'In vel quam orci. Suspendisse potenti. Curabitur eget aliquam ex. Praesent ullamcorper scelerisque egestas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi interdum viverra magna, ut gravida massa lacinia at. Fusce blandit quis lectus ac iaculis.',
-        5
+        4
     ),
     (
         'Help, Diddy! I ve fallen, and I can t get up! Can you pass me a banana, little buddy?',
         'In vel quam orci. Suspendisse potenti. Curabitur eget aliquam ex. Praesent ullamcorper scelerisque egestas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi interdum viverra magna, ut gravida massa lacinia at. Fusce blandit quis lectus ac iaculis.',
-        5
+        3
     );

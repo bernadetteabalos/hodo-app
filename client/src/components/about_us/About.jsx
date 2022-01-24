@@ -4,6 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import from other components
 import Navigation from "../Navigation";
 
+// import images from local files
+import bubbles from "../../images/bubbles.jpg";
+import blossom from "../../images/blossom.jpeg";
+import buttercup from "../../images/buttercup.jpg";
+
 // import styling
 import "../../stylesheets/css/about.css";
 import Confetti from "./buttonClick";
@@ -53,6 +58,9 @@ const About = (props) => {
               <div className="flip-card-inner">
                 <div className="one-front">
                   <h1>Bernadette Abalos</h1>
+                  <div className="profile-photo-about">
+                    <img src={bubbles} />
+                  </div>
                 </div>
                 <div className="one-back">
                   <h2 className="occupation">Full-Stack Web Developer</h2>
@@ -76,6 +84,9 @@ const About = (props) => {
               <div className="flip-inner">
                 <div className="two-front">
                   <h1>Stephanie Li</h1>
+                  <div className="profile-photo-about">
+                    <img src={blossom} />
+                  </div>
                 </div>
                 <div className="two-back">
                   <h2 className="occupation">Full-Stack Web Developer</h2>
@@ -99,6 +110,9 @@ const About = (props) => {
               <div className="flip-in">
                 <div className="three-front">
                   <h1>Blesilda Mateo</h1>
+                  <div className="profile-photo-about">
+                    <img src={buttercup} />
+                  </div>
                 </div>
                 <div className="three-back">
                   <h2 className="occupation">Full-Stack Web Developer</h2>

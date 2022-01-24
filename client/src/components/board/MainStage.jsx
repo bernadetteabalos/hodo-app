@@ -234,7 +234,7 @@ const MainStage = (props) => {
       }
     });
     saveBoard(board_id, stageRef.current.children);
-    console.log('stageref', stageRef.current.children)
+    console.log("stageref", stageRef.current.children);
     // let the user know that the board is saved
     // alert("Board saved! :)");
   };

@@ -1,3 +1,1 @@
-.handleTitle {
-  cursor: pointer;
-  color: black; }
+.handleTitle{padding-left:2em;padding-right:1em;cursor:pointer;color:#000}.handleTitle:hover{color:blue}

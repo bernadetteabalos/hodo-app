@@ -121,28 +121,35 @@ const Profile = (props) => {
       <div className="profile-page">
         <div className="profile-container">
           <div className="left-profile">
-            <div className="profile-photo">
+            <div
+              className="profile-photo"
+              // style={{
+              //   backgroundImage: `url(${currentUser.profile_photo})`,
+              // }}
+            >
               <img src={currentUser.profile_photo} alt="profile-photo" />
             </div>
             <div className="profile-name">
-              <h4 className="nameEmphasis">{currentUser.first_name}</h4>
+              <strong>
+                <h3 className="nameEmphasis">{currentUser.first_name}</h3>
+              </strong>
             </div>
             <div>
-              <em>
-                <h5>Your id is: {currentUser.id}</h5>
-              </em>
+              <h5>Your id is: {currentUser.id}</h5>
             </div>
           </div>
           <div className="right-profile">
             <div className="itineraries-container">
               <h1>My Boards</h1>
               {/* Displays every board and when the name is clicked, redirect to respective board (calls the OneTitle Component) */}
-              {idTitle.map((titleObj) => {
-                return <OneTitle key={titleObj.id} titleObj={titleObj} />;
-              })}
+              <div>
+                {idTitle.map((titleObj) => {
+                  return <OneTitle key={titleObj.id} titleObj={titleObj} />;
+                })}
+              </div>
             </div>
-            <Button className="mt-2 w-100" variant="dark" onClick={handleShow}>
-              Create New Board
+            <Button className="create-btn" onClick={handleShow}>
+              <h3>Create New Board</h3>
             </Button>
             {/* ****** Modal that appears when user creates a new board, user enters title for new board */}
             <Modal show={show} onHide={handleClose}>
