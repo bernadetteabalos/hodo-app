@@ -4,6 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import from other components
 import Navigation from "../Navigation";
 
+// import images from local files
+import bubbles from "../../images/bubbles.jpg";
+import blossom from "../../images/blossom.jpeg";
+import buttercup from "../../images/buttercup.jpg";
+
 // import styling
 import "../../stylesheets/css/about.css";
 import Confetti from "./buttonClick";
@@ -12,7 +17,6 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 //import Stack Logos
 import Bootstrap from "./images/Bootstrap.jpeg";
-import CSS from "./images/CSS.png";
 import Express from "./images/Express.jpeg";
 import Konva from "./images/Konva.png";
 import KonvaReact from "./images/KonvaReact.png";
@@ -47,13 +51,16 @@ const About = (props) => {
         setIdTitle={setIdTitle}
       />
       <div className="about-page title thick">
-        <h1 className="aboutTitle">ABOUT US</h1>
+        <h1> ABOUT US </h1>
         <div className="about-people">
           <div className="card-one">
             <div className="person bold pop">
               <div className="flip-card-inner">
                 <div className="one-front">
                   <h1>Bernadette Abalos</h1>
+                  <div className="profile-photo-about">
+                    <img src={bubbles} />
+                  </div>
                 </div>
                 <div className="one-back">
                   <h2 className="occupation">Full-Stack Web Developer</h2>
@@ -77,6 +84,9 @@ const About = (props) => {
               <div className="flip-inner">
                 <div className="two-front">
                   <h1>Stephanie Li</h1>
+                  <div className="profile-photo-about">
+                    <img src={blossom} />
+                  </div>
                 </div>
                 <div className="two-back">
                   <h2 className="occupation">Full-Stack Web Developer</h2>
@@ -100,6 +110,9 @@ const About = (props) => {
               <div className="flip-in">
                 <div className="three-front">
                   <h1>Blesilda Mateo</h1>
+                  <div className="profile-photo-about">
+                    <img src={buttercup} />
+                  </div>
                 </div>
                 <div className="three-back">
                   <h2 className="occupation">Full-Stack Web Developer</h2>
@@ -122,13 +135,11 @@ const About = (props) => {
         </div>
         <br></br>
         <div className="about-stack">
-          <h1 className="techStack">Our Tech Stack</h1>
+          <h1>Our Tech Stack</h1>
         </div>
         <div className="stack-list">
           <h3>
             <img src={Bootstrap} width="80" alt="bootstrap"></img>
-            &nbsp; &nbsp;
-            <img src={CSS} width="60" alt="css"></img>
             &nbsp; &nbsp;
             <img src={Express} width="100" alt="express"></img>
             &nbsp; &nbsp;
@@ -146,7 +157,7 @@ const About = (props) => {
           </h3>
         </div>
         <div className="thank-you">
-          <h1 className="techStack">
+          <h1>
             THANK YOU x {count} & &nbsp;
             <button
               type="button"

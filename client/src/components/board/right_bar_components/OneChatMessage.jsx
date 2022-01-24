@@ -1,7 +1,7 @@
 const OneChatMessage = (props) => {
   const { chatSpeaker, chat } = props;
   return (
-    <div>
+    <div className="board-list-items">
       <strong>{chatSpeaker}:</strong> {chat}
     </div>
   );
