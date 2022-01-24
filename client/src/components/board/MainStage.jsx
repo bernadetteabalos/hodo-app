@@ -29,8 +29,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const END_POINT = "http://localhost:8001";
 
 const MainStage = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
-    props;
+  const { showLogin, setShowLogin, setIdTitle } = props;
   // for the socket connection
   const [connection, setConnection] = useState(undefined);
   // colours

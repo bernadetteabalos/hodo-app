@@ -46,7 +46,6 @@ const About = (props) => {
   return (
     <>
       <Navigation
-        setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
         setIdTitle={setIdTitle}

@@ -60,7 +60,6 @@ const Login = (props) => {
     <>
       {/* ************ NAVIGATION BAR ************/}
       <Navigation
-        setCurrentUser={setCurrentUser}
         showLogin={showLogin}
         setShowLogin={setShowLogin}
         setIdTitle={setIdTitle}
