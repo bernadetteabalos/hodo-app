@@ -14,6 +14,7 @@ import "../../stylesheets/css/about.css";
 import Confetti from "./buttonClick";
 import { useEffect } from "react/cjs/react.development";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 //import Stack Logos
 import Bootstrap from "./images/Bootstrap.jpeg";
@@ -75,6 +76,13 @@ const About = (props) => {
                       Github
                     </a>
                   </p>
+                  <p>
+                    Contact info &nbsp;
+                    <a href={"mailto:bern.roseabalos@gmail.com"}>
+                      <FontAwesomeIcon icon={faEnvelope} />
+                      Gmail
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -99,6 +107,13 @@ const About = (props) => {
                     <a href={"https://github.com/StephhyL"}>
                       <FontAwesomeIcon icon={faGithub} />
                       Github
+                    </a>
+                  </p>
+                  <p>
+                    Contact info &nbsp;
+                    <a href={"mailto:stephanieli88947@gmail.com"}>
+                      <FontAwesomeIcon icon={faEnvelope} />
+                      Gmail
                     </a>
                   </p>
                 </div>
@@ -126,6 +141,13 @@ const About = (props) => {
                     <a href={"https://github.com/BlesMateo"}>
                       <FontAwesomeIcon icon={faGithub} />
                       Github
+                    </a>
+                  </p>
+                  <p>
+                    Contact info &nbsp;
+                    <a href={"mailto:blesildaangelicamateo@gmail.com"}>
+                      <FontAwesomeIcon icon={faEnvelope} />
+                      Gmail
                     </a>
                   </p>
                 </div>
