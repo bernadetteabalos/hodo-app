@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 
-// import other Component
+// import other Components/providers
 import Navigation from "../Navigation";
 import { currentUserContext } from "../../providers/UserProvider";
 import { navContext } from "../../providers/NavProvider";
@@ -11,11 +11,11 @@ import logo from "../../images/hodo_v3.png";
 // import styling
 import "../../stylesheets/css/home.css";
 
-const Home = (props) => {
+const Home = () => {
   const { profileLogoutShow, loginRegisterShow } = useContext(navContext);
   const { currentUser } = useContext(currentUserContext);
 
-  // upon render, checks if user is logged in. Loggin in, display 'profile' and 'logout' btns. Else, 'login', and 'register' btns
+  // upon render, checks if user is logged in. Loggin in, calls fcn to display 'profile' and 'logout' btns. Else, 'login', and 'register' btns
   useEffect(() => {
     if (currentUser.id) {
       profileLogoutShow();
