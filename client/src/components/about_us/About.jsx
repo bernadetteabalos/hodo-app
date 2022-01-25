@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 // import from other libraries
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// import from other Components/providers
+// import other Component and from providers
 import Navigation from "../Navigation";
 import { currentUserContext } from "../../providers/UserProvider";
 import { navContext } from "../../providers/NavProvider";

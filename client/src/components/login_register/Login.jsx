@@ -2,10 +2,9 @@ import { useRef, useEffect, useContext } from "react";
 
 // import from other libraries
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Container, Form, Button } from "react-bootstrap";
 
-// import other component
+// import other Components and from providers
 import Navigation from "../Navigation";
 import { currentUserContext } from "../../providers/UserProvider";
 import { navContext } from "../../providers/NavProvider";

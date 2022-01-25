@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 
-// import other Components/providers
+// import other Component and from providers
 import Navigation from "../Navigation";
 import { currentUserContext } from "../../providers/UserProvider";
 import { navContext } from "../../providers/NavProvider";
