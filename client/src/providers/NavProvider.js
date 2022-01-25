@@ -39,11 +39,11 @@ const NavProvider = (props) => {
 
   const providerData = {
     showLogin,
-    profileLogoutShow,
-    loginShow,
-    logoutShow,
     loginRegisterShow,
+    loginShow,
     registerShow,
+    logoutShow,
+    profileLogoutShow,
     backShow,
   };
   const Provider = navContext.Provider;
