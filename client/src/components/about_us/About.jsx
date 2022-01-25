@@ -20,6 +20,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import bubbles from "../../images/bubbles.jpg";
 import blossom from "../../images/blossom.jpeg";
 import buttercup from "../../images/buttercup.jpg";
+import bles from "../../images/bles.png";
 
 //import Stack Logos
 import Bootstrap from "./images/Bootstrap.jpeg";
@@ -64,25 +65,31 @@ const About = () => {
                   </div>
                 </div>
                 <div className="one-back">
-                  <h2 className="occupation">Full-Stack Web Developer</h2>
-                  <br></br>
-                  <p className="textAlign">
-                    Former life sciences student who enjoys art and programming.
-                  </p>
-                  <p>
-                    Follow me on &nbsp;
-                    <a href={"https://github.com/bernadetteabalos"}>
-                      <FontAwesomeIcon icon={faGithub} />
-                      Github
-                    </a>
-                  </p>
-                  <p>
-                    Contact info &nbsp;
-                    <a href={"mailto:bern.roseabalos@gmail.com"}>
-                      <FontAwesomeIcon icon={faEnvelope} />
-                      Gmail
-                    </a>
-                  </p>
+                  <div className="back-card">
+                    <h2 className="occupation">Full-Stack Web Developer</h2>
+                    <br></br>
+                    <p className="textAlign">
+                      Former life sciences student who enjoys art and
+                      programming.
+                    </p>
+                    <p>
+                      Follow me on &nbsp;
+                      <a href={"https://github.com/bernadetteabalos"}>
+                        <FontAwesomeIcon icon={faGithub} />
+                        Github
+                      </a>
+                    </p>
+                    <p>
+                      Contact info &nbsp;
+                      <a href={"mailto:bern.roseabalos@gmail.com"}>
+                        <FontAwesomeIcon icon={faEnvelope} />
+                        Gmail
+                      </a>
+                    </p>
+                  </div>
+                  <div className="ppg-container">
+                    <img className="ppg" src={bubbles} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -97,25 +104,32 @@ const About = () => {
                   </div>
                 </div>
                 <div className="two-back">
-                  <h2 className="occupation">Full-Stack Web Developer</h2>
-                  <br></br>
-                  <p className="textAlign">
-                    Former pharmacist who discovered a love for coding.
-                  </p>
-                  <p>
-                    Follow me on &nbsp;
-                    <a href={"https://github.com/StephhyL"}>
-                      <FontAwesomeIcon icon={faGithub} />
-                      Github
-                    </a>
-                  </p>
-                  <p>
-                    Contact info &nbsp;
-                    <a href={"mailto:stephanieli88947@gmail.com"}>
-                      <FontAwesomeIcon icon={faEnvelope} />
-                      Gmail
-                    </a>
-                  </p>
+                  <div className="back-card">
+                    <div>
+                      <h2 className="occupation">Full-Stack Web Developer</h2>
+                      <br></br>
+                      <p className="textAlign">
+                        Former pharmacist who discovered a love for coding.
+                      </p>
+                      <p>
+                        Follow me on &nbsp;
+                        <a href={"https://github.com/StephhyL"}>
+                          <FontAwesomeIcon icon={faGithub} />
+                          Github
+                        </a>
+                      </p>
+                      <p>
+                        Contact info &nbsp;
+                        <a href={"mailto:stephanieli88947@gmail.com"}>
+                          <FontAwesomeIcon icon={faEnvelope} />
+                          Gmail
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="ppg-container">
+                    <img className="ppg" src={blossom} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -125,31 +139,38 @@ const About = () => {
               <div className="flip-in">
                 <div className="three-front">
                   <h1>Blesilda Mateo</h1>
-                  <div className="profile-photo-about">
-                    <img src={buttercup} />
+                  <div>
+                    <div className="profile-photo-about">
+                      <img className="person-photo" src={bles} />
+                    </div>
                   </div>
                 </div>
                 <div className="three-back">
-                  <h2 className="occupation">Full-Stack Web Developer</h2>
-                  <br></br>
-                  <p className="textAlign">
-                    Former aviation student who meandered their way into the
-                    world of web development
-                  </p>
-                  <p>
-                    Follow me on &nbsp;
-                    <a href={"https://github.com/BlesMateo"}>
-                      <FontAwesomeIcon icon={faGithub} />
-                      Github
-                    </a>
-                  </p>
-                  <p>
-                    Contact info &nbsp;
-                    <a href={"mailto:blesildaangelicamateo@gmail.com"}>
-                      <FontAwesomeIcon icon={faEnvelope} />
-                      Gmail
-                    </a>
-                  </p>
+                  <div className="back-card">
+                    <h2 className="occupation">Full-Stack Web Developer</h2>
+                    <br></br>
+                    <p className="textAlign">
+                      Former aviation student who meandered their way into the
+                      world of web development
+                    </p>
+                    <p>
+                      Follow me on &nbsp;
+                      <a href={"https://github.com/BlesMateo"}>
+                        <FontAwesomeIcon icon={faGithub} />
+                        Github
+                      </a>
+                    </p>
+                    <p>
+                      Contact info &nbsp;
+                      <a href={"mailto:blesildaangelicamateo@gmail.com"}>
+                        <FontAwesomeIcon icon={faEnvelope} />
+                        Gmail
+                      </a>
+                    </p>
+                  </div>
+                  <div className="ppg-container">
+                    <img className="ppg" src={buttercup} />
+                  </div>
                 </div>
               </div>
             </div>
