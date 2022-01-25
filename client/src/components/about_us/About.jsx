@@ -32,10 +32,21 @@ import React from "./images/React.png";
 import SASS from "./images/SASS.png";
 import Socketio from "./images/Socketio.png";
 
+<<<<<<< HEAD
 const About = () => {
   const { currentUser } = useContext(currentUserContext);
   const { profileLogoutShow } = useContext(navContext);
   // for the counter state
+=======
+//import Creator photos
+import Bernadette from "./images/Creators/Bernadette.png";
+import Blesilda from "./images/Creators/Blesilda.png";
+import Stephanie from "./images/Creators/Stephanie.png";
+
+const About = (props) => {
+  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
+    props;
+>>>>>>> 048bafbef0979c49ebcbec2faf1d5fb0d644ad96
   const [count, setCount] = useState(1000);
 
   // upon first render, checks if user is logged in. If so, calls fcn to display 'profile, logout' btn
@@ -59,12 +70,20 @@ const About = () => {
             <div className="person bold pop">
               <div className="flip-card-inner">
                 <div className="one-front">
-                  <h1>Bernadette Abalos</h1>
+                  <h1 className="tinyName">Bernadette Abalos</h1>
+                  <br></br>
                   <div className="profile-photo-about">
-                    <img src={bubbles} />
+                    <img
+                      src={Bernadette}
+                      className="Bernadette"
+                      width="240"
+                      height="240"
+                      alt="avatar"
+                    />
                   </div>
                 </div>
                 <div className="one-back">
+<<<<<<< HEAD
                   <div className="back-card">
                     <h2 className="occupation">Full-Stack Web Developer</h2>
                     <br></br>
@@ -90,6 +109,34 @@ const About = () => {
                   <div className="ppg-container">
                     <img className="ppg" src={bubbles} />
                   </div>
+=======
+                  <h2 className="occupation">Full-Stack Web Developer</h2>
+                  <br></br>
+                  <p className="textAlign">
+                    Former life sciences student who enjoys art and programming.
+                  </p>
+                  <p>
+                    Follow me on&nbsp;
+                    <a
+                      className="githubLink"
+                      href={"https://github.com/bernadetteabalos"}
+                      target="_blank"
+                    >
+                      <FontAwesomeIcon icon={faGithub} />
+                      Github
+                    </a>
+                  </p>
+                  <p>
+                    Contact me: &nbsp;
+                    <a
+                      className="emailLink"
+                      href={"mailto:bern.roseabalos@gmail.com"}
+                    >
+                      <FontAwesomeIcon icon={faEnvelope} />
+                      Gmail
+                    </a>
+                  </p>
+>>>>>>> 048bafbef0979c49ebcbec2faf1d5fb0d644ad96
                 </div>
               </div>
             </div>
@@ -98,12 +145,20 @@ const About = () => {
             <div className="person emphasize popsec">
               <div className="flip-inner">
                 <div className="two-front">
-                  <h1>Stephanie Li</h1>
+                  <h1 className="smallName">Stephanie Li</h1>
+                  <br></br>
                   <div className="profile-photo-about">
-                    <img src={blossom} />
+                    <img
+                      src={Stephanie}
+                      className="Stephanie"
+                      width="240"
+                      height="240"
+                      alt="avatar"
+                    />
                   </div>
                 </div>
                 <div className="two-back">
+<<<<<<< HEAD
                   <div className="back-card">
                     <div>
                       <h2 className="occupation">Full-Stack Web Developer</h2>
@@ -130,6 +185,34 @@ const About = () => {
                   <div className="ppg-container">
                     <img className="ppg" src={blossom} />
                   </div>
+=======
+                  <h2 className="occupation">Full-Stack Web Developer</h2>
+                  <br></br>
+                  <p className="textAlign">
+                    Former pharmacist who discovered a love for coding.
+                  </p>
+                  <p>
+                    Follow me on&nbsp;
+                    <a
+                      className="githubLink"
+                      href={"https://github.com/StephhyL"}
+                      target="_blank"
+                    >
+                      <FontAwesomeIcon icon={faGithub} />
+                      Github
+                    </a>
+                  </p>
+                  <p>
+                    Contact me: &nbsp;
+                    <a
+                      className="emailLink"
+                      href={"mailto:stephanieli88947@gmail.com"}
+                    >
+                      <FontAwesomeIcon icon={faEnvelope} />
+                      Gmail
+                    </a>
+                  </p>
+>>>>>>> 048bafbef0979c49ebcbec2faf1d5fb0d644ad96
                 </div>
               </div>
             </div>
@@ -138,6 +221,7 @@ const About = () => {
             <div className="person outline popthird">
               <div className="flip-in">
                 <div className="three-front">
+<<<<<<< HEAD
                   <h1>Blesilda Mateo</h1>
                   <div>
                     <div className="profile-photo-about">
@@ -171,6 +255,48 @@ const About = () => {
                   <div className="ppg-container">
                     <img className="ppg" src={buttercup} />
                   </div>
+=======
+                  <h1 className="miniName">Blesilda Mateo</h1>
+                  <br></br>
+                  <div className="profile-photo-about">
+                    <img
+                      src={Blesilda}
+                      className="Blesilda"
+                      width="240"
+                      height="240"
+                      alt="avatar"
+                    />
+                  </div>
+                </div>
+                <div className="three-back">
+                  <h2 className="occupation">Full-Stack Web Developer</h2>
+                  <br></br>
+                  <p className="textAlign">
+                    Former aviation student who meandered their way into the
+                    world of web development
+                  </p>
+                  <p>
+                    Follow me on&nbsp;
+                    <a
+                      className="githubLink"
+                      href={"https://github.com/BlesMateo"}
+                      target="_blank"
+                    >
+                      <FontAwesomeIcon icon={faGithub} />
+                      Github
+                    </a>
+                  </p>
+                  <p>
+                    Contact me: &nbsp;
+                    <a
+                      className="emailLink"
+                      href={"mailto:blesildaangelicamateo@gmail.com"}
+                    >
+                      <FontAwesomeIcon icon={faEnvelope} />
+                      Gmail
+                    </a>
+                  </p>
+>>>>>>> 048bafbef0979c49ebcbec2faf1d5fb0d644ad96
                 </div>
               </div>
             </div>
@@ -186,9 +312,9 @@ const About = () => {
             <img src={Bootstrap} width="80" alt="bootstrap"></img>
             &nbsp; &nbsp;
             <img src={Express} width="100" alt="express"></img>
-            &nbsp; &nbsp;
+            &nbsp;
             <img src={KonvaReact} width="120" alt="konvareact"></img>
-            &nbsp; &nbsp;
+            &nbsp;
             <img src={Konva} width="120" alt="konva"></img>
             &nbsp; &nbsp;
             <img src={PostgreSQL} width="80" alt="postgresql"></img>
