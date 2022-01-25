@@ -29,7 +29,7 @@ import Socketio from "./images/Socketio.png";
 //import Creator photos
 import Bernadette from "./images/Creators/Bernadette.png";
 import Blesilda from "./images/Creators/Blesilda.png";
-// import Stephanie from "./images/Creators/Stephanie.png";
+import Stephanie from "./images/Creators/Stephanie.png";
 
 const About = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
@@ -114,7 +114,7 @@ const About = (props) => {
                   <br></br>
                   <div className="profile-photo-about">
                     <img
-                      src={SASS}
+                      src={Stephanie}
                       className="Stephanie"
                       width="240"
                       height="240"
