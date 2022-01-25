@@ -1,27 +1,28 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 
 // import from other libraries
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 
-// import other components
+// import other components/providers
 import OneTitle from "./OneTitle";
 import Navigation from "../Navigation";
 import { currentUserContext } from "../../providers/UserProvider";
+import { navContext } from "../../providers/NavProvider";
+import { idTitleContext } from "../../providers/TitleProvider";
 
 // import helpers from local files
 import useApplicationData from "../../hooks/forBoards";
 
 // import styling
 import "../../stylesheets/css/profile.css";
-import { useEffect } from "react";
-import { navContext } from "../../providers/NavProvider";
 
 const Profile = (props) => {
-  const { idTitle, setIdTitle } = props;
   const { currentUser } = useContext(currentUserContext);
   const { logoutShow } = useContext(navContext);
+  const { idTitle, getAllBoardIdTitle, clearIdTitle } =
+    useContext(idTitleContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const titleRef = useRef();
@@ -36,48 +37,24 @@ const Profile = (props) => {
     logoutShow();
 
     // clear the board first (this is to update new title on board if user A makes change and user B goes back to profile page, the new title will be reflected)
-    setIdTitle([]);
+    // setIdTitle([]);
+    clearIdTitle();
 
-    // axios request to get the board id and titles associated with the specific user
-    // 1. axios request to collaborators table to get the board ids associated with the user
-    axios
-      .post("/api/collaborators/userboards", { user_id: currentUser.id })
-      .then((response) => {
-        // response.data looks like this: [1,3] <-- this is the list of the board id associated with the user
-
-        // will only send axios request for title if user has boards
-        if (response.data.length > 0) {
-          response.data.map((id) => {
-            // id is the board id
-            axios
-              .post("/api/collaborators/boardTitle", { board_id: id })
-              .then((res) => {
-                // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
-                setIdTitle((prevState) => [...prevState, res.data]);
-              });
-          });
-        }
-      });
+    getAllBoardIdTitle(currentUser.id);
 
     // // axios request to get the board id and titles associated with the specific user
     // // 1. axios request to collaborators table to get the board ids associated with the user
     // axios
-    //   .post("api/collaborators/userboards", { user_id: currentUser.id })
+    //   .post("/api/collaborators/userboards", { user_id: currentUser.id })
     //   .then((response) => {
     //     // response.data looks like this: [1,3] <-- this is the list of the board id associated with the user
 
-    //     // Only do individual axios request for the boards that are not already in the idTitle array (for inital login as well as when a user is added as a collaborator to another board)
-    //     // For example:
-    //     // response.data = [1,3, 4]
-    //     // idTitle = [{id: 1, title: 'hello'},{id: 3, title: 'world'}]
-    //     // dbArray = [4]
-    //     const dbArray = response.data.slice(idTitle.length);
-
-    //     if (dbArray.length > 0) {
-    //       dbArray.map((id) => {
+    //     // will only send axios request for title if user has boards
+    //     if (response.data.length > 0) {
+    //       response.data.map((id) => {
     //         // id is the board id
     //         axios
-    //           .post("api/collaborators/boardTitle", { board_id: id })
+    //           .post("/api/collaborators/boardTitle", { board_id: id })
     //           .then((res) => {
     //             // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
     //             setIdTitle((prevState) => [...prevState, res.data]);
@@ -98,10 +75,12 @@ const Profile = (props) => {
     // let's user know that a board has been created
     alert(msg);
 
-    setIdTitle((prevState) => [
-      ...prevState,
-      { id: board.id, title: board.title },
-    ]);
+    // displayIdTitle(board.id, board.title);
+
+    // setIdTitle((prevState) => [
+    //   ...prevState,
+    //   { id: board.id, title: board.title },
+    // ]);
 
     navigate(`/board/${board.id}`);
   };
@@ -109,7 +88,7 @@ const Profile = (props) => {
   return (
     <>
       {/* ************ NAVIGATION BAR ************/}
-      <Navigation setIdTitle={setIdTitle} />
+      <Navigation />
       {/* ************ PROFILE ************/}
       <div className="profile-page">
         <div className="profile-container">

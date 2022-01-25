@@ -1,22 +1,23 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 // import from other libraries
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
-import { Button, Modal } from "react-bootstrap";
+// import from providers
+import { currentUserContext } from "../providers/UserProvider";
+import { navContext } from "../providers/NavProvider";
+import { idTitleContext } from "../providers/TitleProvider";
+
+// import from local files
 import logo from "../images/hodo_v3.png";
 //styling
 import "../stylesheets/css/navigation.css";
-import { currentUserContext } from "../providers/UserProvider";
-import { navContext } from "../providers/NavProvider";
 
 const Navigation = (props) => {
   const navigate = useNavigate();
   const { logoutMainProfile } = useContext(currentUserContext);
   const { showLogin, loginShow, logoutShow } = useContext(navContext);
-
-  const { setIdTitle, saveBoard } = props;
-
-  // const [showBackToProfile, setShowBackToProfile] = useState(false);
+  const { clearIdTitle } = useContext(idTitleContext);
 
   const login = (e) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ const Navigation = (props) => {
     navigate("/");
     logoutMainProfile();
     loginShow();
-    setIdTitle([]);
+    clearIdTitle();
   };
 
   return (

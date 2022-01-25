@@ -18,44 +18,19 @@ import "./stylesheets/css/App.css";
 import { currentUserContext } from "./providers/UserProvider";
 
 function App() {
-  // const [currentUser, setCurrentUser] = useState({});
-
   const { currentUser } = useContext(currentUserContext);
-
-  console.log("what is currentUser App--->", currentUser);
-
-  const [showLogin, setShowLogin] = useState("login");
-  const [idTitle, setIdTitle] = useState([]);
 
   return (
     <div className="App">
       {/* ******DIFFERNT ROUTES */}
       <Routes>
-        <Route path="/about" element={<About setIdTitle={setIdTitle} />} />
-        <Route path="/login" element={<Login setIdTitle={setIdTitle} />} />
-        <Route
-          path="/register"
-          element={
-            <Register
-              showLogin={showLogin}
-              setShowLogin={setShowLogin}
-              setIdTitle={setIdTitle}
-            />
-          }
-        />
-        {currentUser.id && (
-          <Route
-            path="/profile"
-            element={<Profile idTitle={idTitle} setIdTitle={setIdTitle} />}
-          />
-        )}
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {currentUser.id && <Route path="/profile" element={<Profile />} />}
         {currentUser.id && <Route path="/board/:id" element={<MainStage />} />}
-        <Route path="/" element={<Home setIdTitle={setIdTitle} />} />
-        <Route
-          path="*"
-          element={<Home setIdTitle={setIdTitle} />}
-          replace={"/"}
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<Home />} replace={"/"} />
       </Routes>
     </div>
   );

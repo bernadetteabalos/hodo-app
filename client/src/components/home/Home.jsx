@@ -12,7 +12,6 @@ import logo from "../../images/hodo_v3.png";
 import "../../stylesheets/css/home.css";
 
 const Home = (props) => {
-  const { setIdTitle } = props;
   const { profileLogoutShow, loginRegisterShow } = useContext(navContext);
   const { currentUser } = useContext(currentUserContext);
 
@@ -27,7 +26,7 @@ const Home = (props) => {
   return (
     <>
       {/* ************ NAVIGATION BAR ************/}
-      <Navigation setIdTitle={setIdTitle} />
+      <Navigation />
       {/* ************ HOME PAGE WITH LOGO ************/}
       <div className="home-page">
         <img src={logo} alt="hodo-logoo" />

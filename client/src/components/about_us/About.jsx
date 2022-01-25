@@ -30,8 +30,7 @@ import { navContext } from "../../providers/NavProvider";
 
 const About = (props) => {
   const { currentUser } = useContext(currentUserContext);
-  const { showLogin, profileLogoutShow } = useContext(navContext);
-  const { setIdTitle } = props;
+  const { profileLogoutShow } = useContext(navContext);
   const [count, setCount] = useState(1000);
 
   useEffect(() => {
@@ -51,7 +50,7 @@ const About = (props) => {
 
   return (
     <>
-      <Navigation setIdTitle={setIdTitle} />
+      <Navigation />
       <div className="about-page title thick">
         <h1> ABOUT US </h1>
         <div className="about-people">
