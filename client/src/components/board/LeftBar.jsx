@@ -57,7 +57,7 @@ const LeftBar = (props) => {
             value={borderColor}
             onChange={(e) => setBorderColor(e.target.value)}
           />
-          <i class="bi bi-slash-lg shapes shapesTwo"></i>
+          <i className="bi bi-slash-lg shapes shapesTwo"></i>
         </div>
         {/********* GENERATE RECTANGLE SHAPE ******/}
         <Button

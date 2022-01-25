@@ -127,7 +127,7 @@ const Header = (props) => {
         <h2 id="boardTitle">{title}</h2>
         {/* EDIT TITLE BTN */}
         <Button className="headerButton" onClick={handleShowTitle}>
-          <i class="bi bi-pencil-square"></i>
+          <i className="bi bi-pencil-square"></i>
         </Button>
         {/* MODAL APPEARS WHEN EDIT BTN CLICKED */}
         <Modal
@@ -206,7 +206,7 @@ const Header = (props) => {
         <Modal show={show === "profile"}>
           <Modal.Header id="exit-header">
             <i
-              class="bi bi-x exit-btn"
+              className="bi bi-x exit-btn"
               onClick={() => {
                 setShow("");
               }}
