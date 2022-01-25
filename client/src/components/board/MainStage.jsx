@@ -30,8 +30,6 @@ import { navContext } from "../../providers/NavProvider";
 const END_POINT = "http://localhost:8001";
 
 const MainStage = () => {
-  const { currentUser } = useContext(currentUserContext);
-  const { backShow } = useContext(navContext);
   // for the socket connection
   const [connection, setConnection] = useState(undefined);
   // colours
@@ -53,6 +51,9 @@ const MainStage = () => {
   const stageRef = useRef(null);
   const posRef = useRef(null);
 
+  // deconstructing from useContexts and helpers
+  const { currentUser } = useContext(currentUserContext);
+  const { backShow } = useContext(navContext);
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
 
   const onKeyPress = (event) => {
