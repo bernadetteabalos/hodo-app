@@ -38,7 +38,45 @@ const CurrentUserProvider = (props) => {
     setCurrentUser({});
   };
 
-  const providerData = { currentUser, loginMainProfile, logoutMainProfile };
+  const registerMainProfile = (
+    first_name,
+    last_name,
+    email,
+    password,
+    profile_photo
+  ) => {
+    // axios request add user to database
+    const urlPostApi = "/api/users/register";
+    axios
+      .post(urlPostApi, {
+        first_name,
+        last_name,
+        email,
+        password,
+        profile_photo,
+      })
+      .then((res) => {
+        if (res.data.msg) {
+          // alert user if there is an error (eg 'user with email already exists')
+          alert(res.data.msg);
+        } else {
+          // set current user to the one that was just added to the db
+          setCurrentUser(res.data);
+          // setShowLogin to logout to display logout in the nav bar
+          // logoutShow();
+          // redirects user to the profile page
+          navigate("/profile");
+        }
+      })
+      .catch((err) => console.log(err.message));
+  };
+
+  const providerData = {
+    currentUser,
+    loginMainProfile,
+    logoutMainProfile,
+    registerMainProfile,
+  };
   const Provider = currentUserContext.Provider;
   return <Provider value={providerData}>{props.children}</Provider>;
 };
