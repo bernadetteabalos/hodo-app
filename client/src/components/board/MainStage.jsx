@@ -29,8 +29,7 @@ import { navContext } from "../../providers/NavProvider";
 // socket end point for websocket
 const END_POINT = "http://localhost:8001";
 
-const MainStage = (props) => {
-  const { setIdTitle } = props;
+const MainStage = () => {
   const { currentUser } = useContext(currentUserContext);
   const { backShow } = useContext(navContext);
   // for the socket connection
