@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { Transformer } from "react-konva";
 import useImage from "use-image";
 
-// import Other Components
+// import other Components
 import RectangleSquareLayer from "../layers/shapes_layer/RectangleSquareLayer";
 import CircleLayer from "../layers/shapes_layer/CircleLayer";
 import StarLayer from "../layers/shapes_layer/StarLayer";
@@ -12,13 +12,7 @@ import ImageLayer from "../layers/images_layer/ImageLayer";
 import TextLayer from "../layers/text_layer/TextLayer";
 import LineLayer from "../layers/line_layer/LinesLayer";
 
-const Element = ({
-  shapeName,
-  shapeProps,
-  isSelected,
-  onSelect,
-  onChange,
-}) => {
+const Element = ({ shapeName, shapeProps, isSelected, onSelect, onChange }) => {
   const [image] = useImage(shapeProps.url, "Anonimus");
   const shapeRef = useRef();
   const trRef = useRef();
