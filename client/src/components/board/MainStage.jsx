@@ -34,7 +34,7 @@ const MainStage = () => {
   const [connection, setConnection] = useState(undefined);
   // colours
   const [fillColor, setFillColor] = useState("");
-  const [borderColor, setBorderColor] = useState("black");
+  const [borderColor, setBorderColor] = useState("#000000");
   // for if SHAPE is selected
   const [selectedId, selectShape] = useState(null);
   // for IMAGES
@@ -43,7 +43,7 @@ const MainStage = () => {
   const [message, setMessage] = useState("");
   const [chatSpeakers, setChatSpeakers] = useState([]);
   // for PENS
-  const [strokeColor, setStrokeColor] = useState("black");
+  const [strokeColor, setStrokeColor] = useState("#000000");
   const [tool, setTool] = useState("select");
   const [lines, setLines] = useState([]);
   // references
