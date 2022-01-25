@@ -26,6 +26,11 @@ import React from "./images/React.png";
 import SASS from "./images/SASS.png";
 import Socketio from "./images/Socketio.png";
 
+//import Creator photos
+import Bernadette from "./images/Creators/Bernadette.png";
+import Blesilda from "./images/Creators/Blesilda.png";
+import Stephanie from "./images/Creators/Stephanie.png";
+
 const About = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
     props;
@@ -58,9 +63,16 @@ const About = (props) => {
             <div className="person bold pop">
               <div className="flip-card-inner">
                 <div className="one-front">
-                  <h1>Bernadette Abalos</h1>
+                  <h1 className="tinyName">Bernadette Abalos</h1>
+                  <br></br>
                   <div className="profile-photo-about">
-                    <img src={bubbles} />
+                    <img
+                      src={Bernadette}
+                      className="Bernadette"
+                      width="240"
+                      height="240"
+                      alt="avatar"
+                    />
                   </div>
                 </div>
                 <div className="one-back">
@@ -70,15 +82,22 @@ const About = (props) => {
                     Former life sciences student who enjoys art and programming.
                   </p>
                   <p>
-                    Follow me on &nbsp;
-                    <a href={"https://github.com/bernadetteabalos"}>
+                    Follow me on&nbsp;
+                    <a
+                      className="githubLink"
+                      href={"https://github.com/bernadetteabalos"}
+                      target="_blank"
+                    >
                       <FontAwesomeIcon icon={faGithub} />
                       Github
                     </a>
                   </p>
                   <p>
-                    Contact info &nbsp;
-                    <a href={"mailto:bern.roseabalos@gmail.com"}>
+                    Contact me: &nbsp;
+                    <a
+                      className="emailLink"
+                      href={"mailto:bern.roseabalos@gmail.com"}
+                    >
                       <FontAwesomeIcon icon={faEnvelope} />
                       Gmail
                     </a>
@@ -91,9 +110,16 @@ const About = (props) => {
             <div className="person emphasize popsec">
               <div className="flip-inner">
                 <div className="two-front">
-                  <h1>Stephanie Li</h1>
+                  <h1 className="smallName">Stephanie Li</h1>
+                  <br></br>
                   <div className="profile-photo-about">
-                    <img src={blossom} />
+                    <img
+                      src={Stephanie}
+                      className="Stephanie"
+                      width="240"
+                      height="240"
+                      alt="avatar"
+                    />
                   </div>
                 </div>
                 <div className="two-back">
@@ -103,15 +129,22 @@ const About = (props) => {
                     Former pharmacist who discovered a love for coding.
                   </p>
                   <p>
-                    Follow me on &nbsp;
-                    <a href={"https://github.com/StephhyL"}>
+                    Follow me on&nbsp;
+                    <a
+                      className="githubLink"
+                      href={"https://github.com/StephhyL"}
+                      target="_blank"
+                    >
                       <FontAwesomeIcon icon={faGithub} />
                       Github
                     </a>
                   </p>
                   <p>
-                    Contact info &nbsp;
-                    <a href={"mailto:stephanieli88947@gmail.com"}>
+                    Contact me: &nbsp;
+                    <a
+                      className="emailLink"
+                      href={"mailto:stephanieli88947@gmail.com"}
+                    >
                       <FontAwesomeIcon icon={faEnvelope} />
                       Gmail
                     </a>
@@ -124,9 +157,16 @@ const About = (props) => {
             <div className="person outline popthird">
               <div className="flip-in">
                 <div className="three-front">
-                  <h1>Blesilda Mateo</h1>
+                  <h1 className="miniName">Blesilda Mateo</h1>
+                  <br></br>
                   <div className="profile-photo-about">
-                    <img src={buttercup} />
+                    <img
+                      src={Blesilda}
+                      className="Blesilda"
+                      width="240"
+                      height="240"
+                      alt="avatar"
+                    />
                   </div>
                 </div>
                 <div className="three-back">
@@ -137,15 +177,22 @@ const About = (props) => {
                     world of web development
                   </p>
                   <p>
-                    Follow me on &nbsp;
-                    <a href={"https://github.com/BlesMateo"}>
+                    Follow me on&nbsp;
+                    <a
+                      className="githubLink"
+                      href={"https://github.com/BlesMateo"}
+                      target="_blank"
+                    >
                       <FontAwesomeIcon icon={faGithub} />
                       Github
                     </a>
                   </p>
                   <p>
-                    Contact info &nbsp;
-                    <a href={"mailto:blesildaangelicamateo@gmail.com"}>
+                    Contact me: &nbsp;
+                    <a
+                      className="emailLink"
+                      href={"mailto:blesildaangelicamateo@gmail.com"}
+                    >
                       <FontAwesomeIcon icon={faEnvelope} />
                       Gmail
                     </a>
@@ -164,9 +211,9 @@ const About = (props) => {
             <img src={Bootstrap} width="80" alt="bootstrap"></img>
             &nbsp; &nbsp;
             <img src={Express} width="100" alt="express"></img>
-            &nbsp; &nbsp;
+            &nbsp;
             <img src={KonvaReact} width="120" alt="konvareact"></img>
-            &nbsp; &nbsp;
+            &nbsp;
             <img src={Konva} width="120" alt="konva"></img>
             &nbsp; &nbsp;
             <img src={PostgreSQL} width="80" alt="postgresql"></img>
