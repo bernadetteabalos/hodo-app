@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 // import from other libraries
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -10,11 +11,13 @@ import { idTitleContext } from "../providers/TitleProvider";
 
 // import from local files
 import logo from "../images/hodo_v3.png";
+
 //styling
 import "../stylesheets/css/navigation.css";
 
-const Navigation = (props) => {
+const Navigation = () => {
   const navigate = useNavigate();
+  // deconstructing from useContext
   const { logoutMainProfile } = useContext(currentUserContext);
   const { showLogin, loginShow, logoutShow } = useContext(navContext);
   const { clearIdTitle } = useContext(idTitleContext);
@@ -108,7 +111,7 @@ const Navigation = (props) => {
               Logout
             </Button>
           )}
-          {/* {showLogin === "back" && (
+          {showLogin === "back" && (
             <Button
               variant="success"
               className="base-btn"
@@ -116,41 +119,7 @@ const Navigation = (props) => {
             >
               Back To Profile
             </Button>
-          )} */}
-          {/* <Modal show={showBackToProfile}>
-            <Modal.Header id="exit-header">
-              <i
-                class="bi bi-x exit-btn"
-                onClick={() => {
-                  setShowBackToProfile(false);
-                }}
-              ></i>
-            </Modal.Header>
-            <Modal.Body>
-              <h4>Save before going back to profile?</h4>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                size="lg"
-                variant="primary"
-                onClick={() => {
-                  saveBoard();
-                  navigate("/profile");
-                }}
-              >
-                Yes, save board
-              </Button>
-              <Button
-                size="lg"
-                variant="secondary"
-                onClick={() => {
-                  navigate("/profile");
-                }}
-              >
-                No
-              </Button>
-            </Modal.Footer>
-          </Modal> */}
+          )}
         </div>
       </div>
     </>
