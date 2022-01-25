@@ -6,13 +6,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CurrentUserProvider from "./providers/UserProvider";
 import { BrowserRouter as Router } from "react-router-dom";
 import NavProvider from "./providers/NavProvider";
+import IdTitleProvider from "./providers/TitleProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <CurrentUserProvider>
         <NavProvider>
-          <App />
+          <IdTitleProvider>
+            <App />
+          </IdTitleProvider>
         </NavProvider>
       </CurrentUserProvider>
     </Router>
