@@ -519,15 +519,6 @@ const MainStage = (props) => {
                 setMessage(e.target.value);
               }}
             ></input>
-            {/* <textarea
-                  className="enterText"
-                  type="text"
-                  placeholder="enter message here"
-                  value={message}
-                  onChange={(e) => {
-                    setMessage(e.target.value);
-                  }}
-                ></textarea> */}
             <Button
               className="send-btn"
               type="submit"
