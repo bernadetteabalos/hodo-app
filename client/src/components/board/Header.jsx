@@ -119,7 +119,7 @@ const Header = (props) => {
       <div className="title-name">
         <h2 id="boardTitle">{title}</h2>
         <Button className="headerButton" onClick={handleShowTitle}>
-          <i class="bi bi-pencil-square"></i>
+          <i className="bi bi-pencil-square"></i>
         </Button>
         <Modal
           show={show === "title"}
@@ -193,7 +193,7 @@ const Header = (props) => {
         <Modal show={show === "profile"}>
           <Modal.Header id="exit-header">
             <i
-              class="bi bi-x exit-btn"
+              className="bi bi-x exit-btn"
               onClick={() => {
                 setShow("");
               }}

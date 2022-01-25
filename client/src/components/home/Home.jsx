@@ -45,7 +45,7 @@ const Home = (props) => {
         HodoApp aims to make the creative process easy and interactive.
         <br />
         <br />
-        <i class="bi bi-chevron-down"></i>
+        <i className="bi bi-chevron-down"></i>
         </h4>
       </div>
       <div data-aos="fade" className="landing-imageTwo">

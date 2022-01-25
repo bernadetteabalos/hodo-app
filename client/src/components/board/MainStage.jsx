@@ -44,7 +44,7 @@ const MainStage = (props) => {
   const [message, setMessage] = useState("");
   const [chatSpeakers, setChatSpeakers] = useState([]);
   // for PENS
-  const [strokeColor, setStrokeColor] = useState("black");
+  const [strokeColor, setStrokeColor] = useState("#000000");
   const [tool, setTool] = useState("select");
   const [lines, setLines] = useState([]);
   // references

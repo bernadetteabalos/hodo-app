@@ -48,7 +48,7 @@ const RightBar = (props) => {
             setState({ showing: !showing });
           }}
         >
-          <i class="bi bi-gear"></i>
+          <i className="bi bi-gear"></i>
         </Button>
         <br></br>
         <div
@@ -118,7 +118,7 @@ const RightBar = (props) => {
             setWarning("delete-shape");
           }}
         >
-          <i class="bi bi-trash"></i>
+          <i className="bi bi-trash"></i>
         </Button>
         <Modal show={warning === "delete-shape"}>
           <Modal.Body>
