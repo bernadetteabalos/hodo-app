@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 .handleTitle {
   padding-left: 2em;
   padding-right: 1em;
@@ -6,5 +8,5 @@
 }
 
 .handleTitle:hover {
-  color: blue;
+  color: $btn-hover;
 }

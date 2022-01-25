@@ -45,7 +45,7 @@ const Navigation = () => {
 
   return (
     <>
-      <div className="navbar">
+      <div className="navbar sticky-top">
         <div className="logo">
           <div>
             <Link to="/">

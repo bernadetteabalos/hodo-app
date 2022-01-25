@@ -46,7 +46,9 @@ const LeftBar = (props) => {
             className="colorPicker"
             type="color"
             value={fillColor}
-            onChange={(e) => setFillColor(e.target.value)}
+            onChange={(e) => {
+              setFillColor(e.target.value)
+            }}
           />
           <i className="bi bi-paint-bucket shapes shapesTwo"></i>
         </div>

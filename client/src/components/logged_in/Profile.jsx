@@ -79,7 +79,7 @@ const Profile = () => {
               </strong>
             </div>
             <div>
-              <h5>Your id is: {currentUser.id}</h5>
+              <h5>Your collaborator id is: {currentUser.id}</h5>
             </div>
           </div>
           {/* ****** RIGHT SIDE OF PAGE WITH LIST OF BOARDS AND CREATE BTN ***/}

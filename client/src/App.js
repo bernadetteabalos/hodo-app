@@ -1,4 +1,6 @@
-import { useState, useContext } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 
 // import other Components
@@ -19,6 +21,8 @@ import { currentUserContext } from "./providers/UserProvider";
 
 function App() {
   const { currentUser } = useContext(currentUserContext);
+
+  AOS.init();
 
   return (
     <div className="App">

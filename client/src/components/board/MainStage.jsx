@@ -33,8 +33,8 @@ const MainStage = () => {
   // for the socket connection
   const [connection, setConnection] = useState(undefined);
   // colours
-  const [fillColor, setFillColor] = useState(null);
-  const [borderColor, setBorderColor] = useState("#000000");
+  const [fillColor, setFillColor] = useState("#c0bce6");
+  const [borderColor, setBorderColor] = useState("#c0bce6");
   // for if SHAPE is selected
   const [selectedId, selectShape] = useState(null);
   // for IMAGES
@@ -60,6 +60,10 @@ const MainStage = () => {
     undo();
   };
   useKeyPress(["z"], onKeyPress);
+
+  useKeyPress(["Delete"], () => {
+    undo('Line');
+  });
 
   //***STAGE GRID ****//
   const WIDTH = 40;
@@ -289,7 +293,7 @@ const MainStage = () => {
     });
   };
 
-  useKeyPress(["x"], () => {
+  useKeyPress(["Delete"], () => {
     deleteShape();
   });
 

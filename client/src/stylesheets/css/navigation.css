@@ -1,6 +1,7 @@
 .navbar {
   display: flex;
   justify-content: space-around;
+  width: 100%;
   background: #d8d7ff; }
   .navbar h3:hover {
     color: #8c8ea7; }
@@ -9,6 +10,7 @@
     justify-content: center;
     margin-left: 3em; }
   .navbar .home-profile-about {
+    margin-left: 1.5em;
     display: flex;
     justify-content: center;
     align-items: center; }
@@ -24,6 +26,8 @@
       background-color: #8c8ea7;
       border: none;
       margin-right: 2em; }
+      .navbar .nav-right Button:hover {
+        background-color: #676a81; }
 
 .exit-btn {
   font-size: 2rem;

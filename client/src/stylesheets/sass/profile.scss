@@ -91,11 +91,15 @@
           align-items: center;
           // color: red;
         }
+        :hover {
+          background-color: $btn-hover;
+          border-radius: 20px;
+        }
       }
     }
   }
 }
 
 .board-list-items {
-  color: red;
+  color: black;
 }
