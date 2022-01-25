@@ -93,7 +93,8 @@ input[type="color"] {
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0); }
   input[type="color"]:hover {
-    filter: brightness(1.2); }
+    filter: brightness(1.2);
+    cursor: pointer; }
 
 input[type="color"]::-webkit-color-swatch-wrapper {
   background-color: rgba(0, 0, 0, 0);

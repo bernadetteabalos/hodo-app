@@ -35,7 +35,7 @@ const Home = (props) => {
       />
       {/* ************ HOME PAGE WITH LOGO ************/}
       <div className="home-page">
-        <img data-aos="fade" src={logo} alt="hodo-logoo" />
+        <img data-aos="zoom-in-up" src={logo} alt="hodo-logoo" />
       </div>
       <div data-aos="fade" className="landing-image">
         <img data-aos="fade-up" src={landing} alt="hodo-landing-1" />
@@ -43,6 +43,9 @@ const Home = (props) => {
         <h4 data-aos="fade-up">Especially with the transition into the remote world,
         <br />
         HodoApp aims to make the creative process easy and interactive.
+        <br />
+        <br />
+        <i class="bi bi-chevron-down"></i>
         </h4>
       </div>
       <div data-aos="fade" className="landing-imageTwo">

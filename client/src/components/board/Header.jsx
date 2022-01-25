@@ -108,7 +108,6 @@ const Header = (props) => {
   return (
     <div className="header-bar">
       <div className="space">
-      <Link to="/">
         <img
           src={logo}
           width="120"
@@ -116,7 +115,6 @@ const Header = (props) => {
           className="d-inline-block align-top img-logo"
           alt="Hodo logo"
         />
-        </Link>
       </div>
       <div className="title-name">
         <h2 id="boardTitle">{title}</h2>
