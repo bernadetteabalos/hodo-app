@@ -10,7 +10,7 @@ export const generateOneElement = (x, y, shape, fillColor, borderColor, url) => 
   }
 
   if (shape === "Text") {
-    width = 150;
+    width = 200;
     height = 30;
   }
 

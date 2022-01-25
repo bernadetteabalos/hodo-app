@@ -59,7 +59,7 @@ const MainStage = (props) => {
   };
   useKeyPress(["z"], onKeyPress);
 
-  useKeyPress(["x"], () => {
+  useKeyPress(["Delete"], () => {
     undo('Line');
   });
 
