@@ -3,7 +3,7 @@ import { useRef, useEffect, useContext } from "react";
 // import from other libraries
 import { Container, Form, Button } from "react-bootstrap";
 
-// import other components/providers
+// import other Components and from providers
 import Navigation from "../Navigation";
 import { navContext } from "../../providers/NavProvider";
 import { currentUserContext } from "../../providers/UserProvider";
@@ -12,10 +12,11 @@ import { currentUserContext } from "../../providers/UserProvider";
 import "../../stylesheets/css/register.css";
 import "../../stylesheets/css/login.css";
 
-const Register = (props) => {
-  const { setIdTitle } = props;
+const Register = () => {
+  // deconstructing from useContext
   const { registerMainProfile } = useContext(currentUserContext);
   const { loginShow } = useContext(navContext);
+  // useRefs
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
@@ -30,6 +31,7 @@ const Register = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // fcn from currentUserContext. (fcn: does axios request to db to see if email already in db. If not, add user and redirects to profile. Else, alert user)
     registerMainProfile(
       firstNameRef.current.value,
       lastNameRef.current.value,
@@ -42,7 +44,7 @@ const Register = (props) => {
   return (
     <>
       {/* ************ NAVIGATION BAR ************/}
-      <Navigation setIdTitle={setIdTitle} />
+      <Navigation />
       {/* ************ REGISTRATION FORM ************/}
       <div className="register-page">
         <Container className="register-container m-auto">
