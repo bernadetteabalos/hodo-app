@@ -13,8 +13,8 @@ const IdTitleProvider = (props) => {
     setIdTitle([]);
   };
 
+  // axios request to get the board id and titles associated with the specific user. Called upon render of /profile ("profile page")
   const getAllBoardIdTitle = (userId) => {
-    // axios request to get the board id and titles associated with the specific user
     // 1. axios request to collaborators table to get the board ids associated with the user
     axios
       .post("/api/collaborators/userboards", { user_id: userId })

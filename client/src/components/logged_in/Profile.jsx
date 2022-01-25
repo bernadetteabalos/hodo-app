@@ -3,7 +3,6 @@ import { useState, useRef, useEffect, useContext } from "react";
 // import from other libraries
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Form } from "react-bootstrap";
-import axios from "axios";
 
 // import other components/providers
 import OneTitle from "./OneTitle";
@@ -18,7 +17,7 @@ import useApplicationData from "../../hooks/forBoards";
 // import styling
 import "../../stylesheets/css/profile.css";
 
-const Profile = (props) => {
+const Profile = () => {
   const { currentUser } = useContext(currentUserContext);
   const { logoutShow } = useContext(navContext);
   const { idTitle, getAllBoardIdTitle, clearIdTitle } =
@@ -32,7 +31,6 @@ const Profile = (props) => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    console.log("who is my user on line 32 of profile--->", currentUser);
     // to display the 'logout' button on the nav bar (pass showLogin down to Navigation Component)
     logoutShow();
 
@@ -40,28 +38,8 @@ const Profile = (props) => {
     // setIdTitle([]);
     clearIdTitle();
 
+    // calls the getAllBoardIdTitle from idTitleContext (which does an axios post request to get the board ids and titles associated with the specific user)
     getAllBoardIdTitle(currentUser.id);
-
-    // // axios request to get the board id and titles associated with the specific user
-    // // 1. axios request to collaborators table to get the board ids associated with the user
-    // axios
-    //   .post("/api/collaborators/userboards", { user_id: currentUser.id })
-    //   .then((response) => {
-    //     // response.data looks like this: [1,3] <-- this is the list of the board id associated with the user
-
-    //     // will only send axios request for title if user has boards
-    //     if (response.data.length > 0) {
-    //       response.data.map((id) => {
-    //         // id is the board id
-    //         axios
-    //           .post("/api/collaborators/boardTitle", { board_id: id })
-    //           .then((res) => {
-    //             // res.data looks like this: {id: 3, title: 'Greek Itinerary'}
-    //             setIdTitle((prevState) => [...prevState, res.data]);
-    //           });
-    //       });
-    //     }
-    //   });
   }, []);
 
   // activated when "create new board" is clicked
@@ -75,13 +53,6 @@ const Profile = (props) => {
     // let's user know that a board has been created
     alert(msg);
 
-    // displayIdTitle(board.id, board.title);
-
-    // setIdTitle((prevState) => [
-    //   ...prevState,
-    //   { id: board.id, title: board.title },
-    // ]);
-
     navigate(`/board/${board.id}`);
   };
 
@@ -93,12 +64,7 @@ const Profile = (props) => {
       <div className="profile-page">
         <div className="profile-container">
           <div className="left-profile">
-            <div
-              className="profile-photo"
-              // style={{
-              //   backgroundImage: `url(${currentUser.profile_photo})`,
-              // }}
-            >
+            <div className="profile-photo">
               <img src={currentUser.profile_photo} alt="profile-photo" />
             </div>
             <div className="profile-name">
