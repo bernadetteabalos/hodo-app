@@ -24,13 +24,15 @@ import { generateOneElement } from "./helpers/_helperFunctions";
 import "../../stylesheets/css/mainstage.css";
 import "../../stylesheets/css/chatbox.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { navContext } from "../../providers/NavProvider";
 
 // socket end point for websocket
 const END_POINT = "http://localhost:8001";
 
 const MainStage = (props) => {
-  const { showLogin, setShowLogin, setIdTitle } = props;
+  const { setIdTitle } = props;
   const { currentUser } = useContext(currentUserContext);
+  const { backShow } = useContext(navContext);
   // for the socket connection
   const [connection, setConnection] = useState(undefined);
   // colours
@@ -105,7 +107,7 @@ const MainStage = (props) => {
 
   // upon render, setShowLogin to back to display "back to profile" button on nav bar (showLogin is passed down as prop)
   useEffect(() => {
-    setShowLogin("back");
+    backShow();
   }, []);
 
   // ************** SOCKET ************************

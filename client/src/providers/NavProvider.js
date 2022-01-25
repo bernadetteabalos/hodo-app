@@ -30,6 +30,10 @@ const NavProvider = (props) => {
     setShowLogin("register");
   };
 
+  const backShow = () => {
+    setShowLogin("back");
+  };
+
   const providerData = {
     showLogin,
     profileLogoutShow,
@@ -37,6 +41,7 @@ const NavProvider = (props) => {
     logoutShow,
     loginRegisterShow,
     registerShow,
+    backShow,
   };
   const Provider = navContext.Provider;
   return <Provider value={providerData}>{props.children}</Provider>;
