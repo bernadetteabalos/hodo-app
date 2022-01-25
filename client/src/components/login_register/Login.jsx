@@ -1,7 +1,6 @@
 import { useRef, useEffect, useContext } from "react";
 
 // import from other libraries
-import { useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 
 // import other Components and from providers
@@ -14,9 +13,8 @@ import "../../stylesheets/css/login.css";
 
 const Login = (props) => {
   const { setIdTitle } = props;
-  const { currentUser, loginMainProfile } = useContext(currentUserContext);
+  const { loginMainProfile } = useContext(currentUserContext);
   const { registerShow } = useContext(navContext);
-  const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
 
@@ -28,34 +26,9 @@ const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // fcn from currentUserContext. (fcn: does axios request to db to see if entered credentials are valid. If so, logs user in/set user to currentUser, and redirects to profile. Else, alert user)
     loginMainProfile(emailRef.current.value, pwRef.current.value);
-
-    // // axios request to check if user's credentials matches those in database
-    // const urlOneUserApi = `/api/users/login`;
-    // axios
-    //   .post(urlOneUserApi, {
-    //     email: emailRef.current.value,
-    //     password: pwRef.current.value,
-    //   })
-    //   // axios request returns json data with either msg(w/ error msg to client) ex {msg: 'incorrect credentials'}
-    //   .then((res) => {
-    //     if (res.data.msg) {
-    //       // display msg to user if incorrect credentials
-    //       alert(res.data.msg);
-    //     } else {
-    //       // sets current user object to user data found in db {id: 1, first_name: 'mario', last_name: 'test', etc...}
-    //       setCurrentUser(res.data);
-    //       // setShowLogin to logout to display logout in the nav bar
-    //       setShowLogin("logout");
-    //       // redirects user to the profile page
-    //       navigate("/profile");
-    //     }
-    //   })
-    //   // prints any error
-    //   .catch((err) => console.log(err.message));
   };
-
-  console.log("what is my currentUser then?", currentUser);
 
   return (
     <>

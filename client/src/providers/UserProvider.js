@@ -8,8 +8,8 @@ const CurrentUserProvider = (props) => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
 
+  // axios request to check if user's credentials matches those in database
   const loginMainProfile = (email, password) => {
-    // axios request to check if user's credentials matches those in database
     const urlOneUserApi = `/api/users/login`;
     axios
       .post(urlOneUserApi, {
