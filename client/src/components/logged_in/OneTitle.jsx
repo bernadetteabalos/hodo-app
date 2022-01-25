@@ -1,5 +1,6 @@
 // import from other libraries
 import { useNavigate } from "react-router-dom";
+
 // import styling
 import "../../stylesheets/css/onetitle.css";
 
@@ -17,7 +18,7 @@ const OneTitle = (props) => {
   return (
     <div>
       <h3 onClick={handleTitle} className="handleTitle">
-        <i class="bi bi-arrow-right"></i>
+        <i className="bi bi-arrow-right"></i>
         {titleObj.title}
       </h3>
       <br></br>

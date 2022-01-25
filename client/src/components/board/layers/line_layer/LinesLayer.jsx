@@ -1,10 +1,9 @@
 import { Line } from "react-konva";
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 
-const LineLayer= (props) => {
-  
+const LineLayer = (props) => {
   const [tool, setTool] = useState("select");
-  const [strokeColor, setStrokeColor] = useState("black");
+  const [strokeColor, setStrokeColor] = useState("#000000");
   const [lines, setLines] = useState([]);
   const isDrawing = useRef(false);
   const { onSelect, shapeRef, onChange, shapeProps } = props;
@@ -33,25 +32,22 @@ const LineLayer= (props) => {
     lines.splice(lines.length - 1, 1, lastLine);
     setLines(lines.concat());
   };
-  
-  return (
-    lines.map((line, i) => (
-      <Line
-        key={i}
-        points={line.points}
-        stroke={line.strokeColor}
-        strokeWidth={5}
-        tension={0.5}
-        ref={shapeRef}
-        {...shapeProps}
-        lineCap="round"
-        globalCompositeOperation={
-          line.tool === "eraser" ? "destination-out" : "source-over"
-        }
-        
-      />
-    ))
-  );
+
+  return lines.map((line, i) => (
+    <Line
+      key={i}
+      points={line.points}
+      stroke={line.strokeColor}
+      strokeWidth={5}
+      tension={0.5}
+      ref={shapeRef}
+      {...shapeProps}
+      lineCap="round"
+      globalCompositeOperation={
+        line.tool === "eraser" ? "destination-out" : "source-over"
+      }
+    />
+  ));
 };
 
 export default LineLayer;

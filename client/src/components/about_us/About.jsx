@@ -1,20 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+
+// import from other libraries
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// import from other components
+// import other Component and from providers
 import Navigation from "../Navigation";
+import { currentUserContext } from "../../providers/UserProvider";
+import { navContext } from "../../providers/NavProvider";
+
+// import styling
+import "../../stylesheets/css/about.css";
+
+// import for Confetti
+import Confetti from "./buttonClick";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 // import images from local files
 import bubbles from "../../images/bubbles.jpg";
 import blossom from "../../images/blossom.jpeg";
 import buttercup from "../../images/buttercup.jpg";
-
-// import styling
-import "../../stylesheets/css/about.css";
-import Confetti from "./buttonClick";
-import { useEffect } from "react/cjs/react.development";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import bles from "../../images/bles.png";
 
 //import Stack Logos
 import Bootstrap from "./images/Bootstrap.jpeg";
@@ -31,18 +37,17 @@ import Bernadette from "./images/Creators/Bernadette.png";
 import Blesilda from "./images/Creators/Blesilda.png";
 import Stephanie from "./images/Creators/Stephanie.png";
 
-const About = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
-    props;
+const About = () => {
+  const { currentUser } = useContext(currentUserContext);
+  const { profileLogoutShow } = useContext(navContext);
   const [count, setCount] = useState(1000);
 
+  // upon first render, checks if user is logged in. If so, calls fcn to display 'profile, logout' btn
   useEffect(() => {
     if (currentUser.id) {
-      setShowLogin("profile-logout");
+      profileLogoutShow();
     }
   }, []);
-
-  console.log("this is my current user on line 13 from about--->", currentUser);
 
   const confetti = () => {
     setCount(count + 1000);
@@ -50,12 +55,7 @@ const About = (props) => {
 
   return (
     <>
-      <Navigation
-        setCurrentUser={setCurrentUser}
-        showLogin={showLogin}
-        setShowLogin={setShowLogin}
-        setIdTitle={setIdTitle}
-      />
+      <Navigation />
       <div className="about-page title thick">
         <h1> ABOUT US </h1>
         <div className="about-people">
@@ -203,6 +203,7 @@ const About = (props) => {
           </div>
         </div>
         <br></br>
+        {/* ********* TECH STACK ******************** */}
         <div className="about-stack">
           <h1>Our Tech Stack</h1>
         </div>
@@ -225,12 +226,13 @@ const About = (props) => {
             <img src={Socketio} width="80" alt="socketio"></img>
           </h3>
         </div>
+        {/* ********* THANK YOU ******************** */}
         <div className="thank-you">
           <h1>
             THANK YOU x {count} & &nbsp;
             <button
               type="button"
-              class="btn btn-outline-dark btn-lg"
+              className="btn btn-outline-dark btn-lg"
               onClick={confetti}
             >
               <Confetti />

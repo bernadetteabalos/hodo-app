@@ -1,20 +1,22 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
 
 // import from other libraries
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 
-// import other components
+// import other Components and from providers
 import Navigation from "../Navigation";
+import { navContext } from "../../providers/NavProvider";
+import { currentUserContext } from "../../providers/UserProvider";
 
 // import stylesheet
 import "../../stylesheets/css/register.css";
 import "../../stylesheets/css/login.css";
 
-const Register = (props) => {
-  const { setCurrentUser, showLogin, setShowLogin, setIdTitle } = props;
-  const navigate = useNavigate();
+const Register = () => {
+  // deconstructing from useContext
+  const { registerMainProfile } = useContext(currentUserContext);
+  const { loginShow } = useContext(navContext);
+  // useRefs
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
@@ -23,47 +25,26 @@ const Register = (props) => {
 
   // setShowLogin to display 'login' button in the nav bar (showLogin passed down to Navigation component)
   useEffect(() => {
-    setShowLogin("login");
+    loginShow();
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // axios request add user to database
-    const urlPostApi = "/api/users/register";
-    axios
-      .post(urlPostApi, {
-        first_name: firstNameRef.current.value,
-        last_name: lastNameRef.current.value,
-        email: emailRef.current.value,
-        password: pwRef.current.value,
-        profile_photo: photoRef.current.value,
-      })
-      .then((res) => {
-        if (res.data.msg) {
-          // alert user if there is an error (eg 'user with email already exists')
-          alert(res.data.msg);
-        } else {
-          // set current user to the one that was just added to the db
-          setCurrentUser(res.data);
-          // setShowLogin to logout to display logout in the nav bar
-          setShowLogin("logout");
-          // redirects user to the profile page
-          navigate("/profile");
-        }
-      })
-      .catch((err) => console.log(err.message));
+    // fcn from currentUserContext. (fcn: does axios request to db to see if email already in db. If not, add user and redirects to profile. Else, alert user)
+    registerMainProfile(
+      firstNameRef.current.value,
+      lastNameRef.current.value,
+      emailRef.current.value,
+      pwRef.current.value,
+      photoRef.current.value
+    );
   };
 
   return (
     <>
       {/* ************ NAVIGATION BAR ************/}
-      <Navigation
-        setCurrentUser={setCurrentUser}
-        showLogin={showLogin}
-        setShowLogin={setShowLogin}
-        setIdTitle={setIdTitle}
-      />
+      <Navigation />
       {/* ************ REGISTRATION FORM ************/}
       <div className="register-page">
         <Container className="register-container m-auto">
