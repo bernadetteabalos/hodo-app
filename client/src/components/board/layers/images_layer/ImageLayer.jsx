@@ -2,6 +2,7 @@ import { Image } from "react-konva";
 
 const ImageLayer = (props) => {
   const { image, onSelect, shapeRef, onChange, shapeProps } = props;
+
   return (
     <Image
       width={shapeProps.width}
