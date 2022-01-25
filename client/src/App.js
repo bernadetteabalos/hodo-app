@@ -30,7 +30,6 @@ function App() {
   return (
     <div className="App">
       {/* ******DIFFERNT ROUTES */}
-
       <Routes>
         <Route
           path="/about"
@@ -62,7 +61,7 @@ function App() {
             />
           }
         />
-        {
+        {currentUser.id && (
           <Route
             path="/profile"
             element={
@@ -74,15 +73,15 @@ function App() {
               />
             }
           />
-        }
-        {
+        )}
+        {currentUser.id && (
           <Route
             path="/board/:id"
             element={
               <MainStage showLogin={showLogin} setShowLogin={setShowLogin} />
             }
           />
-        }
+        )}
         <Route
           path="/"
           element={

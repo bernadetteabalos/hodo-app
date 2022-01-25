@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 // import from other libraries
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,9 +6,11 @@ import { Button, Modal } from "react-bootstrap";
 import logo from "../images/hodo_v3.png";
 //styling
 import "../stylesheets/css/navigation.css";
+import { currentUserContext } from "../providers/UserProvider";
 
 const Navigation = (props) => {
   const navigate = useNavigate();
+  const { logoutMainProfile } = useContext(currentUserContext);
   const { showLogin, setShowLogin, setIdTitle, saveBoard } = props;
 
   // const [showBackToProfile, setShowBackToProfile] = useState(false);
@@ -25,14 +27,14 @@ const Navigation = (props) => {
 
   const back = (e) => {
     e.preventDefault();
-    // setShowLogin("logout");
+    setShowLogin("logout");
     navigate("/profile");
   };
 
   const logout = (e) => {
     e.preventDefault();
     navigate("/");
-    // setCurrentUser({});
+    logoutMainProfile();
     setShowLogin("login");
     setIdTitle([]);
   };
