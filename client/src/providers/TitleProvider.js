@@ -9,6 +9,7 @@ export const idTitleContext = createContext();
 const IdTitleProvider = (props) => {
   const [idTitle, setIdTitle] = useState([]);
 
+  // clears idTitle array. Called upon render of 'profile page' (before getAllBoardIdTitle), and upon clicking 'logout' btn
   const clearIdTitle = () => {
     setIdTitle([]);
   };
