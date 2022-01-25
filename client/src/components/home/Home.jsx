@@ -23,6 +23,7 @@ const Home = () => {
       loginRegisterShow();
     }
   }, []);
+
   return (
     <>
       {/* ************ NAVIGATION BAR ************/}
