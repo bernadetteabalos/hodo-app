@@ -115,7 +115,6 @@ const MainStage = () => {
     const conn = socketIOClient(END_POINT);
     // what is being received from SERVER
     conn.on("inital", (msg) => {
-      console.log("something came back");
       console.log(msg.string);
     });
 
