@@ -33,7 +33,7 @@ const MainStage = () => {
   // for the socket connection
   const [connection, setConnection] = useState(undefined);
   // colours
-  const [fillColor, setFillColor] = useState("");
+  const [fillColor, setFillColor] = useState(null);
   const [borderColor, setBorderColor] = useState("#000000");
   // for if SHAPE is selected
   const [selectedId, selectShape] = useState(null);
