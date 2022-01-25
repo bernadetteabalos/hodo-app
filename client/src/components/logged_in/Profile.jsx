@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Form } from "react-bootstrap";
 
-// import other components/providers
+// import other Components/providers
 import OneTitle from "./OneTitle";
 import Navigation from "../Navigation";
 import { currentUserContext } from "../../providers/UserProvider";
