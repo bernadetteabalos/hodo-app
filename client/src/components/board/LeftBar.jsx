@@ -1,9 +1,9 @@
-// import from other libraries
-import Button from "react-bootstrap/Button";
 import { useState } from "react";
 
-// styling
-// import "../../stylesheets/css/leftbar.css";
+// import from other libraries
+import Button from "react-bootstrap/Button";
+
+// import styling
 import "../../stylesheets/css/mainstage.css";
 
 const LeftBar = (props) => {
@@ -40,6 +40,7 @@ const LeftBar = (props) => {
   return (
     <div className="leftsidebar">
       <div className="select-a-color">
+        {/********* SELECT FILL SHAPE COLOUR ******/}
         <div className="icons">
           <input
             className="colorPicker"
@@ -49,14 +50,16 @@ const LeftBar = (props) => {
           />
           <i className="bi bi-paint-bucket shapes shapesTwo"></i>
         </div>
+        {/********* SELECT SHAPE BORDER COLOUR ******/}
         <div className="icons">
           <input
             type="color"
             value={borderColor}
             onChange={(e) => setBorderColor(e.target.value)}
           />
-          <i class="bi bi-slash-lg shapes shapesTwo"></i>
+          <i className="bi bi-slash-lg shapes shapesTwo"></i>
         </div>
+        {/********* GENERATE RECTANGLE SHAPE ******/}
         <Button
           className="button-icons"
           variant="outline-secondary"
@@ -66,6 +69,7 @@ const LeftBar = (props) => {
             <i className="bi bi-phone-landscape shapes"></i>
           </div>
         </Button>
+        {/********* GENERATE SQUARE SHAPE ******/}
         <Button
           className="button-icons"
           variant="outline-secondary"
@@ -75,6 +79,7 @@ const LeftBar = (props) => {
             <i className="bi bi-square shapes"></i>
           </div>
         </Button>
+        {/********* GENERATE CIRCLE SHAPE ******/}
         <Button
           className="button-icons"
           variant="outline-secondary"
@@ -84,6 +89,7 @@ const LeftBar = (props) => {
             <i className="bi bi-circle shapes"></i>
           </div>
         </Button>
+        {/********* GENERATE STAR SHAPE ******/}
         <Button
           className="button-icons"
           variant="outline-secondary"
@@ -93,6 +99,7 @@ const LeftBar = (props) => {
             <i className="bi bi-star shapes"></i>
           </div>
         </Button>
+        {/********* TEXT ******/}
         <div className="texttools">
           <Button
             className="button-icons"
@@ -104,6 +111,7 @@ const LeftBar = (props) => {
             </div>
           </Button>
         </div>
+        {/********* IMAGE URL FORM ******/}
         <form
           autoComplete="off"
           onSubmit={(e) => {
@@ -124,6 +132,7 @@ const LeftBar = (props) => {
             onChange={(e) => setURL(e.target.value)}
           />
         </form>
+        {/******  IMAGE & PLUS  ********/}
         {imagePlusButton === "image" && (
           <Button
             display={"none"}
@@ -155,7 +164,7 @@ const LeftBar = (props) => {
             </div>
           </Button>
         )}
-        {/* SELECT */}
+        {/********* SELECT ******/}
         <Button
           className="button-icons"
           variant="outline-secondary"
@@ -172,7 +181,7 @@ const LeftBar = (props) => {
             ></i>
           </div>
         </Button>
-        {/* PEN */}
+        {/********* PEN ******/}
         <div
           className="icons"
           onClick={() => setTool(isPenActivated ? "select" : "pen")}
@@ -187,7 +196,7 @@ const LeftBar = (props) => {
             className="bi bi-pen shapes shapesTwo"
           ></i>
         </div>
-        {/* Eraser */}
+        {/********* ERASER ******/}
         <Button
           className="button-icons"
           variant="outline-secondary"

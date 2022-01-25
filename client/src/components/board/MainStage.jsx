@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import useApplicationData from "../../hooks/forBoards";
 import useKeyPress from "../../hooks/keyboardShortcuts";
 
@@ -15,7 +15,7 @@ import RightBar from "./RightBar";
 import LeftBar from "./LeftBar";
 import Element from "./helpers/Element";
 import OneChatMessage from "../board/right_bar_components/OneChatMessage";
-import Navigation from "../Navigation";
+import { currentUserContext } from "../../providers/UserProvider";
 
 // import helper functions
 import { generateOneElement } from "./helpers/_helperFunctions";
@@ -24,18 +24,17 @@ import { generateOneElement } from "./helpers/_helperFunctions";
 import "../../stylesheets/css/mainstage.css";
 import "../../stylesheets/css/chatbox.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { navContext } from "../../providers/NavProvider";
 
 // socket end point for websocket
 const END_POINT = "http://localhost:8001";
 
-const MainStage = (props) => {
-  const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
-    props;
+const MainStage = () => {
   // for the socket connection
   const [connection, setConnection] = useState(undefined);
   // colours
-  const [fillColor, setFillColor] = useState("");
-  const [borderColor, setBorderColor] = useState("black");
+  const [fillColor, setFillColor] = useState(null);
+  const [borderColor, setBorderColor] = useState("#000000");
   // for if SHAPE is selected
   const [selectedId, selectShape] = useState(null);
   // for IMAGES
@@ -44,7 +43,7 @@ const MainStage = (props) => {
   const [message, setMessage] = useState("");
   const [chatSpeakers, setChatSpeakers] = useState([]);
   // for PENS
-  const [strokeColor, setStrokeColor] = useState("black");
+  const [strokeColor, setStrokeColor] = useState("#000000");
   const [tool, setTool] = useState("select");
   const [lines, setLines] = useState([]);
   // references
@@ -52,6 +51,9 @@ const MainStage = (props) => {
   const stageRef = useRef(null);
   const posRef = useRef(null);
 
+  // deconstructing from useContexts and helpers
+  const { currentUser } = useContext(currentUserContext);
+  const { backShow } = useContext(navContext);
   const { elements, board_id, setElements, saveBoard } = useApplicationData();
 
   const onKeyPress = (event) => {
@@ -105,7 +107,7 @@ const MainStage = (props) => {
 
   // upon render, setShowLogin to back to display "back to profile" button on nav bar (showLogin is passed down as prop)
   useEffect(() => {
-    setShowLogin("back");
+    backShow();
   }, []);
 
   // ************** SOCKET ************************
@@ -113,7 +115,6 @@ const MainStage = (props) => {
     const conn = socketIOClient(END_POINT);
     // what is being received from SERVER
     conn.on("inital", (msg) => {
-      console.log("something came back");
       console.log(msg.string);
     });
 
@@ -517,15 +518,6 @@ const MainStage = (props) => {
                 setMessage(e.target.value);
               }}
             ></input>
-            {/* <textarea
-                  className="enterText"
-                  type="text"
-                  placeholder="enter message here"
-                  value={message}
-                  onChange={(e) => {
-                    setMessage(e.target.value);
-                  }}
-                ></textarea> */}
             <Button
               className="send-btn"
               type="submit"

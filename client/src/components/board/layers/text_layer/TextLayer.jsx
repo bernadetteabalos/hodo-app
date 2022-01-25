@@ -4,12 +4,15 @@ import { Html } from "react-konva-utils";
 import "../../../../stylesheets/css/text.css";
 
 const TextLayer = (props) => {
+  // deconstructing from props and shapeProps
   const { onSelect, shapeRef, onChange, shapeProps } = props;
   const { text, fontSize, ...rest } = shapeProps;
-  const inputRef = useRef(null);
+  // useStates
   const [currentText, setCurrentText] = useState(text || "Some text here");
   const [fontScale, setScale] = useState(fontSize || 20);
   const [isEditing, setIsEditing] = useState(false);
+  // references
+  const inputRef = useRef(null);
 
   const onDoubleClick = () => {
     if (!inputRef.current) {
@@ -70,7 +73,14 @@ const TextLayer = (props) => {
         onDblClick={onDoubleClick}
         {...rest}
       />
-      <Html transform={true} transformFunc={(attrs) => ({ ...attrs, x: shapeRef.current.getAbsolutePosition().x, y: shapeRef.current.getAbsolutePosition().y }) }>
+      <Html
+        transform={true}
+        transformFunc={(attrs) => ({
+          ...attrs,
+          x: shapeRef.current.getAbsolutePosition().x,
+          y: shapeRef.current.getAbsolutePosition().y,
+        })}
+      >
         <input
           draggable={false}
           id="textEdit"
@@ -81,7 +91,7 @@ const TextLayer = (props) => {
           onBlur={onBlur}
           style={{
             display: !isEditing && "none",
-            transform: 'translateY(-100%)',
+            transform: "translateY(-100%)",
           }}
         />
       </Html>

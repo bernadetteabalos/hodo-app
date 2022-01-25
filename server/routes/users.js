@@ -135,7 +135,7 @@ module.exports = ({
     // updateBoardTitleFunction
 
     console.log("id, title", id, title);
-    //
+
     updateBoardTitle(id, title)
       .then((board) => res.json(board))
       .catch((err) => {
