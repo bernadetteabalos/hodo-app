@@ -29,6 +29,7 @@ import Socketio from "./images/Socketio.png";
 //import Creator photos
 import Bernadette from "./images/Creators/Bernadette.png";
 import Blesilda from "./images/Creators/Blesilda.png";
+// import Stephanie from "./images/Creators/Stephanie.png";
 
 const About = (props) => {
   const { currentUser, setCurrentUser, showLogin, setShowLogin, setIdTitle } =
@@ -81,15 +82,22 @@ const About = (props) => {
                     Former life sciences student who enjoys art and programming.
                   </p>
                   <p>
-                    Follow me on &nbsp;
-                    <a href={"https://github.com/bernadetteabalos"}>
+                    Follow me on&nbsp;
+                    <a
+                      className="githubLink"
+                      href={"https://github.com/bernadetteabalos"}
+                      target="_blank"
+                    >
                       <FontAwesomeIcon icon={faGithub} />
                       Github
                     </a>
                   </p>
                   <p>
-                    Contact info &nbsp;
-                    <a href={"mailto:bern.roseabalos@gmail.com"}>
+                    Contact me: &nbsp;
+                    <a
+                      className="emailLink"
+                      href={"mailto:bern.roseabalos@gmail.com"}
+                    >
                       <FontAwesomeIcon icon={faEnvelope} />
                       Gmail
                     </a>
@@ -121,15 +129,22 @@ const About = (props) => {
                     Former pharmacist who discovered a love for coding.
                   </p>
                   <p>
-                    Follow me on &nbsp;
-                    <a href={"https://github.com/StephhyL"}>
+                    Follow me on&nbsp;
+                    <a
+                      className="githubLink"
+                      href={"https://github.com/StephhyL"}
+                      target="_blank"
+                    >
                       <FontAwesomeIcon icon={faGithub} />
                       Github
                     </a>
                   </p>
                   <p>
-                    Contact info &nbsp;
-                    <a href={"mailto:stephanieli88947@gmail.com"}>
+                    Contact me: &nbsp;
+                    <a
+                      className="emailLink"
+                      href={"mailto:stephanieli88947@gmail.com"}
+                    >
                       <FontAwesomeIcon icon={faEnvelope} />
                       Gmail
                     </a>
@@ -162,15 +177,22 @@ const About = (props) => {
                     world of web development
                   </p>
                   <p>
-                    Follow me on &nbsp;
-                    <a href={"https://github.com/BlesMateo"}>
+                    Follow me on&nbsp;
+                    <a
+                      className="githubLink"
+                      href={"https://github.com/BlesMateo"}
+                      target="_blank"
+                    >
                       <FontAwesomeIcon icon={faGithub} />
                       Github
                     </a>
                   </p>
                   <p>
-                    Contact info &nbsp;
-                    <a href={"mailto:blesildaangelicamateo@gmail.com"}>
+                    Contact me: &nbsp;
+                    <a
+                      className="emailLink"
+                      href={"mailto:blesildaangelicamateo@gmail.com"}
+                    >
                       <FontAwesomeIcon icon={faEnvelope} />
                       Gmail
                     </a>
@@ -189,9 +211,9 @@ const About = (props) => {
             <img src={Bootstrap} width="80" alt="bootstrap"></img>
             &nbsp; &nbsp;
             <img src={Express} width="100" alt="express"></img>
-            &nbsp; &nbsp;
+            &nbsp;
             <img src={KonvaReact} width="120" alt="konvareact"></img>
-            &nbsp; &nbsp;
+            &nbsp;
             <img src={Konva} width="120" alt="konva"></img>
             &nbsp; &nbsp;
             <img src={PostgreSQL} width="80" alt="postgresql"></img>

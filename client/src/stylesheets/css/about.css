@@ -274,3 +274,23 @@
 .miniName {
   font-size: 38px;
 }
+
+/*Link color change*/
+
+.githubLink {
+  color: #000000;
+  text-decoration: none;
+}
+.githubLink:hover {
+  color: #58c0f0;
+  text-decoration: none;
+}
+
+.emailLink {
+  color: #000000;
+  text-decoration: none;
+}
+.emailLink:hover {
+  color: #eba800;
+  text-decoration: none;
+}
