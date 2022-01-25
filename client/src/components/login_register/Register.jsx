@@ -1,24 +1,21 @@
 import { useRef, useEffect, useContext } from "react";
 
 // import from other libraries
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 
-// import other components
+// import other components/providers
 import Navigation from "../Navigation";
+import { navContext } from "../../providers/NavProvider";
+import { currentUserContext } from "../../providers/UserProvider";
 
 // import stylesheet
 import "../../stylesheets/css/register.css";
 import "../../stylesheets/css/login.css";
-import { navContext } from "../../providers/NavProvider";
-import { currentUserContext } from "../../providers/UserProvider";
 
 const Register = (props) => {
   const { setIdTitle } = props;
   const { registerMainProfile } = useContext(currentUserContext);
-  const { loginShow, logoutShow } = useContext(navContext);
-  const navigate = useNavigate();
+  const { loginShow } = useContext(navContext);
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
@@ -40,31 +37,6 @@ const Register = (props) => {
       pwRef.current.value,
       photoRef.current.value
     );
-
-    // // axios request add user to database
-    // const urlPostApi = "/api/users/register";
-    // axios
-    //   .post(urlPostApi, {
-    //     first_name: firstNameRef.current.value,
-    //     last_name: lastNameRef.current.value,
-    //     email: emailRef.current.value,
-    //     password: pwRef.current.value,
-    //     profile_photo: photoRef.current.value,
-    //   })
-    //   .then((res) => {
-    //     if (res.data.msg) {
-    //       // alert user if there is an error (eg 'user with email already exists')
-    //       alert(res.data.msg);
-    //     } else {
-    //       // set current user to the one that was just added to the db
-    //       setCurrentUser(res.data);
-    //       // setShowLogin to logout to display logout in the nav bar
-    //       logoutShow();
-    //       // redirects user to the profile page
-    //       navigate("/profile");
-    //     }
-    //   })
-    //   .catch((err) => console.log(err.message));
   };
 
   return (
