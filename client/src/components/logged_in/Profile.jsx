@@ -16,10 +16,12 @@ import useApplicationData from "../../hooks/forBoards";
 // import styling
 import "../../stylesheets/css/profile.css";
 import { useEffect } from "react";
+import { navContext } from "../../providers/NavProvider";
 
 const Profile = (props) => {
-  const { showLogin, setShowLogin, idTitle, setIdTitle } = props;
+  const { idTitle, setIdTitle } = props;
   const { currentUser } = useContext(currentUserContext);
+  const { logoutShow } = useContext(navContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const titleRef = useRef();
@@ -31,7 +33,7 @@ const Profile = (props) => {
   useEffect(() => {
     console.log("who is my user on line 32 of profile--->", currentUser);
     // to display the 'logout' button on the nav bar (pass showLogin down to Navigation Component)
-    setShowLogin("logout");
+    logoutShow();
 
     // clear the board first (this is to update new title on board if user A makes change and user B goes back to profile page, the new title will be reflected)
     setIdTitle([]);
@@ -107,11 +109,7 @@ const Profile = (props) => {
   return (
     <>
       {/* ************ NAVIGATION BAR ************/}
-      <Navigation
-        showLogin={showLogin}
-        setShowLogin={setShowLogin}
-        setIdTitle={setIdTitle}
-      />
+      <Navigation setIdTitle={setIdTitle} />
       {/* ************ PROFILE ************/}
       <div className="profile-page">
         <div className="profile-container">

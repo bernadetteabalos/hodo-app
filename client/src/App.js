@@ -31,26 +31,8 @@ function App() {
     <div className="App">
       {/* ******DIFFERNT ROUTES */}
       <Routes>
-        <Route
-          path="/about"
-          element={
-            <About
-              showLogin={showLogin}
-              setShowLogin={setShowLogin}
-              setIdTitle={setIdTitle}
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <Login
-              showLogin={showLogin}
-              setShowLogin={setShowLogin}
-              setIdTitle={setIdTitle}
-            />
-          }
-        />
+        <Route path="/about" element={<About setIdTitle={setIdTitle} />} />
+        <Route path="/login" element={<Login setIdTitle={setIdTitle} />} />
         <Route
           path="/register"
           element={
@@ -64,43 +46,14 @@ function App() {
         {currentUser.id && (
           <Route
             path="/profile"
-            element={
-              <Profile
-                showLogin={showLogin}
-                setShowLogin={setShowLogin}
-                idTitle={idTitle}
-                setIdTitle={setIdTitle}
-              />
-            }
+            element={<Profile idTitle={idTitle} setIdTitle={setIdTitle} />}
           />
         )}
-        {currentUser.id && (
-          <Route
-            path="/board/:id"
-            element={
-              <MainStage showLogin={showLogin} setShowLogin={setShowLogin} />
-            }
-          />
-        )}
-        <Route
-          path="/"
-          element={
-            <Home
-              showLogin={showLogin}
-              setShowLogin={setShowLogin}
-              setIdTitle={setIdTitle}
-            />
-          }
-        />
+        {currentUser.id && <Route path="/board/:id" element={<MainStage />} />}
+        <Route path="/" element={<Home setIdTitle={setIdTitle} />} />
         <Route
           path="*"
-          element={
-            <Home
-              showLogin={showLogin}
-              setShowLogin={setShowLogin}
-              setIdTitle={setIdTitle}
-            />
-          }
+          element={<Home setIdTitle={setIdTitle} />}
           replace={"/"}
         />
       </Routes>

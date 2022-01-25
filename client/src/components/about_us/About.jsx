@@ -26,15 +26,17 @@ import React from "./images/React.png";
 import SASS from "./images/SASS.png";
 import Socketio from "./images/Socketio.png";
 import { currentUserContext } from "../../providers/UserProvider";
+import { navContext } from "../../providers/NavProvider";
 
 const About = (props) => {
   const { currentUser } = useContext(currentUserContext);
-  const { showLogin, setShowLogin, setIdTitle } = props;
+  const { showLogin, profileLogoutShow } = useContext(navContext);
+  const { setIdTitle } = props;
   const [count, setCount] = useState(1000);
 
   useEffect(() => {
     if (currentUser.id) {
-      setShowLogin("profile-logout");
+      profileLogoutShow();
     }
   }, []);
 
@@ -49,11 +51,7 @@ const About = (props) => {
 
   return (
     <>
-      <Navigation
-        showLogin={showLogin}
-        setShowLogin={setShowLogin}
-        setIdTitle={setIdTitle}
-      />
+      <Navigation setIdTitle={setIdTitle} />
       <div className="about-page title thick">
         <h1> ABOUT US </h1>
         <div className="about-people">

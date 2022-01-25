@@ -3,6 +3,7 @@ import { useEffect, useContext } from "react";
 // import other Component
 import Navigation from "../Navigation";
 import { currentUserContext } from "../../providers/UserProvider";
+import { navContext } from "../../providers/NavProvider";
 
 // import from other local files
 import logo from "../../images/hodo_v3.png";
@@ -11,28 +12,22 @@ import logo from "../../images/hodo_v3.png";
 import "../../stylesheets/css/home.css";
 
 const Home = (props) => {
-  const { showLogin, setShowLogin, setIdTitle } = props;
-
+  const { setIdTitle } = props;
+  const { profileLogoutShow, loginRegisterShow } = useContext(navContext);
   const { currentUser } = useContext(currentUserContext);
-
-  console.log("what is by currentUser in home line 18--->", currentUser);
 
   // upon render, checks if user is logged in. Loggin in, display 'profile' and 'logout' btns. Else, 'login', and 'register' btns
   useEffect(() => {
-    // if (currentUser.id) {
-    //   setShowLogin("profile-logout");
-    // } else {
-    //   setShowLogin("login-register");
-    // }
+    if (currentUser.id) {
+      profileLogoutShow();
+    } else {
+      loginRegisterShow();
+    }
   }, []);
   return (
     <>
       {/* ************ NAVIGATION BAR ************/}
-      <Navigation
-        showLogin={showLogin}
-        setShowLogin={setShowLogin}
-        setIdTitle={setIdTitle}
-      />
+      <Navigation setIdTitle={setIdTitle} />
       {/* ************ HOME PAGE WITH LOGO ************/}
       <div className="home-page">
         <img src={logo} alt="hodo-logoo" />

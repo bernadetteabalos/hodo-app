@@ -5,12 +5,15 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CurrentUserProvider from "./providers/UserProvider";
 import { BrowserRouter as Router } from "react-router-dom";
+import NavProvider from "./providers/NavProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <CurrentUserProvider>
-        <App />
+        <NavProvider>
+          <App />
+        </NavProvider>
       </CurrentUserProvider>
     </Router>
   </React.StrictMode>,

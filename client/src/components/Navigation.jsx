@@ -7,11 +7,14 @@ import logo from "../images/hodo_v3.png";
 //styling
 import "../stylesheets/css/navigation.css";
 import { currentUserContext } from "../providers/UserProvider";
+import { navContext } from "../providers/NavProvider";
 
 const Navigation = (props) => {
   const navigate = useNavigate();
   const { logoutMainProfile } = useContext(currentUserContext);
-  const { showLogin, setShowLogin, setIdTitle, saveBoard } = props;
+  const { showLogin, loginShow, logoutShow } = useContext(navContext);
+
+  const { setIdTitle, saveBoard } = props;
 
   // const [showBackToProfile, setShowBackToProfile] = useState(false);
 
@@ -27,7 +30,7 @@ const Navigation = (props) => {
 
   const back = (e) => {
     e.preventDefault();
-    setShowLogin("logout");
+    logoutShow();
     navigate("/profile");
   };
 
@@ -35,7 +38,7 @@ const Navigation = (props) => {
     e.preventDefault();
     navigate("/");
     logoutMainProfile();
-    setShowLogin("login");
+    loginShow();
     setIdTitle([]);
   };
 

@@ -7,21 +7,23 @@ import { Container, Form, Button } from "react-bootstrap";
 
 // import other component
 import Navigation from "../Navigation";
+import { currentUserContext } from "../../providers/UserProvider";
+import { navContext } from "../../providers/NavProvider";
 
 // import stylesheet
 import "../../stylesheets/css/login.css";
-import { currentUserContext } from "../../providers/UserProvider";
 
 const Login = (props) => {
-  const { showLogin, setShowLogin, setIdTitle } = props;
+  const { setIdTitle } = props;
   const { currentUser, loginMainProfile } = useContext(currentUserContext);
+  const { registerShow } = useContext(navContext);
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwRef = useRef();
 
   // setShowLogin to display 'register' button in the nav bar (showLogin passed down to Navigation component)
   useEffect(() => {
-    setShowLogin("register");
+    registerShow();
   }, []);
 
   const handleSubmit = (e) => {
@@ -59,11 +61,7 @@ const Login = (props) => {
   return (
     <>
       {/* ************ NAVIGATION BAR ************/}
-      <Navigation
-        showLogin={showLogin}
-        setShowLogin={setShowLogin}
-        setIdTitle={setIdTitle}
-      />
+      <Navigation setIdTitle={setIdTitle} />
       {/* ************ LOGIN FORM ************/}
       <div className="login-page">
         <Container className="login-container">
