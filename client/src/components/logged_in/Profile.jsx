@@ -18,13 +18,16 @@ import useApplicationData from "../../hooks/forBoards";
 import "../../stylesheets/css/profile.css";
 
 const Profile = () => {
+  // show state for the Modal
+  const [show, setShow] = useState(false);
+  // useRef and useNavigate
+  const titleRef = useRef();
+  const navigate = useNavigate();
+  // deconstructing from providers and helpers
   const { currentUser } = useContext(currentUserContext);
   const { logoutShow } = useContext(navContext);
   const { idTitle, getAllBoardIdTitle, clearIdTitle } =
     useContext(idTitleContext);
-  const navigate = useNavigate();
-  const [show, setShow] = useState(false);
-  const titleRef = useRef();
   const { createBoard, addCollaborator } = useApplicationData();
 
   const handleClose = () => setShow(false);
@@ -45,6 +48,7 @@ const Profile = () => {
   // activated when "create new board" is clicked
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // board has the value of the new board created (createBoard is a fcn that makes an axios request)
     const board = await createBoard(titleRef.current.value, currentUser.id);
 
     // waits for the board info to be grabbed then uses board.id to add user/board to the collaborator table
@@ -53,6 +57,7 @@ const Profile = () => {
     // let's user know that a board has been created
     alert(msg);
 
+    // navigates to the specific board that has just been created
     navigate(`/board/${board.id}`);
   };
 
@@ -60,9 +65,10 @@ const Profile = () => {
     <>
       {/* ************ NAVIGATION BAR ************/}
       <Navigation />
-      {/* ************ PROFILE ************/}
+      {/* ************ PROFILE PAGE************/}
       <div className="profile-page">
         <div className="profile-container">
+          {/* ****** LEFT SIDE OF PAGE WITH PROFILE PHOTO, NAME, ID *****/}
           <div className="left-profile">
             <div className="profile-photo">
               <img src={currentUser.profile_photo} alt="profile-photo" />
@@ -76,6 +82,7 @@ const Profile = () => {
               <h5>Your id is: {currentUser.id}</h5>
             </div>
           </div>
+          {/* ****** RIGHT SIDE OF PAGE WITH LIST OF BOARDS AND CREATE BTN ***/}
           <div className="right-profile">
             <div className="itineraries-container">
               <h1>My Boards</h1>
