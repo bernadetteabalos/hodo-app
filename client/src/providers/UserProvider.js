@@ -1,5 +1,9 @@
-import axios from "axios";
+/*********** currentUser and setCurrentUser. For the purposes of passing currentUser state throughout the app. */
+
 import { useState, createContext } from "react";
+
+// import from other libraries
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const currentUserContext = createContext();

@@ -1,8 +1,9 @@
-// idTitle and setIdTitle. For the purposes of displaying the board titles of the specific user.
-
-import axios from "axios";
+/*********** idTitle and setIdTitle. For the purposes of displaying the board titles of the specific user. */
 
 import { useState, createContext } from "react";
+
+// import from other libraries
+import axios from "axios";
 
 export const idTitleContext = createContext();
 
