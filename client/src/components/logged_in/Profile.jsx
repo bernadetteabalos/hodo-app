@@ -123,7 +123,7 @@ const Profile = () => {
                   <Button
                     variant="light"
                     type="submit"
-                    class="btn btn-outline-secondary"
+                    className="btn btn-outline-secondary"
                   >
                     Create Board
                   </Button>
