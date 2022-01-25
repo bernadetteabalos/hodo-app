@@ -1,10 +1,14 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+
 // import from other libraries
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Button, Modal, Form } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
 
-// import helpers from local files
+// import from providers
+import { currentUserContext } from "../../providers/UserProvider";
+
+// import other from local files
 import useApplicationData from "../../hooks/forBoards";
 import logo from "../../images/hodo_v3.png";
 
@@ -12,13 +16,18 @@ import logo from "../../images/hodo_v3.png";
 import "../../stylesheets/css/header.css";
 
 const Header = (props) => {
-  const navigate = useNavigate();
-  const { currentUser, saveBoard } = props;
-  const { setTitle, title, board_id } = useApplicationData();
+  const { saveBoard } = props;
+  // show state for displaying the Modal for editing title or adding collaborator
   const [show, setShow] = useState("");
+  // deconstructing from currentUserContext and helpers
+  const { currentUser } = useContext(currentUserContext);
+  const { setTitle, title, board_id } = useApplicationData();
+  // useRef and useNavigate
   const newTitleRef = useRef();
   const newCollaboratorRef = useRef();
+  const navigate = useNavigate();
 
+  // functions to handle the title/collaborator modal opens and close
   const handleShowTitle = () => setShow("title");
   const handleShowCollab = () => setShow("collab");
   const handleClose = (e) => {
@@ -26,15 +35,11 @@ const Header = (props) => {
     setShow("");
   };
 
-  const back = (e) => {
-    e.preventDefault();
-    navigate("/profile");
-  };
-
   // Activated when user clicks the edit title button
   const handleEditSave = (e) => {
     // prevent the refresh of the page
     e.preventDefault();
+
     //axios request to server to update the title of the specific board (id) on the boards table
     const urlUpdateTitle = "/api/users/title";
     axios
@@ -107,6 +112,7 @@ const Header = (props) => {
 
   return (
     <div className="header-bar">
+      {/* ***** LEFT SIDE : CONTAINS LOGO ******* */}
       <div className="space">
         <img
           src={logo}
@@ -116,11 +122,14 @@ const Header = (props) => {
           alt="Hodo logo"
         />
       </div>
+      {/* ***** MIDDLE : CONTAINS TITLE & EDIT BTN ******* */}
       <div className="title-name">
         <h2 id="boardTitle">{title}</h2>
+        {/* EDIT TITLE BTN */}
         <Button className="headerButton" onClick={handleShowTitle}>
           <i className="bi bi-pencil-square"></i>
         </Button>
+        {/* MODAL APPEARS WHEN EDIT BTN CLICKED */}
         <Modal
           show={show === "title"}
           onHide={() => {
@@ -151,12 +160,15 @@ const Header = (props) => {
           </Form>
         </Modal>
       </div>
+      {/* ***** RIGHT SIDE : CONTAINS ADD COLLABORATOR & BACK TO PROFILE BTNS ******* */}
+      {/* ADD COLLAB. BTN */}
       <div className="collab-profile">
         <div className="add-collaborators">
           <Button className="headerButtonTwo" onClick={handleShowCollab}>
             Add a Collaborator
           </Button>
         </div>
+        {/* MODAL APPEARS WHEN 'ADD COLLABORATOR' BTN CLICKED */}
         <Modal
           show={show === "collab"}
           onHide={() => {
@@ -186,10 +198,11 @@ const Header = (props) => {
             </Modal.Footer>
           </Form>
         </Modal>
+        {/* PROFILE BTN */}
         <Button className="back-to-profile" onClick={() => setShow("profile")}>
           Back To Profile
         </Button>
-
+        {/* MODAL APPEARS WHEN 'BACK TO PROFILE' BTN CLICKED */}
         <Modal show={show === "profile"}>
           <Modal.Header id="exit-header">
             <i

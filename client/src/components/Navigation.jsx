@@ -1,41 +1,46 @@
-import { useState } from "react";
+import { useContext } from "react";
+
 // import from other libraries
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
-import { Button, Modal } from "react-bootstrap";
+// import from providers
+import { currentUserContext } from "../providers/UserProvider";
+import { navContext } from "../providers/NavProvider";
+import { idTitleContext } from "../providers/TitleProvider";
+
+// import from local files
 import logo from "../images/hodo_v3.png";
+
 //styling
 import "../stylesheets/css/navigation.css";
 
-const Navigation = (props) => {
+const Navigation = () => {
   const navigate = useNavigate();
-  const { setCurrentUser, showLogin, setShowLogin, setIdTitle, saveBoard } =
-    props;
+  // deconstructing from useContext
+  const { logoutMainProfile } = useContext(currentUserContext);
+  const { showLogin, loginShow, logoutShow } = useContext(navContext);
+  const { clearIdTitle } = useContext(idTitleContext);
 
-  // const [showBackToProfile, setShowBackToProfile] = useState(false);
-
+  // activated when user clicks "login" button, redirects to "login page"
   const login = (e) => {
     e.preventDefault();
     navigate("/login");
   };
 
+  // activated when user clicks "register" button, redirects to "register page"
   const register = (e) => {
     e.preventDefault();
     navigate("/register");
   };
 
-  const back = (e) => {
-    e.preventDefault();
-    setShowLogin("logout");
-    navigate("/profile");
-  };
-
+  // activated when 'logout' button clicked: navigates to "home page", reset user to {}, show login btn, and clear idTitle array
   const logout = (e) => {
     e.preventDefault();
     navigate("/");
-    setCurrentUser({});
-    setShowLogin("login");
-    setIdTitle([]);
+    logoutMainProfile();
+    loginShow();
+    clearIdTitle();
   };
 
   return (
@@ -68,6 +73,7 @@ const Navigation = (props) => {
             )}
           </div>
         </div>
+        {/* displays only 'login' btn if user on 'register page' */}
         <div className="nav-right">
           {showLogin === "login" && (
             <div className="link-btn">
@@ -76,6 +82,7 @@ const Navigation = (props) => {
               </Button>
             </div>
           )}
+          {/* displays only 'register' btn if user on 'login page' */}
           {showLogin === "register" && (
             <div className="link-btn">
               <Button variant="success" onClick={register}>
@@ -83,6 +90,7 @@ const Navigation = (props) => {
               </Button>
             </div>
           )}
+          {/* displays both 'register' and 'login' btn if user not logged in and on 'home/about page' */}
           {showLogin === "login-register" && (
             <div className="link-btn">
               <Button variant="success" className="login-btn" onClick={login}>
@@ -97,55 +105,14 @@ const Navigation = (props) => {
               </Button>
             </div>
           )}
+          {/* display only 'logout' btn if user loggin in and on 'profile pg' */}
           {showLogin === "logout" && <Button onClick={logout}>Logout</Button>}
+          {/* display both 'logout' btn and 'profile' link if user loggin in and on 'home/about pg' */}
           {showLogin === "profile-logout" && (
             <Button variant="success" onClick={logout}>
               Logout
             </Button>
           )}
-          {/* {showLogin === "back" && (
-            <Button
-              variant="success"
-              className="base-btn"
-              onClick={() => setShowBackToProfile(true)}
-            >
-              Back To Profile
-            </Button>
-          )} */}
-          {/* <Modal show={showBackToProfile}>
-            <Modal.Header id="exit-header">
-              <i
-                class="bi bi-x exit-btn"
-                onClick={() => {
-                  setShowBackToProfile(false);
-                }}
-              ></i>
-            </Modal.Header>
-            <Modal.Body>
-              <h4>Save before going back to profile?</h4>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                size="lg"
-                variant="primary"
-                onClick={() => {
-                  saveBoard();
-                  navigate("/profile");
-                }}
-              >
-                Yes, save board
-              </Button>
-              <Button
-                size="lg"
-                variant="secondary"
-                onClick={() => {
-                  navigate("/profile");
-                }}
-              >
-                No
-              </Button>
-            </Modal.Footer>
-          </Modal> */}
         </div>
       </div>
     </>

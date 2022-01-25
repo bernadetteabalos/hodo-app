@@ -1,6 +1,14 @@
 import { v4 as uuidV4 } from "uuid";
 
-export const generateOneElement = (x, y, shape, fillColor, borderColor, url) => {
+// function called when user clicks btn to generate a shape, text, or img. Fcn generates an object with a shape/img/text element's attributes. (nt: these properties then passed down to Konva components in diff layer components)
+export const generateOneElement = (
+  x,
+  y,
+  shape,
+  fillColor,
+  borderColor,
+  url
+) => {
   let width = 100;
   let height = 100;
 

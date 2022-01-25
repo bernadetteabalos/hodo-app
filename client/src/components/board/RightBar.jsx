@@ -8,6 +8,7 @@ import "../../stylesheets/css/mainstage.css";
 const RightBar = (props) => {
   const { clearBoard, undo, deleteShape, saveBoard } = props;
 
+  // state for showing Modals for clear board and delete shape
   const [warning, setWarning] = useState("");
   const [state, setState] = useState({ showing: false });
   const { showing } = state;
@@ -41,6 +42,7 @@ const RightBar = (props) => {
   return (
     <>
       <div className="rightbar">
+        {/********* SETTING BUTTON - shows/hides SAVE & CLEAR BOARD btns ******/}
         <Button
           className="funcButton"
           variant="primary"
@@ -51,6 +53,7 @@ const RightBar = (props) => {
           <i className="bi bi-gear"></i>
         </Button>
         <br></br>
+        {/********* SAVE BOARD BTN ******/}
         <div
           className="hideThis fade-in"
           style={{ display: showing ? "block" : "none" }}
@@ -58,6 +61,7 @@ const RightBar = (props) => {
           <Button className="funcButton" variant="primary" onClick={handleSave}>
             Save
           </Button>
+          {/********* SAVE MODAL: appears when user clicks 'save' btn ******/}
           <Modal show={warning === "save"}>
             <Modal.Body>
               <h4>Board Saved :)</h4>
@@ -70,6 +74,7 @@ const RightBar = (props) => {
           </Modal>
           <br></br>
           <br></br>
+          {/********* CLEAR BOARD BTN ******/}
           <Button
             className="clear"
             size="lg"
@@ -81,6 +86,7 @@ const RightBar = (props) => {
             Clear
           </Button>
         </div>
+        {/********* CLEAR MODAL: appears when user clicks 'clear board' btn ******/}
         <Modal show={warning === "clear"}>
           <Modal.Body>
             <h4>Are you sure you want to clear the board?</h4>
@@ -95,6 +101,7 @@ const RightBar = (props) => {
           </Modal.Footer>
         </Modal>
         <br></br>
+        {/********* UNDO BTNS ******/}
         <Button
           className="undoButton"
           variant="warning"
@@ -111,6 +118,7 @@ const RightBar = (props) => {
           Undo Line
         </Button>
         <br></br>
+        {/********* DELETE BTN ******/}
         <Button
           className="undoButton"
           variant="warning"
@@ -120,6 +128,7 @@ const RightBar = (props) => {
         >
           <i className="bi bi-trash"></i>
         </Button>
+        {/********* DELETE MODAL: appears when user clicks 'delete' btn ******/}
         <Modal show={warning === "delete-shape"}>
           <Modal.Body>
             <h4>Are you sure you want to delete the shape?</h4>
