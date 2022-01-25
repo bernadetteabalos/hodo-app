@@ -1,5 +1,6 @@
 // import from other libraries
 import { useNavigate } from "react-router-dom";
+
 // import styling
 import "../../stylesheets/css/onetitle.css";
 
