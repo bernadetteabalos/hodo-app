@@ -1,35 +1,38 @@
-// showLogin and setShowLogin
+// showLogin and setShowLogin. For the purposes of the "dynamic" navigation bar.
 
-import axios from "axios";
 import { useState, createContext } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const navContext = createContext();
 
 const NavProvider = (props) => {
-  // const navigate = useNavigate();
-  const [showLogin, setShowLogin] = useState("login");
+  const [showLogin, setShowLogin] = useState("");
 
-  const loginShow = () => {
-    setShowLogin("login");
-  };
-
-  const logoutShow = () => {
-    setShowLogin("logout");
-  };
-
-  const profileLogoutShow = () => {
-    setShowLogin("profile-logout");
-  };
-
+  // to display both the login and register buttons. Called when the user is not logged in and on home or about page
   const loginRegisterShow = () => {
     setShowLogin("login-register");
   };
 
+  // to display the login button only. Called when user is on the register page.
+  const loginShow = () => {
+    setShowLogin("login");
+  };
+
+  // to display the register button. Called when user is on the login page.
   const registerShow = () => {
     setShowLogin("register");
   };
 
+  // to display the logout button only. Called when the user is logged in and on the profile page.
+  const logoutShow = () => {
+    setShowLogin("logout");
+  };
+
+  // to display the profile link and the logout button. Called when the user is logged in and on the about page
+  const profileLogoutShow = () => {
+    setShowLogin("profile-logout");
+  };
+
+  // to display back button. Called when user on /boards/:id
   const backShow = () => {
     setShowLogin("back");
   };
