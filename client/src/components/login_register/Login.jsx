@@ -55,7 +55,14 @@ const Login = (props) => {
               <h4>
                 <Form.Label className="email-pw">Password </Form.Label>
               </h4>
-              <Form.Control size="lg" type="password" ref={pwRef} required />
+              <Form.Control
+                size="lg"
+                type="password"
+                ref={pwRef}
+                name="password"
+                autoComplete="on"
+                required
+              />
             </Form.Group>
             <Button variant="success" className="w-100 email-pw" type="submit">
               <h4>Login</h4>
