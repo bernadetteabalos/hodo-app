@@ -76,32 +76,38 @@ const About = () => {
                   </div>
                 </div>
                 <div className="one-back">
-                  <h2 className="occupation">Full-Stack Web Developer</h2>
-                  <br></br>
-                  <p className="textAlign">
-                    Former life sciences student who enjoys art and programming.
-                  </p>
-                  <p>
-                    Follow me on&nbsp;
-                    <a
-                      className="githubLink"
-                      href={"https://github.com/bernadetteabalos"}
-                      target="_blank"
-                    >
-                      <FontAwesomeIcon icon={faGithub} />
-                      Github
-                    </a>
-                  </p>
-                  <p>
-                    Contact me: &nbsp;
-                    <a
-                      className="emailLink"
-                      href={"mailto:bern.roseabalos@gmail.com"}
-                    >
-                      <FontAwesomeIcon icon={faEnvelope} />
-                      Gmail
-                    </a>
-                  </p>
+                  <div className="back-text">
+                    <h2 className="occupation">Full-Stack Web Developer</h2>
+                    <br></br>
+                    <h4 className="textAlign">
+                      Former life sciences student who enjoys art and
+                      programming.
+                    </h4>
+                    <p>
+                      Follow me on&nbsp;
+                      <a
+                        className="githubLink"
+                        href={"https://github.com/bernadetteabalos"}
+                        target="_blank"
+                      >
+                        <FontAwesomeIcon icon={faGithub} />
+                        Github
+                      </a>
+                    </p>
+                    <p>
+                      Contact me: &nbsp;
+                      <a
+                        className="emailLink"
+                        href={"mailto:bern.roseabalos@gmail.com"}
+                      >
+                        <FontAwesomeIcon icon={faEnvelope} />
+                        Gmail
+                      </a>
+                    </p>
+                  </div>
+                  <div className="ppg">
+                    <img src={bubbles} alt="bubbles" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -123,32 +129,37 @@ const About = () => {
                   </div>
                 </div>
                 <div className="two-back">
-                  <h2 className="occupation">Full-Stack Web Developer</h2>
-                  <br></br>
-                  <p className="textAlign">
-                    Former pharmacist who discovered a love for coding.
-                  </p>
-                  <p>
-                    Follow me on&nbsp;
-                    <a
-                      className="githubLink"
-                      href={"https://github.com/StephhyL"}
-                      target="_blank"
-                    >
-                      <FontAwesomeIcon icon={faGithub} />
-                      Github
-                    </a>
-                  </p>
-                  <p>
-                    Contact me: &nbsp;
-                    <a
-                      className="emailLink"
-                      href={"mailto:stephanieli88947@gmail.com"}
-                    >
-                      <FontAwesomeIcon icon={faEnvelope} />
-                      Gmail
-                    </a>
-                  </p>
+                  <div className="back-text">
+                    <h2 className="occupation">Full-Stack Web Developer</h2>
+                    <br></br>
+                    <p className="textAlign">
+                      Former pharmacist who discovered a love for coding.
+                    </p>
+                    <p>
+                      Follow me on&nbsp;
+                      <a
+                        className="githubLink"
+                        href={"https://github.com/StephhyL"}
+                        target="_blank"
+                      >
+                        <FontAwesomeIcon icon={faGithub} />
+                        Github
+                      </a>
+                    </p>
+                    <p>
+                      Contact me: &nbsp;
+                      <a
+                        className="emailLink"
+                        href={"mailto:stephanieli88947@gmail.com"}
+                      >
+                        <FontAwesomeIcon icon={faEnvelope} />
+                        Gmail
+                      </a>
+                    </p>
+                  </div>
+                  <div className="ppg">
+                    <img src={blossom} alt="blossom" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -170,33 +181,38 @@ const About = () => {
                   </div>
                 </div>
                 <div className="three-back">
-                  <h2 className="occupation">Full-Stack Web Developer</h2>
-                  <br></br>
-                  <p className="textAlign">
-                    Former aviation student who meandered their way into the
-                    world of web development
-                  </p>
-                  <p>
-                    Follow me on&nbsp;
-                    <a
-                      className="githubLink"
-                      href={"https://github.com/BlesMateo"}
-                      target="_blank"
-                    >
-                      <FontAwesomeIcon icon={faGithub} />
-                      Github
-                    </a>
-                  </p>
-                  <p>
-                    Contact me: &nbsp;
-                    <a
-                      className="emailLink"
-                      href={"mailto:blesildaangelicamateo@gmail.com"}
-                    >
-                      <FontAwesomeIcon icon={faEnvelope} />
-                      Gmail
-                    </a>
-                  </p>
+                  <div className="back-text">
+                    <h2 className="occupation">Full-Stack Web Developer</h2>
+                    <br></br>
+                    <p className="textAlign">
+                      Former aviation student who meandered their way into the
+                      world of web development
+                    </p>
+                    <p>
+                      Follow me on&nbsp;
+                      <a
+                        className="githubLink"
+                        href={"https://github.com/BlesMateo"}
+                        target="_blank"
+                      >
+                        <FontAwesomeIcon icon={faGithub} />
+                        Github
+                      </a>
+                    </p>
+                    <p>
+                      Contact me: &nbsp;
+                      <a
+                        className="emailLink"
+                        href={"mailto:blesildaangelicamateo@gmail.com"}
+                      >
+                        <FontAwesomeIcon icon={faEnvelope} />
+                        Gmail
+                      </a>
+                    </p>
+                  </div>
+                  <div className="ppg">
+                    <img src={buttercup} alt="buttercup" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -226,6 +242,7 @@ const About = () => {
             <img src={Socketio} width="80" alt="socketio"></img>
           </h3>
         </div>
+        <div id="create-space">***</div>
         {/* ********* THANK YOU ******************** */}
         <div className="thank-you">
           <h1>
