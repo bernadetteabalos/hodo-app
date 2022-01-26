@@ -61,7 +61,7 @@ const MainStage = () => {
   };
   useKeyPress(["z"], onKeyPress);
 
-  useKeyPress(["Delete"], () => {
+  useKeyPress(["x"], () => {
     undo('Line');
   });
 
@@ -263,7 +263,7 @@ const MainStage = () => {
       const undoLines = filteredLines.slice(0, filteredLines.length - 1);
       setLines(undoLines);
 
-      connection.emit("line-change", undoLines);
+      connection.emit("line-change", undoLines, board_id);
     } else {
       // } else if (elements[elements.length -1].className !== "Line") {
 
@@ -273,7 +273,7 @@ const MainStage = () => {
       setElements(undoElement);
       console.log("HELLOOOOO", undoElement);
       // send the updated elements array through the socket
-      connection.emit("stage-change", undoElement);
+      connection.emit("stage-change", undoElement, board_id);
     }
   };
 
