@@ -35,7 +35,7 @@ export const generateOneElement = (
       shape: shape,
       url: url,
       text: "Some text here",
-      fontSize: "40",
+      fontSize: "20",
     },
     className: shape,
   };
