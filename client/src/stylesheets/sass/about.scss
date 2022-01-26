@@ -296,7 +296,14 @@
 }
 
 .back-text {
-  height: 75%;
+  height: 60%;
+}
+
+.follow-me {
+  height: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .ppg {
@@ -304,7 +311,6 @@
   justify-content: flex-end;
   height: 25%;
   width: 98%;
-
   img {
     width: 100px;
     height: 100px;

@@ -83,6 +83,8 @@ const About = () => {
                       Former life sciences student who enjoys art and
                       programming.
                     </h4>
+                  </div>
+                  <div className="follow-me">
                     <p>
                       Follow me on&nbsp;
                       <a
@@ -132,9 +134,11 @@ const About = () => {
                   <div className="back-text">
                     <h2 className="occupation">Full-Stack Web Developer</h2>
                     <br></br>
-                    <p className="textAlign">
+                    <h4 className="textAlign">
                       Former pharmacist who discovered a love for coding.
-                    </p>
+                    </h4>
+                  </div>
+                  <div className="follow-me">
                     <p>
                       Follow me on&nbsp;
                       <a
@@ -184,10 +188,13 @@ const About = () => {
                   <div className="back-text">
                     <h2 className="occupation">Full-Stack Web Developer</h2>
                     <br></br>
-                    <p className="textAlign">
+                    <h4 className="textAlign">
                       Former aviation student who meandered their way into the
                       world of web development
-                    </p>
+                    </h4>
+                  </div>
+
+                  <div className="follow-me">
                     <p>
                       Follow me on&nbsp;
                       <a
