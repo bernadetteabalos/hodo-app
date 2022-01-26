@@ -35,7 +35,7 @@ import Socketio from "./images/Socketio.png";
 //import Creator photos
 import Bernadette from "./images/Creators/Bernadette.png";
 import Blesilda from "./images/Creators/Blesilda.png";
-import Stephanie from "./images/Creators/Stephanie.png";
+import Stephanie from "./images/Creators/Stephanie2.png";
 
 const About = () => {
   const { currentUser } = useContext(currentUserContext);
