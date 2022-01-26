@@ -10,7 +10,7 @@ const TextLayer = (props) => {
   const { text, fontSize, ...rest } = shapeProps;
   // useStates
   const [currentText, setCurrentText] = useState(text);
-  const [fontScale, setScale] = useState(fontSize || 20);
+  // const [fontScale, setScale] = useState(fontSize || 20);
   const [isEditing, setIsEditing] = useState(false);
   // references
   const inputRef = useRef(null);
@@ -42,7 +42,7 @@ const TextLayer = (props) => {
         text={shapeProps.text}
         x={50}
         y={80}
-        fontSize={fontScale}
+        fontSize={shapeProps.fontSize}
         width={200}
         onClick={onSelect}
         onTap={onSelect}
@@ -54,6 +54,7 @@ const TextLayer = (props) => {
             x: e.target.x(),
             y: e.target.y(),
             text: e.target.text(),
+            fontSize: e.target.fontSize(),
           });
           e.target.moveToTop();
         }}
@@ -73,8 +74,9 @@ const TextLayer = (props) => {
             width: Math.max(5, node.width() * scaleX),
             height: Math.max(node.height() * scaleY),
             text: node.text(),
+            fontSize: node.fontSize() * scaleX,
           });
-          setScale(node.attrs.fontSize * scaleX);
+          // setScale(node.attrs.fontSize * scaleX);
           console.log("after font size", shapeRef);
         }}
         onDblClick={onDoubleClick}
