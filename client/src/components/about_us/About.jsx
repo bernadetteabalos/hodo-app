@@ -135,7 +135,7 @@ const About = () => {
                     <h2 className="occupation">Full-Stack Web Developer</h2>
                     <br></br>
                     <h4 className="textAlign">
-                      Former pharmacist who discovered a love for coding.
+                      From pharmacy to web development.
                     </h4>
                   </div>
                   <div className="follow-me">
