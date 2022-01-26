@@ -226,9 +226,9 @@ const MainStage = () => {
     setLines([]);
     setTool("select");
     // 1. sends empty array through socket to reset board
-    connection.emit("stage-change", []);
+    connection.emit("stage-change", [], board_id);
     // i. sends empty array through socket to reset board
-    connection.emit("line-change", []);
+    connection.emit("line-change", [], board_id);
   };
 
   /** Activated when the user confirms "yes" to save the board */
