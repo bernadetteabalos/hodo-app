@@ -176,7 +176,7 @@ const About = () => {
                   <br></br>
                   <div className="profile-photo-about">
                     <img
-                      src={Blesilda}
+                      src={bles}
                       className="Blesilda"
                       width="240"
                       height="240"
@@ -263,7 +263,7 @@ const About = () => {
             </button>
             &nbsp; to our instructors and mentors at LHL!
           </h1>
-          <span>It wouldn't be a LHL React project without a counter 😃</span>
+          <h2>It wouldn't be a LHL React project without a counter 😃</h2>
         </div>
       </div>
     </>
