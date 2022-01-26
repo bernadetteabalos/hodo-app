@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useEffect } from "react";
 import { Stage, Layer, Text } from "react-konva";
 import { Html } from "react-konva-utils";
 import "../../../../stylesheets/css/text.css";
@@ -31,10 +32,14 @@ const TextLayer = (props) => {
     setCurrentText(e.target.value);
   };
 
+  useEffect(() => {
+    shapeProps.text = currentText;
+  }, [currentText]);
+
   return (
     <>
       <Text
-        text={currentText}
+        text={shapeProps.text}
         x={50}
         y={80}
         fontSize={fontScale}
@@ -48,6 +53,7 @@ const TextLayer = (props) => {
             ...rest,
             x: e.target.x(),
             y: e.target.y(),
+            text: e.target.text(),
           });
           e.target.moveToTop();
         }}
@@ -66,6 +72,7 @@ const TextLayer = (props) => {
             y: node.y(),
             width: Math.max(5, node.width() * scaleX),
             height: Math.max(node.height() * scaleY),
+            text: node.text(),
           });
           setScale(node.attrs.fontSize * scaleX);
           console.log("after font size", shapeRef);
