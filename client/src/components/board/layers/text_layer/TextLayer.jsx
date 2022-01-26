@@ -8,7 +8,7 @@ const TextLayer = (props) => {
   const { onSelect, shapeRef, onChange, shapeProps } = props;
   const { text, fontSize, ...rest } = shapeProps;
   // useStates
-  const [currentText, setCurrentText] = useState(text || "Some text here");
+  const [currentText, setCurrentText] = useState(text);
   const [fontScale, setScale] = useState(fontSize || 20);
   const [isEditing, setIsEditing] = useState(false);
   // references
