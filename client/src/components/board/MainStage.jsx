@@ -62,7 +62,7 @@ const MainStage = () => {
   useKeyPress(["z"], onKeyPress);
 
   useKeyPress(["Delete"], () => {
-    undo('Line');
+    undo("Line");
   });
 
   //***STAGE GRID ****//
@@ -226,9 +226,9 @@ const MainStage = () => {
     setLines([]);
     setTool("select");
     // 1. sends empty array through socket to reset board
-    connection.emit("stage-change", []);
+    connection.emit("stage-change", [], board_id);
     // i. sends empty array through socket to reset board
-    connection.emit("line-change", []);
+    connection.emit("line-change", [], board_id);
   };
 
   /** Activated when the user confirms "yes" to save the board */
@@ -263,7 +263,7 @@ const MainStage = () => {
       const undoLines = filteredLines.slice(0, filteredLines.length - 1);
       setLines(undoLines);
 
-      connection.emit("line-change", undoLines);
+      connection.emit("line-change", undoLines, board_id);
     } else {
       // } else if (elements[elements.length -1].className !== "Line") {
 
@@ -273,7 +273,7 @@ const MainStage = () => {
       setElements(undoElement);
       console.log("HELLOOOOO", undoElement);
       // send the updated elements array through the socket
-      connection.emit("stage-change", undoElement);
+      connection.emit("stage-change", undoElement, board_id);
     }
   };
 
@@ -289,6 +289,8 @@ const MainStage = () => {
       const copyOfElements = [...prev];
       copyOfElements.splice(targetIndex, 1);
       selectShape(null);
+      // send the updated elements array through the socket
+      connection.emit("stage-change", copyOfElements, board_id);
       return copyOfElements;
     });
   };

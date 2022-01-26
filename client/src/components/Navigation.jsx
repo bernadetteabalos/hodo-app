@@ -19,7 +19,7 @@ const Navigation = () => {
   const navigate = useNavigate();
   // deconstructing from useContext
   const { logoutMainProfile } = useContext(currentUserContext);
-  const { showLogin, loginShow, logoutShow } = useContext(navContext);
+  const { showLogin, loginShow } = useContext(navContext);
   const { clearIdTitle } = useContext(idTitleContext);
 
   // activated when user clicks "login" button, redirects to "login page"
@@ -61,7 +61,7 @@ const Navigation = () => {
           <div className="home-profile-about">
             <div>
               <Link className="nav-link" to="/about">
-                <h3>About</h3>
+                <h3>About Us</h3>
               </Link>
             </div>
             {showLogin === "profile-logout" && (

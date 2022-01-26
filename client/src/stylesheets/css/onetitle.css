@@ -1,8 +1,1 @@
-.handleTitle {
-  padding-left: 2em;
-  padding-right: 1em;
-  cursor: pointer;
-  color: black; }
-
-.handleTitle:hover {
-  color: #676a81; }
+.handleTitle{padding-left:2em;padding-right:1em;cursor:pointer;color:#000}.handleTitle:hover{color:#676a81}

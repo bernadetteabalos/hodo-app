@@ -34,6 +34,8 @@ export const generateOneElement = (
       id: uuidV4(),
       shape: shape,
       url: url,
+      text: "Some text here",
+      fontSize: "20",
     },
     className: shape,
   };
