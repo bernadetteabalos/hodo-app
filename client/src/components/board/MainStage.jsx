@@ -289,6 +289,8 @@ const MainStage = () => {
       const copyOfElements = [...prev];
       copyOfElements.splice(targetIndex, 1);
       selectShape(null);
+      // send the updated elements array through the socket
+      connection.emit("stage-change", copyOfElements, board_id);
       return copyOfElements;
     });
   };
