@@ -32,7 +32,7 @@
   justify-content: center;
   position: absolute;
   z-index: 4;
-  margin-top: 150em;
+  padding-top: 150em;
   padding-bottom: 30em; }
 
 .occupation {
@@ -264,13 +264,26 @@
   justify-content: flex-end;
   height: 25%;
   width: 98%; }
-  .ppg img {
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
-    border: 3px black solid; }
+
+.ppg img {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  border: 3px black solid; }
 
 #create-space {
   background-color: white;
   width: 100%;
   text-align: center; }
+
+.stack-list {
+  margin-top: 1em; }
+
+.first-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center; }
+
+.red {
+  color: #ffcc00;
+  text-shadow: -1.5px -1.5px 0 #ffff07, 1px -1px 0 #ffff07, -2px 2px 0 #ffff07, 1.5px 1.5px 0 #ffff07; }
