@@ -249,9 +249,7 @@ const About = () => {
             <img src={Socketio} width="80" alt="socketio"></img>
           </h3>
         </div>
-        <div id="create-space">
-          ***
-          </div>
+        <div id="create-space">***</div>
         {/* ********* THANK YOU ******************** */}
         <div className="thank-you" data-aos="fade-in">
           <h1>
