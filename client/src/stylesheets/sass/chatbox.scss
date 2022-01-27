@@ -9,7 +9,7 @@
   overflow-wrap: break-word;
   flex-direction: column-reverse;
   justify-content: flex-start;
-  font-size: 1.15rem;
+  font-size: 1.5rem;
   padding: 0.5em;
 }
 
@@ -21,11 +21,14 @@
   font-size: 1rem;
   display: flex;
   align-items: flex-end;
+  font-size: 22px;
 }
 
 button.send-btn {
   width: 280px;
   background-color: rgb(185, 188, 223);
   border: none;
+  font-size: 22px;
+  font-weight: bold;
   
 }

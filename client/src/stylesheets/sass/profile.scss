@@ -1,14 +1,21 @@
 @import "./variables.scss";
 
 .profile-page {
-  background-color: $base-background;
+  background-color: rgb(241, 241, 241);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
   .profile-container {
-    // background-color: green;
+    background-color: white;
     margin: auto;
     display: flex;
     justify-content: space-evenly;
-    height: 100vh;
-    width: 100vw;
+    height: 65vh;
+    width: 80vw;
+    border-radius: 40px;
+    position: absolute;
+    margin-top: 4em;
+    box-shadow: 0 4px 8px 0 rgba(38, 45, 46, 0.536); 
 
     .left-profile {
       // background-color: blue;
@@ -20,18 +27,33 @@
       align-items: center;
       // background-color: red;
       height: 100%;
+      position: relative;
+      z-index: 1;
+      .profile-bg {
+        background-image: url('../../images/profile.jpg');
+        background-size: cover;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+        filter: opacity(50%);
+
+      }
       .profile-photo {
-        margin-top: 6em;
+        margin-top: 3.5em;
         display: flex;
         justify-content: center;
         // height: 400px;
         // width: 400px;
         // border-radius: 400px;
-        height: 25vw;
-        width: 25vw;
+        height: 17vw;
+        width: 17vw;
         border-radius: 25vw;
         // border: 3px solid black;
         background-repeat: no-repeat;
+        box-shadow: 0 4px 8px 0 rgba(38, 45, 46, 0.536); 
         // profile img
         // background-image:;s
         img {
@@ -54,48 +76,95 @@
       justify-content: center;
       margin-top: 2.5em;
       width: 50%;
+
+      h3.nameEmphasis {
+        font-size: 50px;
+        font-weight: bold;
+        color: #615669;
+      }
     }
     .right-profile {
       // background-color: green;
       width: 50%;
       height: 100%;
       .itineraries-container {
-        margin-top: 5em;
         margin-bottom: 2em;
         // border: 5px solid black;
-        border-radius: 40px;
+        border-top-right-radius: 40px;
+        border-bottom-right-radius: 40px;
         background-color: $nav-background;
-        height: 55vh;
-        width: 37.5vw;
+        height: 65vh;
+        width: 40.1vw;
         display: flex;
         overflow: auto;
         overflow-wrap: break-word;
         flex-direction: column;
         justify-content: flex-start;
+        align-items: center;
         font-size: 1.15rem;
+        .boardsTitle {
+          background-color: white;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          padding-bottom: 2em;
+        }
         h1 {
-          padding-top: 0.5em;
-          padding-bottom: 0.35em;
-          padding-left: 1em;
+          margin-top: 1.5em;
+          margin-bottom: 0;
+          font-size: 2em;
+          text-transform: uppercase;
+          font-family: $font-title;
+          font-weight: bold;
+          color: $nav-background;
+          text-shadow: 2px 2px #a7a7a7;
+        }
+        .board-grid {
+          display: grid;
+          justify-items: center;
+          grid-template-columns: 15em 15em;
+          grid-template-rows: auto;
+          margin-top: 2em;
+          
+
+        }
+      }
+
+      .create-new-board {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        :hover {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 2px;
+          border-radius: 20px;
+          background-color: $btn-hover;
+        }
+        .bi-plus-circle {
+          margin-right: 10px;
+          &:hover {
+            margin-right: 10px;
+          }
         }
       }
       .create-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: $btn;
         border: none;
         border-radius: 20px;
         width: 75%;
-        padding: 0px;
-        h3 {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          // color: red;
-        }
-        :hover {
-          background-color: $btn-hover;
-          border-radius: 20px;
-        }
+        height: 50px;
+        margin: 2px;
+        text-transform: uppercase;
+        padding: 0;
+        font-size: 30px;
       }
+      
     }
   }
 }

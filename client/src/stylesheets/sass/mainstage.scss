@@ -198,6 +198,7 @@ button.headerButton {
   color: black;
   background-color: white;
   border: none;
+  
 }
 
 button.headerButtonTwo {
@@ -206,6 +207,7 @@ button.headerButtonTwo {
   background-color: white;
   border: none;
   margin-right: 1em;
+  font-size: 20px;
 }
 
 button.headerButton:hover {
@@ -224,7 +226,7 @@ button.headerButton.active {
 }
 
 #boardTitle {
-  font-size: 20px;
+  font-size: 25px;
   margin-bottom: 0px;
   margin-right: 1em;
 }
@@ -234,12 +236,14 @@ button.undoButton {
   color: rgb(185, 188, 223);
   border: 1px solid rgb(185, 188, 223);
   height: 60px;
+  font-weight: 700;
   padding: 0px;
 }
 
 button.undoButton:hover {
   background-color: rgb(185, 188, 223);
   border: none;
+  color: white;
 }
 
 button.undoButton:focus {

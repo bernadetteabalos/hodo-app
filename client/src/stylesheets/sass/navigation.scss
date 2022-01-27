@@ -3,7 +3,12 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
-  background: $nav-background;
+  background: white;
+  h3 {
+    font-family: $font-title;
+    font-size: 20px;
+    text-transform: uppercase;
+  }
   h3:hover {
     color: $btn;
   }
@@ -27,14 +32,16 @@
     display: flex;
     Button {
       width: 80%;
-      font-size: 1.45rem;
+      font-size: 20px;
+      font-weight: 400;
       color: white;
-      background-color: $btn;
+      background-color: $btn-hover;
       border: none;
       margin-right: 2em;
+      text-transform: uppercase;
 
       &:hover {
-        background-color: $btn-hover;
+        background-color: $btn;
       }
 
     }

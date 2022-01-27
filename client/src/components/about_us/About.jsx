@@ -79,10 +79,10 @@ const About = () => {
                   <div className="back-text">
                     <h2 className="occupation">Full-Stack Web Developer</h2>
                     <br></br>
-                    <h4 className="textAlign">
-                      Former life sciences student who enjoys art and
+                    <h5 className="textAlign">
+                      Life sciences graduate who enjoys art/design and
                       programming.
-                    </h4>
+                    </h5>
                   </div>
                   <div className="follow-me">
                     <p>
@@ -134,9 +134,9 @@ const About = () => {
                   <div className="back-text">
                     <h2 className="occupation">Full-Stack Web Developer</h2>
                     <br></br>
-                    <h4 className="textAlign">
+                    <h5 className="textAlign">
                       From pharmacy to web development.
-                    </h4>
+                    </h5>
                   </div>
                   <div className="follow-me">
                     <p>
@@ -188,10 +188,10 @@ const About = () => {
                   <div className="back-text">
                     <h2 className="occupation">Full-Stack Web Developer</h2>
                     <br></br>
-                    <h4 className="textAlign">
+                    <h5 className="textAlign">
                       Former aviation student who meandered their way into the
                       world of web development
-                    </h4>
+                    </h5>
                   </div>
 
                   <div className="follow-me">
@@ -249,9 +249,11 @@ const About = () => {
             <img src={Socketio} width="80" alt="socketio"></img>
           </h3>
         </div>
-        <div id="create-space">***</div>
+        <div id="create-space">
+          ***
+          </div>
         {/* ********* THANK YOU ******************** */}
-        <div className="thank-you">
+        <div className="thank-you" data-aos="fade-in">
           <h1>
             THANK YOU x {count} & &nbsp;
             <button

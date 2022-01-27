@@ -1,1 +1,24 @@
-.handleTitle{padding-left:2em;padding-right:1em;cursor:pointer;color:#000}.handleTitle:hover{color:#676a81}
+.handleTitle {
+  text-align: center;
+  cursor: pointer;
+  color: black; }
+
+.boardBox {
+  background-color: white;
+  padding: 1em;
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10em;
+  height: 10em;
+  border-radius: 40px; }
+  .boardBox h3 {
+    font-size: 24px;
+    color: grey; }
+  .boardBox:hover {
+    background-color: #676a81;
+    box-shadow: 0 4px 8px 0 rgba(38, 45, 46, 0.536);
+    cursor: pointer; }
+    .boardBox:hover h3 {
+      color: white; }

@@ -1,6 +1,6 @@
 .about-page {
   background: #ffffff;
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,19 +31,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  z-index: 4;
+  margin-top: 150em;
+  padding-bottom: 30em;
 }
 
 .occupation {
   color: black;
   font-weight: bold;
+  font-size: 25px;
+  padding-top: 1em;
 }
 
 .textAlign {
   text-align: center;
-  margin-left: 1em;
-  margin-right: 1em;
-  padding-left: 3em;
-  padding-right: 3em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .head {
@@ -264,15 +270,18 @@
 }
 
 .tinyName {
-  font-size: 38px;
+  font-size: 34px;
+  padding-top: 0.5em;
 }
 
 .smallName {
   font-size: 38px;
+  padding-top: 0.5em;
 }
 
 .miniName {
   font-size: 38px;
+  padding-top: 0.5em;
 }
 
 /*Link color change*/
@@ -321,7 +330,7 @@
 
 #create-space {
   // margin-bottom: 10vh;
-  background-color: red;
+  background-color: white;
   width: 100%;
   text-align: center;
 }
