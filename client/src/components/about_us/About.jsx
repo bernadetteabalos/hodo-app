@@ -12,7 +12,7 @@ import { navContext } from "../../providers/NavProvider";
 import "../../stylesheets/css/about.css";
 
 // import for Confetti
-import Confetti from "./buttonClick";
+import Confetti from "./Confetti";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
@@ -253,7 +253,7 @@ const About = () => {
         {/* ********* THANK YOU ******************** */}
         <div className="thank-you">
           <h1>
-            THANK YOU x {count} & &nbsp;
+            THANK YOU x <span className="red">{count}</span> & &nbsp;
             <button
               type="button"
               className="btn btn-outline-dark btn-lg"
