@@ -200,7 +200,7 @@ const Header = (props) => {
         </Modal>
         {/* PROFILE BTN */}
         <Button className="back-to-profile" onClick={() => setShow("profile")}>
-          Back To Profile
+          Back
         </Button>
         {/* MODAL APPEARS WHEN 'BACK TO PROFILE' BTN CLICKED */}
         <Modal show={show === "profile"}>

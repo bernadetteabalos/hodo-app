@@ -1,12 +1,34 @@
 @import "./variables.scss";
 
 .handleTitle {
-  padding-left: 2em;
-  padding-right: 1em;
+  text-align: center;
   cursor: pointer;
   color: rgb(0, 0, 0);
 }
 
-.handleTitle:hover {
-  color: $btn-hover;
+.boardBox {
+  background-color: white;
+  padding: 1em;
+  margin: 1em;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: 10em;
+  height: 10em;
+  border-radius: 40px;
+
+  h3 {
+    font-size: 24px;
+    color: grey;
+    
+  }
+
+  &:hover {
+    background-color: $btn-hover;
+    box-shadow: 0 4px 8px 0 rgba(38, 45, 46, 0.536); 
+    cursor: pointer;
+    h3 { 
+      color: white;
+    }
+  }
 }

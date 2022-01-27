@@ -61,8 +61,8 @@ const MainStage = () => {
   };
   useKeyPress(["z"], onKeyPress);
 
-  useKeyPress(["Delete"], () => {
-    undo("Line");
+  useKeyPress(["x"], () => {
+    undo('Line');
   });
 
   //***STAGE GRID ****//

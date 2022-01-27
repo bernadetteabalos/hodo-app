@@ -13,6 +13,7 @@ import { idTitleContext } from "../../providers/TitleProvider";
 
 // import helpers from local files
 import useApplicationData from "../../hooks/forBoards";
+import profileBG from "../../images/profile.jpg";
 
 // import styling
 import "../../stylesheets/css/profile.css";
@@ -70,6 +71,7 @@ const Profile = () => {
         <div className="profile-container">
           {/* ****** LEFT SIDE OF PAGE WITH PROFILE PHOTO, NAME, ID *****/}
           <div className="left-profile">
+            <div className="profile-bg"></div>
             <div className="profile-photo">
               <img src={currentUser.profile_photo} alt="profile-photo" />
             </div>
@@ -79,23 +81,25 @@ const Profile = () => {
               </strong>
             </div>
             <div>
-              <h5>Your collaborator id is: {currentUser.id}</h5>
+              <h4>Your collaborator id is: {currentUser.id}</h4>
             </div>
           </div>
           {/* ****** RIGHT SIDE OF PAGE WITH LIST OF BOARDS AND CREATE BTN ***/}
           <div className="right-profile">
             <div className="itineraries-container">
-              <h1>My Boards</h1>
+              <div className="boardsTitle"><h1>My Boards</h1></div>
               {/* Displays every board and when the name is clicked, redirect to respective board (calls the OneTitle Component) */}
-              <div>
+              <div className="board-grid">
                 {idTitle.map((titleObj) => {
                   return <OneTitle key={titleObj.id} titleObj={titleObj} />;
                 })}
               </div>
             </div>
-            <Button className="create-btn" onClick={handleShow}>
-              <h3>Create New Board</h3>
+            <div className="create-new-board" onClick={handleShow}>
+            <Button className="create-btn">
+              <i class="bi bi-plus-circle"></i>New Board
             </Button>
+            </div>
             {/* ****** Modal that appears when user creates a new board, user enters title for new board */}
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>

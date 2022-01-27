@@ -27,7 +27,7 @@ const Confetti = (props) => {
     refAnimationInstance.current &&
       refAnimationInstance.current({
         ...opts,
-        origin: { x: 0.39, y: 0.9 },
+        origin: { x: 0.5, y: 0.9 },
         particleCount: Math.floor(200 * particleRatio),
       });
   }, []);

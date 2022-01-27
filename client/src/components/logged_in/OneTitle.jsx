@@ -16,9 +16,8 @@ const OneTitle = (props) => {
   };
 
   return (
-    <div>
-      <h3 onClick={handleTitle} className="handleTitle">
-        <i className="bi bi-arrow-right"></i>
+    <div className="boardBox" onClick={handleTitle} >
+      <h3 className="handleTitle">
         {titleObj.title}
       </h3>
       <br></br>

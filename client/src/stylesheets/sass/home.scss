@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 .home-page {
-  background-color: $base-background;
+  background-color: rgb(241, 241, 241);
   width: 100%;
   height: 100%;
   display: flex;
@@ -29,14 +29,16 @@
   h3 {
     position: absolute;
     font-weight: bold;
+    font-size: 40px;
     z-index: 4;
-    margin-top: 20%;
+    margin-top: 23%;
   }
   h4 {
     text-align:center;
     position: absolute;
     z-index: 4;
-    margin-top: 34%;
+    margin-top: 37%;
+    font-size: 30px;
   }
 }
 
@@ -56,12 +58,14 @@
     font-weight: bold;
     text-align:center;
     position: absolute;
+    font-size: 40px;
     z-index: 4;
   }
   h4 {
     text-align:center;
     position: absolute;
     z-index: 4;
-    margin-top: 8%;
+    margin-top: 10%;
+    font-size: 30px;
   }
 }
