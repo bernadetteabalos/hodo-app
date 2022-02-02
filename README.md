@@ -1,4 +1,15 @@
-# HODO
+!["Figma"](https://img.shields.io/badge/-Figma-brightgreen)
+!["Github"](https://img.shields.io/badge/-GitHub-orange)
+!["Bootstrap"](https://img.shields.io/badge/-Bootstrap-yellow)
+!["Express"](https://img.shields.io/badge/-Express-yellowgreen)
+!["Konva"](https://img.shields.io/badge/-konva-blue)
+!["PostgreSQL"](https://img.shields.io/badge/-PostgreSQL-blue)
+!["React-Konva"](https://img.shields.io/badge/react-konva-blue0)
+!["React"](https://img.shields.io/badge/-React-green)
+!["SASS"](https://img.shields.io/badge/-SASS-red)
+!["Socket.io"](https://img.shields.io/badge/-Socket.io-lightgrey)
+
+# Summary
 
 A collaborative whiteboard application that allows users to get creative!
 
