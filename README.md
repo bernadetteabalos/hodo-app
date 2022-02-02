@@ -2,7 +2,7 @@
 !["Github"](https://img.shields.io/badge/-GitHub-orange)
 !["Bootstrap"](https://img.shields.io/badge/-Bootstrap-yellow)
 !["Express"](https://img.shields.io/badge/-Express-yellowgreen)
-!["Konva"](https://img.shields.io/badge/-konva-blue)
+!["Konva"](https://img.shields.io/badge/-Konva-blue)
 !["PostgreSQL"](https://img.shields.io/badge/-PostgreSQL-blue)
 !["React-Konva"](https://img.shields.io/badge/react-konva-blue0)
 !["React"](https://img.shields.io/badge/-React-green)
