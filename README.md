@@ -60,3 +60,8 @@ Add another collaborator, have a chat and work through your ideas together!
 - Use-Image
 
 ## Setup
+
+- Install dependencies with `npm install`.
+- Run npm start in client directory
+- On a seperate window on terminal, run npm start in server directory.
+- Visit `http://localhost:3000/`
