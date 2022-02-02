@@ -1,4 +1,4 @@
-!["Figma"](https://img.shields.io/badge/-blueviolet)
+!["Figma"](https://img.shields.io/badge/-Figma-blueviolet)
 !["Github"](https://img.shields.io/badge/-GitHub-orange)
 !["Bootstrap"](https://img.shields.io/badge/-Bootstrap-blueviolet)
 !["Express"](https://img.shields.io/badge/-Express-critical)
