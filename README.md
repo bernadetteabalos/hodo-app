@@ -1,12 +1,12 @@
-!["Figma"](https://img.shields.io/badge/-Figma-brightgreen)
+!["Figma"](https://img.shields.io/badge/-blueviolet)
 !["Github"](https://img.shields.io/badge/-GitHub-orange)
-!["Bootstrap"](https://img.shields.io/badge/-Bootstrap-yellow)
-!["Express"](https://img.shields.io/badge/-Express-yellowgreen)
+!["Bootstrap"](https://img.shields.io/badge/-Bootstrap-blueviolet)
+!["Express"](https://img.shields.io/badge/-Express-critical)
 !["Konva"](https://img.shields.io/badge/-Konva-blue)
-!["PostgreSQL"](https://img.shields.io/badge/-PostgreSQL-blue)
-!["React-Konva"](https://img.shields.io/badge/react-konva-blue0)
+!["PostgreSQL"](https://img.shields.io/badge/-PostgreSQL-9cf)
+!["React-Konva"](https://img.shields.io/badge/React-Konva-informational)
 !["React"](https://img.shields.io/badge/-React-green)
-!["SASS"](https://img.shields.io/badge/-SASS-red)
+!["SASS"](https://img.shields.io/badge/-SASS-ff69b4)
 !["Socket.io"](https://img.shields.io/badge/-Socket.io-lightgrey)
 
 # Summary
